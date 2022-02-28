@@ -1,20 +1,29 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-class ThemeUtil {
-  ThemeUtil._();
+class AppTheme {
+  AppTheme._();
   static const Color _primaryColor = Color(0xff0057b7);
   static const Color _secondaryColor = Color(0xffffd700);
 
   static MaterialColor get _primarySwatch => _generateSwatch(_primaryColor);
 
-  static ThemeData get appTheme => ThemeData(
-        primarySwatch: _primarySwatch,
-        highlightColor: _primaryColor.withAlpha(100),
+  static ThemeData get appTheme => ThemeData.light().copyWith(
+        primaryColor: _primaryColor,
         textTheme: ThemeData.light().textTheme,
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: _generateSwatch(_primaryColor),
+          primarySwatch: _primarySwatch,
           accentColor: _secondaryColor,
+          brightness: Brightness.light,
+        ),
+      );
+
+  static ThemeData get appThemeDark => ThemeData.dark().copyWith(
+        primaryColor: _primaryColor,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: _primarySwatch,
+          accentColor: _secondaryColor,
+          brightness: Brightness.dark,
         ),
       );
 

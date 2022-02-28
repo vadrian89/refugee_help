@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatelessWidget {
@@ -5,7 +6,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text("Refugee Help")),
+        appBar: AppBar(title: Text("refugee_help".tr())),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {},
