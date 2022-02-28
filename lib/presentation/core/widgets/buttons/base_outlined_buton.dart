@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'button_body_with_icon.dart';
 
-/// A custom [ElevatedButton] which is used throughout this app.
+/// A custom [OutlinedButton] which is used throughout this app.
 ///
-/// This way, in case a breaking change occurs in Flutter to [ElevatedButton], we can easily address it in our app.
-class BaseElevatedButton extends StatelessWidget {
+/// This way, in case a breaking change occurs in Flutter to [OutlinedButton], we can easily address it in our app.
+class BaseOutlinedButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final VoidCallback? onLongPress;
   final ButtonStyle? style;
@@ -14,7 +14,7 @@ class BaseElevatedButton extends StatelessWidget {
   final Clip clipBehavior;
   final Widget child;
 
-  const BaseElevatedButton({
+  const BaseOutlinedButton({
     Key? key,
     required this.child,
     this.onPressed,
@@ -26,7 +26,7 @@ class BaseElevatedButton extends StatelessWidget {
   }) : super(key: key);
 
   /// A factory constructor which takes an aditional icon to show along with the label.
-  factory BaseElevatedButton.icon({
+  factory BaseOutlinedButton.icon({
     Key? key,
     required Widget label,
     required Widget icon,
@@ -37,7 +37,7 @@ class BaseElevatedButton extends StatelessWidget {
     VoidCallback? onPressed,
     VoidCallback? onLongPress,
   }) =>
-      BaseElevatedButton(
+      BaseOutlinedButton(
         child: ButtonBodyWithIcon(label: label, icon: icon),
         style: style,
         focusNode: focusNode,
@@ -48,7 +48,7 @@ class BaseElevatedButton extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) => ElevatedButton(
+  Widget build(BuildContext context) => OutlinedButton(
         child: child,
         style: style,
         focusNode: focusNode,

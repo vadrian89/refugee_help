@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:refugee_help/presentation/core/screens/app_theme.dart';
-
-import 'core/screens/main_screen.dart';
+import 'package:refugee_help/presentation/core/app_theme.dart';
+import 'package:refugee_help/presentation/core/screens/widgets_showcase_screen.dart';
 
 class AppRoot extends StatelessWidget {
   const AppRoot({Key? key}) : super(key: key);
@@ -14,6 +13,6 @@ class AppRoot extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        home: const MainScreen(),
+        home: const WidgetsShowcaseScreen(),
       );
 }
