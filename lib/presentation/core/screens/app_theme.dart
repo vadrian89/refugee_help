@@ -3,27 +3,43 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   AppTheme._();
-  static const Color _primaryColor = Color(0xff0057b7);
-  static const Color _secondaryColor = Color(0xffffd700);
+  static const Color _primaryLight = Color(0xff0057B7);
+  static const Color _primaryLightVariant = Color(0xff4EB2FF);
+  static const Color _secondaryLight = Color(0xffffd700);
+  static const Color _secondaryLightVariant = Color(0xffFDE27C);
 
-  static MaterialColor get _primarySwatch => _generateSwatch(_primaryColor);
-
-  static ThemeData get appTheme => ThemeData.light().copyWith(
-        primaryColor: _primaryColor,
+  static ThemeData get appTheme => ThemeData(
+        primaryColor: _primaryLight,
+        primarySwatch: _generateSwatch(_primaryLight),
+        brightness: Brightness.light,
         textTheme: ThemeData.light().textTheme,
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: _primarySwatch,
-          accentColor: _secondaryColor,
+          primarySwatch: _generateSwatch(_primaryLight),
+          accentColor: _secondaryLight,
           brightness: Brightness.light,
+        ).copyWith(
+          primaryVariant: _primaryLightVariant,
+          secondaryVariant: _secondaryLightVariant,
         ),
       );
 
-  static ThemeData get appThemeDark => ThemeData.dark().copyWith(
-        primaryColor: _primaryColor,
+  static const Color _primaryDark = Color(0xffabc7ff);
+  static const Color _primaryDarkVariant = Color(0xff004495);
+  static const Color _secondaryDark = Color(0xffeac400);
+  static const Color _secondaryDarkVariant = Color(0xff554600);
+
+  static ThemeData get appThemeDark => ThemeData(
+        primaryColor: _primaryDark,
+        primarySwatch: _generateSwatch(_primaryDark),
+        brightness: Brightness.dark,
+        textTheme: ThemeData.dark().textTheme,
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: _primarySwatch,
-          accentColor: _secondaryColor,
+          primarySwatch: _generateSwatch(_primaryDark),
+          accentColor: _secondaryDark,
           brightness: Brightness.dark,
+        ).copyWith(
+          primaryVariant: _primaryDarkVariant,
+          secondaryVariant: _secondaryDarkVariant,
         ),
       );
 
