@@ -42,7 +42,11 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
             emit(AuthenticationState.failure(message));
             emit(const AuthenticationState.unauthenticated());
           },
-          success: (_) => null,
+          success: (response) {
+            if (response is String) {
+              emit(AuthenticationState.success(response));
+            }
+          },
         ),
       );
 

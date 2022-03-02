@@ -14,7 +14,7 @@ class AuthenticationRepository extends BaseRepository {
 
   /// Location of user profiles are stored on the database.
   static const String _profilesTable = "user_profiles";
-  CollectionReference get _collection => repoTopCollection(_profilesTable);
+  CollectionReference get _collection => getCollection(_profilesTable);
 
   /// Stream controller used to create a stream through which profile data is made available.
   final StreamController<UserModel?> _profileStreamCtrl;
@@ -155,6 +155,34 @@ class AuthenticationRepository extends BaseRepository {
         }
       });
     }
+  }
+
+  Future<void> sendEmailVerification() async {
+    OperationResult<String> result = OperationResult.success("sent_email_verification".tr());
+    try {
+      await _auth.currentUser!.sendEmailVerification();
+    } on FirebaseException catch (e) {
+      logException("Exception in sendEmailVerification", error: e, stackTrace: e.stackTrace);
+      result = OperationResult.failure(e.code.tr());
+    } catch (e, stackTrace) {
+      logException("Exception in sendEmailVerification", error: e, stackTrace: stackTrace);
+      result = OperationResult.failure("unkown_error".tr());
+    }
+    addResultToStream(result);
+  }
+
+  Future<void> sendPasswordReset(String email) async {
+    OperationResult<String> result = OperationResult.success("sent_password_reset".tr());
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseException catch (e) {
+      logException("Exception in sendPasswordReset", error: e, stackTrace: e.stackTrace);
+      result = OperationResult.failure(e.code.tr());
+    } catch (e, stackTrace) {
+      logException("Exception in sendPasswordReset", error: e, stackTrace: stackTrace);
+      result = OperationResult.failure("unkown_error".tr());
+    }
+    addResultToStream(result);
   }
 
   /// Close all stream controllers.

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:refugee_help/infrastructure/extensions.dart';
 
 import 'operation_result.dart';
 
@@ -25,21 +25,26 @@ abstract class BaseRepository {
   }
 
   /// Log debug messages.
-  void logDebug(String message, {dynamic error, StackTrace? stackTrace}) =>
-      _logger.d(message, error, stackTrace);
+  void logDebug(String message, {dynamic error, StackTrace? stackTrace}) {
+    FirebaseCrashlytics.instance.log(message);
+    _logger.d(message, error, stackTrace);
+  }
 
   /// Log exceptions caught.
-  void logException(String message, {dynamic error, StackTrace? stackTrace}) =>
-      _logger.e(message, error, stackTrace);
+  void logException(String message, {dynamic error, StackTrace? stackTrace}) {
+    FirebaseCrashlytics.instance.log(message);
+    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    _logger.e(message, error, stackTrace);
+  }
 
   void addResultToStream(OperationResult result) => _resultStreamController.sink.add(result);
 
   @protected
-  CollectionReference repoTopCollection(String collection) {
+  CollectionReference getCollection(String collection) {
     if (collection == "users") {
       return FirebaseFirestore.instance.collection(collection);
     }
-    return FirebaseFirestore.instance.collection("$_project${collection.capitalised}");
+    return FirebaseFirestore.instance.collection("${_project}_${collection.toLowerCase()}");
   }
 
   Map<String, dynamic> mapFromObject(Object? object) => (object as Map<String, dynamic>?) ?? {};

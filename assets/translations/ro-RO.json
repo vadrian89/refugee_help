@@ -14,5 +14,9 @@
     "email-already-in-use": "E-mail-ul este deja folosit!",
     "unkown_error": "Eroare necunoscută!", 
     "authorization_failed": "Autorizarea a eşuat!",
-    "authorization_invalid_response": "Răspuns invalid!"
+    "authorization_invalid_response": "Răspuns invalid!",
+    "sending_email_verification": "Se trimite e-mail de verificare...",
+    "sent_email_verification": "E-mail-ul de verificare a fost trimis!",
+    "sending_password_reset": "Se trimite e-mail de resetare a parole...",
+    "sent_password_reset": "E-mail-ul de resetare a parolei a fost trimis!"
 }
