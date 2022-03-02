@@ -8,10 +8,11 @@ import 'package:refugee_help/application/bloc_observer.dart';
 import 'package:refugee_help/presentation/app_root.dart';
 
 import 'domain/util/firebase_util.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   if (kReleaseMode) await setupFirebaseCrashlytics();
   await EasyLocalization.ensureInitialized();
 
