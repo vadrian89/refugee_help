@@ -8,6 +8,6 @@ class Head4Text extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
         text,
-        style: Theme.of(context).textTheme.headline4,
+        style: Theme.of(context).textTheme.headline3,
       );
 }

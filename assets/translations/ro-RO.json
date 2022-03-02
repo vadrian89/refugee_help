@@ -1,3 +1,18 @@
 {
-    "refugee_help": "Ajutorul refugiaţilor"
+    "refugee_help": "Ajutorul refugiaţilor",
+    "register_user_error": "Eroare la înregistrarea utilizatorului!",
+    "update_user_profile_error": "Eroare la actualizarea profilului!",
+    "sign_in_error": "Eroare la conectare!",
+    "sign_out_error": "Eroare la deconectare!",
+    "add_user_profile_error": "Eroare la crearea profilului de utilizator!",
+    "account-exists-with-different-credential": "Contul a fost conectat prin altă metodă!",
+    "invalid-credential": "Credenţialele sunt invalide!",
+    "operation-not-allowed": "Această operaţiune nu este permisă pentru utilizatorul curent!",
+    "user-disabled": "Contul a fost dezactivat! Contactează administratorul!",
+    "user-not-found": "Contul de utilizator nu există!",
+    "wrong-password": "Parolă greşită!",
+    "email-already-in-use": "E-mail-ul este deja folosit!",
+    "unkown_error": "Eroare necunoscută!", 
+    "authorization_failed": "Autorizarea a eşuat!",
+    "authorization_invalid_response": "Răspuns invalid!"
 }

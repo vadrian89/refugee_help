@@ -4,11 +4,11 @@ import 'package:refugee_help/presentation/core/widgets/buttons/base_icon_button.
 import 'package:refugee_help/presentation/core/widgets/buttons/base_outlined_buton.dart';
 import 'package:refugee_help/presentation/core/widgets/buttons/base_text_buton.dart';
 import 'package:refugee_help/presentation/core/widgets/text/body1_text.dart';
-import 'package:refugee_help/presentation/core/widgets/text/body2_text%20.dart';
+import 'package:refugee_help/presentation/core/widgets/text/body2_text.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head1_text.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head2_text.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head3_text.dart';
-import 'package:refugee_help/presentation/core/widgets/text/head4_text%20.dart';
+import 'package:refugee_help/presentation/core/widgets/text/head4_text.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head5_text.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head6_text.dart';
 import 'package:refugee_help/presentation/core/widgets/text/sub1_text.dart';
