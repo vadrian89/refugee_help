@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/domain/util/json_util.dart';
+import 'package:refugee_help/infrastructure/validators.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'user_category_model.dart';
@@ -24,6 +25,12 @@ class UserModel with _$UserModel {
 
   /// Get the full name of the user by making use of string interpolation.
   String get fullName => "${lastName ?? ""} ${firstName ?? ""}";
+
+  bool get emailIsValid => Validators.isValidEmail(email);
+  bool get lastNameIsValid => lastName?.isNotEmpty ?? false;
+  bool get firstNameIsValid => firstName?.isNotEmpty ?? false;
+  bool get phoneIsValid => phone?.isNotEmpty ?? false;
+  bool get isValid => emailIsValid && lastNameIsValid && firstNameIsValid && phoneIsValid;
 
   const factory UserModel({
     String? id,
@@ -59,7 +66,7 @@ class UserModel with _$UserModel {
         createdAt: user.metadata.creationTime,
         updatedAt: user.metadata.lastSignInTime,
         isAnonymous: user.isAnonymous,
-        category: userCategList[1],
+        category: userCategList.firstWhere((e) => e.name == "Volunteer"),
       );
 
   factory UserModel.fromApple(User user, AuthorizationCredentialAppleID appleUser) => UserModel(
@@ -71,6 +78,6 @@ class UserModel with _$UserModel {
         phone: user.phoneNumber,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        category: userCategList[1],
+        category: userCategList.firstWhere((e) => e.name == "Volunteer"),
       );
 }

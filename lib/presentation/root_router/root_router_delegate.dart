@@ -78,6 +78,10 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
     if (_routerCubit.popRoute(_popResult)) {
       return Future.value(true);
     }
+    if (navigatorKey.currentState?.canPop() ?? false) {
+      navigatorKey.currentState!.pop();
+      return Future.value(true);
+    }
     return _confirmAppExit();
   }
 

@@ -11,7 +11,7 @@ class UserCategoryModel extends Equatable {
 
   static UserCategoryModel? fromJson(dynamic id) => userCategList.firstWhere(
         (e) => e.id == int.tryParse(id),
-        orElse: () => userCategList[1],
+        orElse: () => userCategList.firstWhere((e) => e.name == "Volunteer"),
       );
 
   static int? toJson(UserCategoryModel? category) => category?.id;
@@ -22,6 +22,6 @@ class UserCategoryModel extends Equatable {
 
 const List<UserCategoryModel> userCategList = [
   UserCategoryModel(1, "Admin"),
-  UserCategoryModel(2, "Volunteer"),
-  UserCategoryModel(3, "Refugee"),
+  UserCategoryModel(2, "Dispatcher"),
+  UserCategoryModel(3, "Volunteer"),
 ];

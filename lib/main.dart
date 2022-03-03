@@ -6,12 +6,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/bloc_initialiser.dart';
 import 'package:refugee_help/application/bloc_observer.dart';
 import 'package:refugee_help/presentation/app_root.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 import 'domain/util/firebase_util.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  /// So we get rid of the pesky '#' from the browser url.
+  setPathUrlStrategy();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   if (kReleaseMode) await setupFirebaseCrashlytics();
   await EasyLocalization.ensureInitialized();
