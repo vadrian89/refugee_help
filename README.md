@@ -12,18 +12,20 @@ It allows citizens/businesses to enroll and offer their availability for housing
 
 Though I found out a Wordpress website exists already (refugees.ro), with similar capabilities of what I want to build, I want something better, with more functionalities and cross-platform (mobile + web).   
 
-From my talks with hands-on people, there is a need of such an app, to help volunteers organize better.   
+From my talks with hands-on people, there is a need of such an app, to help volunteers organize better. 
+There were reported cases were refugees were taken and the "volunteer" drivers asked them money.  
+With this app people can organize better and reduce these kind of incidents. 
 
-Features which I want initially to implement:  
+Features which are needed initially:  
 - registration and sign in using e-mail + password, Google and Apple ID;  
 - volunteers will be able to add their services and availability, each with their unique data;  
-- everyone can see on a map what volunteers can offer with realtime availability; without registration;  
-- the app will be available in multiple languages; priority languages are english & romanian, with the hope of finding translators for other languages (such as: polish, hungarian, ukrainean, etc);  
+- there will be a dispatcher which assigns refugees to volunteers and has access to a realtime database of volunteers and their offerings;   
+- the app will be available in multiple languages; priority languages are english & romanian, with the hope of finding translators for other languages (such as: polish, hungarian, ukrainean, etc);   
 
 Features which I want to implement after the initial launch:  
+- everyone can see on a map what volunteers can offer with realtime availability; without registration;  
 - refugees can add their needs, based on what volunteers can offer (housing/food/transportation/etc);  
-- volunteers can see the needs and can contact them; refugees will receive push notifications if someone can fulfill the need;  
-- find refugee: by name/email/phone number; this is for those registered to be able to find their loved ones;  
+- volunteers can see the needs and can contact them directly; 
 
 Coding info:
 - [Bloc](https://pub.dev/packages/flutter_bloc) package will be used for state management;  
