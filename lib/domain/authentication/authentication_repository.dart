@@ -57,11 +57,11 @@ class AuthenticationRepository extends BaseRepository {
   }
 
   /// Sign in the user using e-mail + password.
-  Future<OperationResult> signInUser({
+  Future<void> signInUser({
     required String email,
     required String password,
   }) async {
-    OperationResult result = const OperationResult.success();
+    OperationResult? result;
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -71,7 +71,9 @@ class AuthenticationRepository extends BaseRepository {
       logException("Exception in signInUser", error: e, stackTrace: stackTrace);
       result = OperationResult.failure("unkown_error".tr());
     }
-    return result;
+    if (result != null) {
+      addResultToStream(result);
+    }
   }
 
   Future<void> signInWithGoogle() async {

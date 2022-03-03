@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/authentication/authentication_repository.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
+
+import '../../infrastructure/utils.dart';
 
 part 'authentication_state.dart';
 part 'authentication_cubit.freezed.dart';
@@ -41,11 +44,13 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           failure: (message) {
             emit(AuthenticationState.failure(message));
             emit(const AuthenticationState.unauthenticated());
+            return;
           },
           success: (response) {
-            if (response is String) {
+            if (response is String || response == null) {
               emit(AuthenticationState.success(response));
             }
+            return;
           },
         ),
       );
@@ -61,6 +66,17 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         }
       },
     );
+  }
+
+  Future<void> signInWithEmail({required String email, required String password}) async {
+    emit(AuthenticationState.loading("signing_in".tr()));
+    await Utils.repoDelay();
+    await _repo.signInUser(email: email, password: password);
+  }
+
+  Future<void> signInWithGoogle() async {
+    emit(AuthenticationState.loading("signing_in".tr()));
+    await _repo.signInWithGoogle();
   }
 
   /// Public method sign out the user.

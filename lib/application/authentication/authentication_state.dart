@@ -17,7 +17,7 @@ class AuthenticationState with _$AuthenticationState {
   const factory AuthenticationState.loading(String message) = _Loading;
 
   /// Emit [AuthenticationState.success] whenever operation ended successfully.
-  const factory AuthenticationState.success(String message) = _Success;
+  const factory AuthenticationState.success([String? message]) = _Success;
 
   /// Emit [AuthenticationState.failure] whenever an error has occured in the authentication process.
   const factory AuthenticationState.failure(String message) = _Failure;

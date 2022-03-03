@@ -38,7 +38,7 @@ class _$AuthenticationStateTearOff {
     );
   }
 
-  _Success success(String message) {
+  _Success success([String? message]) {
     return _Success(
       message,
     );
@@ -62,7 +62,7 @@ mixin _$AuthenticationState {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel user) authenticated,
     required TResult Function(String message) loading,
-    required TResult Function(String message) success,
+    required TResult Function(String? message) success,
     required TResult Function(String message) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -72,7 +72,7 @@ mixin _$AuthenticationState {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -82,7 +82,7 @@ mixin _$AuthenticationState {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) =>
@@ -180,7 +180,7 @@ class _$_Initial implements _Initial {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel user) authenticated,
     required TResult Function(String message) loading,
-    required TResult Function(String message) success,
+    required TResult Function(String? message) success,
     required TResult Function(String message) failure,
   }) {
     return initial();
@@ -193,7 +193,7 @@ class _$_Initial implements _Initial {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
   }) {
     return initial?.call();
@@ -206,7 +206,7 @@ class _$_Initial implements _Initial {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -309,7 +309,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel user) authenticated,
     required TResult Function(String message) loading,
-    required TResult Function(String message) success,
+    required TResult Function(String? message) success,
     required TResult Function(String message) failure,
   }) {
     return unauthenticated();
@@ -322,7 +322,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
   }) {
     return unauthenticated?.call();
@@ -335,7 +335,7 @@ class _$_Unauthenticated implements _Unauthenticated {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -471,7 +471,7 @@ class _$_Authenticated implements _Authenticated {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel user) authenticated,
     required TResult Function(String message) loading,
-    required TResult Function(String message) success,
+    required TResult Function(String? message) success,
     required TResult Function(String message) failure,
   }) {
     return authenticated(user);
@@ -484,7 +484,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
   }) {
     return authenticated?.call(user);
@@ -497,7 +497,7 @@ class _$_Authenticated implements _Authenticated {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -627,7 +627,7 @@ class _$_Loading implements _Loading {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel user) authenticated,
     required TResult Function(String message) loading,
-    required TResult Function(String message) success,
+    required TResult Function(String? message) success,
     required TResult Function(String message) failure,
   }) {
     return loading(message);
@@ -640,7 +640,7 @@ class _$_Loading implements _Loading {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
   }) {
     return loading?.call(message);
@@ -653,7 +653,7 @@ class _$_Loading implements _Loading {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -720,7 +720,7 @@ abstract class _Loading implements AuthenticationState {
 abstract class _$SuccessCopyWith<$Res> {
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) then) =
       __$SuccessCopyWithImpl<$Res>;
-  $Res call({String message});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -741,7 +741,7 @@ class __$SuccessCopyWithImpl<$Res>
       message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -749,10 +749,10 @@ class __$SuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Success implements _Success {
-  const _$_Success(this.message);
+  const _$_Success([this.message]);
 
   @override
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -783,7 +783,7 @@ class _$_Success implements _Success {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel user) authenticated,
     required TResult Function(String message) loading,
-    required TResult Function(String message) success,
+    required TResult Function(String? message) success,
     required TResult Function(String message) failure,
   }) {
     return success(message);
@@ -796,7 +796,7 @@ class _$_Success implements _Success {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
   }) {
     return success?.call(message);
@@ -809,7 +809,7 @@ class _$_Success implements _Success {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -864,9 +864,9 @@ class _$_Success implements _Success {
 }
 
 abstract class _Success implements AuthenticationState {
-  const factory _Success(String message) = _$_Success;
+  const factory _Success([String? message]) = _$_Success;
 
-  String get message;
+  String? get message;
   @JsonKey(ignore: true)
   _$SuccessCopyWith<_Success> get copyWith =>
       throw _privateConstructorUsedError;
@@ -939,7 +939,7 @@ class _$_Failure implements _Failure {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel user) authenticated,
     required TResult Function(String message) loading,
-    required TResult Function(String message) success,
+    required TResult Function(String? message) success,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -952,7 +952,7 @@ class _$_Failure implements _Failure {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -965,7 +965,7 @@ class _$_Failure implements _Failure {
     TResult Function()? unauthenticated,
     TResult Function(UserModel user)? authenticated,
     TResult Function(String message)? loading,
-    TResult Function(String message)? success,
+    TResult Function(String? message)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
   static const Color _primaryLight = Color(0xff0057B7);
-  static const Color _primaryLightVariant = Color(0xff4EB2FF);
+  static const Color _primaryContainerLight = Color(0xff4EB2FF);
   static const Color _secondaryLight = Color(0xffffd700);
-  static const Color _secondaryLightVariant = Color(0xffFDE27C);
+  static const Color _secondaryContainerLight = Color(0xffFDE27C);
 
   static ThemeData get appTheme => ThemeData(
         primaryColor: _primaryLight,
@@ -18,15 +18,15 @@ class AppTheme {
           accentColor: _secondaryLight,
           brightness: Brightness.light,
         ).copyWith(
-          primaryVariant: _primaryLightVariant,
-          secondaryVariant: _secondaryLightVariant,
+          primaryContainer: _primaryContainerLight,
+          secondaryContainer: _secondaryContainerLight,
         ),
       );
 
   static const Color _primaryDark = Color(0xffabc7ff);
-  static const Color _primaryDarkVariant = Color(0xff004495);
+  static const Color _primaryContainerDark = Color(0xff004495);
   static const Color _secondaryDark = Color(0xffeac400);
-  static const Color _secondaryDarkVariant = Color(0xff554600);
+  static const Color _secondaryContainerDark = Color(0xff554600);
 
   static ThemeData get appThemeDark => ThemeData(
         primaryColor: _primaryDark,
@@ -38,8 +38,8 @@ class AppTheme {
           accentColor: _secondaryDark,
           brightness: Brightness.dark,
         ).copyWith(
-          primaryVariant: _primaryDarkVariant,
-          secondaryVariant: _secondaryDarkVariant,
+          primaryContainer: _primaryContainerDark,
+          secondaryContainer: _secondaryContainerDark,
         ),
       );
 
