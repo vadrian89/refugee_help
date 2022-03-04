@@ -27,17 +27,24 @@ class _$UserModelTearOff {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           UserCategoryModel? category,
       String? email,
-      @JsonKey(ignore: true)
-          String? password,
       @JsonKey(name: "last_name")
           String? lastName,
       @JsonKey(name: "first_name")
           String? firstName,
       String? phone,
+      String? county,
+      String? city,
+      String? address,
+      @JsonKey(name: "profile_image")
+          String? profileImage,
+      String? organization,
+      bool? available = false,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
           DateTime? updatedAt,
+      @JsonKey(ignore: true)
+          String? password,
       @JsonKey(ignore: true)
           dynamic isAnonymous = false,
       @JsonKey(ignore: true)
@@ -46,12 +53,18 @@ class _$UserModelTearOff {
       id: id,
       category: category,
       email: email,
-      password: password,
       lastName: lastName,
       firstName: firstName,
       phone: phone,
+      county: county,
+      city: city,
+      address: address,
+      profileImage: profileImage,
+      organization: organization,
+      available: available,
       createdAt: createdAt,
       updatedAt: updatedAt,
+      password: password,
       isAnonymous: isAnonymous,
       emailVerified: emailVerified,
     );
@@ -72,19 +85,26 @@ mixin _$UserModel {
       fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
   UserCategoryModel? get category => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  String? get password => throw _privateConstructorUsedError;
   @JsonKey(name: "last_name")
   String? get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: "first_name")
   String? get firstName => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
+  String? get county => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  @JsonKey(name: "profile_image")
+  String? get profileImage => throw _privateConstructorUsedError;
+  String? get organization => throw _privateConstructorUsedError;
+  bool? get available => throw _privateConstructorUsedError;
   @JsonKey(
       fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(
       fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  String? get password => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   dynamic get isAnonymous => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -105,17 +125,24 @@ abstract class $UserModelCopyWith<$Res> {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           UserCategoryModel? category,
       String? email,
-      @JsonKey(ignore: true)
-          String? password,
       @JsonKey(name: "last_name")
           String? lastName,
       @JsonKey(name: "first_name")
           String? firstName,
       String? phone,
+      String? county,
+      String? city,
+      String? address,
+      @JsonKey(name: "profile_image")
+          String? profileImage,
+      String? organization,
+      bool? available,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
           DateTime? updatedAt,
+      @JsonKey(ignore: true)
+          String? password,
       @JsonKey(ignore: true)
           dynamic isAnonymous,
       @JsonKey(ignore: true)
@@ -135,12 +162,18 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
     Object? id = freezed,
     Object? category = freezed,
     Object? email = freezed,
-    Object? password = freezed,
     Object? lastName = freezed,
     Object? firstName = freezed,
     Object? phone = freezed,
+    Object? county = freezed,
+    Object? city = freezed,
+    Object? address = freezed,
+    Object? profileImage = freezed,
+    Object? organization = freezed,
+    Object? available = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? password = freezed,
     Object? isAnonymous = freezed,
     Object? emailVerified = freezed,
   }) {
@@ -157,10 +190,6 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String?,
       lastName: lastName == freezed
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
@@ -173,6 +202,30 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      county: county == freezed
+          ? _value.county
+          : county // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: address == freezed
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profileImage: profileImage == freezed
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      organization: organization == freezed
+          ? _value.organization
+          : organization // ignore: cast_nullable_to_non_nullable
+              as String?,
+      available: available == freezed
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -181,6 +234,10 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
       isAnonymous: isAnonymous == freezed
           ? _value.isAnonymous
           : isAnonymous // ignore: cast_nullable_to_non_nullable
@@ -204,17 +261,24 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           UserCategoryModel? category,
       String? email,
-      @JsonKey(ignore: true)
-          String? password,
       @JsonKey(name: "last_name")
           String? lastName,
       @JsonKey(name: "first_name")
           String? firstName,
       String? phone,
+      String? county,
+      String? city,
+      String? address,
+      @JsonKey(name: "profile_image")
+          String? profileImage,
+      String? organization,
+      bool? available,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
           DateTime? updatedAt,
+      @JsonKey(ignore: true)
+          String? password,
       @JsonKey(ignore: true)
           dynamic isAnonymous,
       @JsonKey(ignore: true)
@@ -235,12 +299,18 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? category = freezed,
     Object? email = freezed,
-    Object? password = freezed,
     Object? lastName = freezed,
     Object? firstName = freezed,
     Object? phone = freezed,
+    Object? county = freezed,
+    Object? city = freezed,
+    Object? address = freezed,
+    Object? profileImage = freezed,
+    Object? organization = freezed,
+    Object? available = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? password = freezed,
     Object? isAnonymous = freezed,
     Object? emailVerified = freezed,
   }) {
@@ -257,10 +327,6 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String?,
       lastName: lastName == freezed
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
@@ -273,6 +339,30 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      county: county == freezed
+          ? _value.county
+          : county // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: address == freezed
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profileImage: profileImage == freezed
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      organization: organization == freezed
+          ? _value.organization
+          : organization // ignore: cast_nullable_to_non_nullable
+              as String?,
+      available: available == freezed
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -281,6 +371,10 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
       isAnonymous: isAnonymous == freezed ? _value.isAnonymous : isAnonymous,
       emailVerified:
           emailVerified == freezed ? _value.emailVerified : emailVerified,
@@ -296,17 +390,24 @@ class _$_UserModel extends _UserModel {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           this.category,
       this.email,
-      @JsonKey(ignore: true)
-          this.password,
       @JsonKey(name: "last_name")
           this.lastName,
       @JsonKey(name: "first_name")
           this.firstName,
       this.phone,
+      this.county,
+      this.city,
+      this.address,
+      @JsonKey(name: "profile_image")
+          this.profileImage,
+      this.organization,
+      this.available = false,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           this.createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
           this.updatedAt,
+      @JsonKey(ignore: true)
+          this.password,
       @JsonKey(ignore: true)
           this.isAnonymous = false,
       @JsonKey(ignore: true)
@@ -325,9 +426,6 @@ class _$_UserModel extends _UserModel {
   @override
   final String? email;
   @override
-  @JsonKey(ignore: true)
-  final String? password;
-  @override
   @JsonKey(name: "last_name")
   final String? lastName;
   @override
@@ -335,6 +433,20 @@ class _$_UserModel extends _UserModel {
   final String? firstName;
   @override
   final String? phone;
+  @override
+  final String? county;
+  @override
+  final String? city;
+  @override
+  final String? address;
+  @override
+  @JsonKey(name: "profile_image")
+  final String? profileImage;
+  @override
+  final String? organization;
+  @JsonKey()
+  @override
+  final bool? available;
   @override
   @JsonKey(
       fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
@@ -345,6 +457,9 @@ class _$_UserModel extends _UserModel {
   final DateTime? updatedAt;
   @override
   @JsonKey(ignore: true)
+  final String? password;
+  @override
+  @JsonKey(ignore: true)
   final dynamic isAnonymous;
   @override
   @JsonKey(ignore: true)
@@ -352,7 +467,7 @@ class _$_UserModel extends _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, category: $category, email: $email, password: $password, lastName: $lastName, firstName: $firstName, phone: $phone, createdAt: $createdAt, updatedAt: $updatedAt, isAnonymous: $isAnonymous, emailVerified: $emailVerified)';
+    return 'UserModel(id: $id, category: $category, email: $email, lastName: $lastName, firstName: $firstName, phone: $phone, county: $county, city: $city, address: $address, profileImage: $profileImage, organization: $organization, available: $available, createdAt: $createdAt, updatedAt: $updatedAt, password: $password, isAnonymous: $isAnonymous, emailVerified: $emailVerified)';
   }
 
   @override
@@ -363,12 +478,20 @@ class _$_UserModel extends _UserModel {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.category, category) &&
             const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.phone, phone) &&
+            const DeepCollectionEquality().equals(other.county, county) &&
+            const DeepCollectionEquality().equals(other.city, city) &&
+            const DeepCollectionEquality().equals(other.address, address) &&
+            const DeepCollectionEquality()
+                .equals(other.profileImage, profileImage) &&
+            const DeepCollectionEquality()
+                .equals(other.organization, organization) &&
+            const DeepCollectionEquality().equals(other.available, available) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality()
                 .equals(other.isAnonymous, isAnonymous) &&
             const DeepCollectionEquality()
@@ -381,12 +504,18 @@ class _$_UserModel extends _UserModel {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(category),
       const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(phone),
+      const DeepCollectionEquality().hash(county),
+      const DeepCollectionEquality().hash(city),
+      const DeepCollectionEquality().hash(address),
+      const DeepCollectionEquality().hash(profileImage),
+      const DeepCollectionEquality().hash(organization),
+      const DeepCollectionEquality().hash(available),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt),
+      const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(isAnonymous),
       const DeepCollectionEquality().hash(emailVerified));
 
@@ -407,17 +536,24 @@ abstract class _UserModel extends UserModel {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           UserCategoryModel? category,
       String? email,
-      @JsonKey(ignore: true)
-          String? password,
       @JsonKey(name: "last_name")
           String? lastName,
       @JsonKey(name: "first_name")
           String? firstName,
       String? phone,
+      String? county,
+      String? city,
+      String? address,
+      @JsonKey(name: "profile_image")
+          String? profileImage,
+      String? organization,
+      bool? available,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
           DateTime? updatedAt,
+      @JsonKey(ignore: true)
+          String? password,
       @JsonKey(ignore: true)
           dynamic isAnonymous,
       @JsonKey(ignore: true)
@@ -436,9 +572,6 @@ abstract class _UserModel extends UserModel {
   @override
   String? get email;
   @override
-  @JsonKey(ignore: true)
-  String? get password;
-  @override
   @JsonKey(name: "last_name")
   String? get lastName;
   @override
@@ -447,6 +580,19 @@ abstract class _UserModel extends UserModel {
   @override
   String? get phone;
   @override
+  String? get county;
+  @override
+  String? get city;
+  @override
+  String? get address;
+  @override
+  @JsonKey(name: "profile_image")
+  String? get profileImage;
+  @override
+  String? get organization;
+  @override
+  bool? get available;
+  @override
   @JsonKey(
       fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
   DateTime? get createdAt;
@@ -454,6 +600,9 @@ abstract class _UserModel extends UserModel {
   @JsonKey(
       fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
   DateTime? get updatedAt;
+  @override
+  @JsonKey(ignore: true)
+  String? get password;
   @override
   @JsonKey(ignore: true)
   dynamic get isAnonymous;

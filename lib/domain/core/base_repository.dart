@@ -37,7 +37,7 @@ abstract class BaseRepository {
     _logger.e(message, error, stackTrace);
   }
 
-  void addResultToStream(OperationResult result) => _resultStreamController.sink.add(result);
+  void addResultToStream(OperationResult result) => _resultStreamController.add(result);
 
   @protected
   CollectionReference getCollection(String collection) {

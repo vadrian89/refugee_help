@@ -6,22 +6,29 @@ class UserCategoryModel extends Equatable {
 
   const UserCategoryModel(this.id, this.name);
 
+  factory UserCategoryModel.admin() => const UserCategoryModel(1, "Admin");
+
+  factory UserCategoryModel.dispatcher() => const UserCategoryModel(2, "Dispatcher");
+
+  factory UserCategoryModel.volunteer() => const UserCategoryModel(3, "Volunteer");
+
+  factory UserCategoryModel.fromId([int? id]) {
+    if (id == 1) {
+      return UserCategoryModel.admin();
+    } else if (id == 2) {
+      return UserCategoryModel.dispatcher();
+    } else {
+      return UserCategoryModel.volunteer();
+    }
+  }
+
+  static UserCategoryModel? fromJson(dynamic id) => UserCategoryModel.fromId(int.tryParse(id));
+
   @override
   List<Object?> get props => [id, name];
-
-  static UserCategoryModel? fromJson(dynamic id) => userCategList.firstWhere(
-        (e) => e.id == int.tryParse(id),
-        orElse: () => userCategList.firstWhere((e) => e.name == "Volunteer"),
-      );
 
   static int? toJson(UserCategoryModel? category) => category?.id;
 
   @override
   String toString() => "UserCategoryModel(id: $id, name: $name)";
 }
-
-const List<UserCategoryModel> userCategList = [
-  UserCategoryModel(1, "Admin"),
-  UserCategoryModel(2, "Dispatcher"),
-  UserCategoryModel(3, "Volunteer"),
-];

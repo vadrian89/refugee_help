@@ -36,9 +36,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     _initProfileStateSub();
   }
 
-  /// Private method which initialises [_operationResultSub].
-  ///
-  /// There is no need to manage success.
+  /// Initialise [_operationResultSub] and start parsing the incoming [OperationResult] objects.
   void _initOperationResultSub() => _operationResultSub = _repo.resultStream.listen(
         (result) => result.when(
           failure: (message) {
@@ -55,7 +53,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         ),
       );
 
-  /// Private method which initialises [_profileStreamSub].
+  /// Initialise [_profileStreamSub] and start parsing the incoming [UserModel] objects.
   void _initProfileStateSub() {
     _profileStreamSub = _repo.profileStream.listen(
       (user) {
@@ -79,10 +77,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     await _repo.signInWithGoogle();
   }
 
-  /// Public method sign out the user.
   void signOut() => _repo.signOut();
 
-  /// Method, provided by [BlocBase], used to clean up resources used by the cubit.
+  /// Clean up resources used by the cubit.
   @override
   Future<void> close() async {
     await _operationResultSub.cancel();

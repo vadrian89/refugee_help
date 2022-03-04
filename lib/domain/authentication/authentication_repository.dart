@@ -153,7 +153,9 @@ class AuthenticationRepository extends BaseRepository {
         if (!doc.exists) {
           _addUser(_newUser?.copyWith(id: authUser.uid) ?? UserModel.fromAuth(authUser));
         } else {
-          _profileStreamCtrl.add(UserModel.fromJson(mapFromObject(doc.data())));
+          _profileStreamCtrl.add(UserModel.fromJson(mapFromObject(doc.data())).copyWith(
+            emailVerified: authUser.email,
+          ));
         }
       });
     }

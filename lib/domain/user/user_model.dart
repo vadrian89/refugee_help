@@ -14,8 +14,7 @@ part 'user_model.g.dart';
 /// Model of the user's profile stored in the database.
 ///
 /// Contains all fields, mapped to their respective table columns.
-/// Because SQL and Dart naming convention differs, we make use `@JsonKey(name: "")` to properly map
-/// the fields.
+/// Because databases and Dart naming convention differs, we make use `@JsonKey(name: "")` to properly map the fields.
 @freezed
 class UserModel with _$UserModel {
   /// Make the constructor private to enable custom computed values (getters) and methods.
@@ -25,26 +24,43 @@ class UserModel with _$UserModel {
 
   /// Get the full name of the user by making use of string interpolation.
   String get fullName => "${lastName ?? ""} ${firstName ?? ""}";
-
   bool get emailIsValid => Validators.isValidEmail(email);
   bool get lastNameIsValid => lastName?.isNotEmpty ?? false;
   bool get firstNameIsValid => firstName?.isNotEmpty ?? false;
   bool get phoneIsValid => phone?.isNotEmpty ?? false;
-  bool get isValid => emailIsValid && lastNameIsValid && firstNameIsValid && phoneIsValid;
+  bool get countyIsValid => county?.isNotEmpty ?? false;
+  bool get cityIsValid => city?.isNotEmpty ?? false;
+  bool get addressIsValid => address?.isNotEmpty ?? false;
+  bool get imageIsValid => profileImage?.isNotEmpty ?? false;
+  bool get isValid =>
+      emailIsValid &&
+      lastNameIsValid &&
+      firstNameIsValid &&
+      phoneIsValid &&
+      countyIsValid &&
+      cityIsValid &&
+      addressIsValid &&
+      imageIsValid;
 
   const factory UserModel({
     String? id,
     @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
         UserCategoryModel? category,
     String? email,
-    @JsonKey(ignore: true) String? password,
     @JsonKey(name: "last_name") String? lastName,
     @JsonKey(name: "first_name") String? firstName,
     String? phone,
+    String? county,
+    String? city,
+    String? address,
+    @JsonKey(name: "profile_image") String? profileImage,
+    String? organization,
+    @Default(false) bool? available,
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
         DateTime? createdAt,
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
         DateTime? updatedAt,
+    @JsonKey(ignore: true) String? password,
     @JsonKey(ignore: true) @Default(false) isAnonymous,
     @JsonKey(ignore: true) @Default(false) emailVerified,
   }) = _UserModel;
@@ -66,7 +82,7 @@ class UserModel with _$UserModel {
         createdAt: user.metadata.creationTime,
         updatedAt: user.metadata.lastSignInTime,
         isAnonymous: user.isAnonymous,
-        category: userCategList.firstWhere((e) => e.name == "Volunteer"),
+        category: UserCategoryModel.volunteer(),
       );
 
   factory UserModel.fromApple(User user, AuthorizationCredentialAppleID appleUser) => UserModel(
@@ -78,6 +94,6 @@ class UserModel with _$UserModel {
         phone: user.phoneNumber,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        category: userCategList.firstWhere((e) => e.name == "Volunteer"),
+        category: UserCategoryModel.volunteer(),
       );
 }
