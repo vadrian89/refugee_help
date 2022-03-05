@@ -19,5 +19,21 @@
     "sent_email_verification": "E-mail-ul de verificare a fost trimis!",
     "sending_password_reset": "Se trimite e-mail de resetare a parole...",
     "sent_password_reset": "E-mail-ul de resetare a parolei a fost trimis!",
-    "signing_in": "În curs de conectare..."
+    "signing_in": "În curs de conectare...",
+    "sign_in": "Conectează-te",
+    "sign_in_with_apple": "Conectează-te cu Apple",
+    "sign_in_with_google": "Conectează-te cu Google",
+    "or": "Sau",
+    "no_account_q":"Nu ai cont?",
+    "sign_up": "Înregistrează-te",
+    "password": "Parolă",
+    "password_req": "Parola trebuie să aibă o lungime de cel puţin 8 caractere şi să conţină: litere mari, litere mici, caractere speciale şi cifre.",
+    "sign_in_to_your_account": "Conectează-te la contul tău",
+    "email_invalid": "E-mail-ul nu este valid!",
+    "reset_password": "Resetează parola",
+    "form_is_empty": "Formularul nu este completat!",
+    "form_is_not_valid": "Formularul nu este valid!",
+    "resource_not_found": "Resursa nu a fost găsită",
+    "error": "Eroare",
+    "close": "Închide"
 }

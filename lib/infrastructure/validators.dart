@@ -9,7 +9,7 @@ class Validators {
     r"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})",
   );
   static final RegExp _emailRegExp = RegExp(
-    r"^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$",
+    r"^[a-zA-Z0-9_\.!#$%\^&\*]+@[a-zA-Z_]+?\.[a-zA-Z]{2,20}$",
   );
 
   /// Validate that the provided value is a valid e-mail.

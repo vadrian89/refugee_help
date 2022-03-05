@@ -92,7 +92,6 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
     final Page? page = _routerCubit.state.maybeWhen(
       orElse: () => null,
       register: () => null,
-      signIn: () => null,
       home: (_) => null,
     );
 

@@ -19,5 +19,21 @@
     "sent_email_verification": "Sent e-mail verification!",
     "sending_password_reset": "Sending password reset e-mail...",
     "sent_password_reset": "Sent password reset e-mail!",
-    "signing_in": "Signing in user..."
+    "signing_in": "Signing in user...",
+    "sign_in": "Sign in",
+    "sign_in_with_apple": "Sign in with Apple",
+    "sign_in_with_google": "Sign in with Google",
+    "or": "Or",
+    "no_account_q":"Don't have an account?",
+    "sign_up": "Sign up",
+    "password": "Password",
+    "password_req": "Password must be at least 8 characters long and contain at least 1 of each: uppercase, lowercase, special character, number.",
+    "sign_in_to_your_account": "Sign in to your account",
+    "email_invalid": "E-mail is not valid!",
+    "reset_password": "Reset password",
+    "form_is_empty": "Form is empty!",
+    "form_is_not_valid": "Form is not valid!",
+    "resource_not_found": "Resource not found",
+    "error": "Error",
+    "close": "Close"
 }

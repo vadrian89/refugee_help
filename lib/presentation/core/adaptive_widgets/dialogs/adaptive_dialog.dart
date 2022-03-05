@@ -1,7 +1,7 @@
-import 'dart:io';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:refugee_help/infrastructure/utils.dart';
 
 import 'adaptive_dialog_action.dart';
 import '../core/adaptive_widget.dart';
@@ -24,7 +24,7 @@ class AdaptiveDialog extends AdaptiveWidget {
 
   EdgeInsetsGeometry get _contentPadding =>
       contentPadding ??
-      (Platform.isIOS
+      (Utils.isIos
           ? const EdgeInsets.symmetric(vertical: 20)
           : const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0));
 
@@ -52,24 +52,25 @@ class AdaptiveDialog extends AdaptiveWidget {
   Future<T?> show<T extends Object?>(BuildContext context) => showDialog(
         context: context,
         builder: (context) => this,
-        barrierDismissible: !Platform.isIOS,
+        barrierDismissible: !Utils.isIos,
       );
 
   static Future<bool?> showConfirmation(
     BuildContext context, {
     required String title,
     required String content,
-    required String cancelText,
+    String? cancelText,
     required String confirmText,
   }) =>
       AdaptiveDialog._(
         title: Text(title),
         content: Text(content),
         actions: [
-          AdaptiveDialogAction(
-            child: Text(cancelText),
-            onPressed: () => Navigator.maybePop(context, false),
-          ),
+          if (cancelText != null)
+            AdaptiveDialogAction(
+              child: Text(cancelText),
+              onPressed: () => Navigator.maybePop(context, false),
+            ),
           AdaptiveDialogAction(
             child: Text(confirmText),
             onPressed: () => Navigator.maybePop(context, true),
@@ -77,35 +78,26 @@ class AdaptiveDialog extends AdaptiveWidget {
         ],
       ).show<bool>(context);
 
-  static Future<bool?> showNotification(
+  static Future<void> showNotification(
     BuildContext context, {
     required String title,
     required String content,
-    String? confirmText,
+    String? buttonText,
   }) =>
-      AdaptiveDialog._(
-        title: Text(title),
-        content: Text(content),
-        actions: [
-          AdaptiveDialogAction(
-            child: Text(confirmText ?? "Ok"),
-            onPressed: () => Navigator.maybePop(context),
-          ),
-        ],
-      ).show<bool>(context);
+      showConfirmation(
+        context,
+        title: title,
+        content: content,
+        confirmText: buttonText ?? "close".tr(),
+      );
 
-  static Future<bool?> showError(
+  static Future<void> showError(
     BuildContext context, {
     required String message,
   }) =>
-      AdaptiveDialog._(
-        title: const Text("Error"),
-        content: Text(message),
-        actions: [
-          AdaptiveDialogAction(
-            child: const Text("Ok"),
-            onPressed: () => Navigator.maybePop(context),
-          ),
-        ],
-      ).show<bool>(context);
+      showNotification(
+        context,
+        title: "error".tr(),
+        content: message,
+      );
 }

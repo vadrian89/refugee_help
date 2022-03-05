@@ -19,7 +19,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 0.0.1+1
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=2.16.1 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -47,7 +47,9 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.4.0
   logger: ^1.1.0
+  material_design_icons_flutter: ^5.0.6595
   sign_in_with_apple: ^3.3.0
+  social_login_buttons: ^1.0.6+2
   url_strategy: ^0.2.0
 
 dev_dependencies:

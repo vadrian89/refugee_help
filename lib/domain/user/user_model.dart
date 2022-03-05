@@ -61,8 +61,8 @@ class UserModel with _$UserModel {
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
         DateTime? updatedAt,
     @JsonKey(ignore: true) String? password,
-    @JsonKey(ignore: true) @Default(false) isAnonymous,
-    @JsonKey(ignore: true) @Default(false) emailVerified,
+    @JsonKey(ignore: true) @Default(false) bool isAnonymous,
+    @JsonKey(ignore: true) @Default(false) bool emailVerified,
   }) = _UserModel;
 
   /// Make a [UserModel] object from the incoming JSON.

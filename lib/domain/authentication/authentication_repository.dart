@@ -49,6 +49,9 @@ class AuthenticationRepository extends BaseRepository {
         password: _newUser!.password!,
       );
       await userCredential.user!.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      logException("Exception in registerUser", error: e, stackTrace: e.stackTrace);
+      result = OperationResult.failure(e.code.tr());
     } catch (e, stackTrace) {
       logException("Exception in registerUser", error: e, stackTrace: stackTrace);
       result = const OperationResult.failure("Unkown error when registering user!");
@@ -66,7 +69,7 @@ class AuthenticationRepository extends BaseRepository {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       logException("Exception in signInUser", error: e, stackTrace: e.stackTrace);
-      result = const OperationResult.failure("Unkown error when signing in user!");
+      result = OperationResult.failure(e.code.tr());
     } catch (e, stackTrace) {
       logException("Exception in signInUser", error: e, stackTrace: stackTrace);
       result = OperationResult.failure("unkown_error".tr());
@@ -80,7 +83,10 @@ class AuthenticationRepository extends BaseRepository {
     OperationResult? result;
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return;
+      if (googleUser == null) {
+        addResultToStream(const OperationResult.success());
+        return;
+      }
 
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
@@ -127,7 +133,7 @@ class AuthenticationRepository extends BaseRepository {
     OperationResult? result;
     try {
       logDebug("Adding user: $model");
-      await _collection.add(model);
+      await _collection.doc(model.id.toString()).set(model.toJson());
       logDebug("User added successfully!");
     } on FirebaseException catch (error) {
       logException("Exception in _addUser", error: error, stackTrace: error.stackTrace);
@@ -154,7 +160,7 @@ class AuthenticationRepository extends BaseRepository {
           _addUser(_newUser?.copyWith(id: authUser.uid) ?? UserModel.fromAuth(authUser));
         } else {
           _profileStreamCtrl.add(UserModel.fromJson(mapFromObject(doc.data())).copyWith(
-            emailVerified: authUser.email,
+            emailVerified: authUser.emailVerified,
           ));
         }
       });

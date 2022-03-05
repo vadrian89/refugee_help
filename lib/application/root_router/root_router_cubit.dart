@@ -33,9 +33,6 @@ class RootRouterCubit extends Cubit<RootRouterState> {
         authenticated: (user) => RootRouterState.home(user: user),
       ));
 
-  /// Public method used to show [SignInScreen].
-  void goToSignIn() => _onlyUnauthenticated(const RootRouterState.signIn());
-
   /// Public method used to show [RegisterInScreen].
   void goToRegister() => _onlyUnauthenticated(const RootRouterState.register());
 
@@ -63,7 +60,6 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           initial: (_) => goToRoot(),
           unauthenticated: (_) => goToRoot(),
           register: (registerState) => _onlyUnauthenticated(registerState),
-          signIn: (signInState) => _onlyUnauthenticated(signInState),
           home: (homeState) => _onlyAuthenticated(homeState),
           unknown: (unkownState) => emit(unkownState),
         ),

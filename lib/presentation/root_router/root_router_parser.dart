@@ -16,11 +16,11 @@ class RootRouterParser extends RouteInformationParser<RootRouterState> {
     if (uri.pathSegments.isNotEmpty) {
       if (uri.pathSegments.length == 1) {
         state = RootRouterState.fromUriLevel1(uri);
-      }
-      if (uri.pathSegments.length == 2) {
+      } else if (uri.pathSegments.length == 2) {
         state = RootRouterState.fromUriLevel2(uri);
+      } else {
+        state = const RootRouterState.unknown();
       }
-      state = const RootRouterState.unknown();
     }
     return SynchronousFuture(state);
   }

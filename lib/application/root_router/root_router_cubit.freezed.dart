@@ -36,10 +36,6 @@ class _$RootRouterStateTearOff {
     return const _Register();
   }
 
-  _SignIn signIn() {
-    return const _SignIn();
-  }
-
   _Unknown unknown() {
     return const _Unknown();
   }
@@ -56,7 +52,6 @@ mixin _$RootRouterState {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user) home,
     required TResult Function() register,
-    required TResult Function() signIn,
     required TResult Function() unknown,
   }) =>
       throw _privateConstructorUsedError;
@@ -66,7 +61,6 @@ mixin _$RootRouterState {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
   }) =>
       throw _privateConstructorUsedError;
@@ -76,7 +70,6 @@ mixin _$RootRouterState {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
     required TResult orElse(),
   }) =>
@@ -87,7 +80,6 @@ mixin _$RootRouterState {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Register value) register,
-    required TResult Function(_SignIn value) signIn,
     required TResult Function(_Unknown value) unknown,
   }) =>
       throw _privateConstructorUsedError;
@@ -97,7 +89,6 @@ mixin _$RootRouterState {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
   }) =>
       throw _privateConstructorUsedError;
@@ -107,7 +98,6 @@ mixin _$RootRouterState {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) =>
@@ -173,7 +163,6 @@ class _$_Initial extends _Initial {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user) home,
     required TResult Function() register,
-    required TResult Function() signIn,
     required TResult Function() unknown,
   }) {
     return initial();
@@ -186,7 +175,6 @@ class _$_Initial extends _Initial {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
   }) {
     return initial?.call();
@@ -199,7 +187,6 @@ class _$_Initial extends _Initial {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
@@ -216,7 +203,6 @@ class _$_Initial extends _Initial {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Register value) register,
-    required TResult Function(_SignIn value) signIn,
     required TResult Function(_Unknown value) unknown,
   }) {
     return initial(this);
@@ -229,7 +215,6 @@ class _$_Initial extends _Initial {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
   }) {
     return initial?.call(this);
@@ -242,7 +227,6 @@ class _$_Initial extends _Initial {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) {
@@ -303,7 +287,6 @@ class _$_Unauthenticated extends _Unauthenticated {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user) home,
     required TResult Function() register,
-    required TResult Function() signIn,
     required TResult Function() unknown,
   }) {
     return unauthenticated();
@@ -316,7 +299,6 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
   }) {
     return unauthenticated?.call();
@@ -329,7 +311,6 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
@@ -346,7 +327,6 @@ class _$_Unauthenticated extends _Unauthenticated {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Register value) register,
-    required TResult Function(_SignIn value) signIn,
     required TResult Function(_Unknown value) unknown,
   }) {
     return unauthenticated(this);
@@ -359,7 +339,6 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
   }) {
     return unauthenticated?.call(this);
@@ -372,7 +351,6 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) {
@@ -467,7 +445,6 @@ class _$_Home extends _Home {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user) home,
     required TResult Function() register,
-    required TResult Function() signIn,
     required TResult Function() unknown,
   }) {
     return home(user);
@@ -480,7 +457,6 @@ class _$_Home extends _Home {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
   }) {
     return home?.call(user);
@@ -493,7 +469,6 @@ class _$_Home extends _Home {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
@@ -510,7 +485,6 @@ class _$_Home extends _Home {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Register value) register,
-    required TResult Function(_SignIn value) signIn,
     required TResult Function(_Unknown value) unknown,
   }) {
     return home(this);
@@ -523,7 +497,6 @@ class _$_Home extends _Home {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
   }) {
     return home?.call(this);
@@ -536,7 +509,6 @@ class _$_Home extends _Home {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) {
@@ -598,7 +570,6 @@ class _$_Register extends _Register {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user) home,
     required TResult Function() register,
-    required TResult Function() signIn,
     required TResult Function() unknown,
   }) {
     return register();
@@ -611,7 +582,6 @@ class _$_Register extends _Register {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
   }) {
     return register?.call();
@@ -624,7 +594,6 @@ class _$_Register extends _Register {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
@@ -641,7 +610,6 @@ class _$_Register extends _Register {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Register value) register,
-    required TResult Function(_SignIn value) signIn,
     required TResult Function(_Unknown value) unknown,
   }) {
     return register(this);
@@ -654,7 +622,6 @@ class _$_Register extends _Register {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
   }) {
     return register?.call(this);
@@ -667,7 +634,6 @@ class _$_Register extends _Register {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) {
@@ -681,133 +647,6 @@ class _$_Register extends _Register {
 abstract class _Register extends RootRouterState {
   const factory _Register() = _$_Register;
   const _Register._() : super._();
-}
-
-/// @nodoc
-abstract class _$SignInCopyWith<$Res> {
-  factory _$SignInCopyWith(_SignIn value, $Res Function(_SignIn) then) =
-      __$SignInCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$SignInCopyWithImpl<$Res> extends _$RootRouterStateCopyWithImpl<$Res>
-    implements _$SignInCopyWith<$Res> {
-  __$SignInCopyWithImpl(_SignIn _value, $Res Function(_SignIn) _then)
-      : super(_value, (v) => _then(v as _SignIn));
-
-  @override
-  _SignIn get _value => super._value as _SignIn;
-}
-
-/// @nodoc
-
-class _$_SignIn extends _SignIn {
-  const _$_SignIn() : super._();
-
-  @override
-  String toString() {
-    return 'RootRouterState.signIn()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _SignIn);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() unauthenticated,
-    required TResult Function(UserModel? user) home,
-    required TResult Function() register,
-    required TResult Function() signIn,
-    required TResult Function() unknown,
-  }) {
-    return signIn();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? unauthenticated,
-    TResult Function(UserModel? user)? home,
-    TResult Function()? register,
-    TResult Function()? signIn,
-    TResult Function()? unknown,
-  }) {
-    return signIn?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? unauthenticated,
-    TResult Function(UserModel? user)? home,
-    TResult Function()? register,
-    TResult Function()? signIn,
-    TResult Function()? unknown,
-    required TResult orElse(),
-  }) {
-    if (signIn != null) {
-      return signIn();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Unauthenticated value) unauthenticated,
-    required TResult Function(_Home value) home,
-    required TResult Function(_Register value) register,
-    required TResult Function(_SignIn value) signIn,
-    required TResult Function(_Unknown value) unknown,
-  }) {
-    return signIn(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Unauthenticated value)? unauthenticated,
-    TResult Function(_Home value)? home,
-    TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
-    TResult Function(_Unknown value)? unknown,
-  }) {
-    return signIn?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Unauthenticated value)? unauthenticated,
-    TResult Function(_Home value)? home,
-    TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
-    TResult Function(_Unknown value)? unknown,
-    required TResult orElse(),
-  }) {
-    if (signIn != null) {
-      return signIn(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SignIn extends RootRouterState {
-  const factory _SignIn() = _$_SignIn;
-  const _SignIn._() : super._();
 }
 
 /// @nodoc
@@ -852,7 +691,6 @@ class _$_Unknown extends _Unknown {
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user) home,
     required TResult Function() register,
-    required TResult Function() signIn,
     required TResult Function() unknown,
   }) {
     return unknown();
@@ -865,7 +703,6 @@ class _$_Unknown extends _Unknown {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
   }) {
     return unknown?.call();
@@ -878,7 +715,6 @@ class _$_Unknown extends _Unknown {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user)? home,
     TResult Function()? register,
-    TResult Function()? signIn,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
@@ -895,7 +731,6 @@ class _$_Unknown extends _Unknown {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Register value) register,
-    required TResult Function(_SignIn value) signIn,
     required TResult Function(_Unknown value) unknown,
   }) {
     return unknown(this);
@@ -908,7 +743,6 @@ class _$_Unknown extends _Unknown {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
   }) {
     return unknown?.call(this);
@@ -921,7 +755,6 @@ class _$_Unknown extends _Unknown {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Register value)? register,
-    TResult Function(_SignIn value)? signIn,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
   }) {

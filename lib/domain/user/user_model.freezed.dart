@@ -46,9 +46,9 @@ class _$UserModelTearOff {
       @JsonKey(ignore: true)
           String? password,
       @JsonKey(ignore: true)
-          dynamic isAnonymous = false,
+          bool isAnonymous = false,
       @JsonKey(ignore: true)
-          dynamic emailVerified = false}) {
+          bool emailVerified = false}) {
     return _UserModel(
       id: id,
       category: category,
@@ -106,9 +106,9 @@ mixin _$UserModel {
   @JsonKey(ignore: true)
   String? get password => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  dynamic get isAnonymous => throw _privateConstructorUsedError;
+  bool get isAnonymous => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  dynamic get emailVerified => throw _privateConstructorUsedError;
+  bool get emailVerified => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -144,9 +144,9 @@ abstract class $UserModelCopyWith<$Res> {
       @JsonKey(ignore: true)
           String? password,
       @JsonKey(ignore: true)
-          dynamic isAnonymous,
+          bool isAnonymous,
       @JsonKey(ignore: true)
-          dynamic emailVerified});
+          bool emailVerified});
 }
 
 /// @nodoc
@@ -241,11 +241,11 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
       isAnonymous: isAnonymous == freezed
           ? _value.isAnonymous
           : isAnonymous // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool,
       emailVerified: emailVerified == freezed
           ? _value.emailVerified
           : emailVerified // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool,
     ));
   }
 }
@@ -280,9 +280,9 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       @JsonKey(ignore: true)
           String? password,
       @JsonKey(ignore: true)
-          dynamic isAnonymous,
+          bool isAnonymous,
       @JsonKey(ignore: true)
-          dynamic emailVerified});
+          bool emailVerified});
 }
 
 /// @nodoc
@@ -375,9 +375,14 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
-      isAnonymous: isAnonymous == freezed ? _value.isAnonymous : isAnonymous,
-      emailVerified:
-          emailVerified == freezed ? _value.emailVerified : emailVerified,
+      isAnonymous: isAnonymous == freezed
+          ? _value.isAnonymous
+          : isAnonymous // ignore: cast_nullable_to_non_nullable
+              as bool,
+      emailVerified: emailVerified == freezed
+          ? _value.emailVerified
+          : emailVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -460,10 +465,10 @@ class _$_UserModel extends _UserModel {
   final String? password;
   @override
   @JsonKey(ignore: true)
-  final dynamic isAnonymous;
+  final bool isAnonymous;
   @override
   @JsonKey(ignore: true)
-  final dynamic emailVerified;
+  final bool emailVerified;
 
   @override
   String toString() {
@@ -555,9 +560,9 @@ abstract class _UserModel extends UserModel {
       @JsonKey(ignore: true)
           String? password,
       @JsonKey(ignore: true)
-          dynamic isAnonymous,
+          bool isAnonymous,
       @JsonKey(ignore: true)
-          dynamic emailVerified}) = _$_UserModel;
+          bool emailVerified}) = _$_UserModel;
   const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -605,10 +610,10 @@ abstract class _UserModel extends UserModel {
   String? get password;
   @override
   @JsonKey(ignore: true)
-  dynamic get isAnonymous;
+  bool get isAnonymous;
   @override
   @JsonKey(ignore: true)
-  dynamic get emailVerified;
+  bool get emailVerified;
   @override
   @JsonKey(ignore: true)
   _$UserModelCopyWith<_UserModel> get copyWith =>

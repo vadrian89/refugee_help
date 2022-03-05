@@ -20,9 +20,6 @@ class RootRouterState with _$RootRouterState {
   /// Path used for unverified users.
   static const unverifiedPath = "/unverified";
 
-  /// Path used for sign with e-mail and password in screen.
-  static const signInPath = "/sign-in";
-
   /// Path used for registration screen.
   static const registerPath = "/register";
 
@@ -57,9 +54,6 @@ class RootRouterState with _$RootRouterState {
   /// [RootRouterState.register] shows [RegisterScreen].
   const factory RootRouterState.register() = _Register;
 
-  /// [RootRouterState.signIn] shows [SignInScreen].
-  const factory RootRouterState.signIn() = _SignIn;
-
   /// [RootRouterState.unknown] is the state returned when the user requests an uknown page.
   ///
   /// This is the equivalent of error 404 for HTTP requests: https://en.wikipedia.org/wiki/HTTP_404.
@@ -75,8 +69,6 @@ class RootRouterState with _$RootRouterState {
       return const RootRouterState.home();
     } else if (pathSegment == authPath) {
       return const RootRouterState.unauthenticated();
-    } else if (pathSegment == signInPath) {
-      return const RootRouterState.signIn();
     } else if (pathSegment == registerPath) {
       return const RootRouterState.register();
     } else {
@@ -96,7 +88,6 @@ class RootRouterState with _$RootRouterState {
         initial: () => rootPath,
         unauthenticated: () => authPath,
         register: () => registerPath,
-        signIn: () => signInPath,
         home: (_) => homePath,
         orElse: () => unknownPath,
       );

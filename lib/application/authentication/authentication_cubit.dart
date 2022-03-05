@@ -77,6 +77,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     await _repo.signInWithGoogle();
   }
 
+  Future<void> resetPassword(String email) async {
+    emit(AuthenticationState.loading("sending_password_reset".tr()));
+    await Utils.repoDelay();
+    await _repo.sendPasswordReset(email);
+  }
+
   void signOut() => _repo.signOut();
 
   /// Clean up resources used by the cubit.

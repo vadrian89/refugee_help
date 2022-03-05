@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 class Utils {
@@ -10,4 +13,6 @@ class Utils {
   static Future<void> repoDelay([int milliseconds = 300]) =>
       Future.delayed(Duration(milliseconds: milliseconds));
   static Future<void> streamDelay() => repoDelay(150);
+
+  static bool get isIos => !kIsWeb && Platform.isIOS;
 }

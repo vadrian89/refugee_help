@@ -22,7 +22,8 @@ class UserCategoryModel extends Equatable {
     }
   }
 
-  static UserCategoryModel? fromJson(dynamic id) => UserCategoryModel.fromId(int.tryParse(id));
+  static UserCategoryModel? fromJson(dynamic id) =>
+      UserCategoryModel.fromId(int.tryParse(id.toString()));
 
   @override
   List<Object?> get props => [id, name];

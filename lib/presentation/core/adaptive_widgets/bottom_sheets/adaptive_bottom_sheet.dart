@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:refugee_help/infrastructure/utils.dart';
 
 import '../../widgets/refocus_background.dart';
 import '../core/adaptive_widget.dart';
@@ -82,12 +81,12 @@ class AdaptiveBottomSheet extends AdaptiveWidget {
 
   Widget _title(BuildContext context) => Text(
         title!,
-        textAlign: Platform.isIOS ? TextAlign.center : TextAlign.left,
+        textAlign: Utils.isIos ? TextAlign.center : TextAlign.left,
         style: Theme.of(context).textTheme.headline6,
       );
 
   Future<T?> show<T extends Object?>(BuildContext context) =>
-      Platform.isIOS ? _showCupertino(context) : _showMaterial(context);
+      Utils.isIos ? _showCupertino(context) : _showMaterial(context);
 
   Future<T?> _showMaterial<T extends Object?>(BuildContext context) => showModalBottomSheet<T?>(
         context: context,
