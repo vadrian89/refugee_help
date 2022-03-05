@@ -27,6 +27,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     final result = await _repo.registerUser(user.copyWith(
       lastName: user.lastName!.capitalised,
       firstName: user.firstName!.capitalised,
+      email: user.email!.toLowerCase(),
     ));
     result.when(
       failure: (message) {

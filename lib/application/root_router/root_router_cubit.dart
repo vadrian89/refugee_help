@@ -40,13 +40,17 @@ class RootRouterCubit extends Cubit<RootRouterState> {
   ///
   /// Return `true` if the app navigated back or `false` if it's the root of the app.
   /// The value of the [result] argument is the value returned by the [Route].
-  bool popRoute(dynamic result) {
-    if (!state.isRoot) {
-      goToRoot();
-      return true;
-    }
-    return false;
-  }
+  bool popRoute(dynamic result) => state.maybeMap(
+        register: (_) {
+          goToRoot();
+          return true;
+        },
+        unknown: (_) {
+          goToRoot();
+          return true;
+        },
+        orElse: () => false,
+      );
 
   /// Method called by the overriden [RootRouterDelegate.setNewRoutePath] method.
   ///
@@ -82,7 +86,16 @@ class RootRouterCubit extends Cubit<RootRouterState> {
     RootRouterState? newState = authState.maybeWhen(
       orElse: () => null,
       unauthenticated: () => const RootRouterState.unauthenticated(),
-      authenticated: (user) => RootRouterState.home(user: user),
+      authenticated: (user) {
+        final goHome = state.maybeWhen(
+          orElse: () => false,
+          initial: () => true,
+          unauthenticated: () => true,
+          register: () => true,
+        );
+        if (goHome) goToRoot();
+        return;
+      },
     );
 
     if (newState != null) {

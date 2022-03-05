@@ -11,6 +11,7 @@ class Validators {
   static final RegExp _emailRegExp = RegExp(
     r"^[a-zA-Z0-9_\.!#$%\^&\*]+@[a-zA-Z_]+?\.[a-zA-Z]{2,20}$",
   );
+  static final RegExp _phoneRegExp = RegExp(r"^\+40[0-9]{8,9}$");
 
   /// Validate that the provided value is a valid e-mail.
   static bool isValidEmail([String? email]) => (email != null) && _emailRegExp.hasMatch(email);
@@ -26,4 +27,7 @@ class Validators {
   /// - should contain at least one digit;
   static bool isValidPassword([String? password]) =>
       (password != null) && _passwordRegExp.hasMatch(password);
+
+  /// Validate phone number.
+  static bool isValidPhone(String? phone) => (phone != null) && _phoneRegExp.hasMatch(phone);
 }

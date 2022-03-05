@@ -15,6 +15,7 @@ class MainScreen extends StatelessWidget {
           initial: () => const LoadingScreen(),
           orElse: () => const UnkownScreen(),
           unauthenticated: () => const AuthenticationScreen(),
+          register: () => const AuthenticationScreen(),
           home: (_) => const HomeScreen(),
         ),
       );

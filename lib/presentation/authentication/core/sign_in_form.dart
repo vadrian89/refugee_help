@@ -45,6 +45,7 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const VerticalSpacing(60),
           Head6Text(text: "sign_in_to_your_account".tr()),

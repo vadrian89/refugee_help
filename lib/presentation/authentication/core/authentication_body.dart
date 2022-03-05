@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
+import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 
 import 'package:refugee_help/presentation/authentication/core/sign_in_form.dart';
 import 'package:refugee_help/presentation/core/widgets/text/sub1_text.dart';
@@ -39,7 +40,7 @@ class AuthenticationBody extends StatelessWidget {
               MessageButton(
                 message: "no_account_q".tr(),
                 buttonLabel: "sign_up".tr(),
-                onPressed: () {},
+                onPressed: context.read<RootRouterCubit>().goToRegister,
               ),
             ],
           ),

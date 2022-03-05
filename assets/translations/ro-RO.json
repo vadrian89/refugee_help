@@ -35,5 +35,14 @@
     "form_is_not_valid": "Formularul nu este valid!",
     "resource_not_found": "Resursa nu a fost găsită",
     "error": "Eroare",
-    "close": "Închide"
+    "close": "Închide",
+    "create_your_account": "Crează-ţi contul",
+    "last_name": "Nume",
+    "field_empty_error": "Câmpul nu poate fi gol!",
+    "first_name": "Prenume",
+    "phone": "Telefon",
+    "phone_invalid": "Numărul de telefon trebuie să fie de forma: +40722555444",
+    "confirm_password": "Confirmă parola",
+    "registering_user":"În curs de înregistrare...",
+    "password_confirm_mismatch": "Nu se potriveşte cu parola introdusă!"
 }

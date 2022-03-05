@@ -34,6 +34,8 @@ class RootRouterState with _$RootRouterState {
   /// based on the current [AuthenticationState].
   bool get isRoot => maybeWhen(orElse: () => false, unauthenticated: () => true, home: (_) => true);
 
+  bool get isRegister => maybeWhen(orElse: () => false, register: () => true);
+
   /// Define the private constructor to enable support for class methods and properties.
   const RootRouterState._();
 

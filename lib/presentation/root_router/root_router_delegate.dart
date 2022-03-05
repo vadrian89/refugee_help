@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
+import 'package:refugee_help/presentation/authentication/register/register_screen.dart';
 import 'package:refugee_help/presentation/core/screens/main_screen.dart';
 import 'package:refugee_help/presentation/core/utils/app_exit_dialog.dart';
 
@@ -38,6 +39,8 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
           key: navigatorKey,
           pages: List.from([
             _materialPage(valueKey: "mainScreen", child: const MainScreen()),
+            if (currentConfiguration.isRegister)
+              _materialPage(valueKey: "registerScreen", child: const RegisterScreen()),
             ..._extraPages,
           ]),
           onPopPage: _onPopPageParser,
