@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:refugee_help/infrastructure/firebase/chrashlytics_manager.dart';
 
 import 'operation_result.dart';
 
@@ -26,14 +26,14 @@ abstract class BaseRepository {
 
   /// Log debug messages.
   void logDebug(String message, {dynamic error, StackTrace? stackTrace}) {
-    FirebaseCrashlytics.instance.log(message);
+    ChrashlyticsManager.log(message);
     _logger.d(message, error, stackTrace);
   }
 
   /// Log exceptions caught.
   void logException(String message, {dynamic error, StackTrace? stackTrace}) {
-    FirebaseCrashlytics.instance.log(message);
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    ChrashlyticsManager.log(message);
+    ChrashlyticsManager.recordError(error, stackTrace);
     _logger.e(message, error, stackTrace);
   }
 
@@ -41,7 +41,7 @@ abstract class BaseRepository {
 
   @protected
   CollectionReference getCollection(String collection) {
-    if (collection == "users") {
+    if (collection == "user_profiles") {
       return FirebaseFirestore.instance.collection(collection);
     }
     return FirebaseFirestore.instance.collection("${_project}_${collection.toLowerCase()}");

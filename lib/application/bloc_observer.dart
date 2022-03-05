@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:logger/logger.dart';
+import 'package:refugee_help/infrastructure/firebase/chrashlytics_manager.dart';
 
 /// Class used to debug bloc workflow.
 class SimpleBlocObserver extends BlocObserver {
@@ -15,7 +15,7 @@ class SimpleBlocObserver extends BlocObserver {
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     _logger.e("$bloc error: $error");
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    ChrashlyticsManager.recordError(error, stackTrace);
     super.onError(bloc, error, stackTrace);
   }
 
