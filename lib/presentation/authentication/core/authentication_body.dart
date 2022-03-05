@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
 
-import 'package:refugee_help/presentation/authentication/core/auth_social_button.dart';
 import 'package:refugee_help/presentation/authentication/core/sign_in_form.dart';
 import 'package:refugee_help/presentation/core/widgets/text/sub1_text.dart';
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
 
-import 'message_button.dart';
+import 'buttons/auth_social_button.dart';
+import 'buttons/message_button.dart';
 
 class AuthenticationBody extends StatelessWidget {
   const AuthenticationBody({Key? key}) : super(key: key);

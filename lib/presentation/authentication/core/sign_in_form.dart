@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
 import 'package:refugee_help/infrastructure/validators.dart';
-import 'package:refugee_help/presentation/authentication/core/auth_elevated_button.dart';
-import 'package:refugee_help/presentation/authentication/core/auth_text_field.dart';
-import 'package:refugee_help/presentation/authentication/core/password_field.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/widgets/buttons/base_text_buton.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head6_text.dart';
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
+
+import 'buttons/auth_elevated_button.dart';
+import 'text_fields/auth_text_field.dart';
+import 'text_fields/password_field.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({Key? key}) : super(key: key);
