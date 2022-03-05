@@ -14,8 +14,7 @@ class RegisterScreen extends StatelessWidget {
         child: ScaffoldMessenger(
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.white,
-              foregroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               elevation: 0,
             ),
             body: const RegisterListener(child: RegisterForm()),
