@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:refugee_help/infrastructure/validators.dart';
 
-import 'auth_text_field.dart';
+import '../../../core/widgets/text_fields/app_text_field.dart';
 
 class PasswordField extends StatefulWidget {
   final TextEditingController? controller;
@@ -25,7 +25,7 @@ class _PasswordFieldState extends State<PasswordField> {
   bool _obscure = true;
 
   @override
-  Widget build(BuildContext context) => AuthTextField(
+  Widget build(BuildContext context) => AppTextField(
         controller: widget.controller,
         hintText: widget.hintText ?? "password".tr(),
         validator: widget.validator ??

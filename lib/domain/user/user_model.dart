@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:refugee_help/domain/core/image_model.dart';
 import 'package:refugee_help/domain/util/json_util.dart';
 import 'package:refugee_help/infrastructure/validators.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -31,7 +32,7 @@ class UserModel with _$UserModel {
   bool get countyIsValid => county?.isNotEmpty ?? false;
   bool get cityIsValid => city?.isNotEmpty ?? false;
   bool get addressIsValid => address?.isNotEmpty ?? false;
-  bool get imageIsValid => profileImage?.isNotEmpty ?? false;
+  bool get imageIsValid => profileImage?.isValid ?? false;
   bool get isValid =>
       emailIsValid &&
       lastNameIsValid &&
@@ -41,7 +42,7 @@ class UserModel with _$UserModel {
       cityIsValid &&
       addressIsValid &&
       imageIsValid;
-
+  @JsonSerializable(explicitToJson: true)
   const factory UserModel({
     String? id,
     @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
@@ -53,7 +54,7 @@ class UserModel with _$UserModel {
     String? county,
     String? city,
     String? address,
-    @JsonKey(name: "profile_image") String? profileImage,
+    @JsonKey(name: "profile_image") ImageModel? profileImage,
     String? organization,
     @Default(false) bool? available,
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
@@ -70,6 +71,7 @@ class UserModel with _$UserModel {
 
   factory UserModel.fromAuth(User user) => UserModel(
         id: user.uid,
+        profileImage: ImageModel(imageURL: user.photoURL),
         lastName: (user.displayName?.trim().isNotEmpty ?? false)
             ? user.displayName!.split(" ").last
             : null,
@@ -87,6 +89,7 @@ class UserModel with _$UserModel {
 
   factory UserModel.fromApple(User user, AuthorizationCredentialAppleID appleUser) => UserModel(
         id: user.uid,
+        profileImage: ImageModel(imageURL: user.photoURL),
         lastName: appleUser.familyName,
         firstName: appleUser.givenName,
         email: user.email,

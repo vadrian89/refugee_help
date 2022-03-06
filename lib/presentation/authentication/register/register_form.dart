@@ -10,8 +10,8 @@ import 'package:refugee_help/presentation/core/widgets/refocus_background.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head6_text.dart';
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
 
-import '../core/buttons/auth_elevated_button.dart';
-import '../core/text_fields/auth_text_field.dart';
+import '../core/buttons/expanded_elevated_button.dart';
+import '../../core/widgets/text_fields/app_text_field.dart';
 import '../core/text_fields/password_field.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -96,25 +96,25 @@ class _RegisterFormState extends State<RegisterForm> {
                 const VerticalSpacing(60),
                 Head6Text(text: "create_your_account".tr()),
                 const VerticalSpacing(),
-                AuthTextField(
+                AppTextField(
                   controller: _lastNameController,
                   hintText: "last_name".tr(),
                   autovalidateMode: AutovalidateMode.always,
                   validator: (val) => (val?.isNotEmpty ?? false) ? null : "field_empty_error".tr(),
                 ),
-                AuthTextField(
+                AppTextField(
                   controller: _firstNameController,
                   hintText: "first_name".tr(),
                   autovalidateMode: AutovalidateMode.always,
                   validator: (val) => (val?.isNotEmpty ?? false) ? null : "field_empty_error".tr(),
                 ),
-                AuthTextField(
+                AppTextField(
                   controller: _phoneController,
                   hintText: "phone".tr(),
                   validator: (val) => Validators.isValidPhone(val) ? null : "phone_invalid".tr(),
                   keyboardType: TextInputType.phone,
                 ),
-                AuthTextField(
+                AppTextField(
                   controller: _emailController,
                   hintText: "E-mail",
                   validator: (val) => Validators.isValidEmail(val) ? null : "email_invalid".tr(),
@@ -130,11 +130,11 @@ class _RegisterFormState extends State<RegisterForm> {
                       (_password == _passwordConfirm) ? null : "password_confirm_mismatch".tr(),
                 ),
                 const VerticalSpacing(20),
-                AuthElevatedButton(
+                ExpandedElevatedButton(
                   label: "sign_up".tr(),
                   onPressed: () {
                     if (!_isFilled) {
-                      AdaptiveDialog.showError(context, message: "form_is_empty".tr());
+                      AdaptiveDialog.showError(context, message: "form_not_completed".tr());
                       return;
                     }
                     if (!_isValid) {

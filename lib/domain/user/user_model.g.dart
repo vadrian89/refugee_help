@@ -16,7 +16,9 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       county: json['county'] as String?,
       city: json['city'] as String?,
       address: json['address'] as String?,
-      profileImage: json['profile_image'] as String?,
+      profileImage: json['profile_image'] == null
+          ? null
+          : ImageModel.fromJson(json['profile_image'] as Map<String, dynamic>),
       organization: json['organization'] as String?,
       available: json['available'] as bool? ?? false,
       createdAt: dateTimeFromJson(json['updated_at']),
@@ -34,7 +36,7 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'county': instance.county,
       'city': instance.city,
       'address': instance.address,
-      'profile_image': instance.profileImage,
+      'profile_image': instance.profileImage?.toJson(),
       'organization': instance.organization,
       'available': instance.available,
       'updated_at': dateTimeToJson(instance.createdAt),

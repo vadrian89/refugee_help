@@ -10,6 +10,7 @@ class BaseTextFormField extends StatelessWidget {
   final AutovalidateMode autovalidateMode;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final String? initialValue;
 
   const BaseTextFormField({
     Key? key,
@@ -22,10 +23,12 @@ class BaseTextFormField extends StatelessWidget {
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
     this.keyboardType,
     this.obscureText = false,
+    this.initialValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => TextFormField(
+        initialValue: initialValue,
         controller: controller,
         focusNode: focusNode,
         decoration: inputDecoration,

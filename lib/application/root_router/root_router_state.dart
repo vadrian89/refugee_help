@@ -14,6 +14,8 @@ class RootRouterState with _$RootRouterState {
   /// Home path returned, once the user is authenticated.
   static const homePath = "/home";
 
+  static const profilePath = "/user-profile";
+
   /// Path which means the user is not authenticated.
   static const authPath = "/auth";
 
@@ -32,7 +34,11 @@ class RootRouterState with _$RootRouterState {
   /// Check if we the screen is root.
   /// [RootRouterState.unauthenticated] and [RootRouterState.home] show the root of the screen
   /// based on the current [AuthenticationState].
-  bool get isRoot => maybeWhen(orElse: () => false, unauthenticated: () => true, home: (_) => true);
+  bool get isRoot => maybeWhen(
+        orElse: () => false,
+        unauthenticated: () => true,
+        home: (_, viewProfile) => !viewProfile,
+      );
 
   bool get isRegister => maybeWhen(orElse: () => false, register: () => true);
 
@@ -51,7 +57,10 @@ class RootRouterState with _$RootRouterState {
   const factory RootRouterState.unauthenticated() = _Unauthenticated;
 
   /// [RootRouterState.home] is the state of the router after the user is authenticated.
-  const factory RootRouterState.home({UserModel? user}) = _Home;
+  const factory RootRouterState.home({
+    UserModel? user,
+    @Default(false) bool viewProfile,
+  }) = _Home;
 
   /// [RootRouterState.register] shows [RegisterScreen].
   const factory RootRouterState.register() = _Register;
@@ -82,6 +91,11 @@ class RootRouterState with _$RootRouterState {
   ///
   /// This constructor is used inside [RootRouterParser.parseRouteInformation].
   factory RootRouterState.fromUriLevel2(Uri uri) {
+    final pathSegment1 = "/${uri.pathSegments[0]}";
+    final pathSegment2 = "/${uri.pathSegments[1]}";
+    if (pathSegment1 == homePath && pathSegment2 == profilePath) {
+      return const RootRouterState.home(viewProfile: true);
+    }
     return const RootRouterState.unknown();
   }
 
@@ -90,7 +104,7 @@ class RootRouterState with _$RootRouterState {
         initial: () => rootPath,
         unauthenticated: () => authPath,
         register: () => registerPath,
-        home: (_) => homePath,
+        home: (_, viewProfile) => "$homePath${viewProfile ? profilePath : ""}",
         orElse: () => unknownPath,
       );
 }

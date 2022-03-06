@@ -8,8 +8,8 @@ import 'package:refugee_help/presentation/core/widgets/buttons/base_text_buton.d
 import 'package:refugee_help/presentation/core/widgets/text/head6_text.dart';
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
 
-import 'buttons/auth_elevated_button.dart';
-import 'text_fields/auth_text_field.dart';
+import 'buttons/expanded_elevated_button.dart';
+import '../../core/widgets/text_fields/app_text_field.dart';
 import 'text_fields/password_field.dart';
 
 class SignInForm extends StatefulWidget {
@@ -50,7 +50,7 @@ class _SignInFormState extends State<SignInForm> {
           const VerticalSpacing(60),
           Head6Text(text: "sign_in_to_your_account".tr()),
           const VerticalSpacing(),
-          AuthTextField(
+          AppTextField(
             controller: _emailController,
             hintText: "E-mail",
             validator: (val) => Validators.isValidEmail(val) ? null : "email_invalid".tr(),
@@ -76,11 +76,11 @@ class _SignInFormState extends State<SignInForm> {
             ],
           ),
           const VerticalSpacing(),
-          AuthElevatedButton(
+          ExpandedElevatedButton(
             label: "sign_in".tr(),
             onPressed: () {
               if (!_isFilled) {
-                AdaptiveDialog.showError(context, message: "form_is_empty".tr());
+                AdaptiveDialog.showError(context, message: "form_not_completed".tr());
                 return;
               }
               if (!_isValid) {

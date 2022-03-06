@@ -36,6 +36,8 @@ class RootRouterCubit extends Cubit<RootRouterState> {
   /// Public method used to show [RegisterInScreen].
   void goToRegister() => _onlyUnauthenticated(const RootRouterState.register());
 
+  void goToUserProfile() => _onlyAuthenticated(const RootRouterState.home(viewProfile: true));
+
   /// Implement the logic for what happens when the back button was called.
   ///
   /// Return `true` if the app navigated back or `false` if it's the root of the app.
@@ -48,6 +50,13 @@ class RootRouterCubit extends Cubit<RootRouterState> {
         unknown: (_) {
           goToRoot();
           return true;
+        },
+        home: (home) {
+          if (home.viewProfile) {
+            goToRoot();
+            return true;
+          }
+          return false;
         },
         orElse: () => false,
       );
@@ -127,7 +136,7 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           /// The [RootRouterState.user] which should contain the currently authenticated [UserModel].
           /// This argument should be taken from the [AuthenticationState.authenticated] state to ensure the latest data is used.
           /// The [RootRouterState.showScreen] which tells the delegate if it should show the [LoggedInScreen] screen.
-          home: (_) => RootRouterState.home(user: user),
+          home: (_, viewProfile) => RootRouterState.home(user: user, viewProfile: viewProfile),
         ),
       ));
 

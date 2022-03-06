@@ -36,7 +36,7 @@ class _$UserModelTearOff {
       String? city,
       String? address,
       @JsonKey(name: "profile_image")
-          String? profileImage,
+          ImageModel? profileImage,
       String? organization,
       bool? available = false,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
@@ -94,7 +94,7 @@ mixin _$UserModel {
   String? get city => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: "profile_image")
-  String? get profileImage => throw _privateConstructorUsedError;
+  ImageModel? get profileImage => throw _privateConstructorUsedError;
   String? get organization => throw _privateConstructorUsedError;
   bool? get available => throw _privateConstructorUsedError;
   @JsonKey(
@@ -134,7 +134,7 @@ abstract class $UserModelCopyWith<$Res> {
       String? city,
       String? address,
       @JsonKey(name: "profile_image")
-          String? profileImage,
+          ImageModel? profileImage,
       String? organization,
       bool? available,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
@@ -147,6 +147,8 @@ abstract class $UserModelCopyWith<$Res> {
           bool isAnonymous,
       @JsonKey(ignore: true)
           bool emailVerified});
+
+  $ImageModelCopyWith<$Res>? get profileImage;
 }
 
 /// @nodoc
@@ -217,7 +219,7 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
       profileImage: profileImage == freezed
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ImageModel?,
       organization: organization == freezed
           ? _value.organization
           : organization // ignore: cast_nullable_to_non_nullable
@@ -248,6 +250,17 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
               as bool,
     ));
   }
+
+  @override
+  $ImageModelCopyWith<$Res>? get profileImage {
+    if (_value.profileImage == null) {
+      return null;
+    }
+
+    return $ImageModelCopyWith<$Res>(_value.profileImage!, (value) {
+      return _then(_value.copyWith(profileImage: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -270,7 +283,7 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String? city,
       String? address,
       @JsonKey(name: "profile_image")
-          String? profileImage,
+          ImageModel? profileImage,
       String? organization,
       bool? available,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
@@ -283,6 +296,9 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
           bool isAnonymous,
       @JsonKey(ignore: true)
           bool emailVerified});
+
+  @override
+  $ImageModelCopyWith<$Res>? get profileImage;
 }
 
 /// @nodoc
@@ -354,7 +370,7 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
       profileImage: profileImage == freezed
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ImageModel?,
       organization: organization == freezed
           ? _value.organization
           : organization // ignore: cast_nullable_to_non_nullable
@@ -388,7 +404,8 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_UserModel extends _UserModel {
   const _$_UserModel(
       {this.id,
@@ -446,7 +463,7 @@ class _$_UserModel extends _UserModel {
   final String? address;
   @override
   @JsonKey(name: "profile_image")
-  final String? profileImage;
+  final ImageModel? profileImage;
   @override
   final String? organization;
   @JsonKey()
@@ -550,7 +567,7 @@ abstract class _UserModel extends UserModel {
       String? city,
       String? address,
       @JsonKey(name: "profile_image")
-          String? profileImage,
+          ImageModel? profileImage,
       String? organization,
       bool? available,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
@@ -592,7 +609,7 @@ abstract class _UserModel extends UserModel {
   String? get address;
   @override
   @JsonKey(name: "profile_image")
-  String? get profileImage;
+  ImageModel? get profileImage;
   @override
   String? get organization;
   @override

@@ -1,0 +1,31 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:refugee_help/application/authentication/authentication_cubit.dart';
+import 'package:refugee_help/application/root_router/root_router_cubit.dart';
+import 'package:refugee_help/presentation/home/core/app_drawer/app_drawer_header.dart';
+import 'package:refugee_help/presentation/home/core/app_drawer/drawer_list_tile.dart';
+
+class AppDrawer extends StatelessWidget {
+  const AppDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Drawer(
+        child: Column(
+          children: [
+            const AppDrawerHeader(),
+            DrawerListTile(
+              icon: MdiIcons.account,
+              label: "user_profile".tr(),
+              onPressed: context.read<RootRouterCubit>().goToUserProfile,
+            ),
+            DrawerListTile(
+              icon: MdiIcons.logout,
+              label: "sign_out".tr(),
+              onPressed: context.read<AuthenticationCubit>().signOut,
+            ),
+          ],
+        ),
+      );
+}

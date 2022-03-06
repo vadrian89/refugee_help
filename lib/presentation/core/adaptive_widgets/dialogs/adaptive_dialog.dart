@@ -55,14 +55,14 @@ class AdaptiveDialog extends AdaptiveWidget {
         barrierDismissible: !Utils.isIos,
       );
 
-  static Future<bool?> showConfirmation(
+  static Future<bool> showConfirmation(
     BuildContext context, {
     required String title,
     required String content,
     String? cancelText,
     required String confirmText,
-  }) =>
-      AdaptiveDialog._(
+  }) async =>
+      (await AdaptiveDialog._(
         title: Text(title),
         content: Text(content),
         actions: [
@@ -76,7 +76,7 @@ class AdaptiveDialog extends AdaptiveWidget {
             onPressed: () => Navigator.maybePop(context, true),
           ),
         ],
-      ).show<bool>(context);
+      ).show<bool>(context))!;
 
   static Future<void> showNotification(
     BuildContext context, {

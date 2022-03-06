@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:refugee_help/presentation/core/widgets/text_fields/base_text_form_field.dart';
 
-class AuthTextField extends StatelessWidget {
+class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String? errorMessage)? validator;
   final String? hintText;
@@ -11,8 +11,10 @@ class AuthTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final AutovalidateMode autovalidateMode;
+  final bool readOnly;
+  final String? initialValue;
 
-  const AuthTextField({
+  const AppTextField({
     Key? key,
     this.controller,
     this.validator,
@@ -23,10 +25,13 @@ class AuthTextField extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
+    this.readOnly = false,
+    this.initialValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => BaseTextFormField(
+        initialValue: initialValue,
         controller: controller,
         inputDecoration: InputDecoration(
           hintText: hintText,
@@ -39,5 +44,6 @@ class AuthTextField extends StatelessWidget {
         onChanged: onChanged,
         obscureText: obscureText,
         autovalidateMode: autovalidateMode,
+        readOnly: readOnly,
       );
 }

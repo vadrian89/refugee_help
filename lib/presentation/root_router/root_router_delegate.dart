@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/presentation/authentication/register/register_screen.dart';
+import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/screens/main_screen.dart';
-import 'package:refugee_help/presentation/core/utils/app_exit_dialog.dart';
+import 'package:refugee_help/presentation/user_profile/user_profile_screen.dart';
 
 /// The root delegate of the app.
 ///
@@ -82,7 +84,7 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
       return Future.value(true);
     }
     if (navigatorKey.currentState?.canPop() ?? false) {
-      navigatorKey.currentState!.pop();
+      navigatorKey.currentState!.maybePop();
       return Future.value(true);
     }
     return _confirmAppExit();
@@ -92,17 +94,30 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
   ///
   /// Alternatively to have a cleaner delegate, the list of pages can be built in a separate class.
   List<Page> get _extraPages {
-    final Page? page = _routerCubit.state.maybeWhen(
+    List<Page> tmpList = [];
+    _routerCubit.state.maybeWhen(
       orElse: () => null,
       register: () => null,
-      home: (_) => null,
+      home: (_, viewProfile) {
+        if (viewProfile) {
+          tmpList.add(
+            _materialPage(valueKey: RootRouterState.profilePath, child: const UserProfileScreen()),
+          );
+        }
+      },
     );
 
-    return [if (page != null) page];
+    return tmpList;
   }
 
   /// Ask the user to confirm he wants to exit the app.
-  Future<bool> _confirmAppExit() => const AppExitDialog().show(_navigatorKey.currentContext!);
+  Future<bool> _confirmAppExit() async => !(await AdaptiveDialog.showConfirmation(
+        _navigatorKey.currentContext!,
+        title: "exit_app_title".tr(),
+        content: "exit_app_confirm".tr(),
+        cancelText: "cancel".tr(),
+        confirmText: "close".tr(),
+      ));
 
   /// Build a [Page] (screens) to use in [Navigator.pages] list.
   Page _materialPage({

@@ -15,4 +15,27 @@ class Utils {
   static Future<void> streamDelay() => repoDelay(150);
 
   static bool get isIos => !kIsWeb && Platform.isIOS;
+
+  static String getImageMime(String path) {
+    if (path.contains(".jpg") || path.contains(".jpeg")) {
+      return "image/jpeg";
+    }
+    if (path.contains(".jpg")) {
+      return "image/jpg";
+    } else if (path.contains(".png")) {
+      return "image/png";
+    } else if (path.contains(".svg")) {
+      return "image/svg+xml";
+    } else if (path.contains(".apng")) {
+      return "image/apng";
+    } else if (path.contains(".bmp")) {
+      return "image/bmp";
+    } else if (path.contains(".gif")) {
+      return "image/gif";
+    } else if (path.contains(".webp")) {
+      return "image/webp";
+    } else {
+      return "";
+    }
+  }
 }
