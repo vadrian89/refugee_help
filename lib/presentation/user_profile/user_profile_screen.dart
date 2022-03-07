@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
 import 'package:refugee_help/application/user/user_cubit.dart';
+import 'package:refugee_help/presentation/core/widgets/buttons/alt_back_button.dart';
 import 'package:refugee_help/presentation/user_profile/core/user_edit_button.dart';
 import 'package:refugee_help/presentation/user_profile/core/user_profile_form.dart';
 
@@ -16,7 +17,8 @@ class UserProfileScreen extends StatelessWidget {
         child: ScaffoldMessenger(
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              leading: const AltBackButton(),
+              backgroundColor: Colors.transparent,
               elevation: 0,
               actions: const [UserEditButton()],
             ),
