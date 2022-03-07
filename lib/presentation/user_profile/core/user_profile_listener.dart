@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/user/user_cubit.dart';
+import 'package:refugee_help/domain/user/user_model.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/utils/snackbars.dart';
 
 class UserProfileListener extends StatelessWidget {
   final Widget child;
+  final void Function(UserModel user) onView;
+  final void Function(UserModel user) onEdit;
 
-  const UserProfileListener({Key? key, required this.child}) : super(key: key);
+  const UserProfileListener({
+    Key? key,
+    required this.child,
+    required this.onView,
+    required this.onEdit,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => BlocListener<UserCubit, UserState>(
@@ -20,12 +28,8 @@ class UserProfileListener extends StatelessWidget {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             return AdaptiveDialog.showError(context, message: message);
           },
-        ),
-        listenWhen: (_, current) => current.maybeWhen(
-          orElse: () => false,
-          loading: (_) => true,
-          success: (_) => true,
-          failure: (_) => true,
+          view: onView,
+          edit: onEdit,
         ),
         child: child,
       );

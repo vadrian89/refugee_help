@@ -6,8 +6,6 @@ import 'package:refugee_help/presentation/core/widgets/buttons/alt_back_button.d
 import 'package:refugee_help/presentation/user_profile/core/user_edit_button.dart';
 import 'package:refugee_help/presentation/user_profile/core/user_profile_form.dart';
 
-import 'core/user_profile_listener.dart';
-
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
 
@@ -22,7 +20,7 @@ class UserProfileScreen extends StatelessWidget {
               elevation: 0,
               actions: const [UserEditButton()],
             ),
-            body: const UserProfileListener(child: UserProfileForm()),
+            body: const UserProfileForm(),
           ),
         ),
       );

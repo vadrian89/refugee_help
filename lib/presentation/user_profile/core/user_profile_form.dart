@@ -17,6 +17,7 @@ import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
 import 'package:refugee_help/presentation/user_profile/core/user_profile_image.dart';
 import 'package:path/path.dart' as p;
 import 'package:refugee_help/presentation/user_profile/core/user_button_bar.dart';
+import 'package:refugee_help/presentation/user_profile/core/user_profile_listener.dart';
 
 class UserProfileForm extends StatefulWidget {
   const UserProfileForm({Key? key}) : super(key: key);
@@ -102,68 +103,69 @@ class _UserProfileFormState extends State<UserProfileForm> {
   }
 
   @override
-  Widget build(_) => BlocConsumer<UserCubit, UserState>(
-        listener: (context, state) => state.maybeWhen(
-          orElse: () => false,
-          view: (user) => setState(() {
-            _user = user;
-            _updateUserForm();
-          }),
-          edit: (user) => setState(() {
-            _user = user;
-            _updateUserForm();
-          }),
+  Widget build(_) => UserProfileListener(
+        onEdit: (user) => setState(() {
+          _user = user;
+          _updateUserForm();
+        }),
+        onView: (user) => setState(() {
+          _user = user;
+          _updateUserForm();
+        }),
+        child: RefocusBackground(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: _formBuilder,
+            ),
+          ),
         ),
+      );
+
+  Widget get _formBuilder => BlocBuilder<UserCubit, UserState>(
         builder: (context, state) {
           final isInitial = state.maybeWhen(orElse: () => false, initial: () => true);
-
           if (isInitial) {
             return const LoaderWidget();
           }
+
           editable = state.maybeWhen(orElse: () => false, edit: (_) => true);
 
-          return RefocusBackground(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 500),
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  shrinkWrap: true,
-                  children: [
-                    const VerticalSpacing(),
-                    UserProfileImage(
-                      image: _profileImage,
-                      editable: editable,
-                      onEdit: () => _pickImage(context),
-                    ),
-                    const VerticalSpacing(),
-                    ..._fields,
-                    const VerticalSpacing(20),
-                    UserButtonBar(
-                      onSave: () {
-                        if (!_isFilled) {
-                          AdaptiveDialog.showError(context, message: "form_not_completed".tr());
-                          return;
-                        }
-                        if (!_isValid) {
-                          AdaptiveDialog.showError(context, message: "form_is_not_valid".tr());
-                          return;
-                        }
-                        AdaptiveDialog.showConfirmation(
-                          context,
-                          title: "update_user_title".tr(),
-                          content: "update_user_confirm".tr(),
-                          confirmText: "save".tr(),
-                          cancelText: "cancel".tr(),
-                        ).then((save) =>
-                            save ? context.read<UserCubit>().updateUser(_updatedUser) : null);
-                      },
-                    ),
-                    const VerticalSpacing(40),
-                  ],
-                ),
+          return ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            shrinkWrap: true,
+            children: [
+              const VerticalSpacing(),
+              UserProfileImage(
+                image: _profileImage,
+                editable: editable,
+                onEdit: () => _pickImage(context),
               ),
-            ),
+              const VerticalSpacing(),
+              ..._fields,
+              const VerticalSpacing(20),
+              UserButtonBar(
+                onSave: () {
+                  if (!_isFilled) {
+                    AdaptiveDialog.showError(context, message: "form_not_completed".tr());
+                    return;
+                  }
+                  if (!_isValid) {
+                    AdaptiveDialog.showError(context, message: "form_is_not_valid".tr());
+                    return;
+                  }
+                  AdaptiveDialog.showConfirmation(
+                    context,
+                    title: "update_user_title".tr(),
+                    content: "update_user_confirm".tr(),
+                    confirmText: "save".tr(),
+                    cancelText: "cancel".tr(),
+                  ).then(
+                      (save) => save ? context.read<UserCubit>().updateUser(_updatedUser) : null);
+                },
+              ),
+              const VerticalSpacing(40),
+            ],
           );
         },
         buildWhen: (_, current) => current.maybeWhen(
@@ -249,7 +251,10 @@ class _UserProfileFormState extends State<UserProfileForm> {
 
     final selected = pickedFile.files.single;
     setState(() {
-      _profileImage = ImageModel(imageData: selected.bytes, fileExtension: selected.extension);
+      _profileImage = ImageModel(
+        imageData: selected.bytes,
+        fileExtension: selected.extension,
+      );
     });
   }
 

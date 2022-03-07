@@ -49,8 +49,14 @@ class CircleImageAvatar extends StatelessWidget {
             radius: radius,
           ),
         ),
-        placeholder: (context, __) => const Center(
-          child: CircularProgressIndicator.adaptive(),
+        placeholder: (context, __) => Center(
+          child: CircleAvatar(
+            backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
+            radius: radius,
+            child: CircularProgressIndicator.adaptive(
+              valueColor: AlwaysStoppedAnimation<Color>(foregroundColor ?? Colors.white),
+            ),
+          ),
         ),
         errorWidget: (context, url, error) => _placeholderError,
       );

@@ -8,8 +8,5 @@ class LoadingScreen extends StatelessWidget {
   const LoadingScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => const Scaffold(
-        backgroundColor: Colors.white,
-        body: LoaderWidget(),
-      );
+  Widget build(BuildContext context) => const Scaffold(body: LoaderWidget());
 }
