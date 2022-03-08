@@ -6,6 +6,7 @@ import 'package:refugee_help/application/authentication/authentication_cubit.dar
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/presentation/home/core/app_drawer/app_drawer_header.dart';
 import 'package:refugee_help/presentation/home/core/app_drawer/drawer_list_tile.dart';
+import 'package:refugee_help/presentation/home/core/app_drawer/volunteering_availability_tile.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -20,6 +21,8 @@ class AppDrawer extends StatelessWidget {
               label: "user_profile".tr(),
               onPressed: context.read<RootRouterCubit>().goToUserProfile,
             ),
+            const VolunteeringAvailabilityTile(),
+            const Spacer(),
             DrawerListTile(
               icon: MdiIcons.logout,
               label: "sign_out".tr(),

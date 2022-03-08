@@ -1,5 +1,5 @@
 {
-    "refugee_help": "Ajutorul refugiaţilor",
+    "refugee_help": "Ajutor refugiaţi",
     "register_user_error": "Eroare la înregistrarea utilizatorului!",
     "update_user_profile_error": "Eroare la actualizarea profilului!",
     "sign_in_error": "Eroare la conectare!",
@@ -64,5 +64,8 @@
     "image_library": "Galerie imagini",
     "photo_camera": "Cameră foto",
     "exit_app_title": "Ieşi din aplicaţie",
-    "exit_app_confirm": "Eşti sigur că doreşti să închizi aplicaţia?"
+    "exit_app_confirm": "Eşti sigur că doreşti să închizi aplicaţia?",
+    "volunteering_availability": "Disponibilitatea voluntariat",
+    "available": "Disponibil",
+    "unavailable": "Indisponibil"
 }

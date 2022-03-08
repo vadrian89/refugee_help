@@ -25,7 +25,7 @@ class UserCubit extends Cubit<UserState> {
       authenticated: (user) => _emitView(user),
     );
     _authStateSub = authCubit.stream.listen(_parseAuthState);
-    _resultSub = _repository.resultStream.listen(_initResultSub);
+    _resultSub = _repository.resultStream.listen(_parseResultSub);
   }
 
   void _parseAuthState(AuthenticationState authState) => authState.maybeWhen(
@@ -42,9 +42,9 @@ class UserCubit extends Cubit<UserState> {
         },
       );
 
-  void _initResultSub(OperationResult result) => result.when(
+  void _parseResultSub(OperationResult result) => result.when(
         failure: (message) => emit(UserState.failure(message)),
-        success: (_) => null,
+        success: (response) => emit(UserState.success(response)),
       );
 
   void _emitView(UserModel user) => emit(UserState.view(user));
@@ -59,6 +59,11 @@ class UserCubit extends Cubit<UserState> {
     emit(UserState.loading("updating_user".tr()));
     await Utils.repoDelay();
     await _repository.updateUser(user);
+  }
+
+  Future<void> toggleAvailability(UserModel user) async {
+    await Utils.repoDelay();
+    await _repository.updateAvailability(user);
   }
 
   @override

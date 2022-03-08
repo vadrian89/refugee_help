@@ -6,10 +6,12 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text("refugee_help".tr())),
-        drawer: const AppDrawer(),
-        // body: UserProfileForm(),
-        // bottomNavigationBar: const HomeBottomNavigation(),
+  Widget build(BuildContext context) => ScaffoldMessenger(
+        child: Scaffold(
+          appBar: AppBar(title: Text("refugee_help".tr())),
+          drawer: const AppDrawer(),
+          // body: UserProfileForm(),
+          // bottomNavigationBar: const HomeBottomNavigation(),
+        ),
       );
 }

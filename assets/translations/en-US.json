@@ -64,5 +64,8 @@
     "image_library": "Image library",
     "photo_camera": "Photo camera",
     "exit_app_title": "Exit app",
-    "exit_app_confirm": "Are you sure you want to exit app?"
+    "exit_app_confirm": "Are you sure you want to exit app?",
+    "volunteering_availability": "Volunteering availability",
+    "available": "Available",
+    "unavailable": "Unavailable"
 }

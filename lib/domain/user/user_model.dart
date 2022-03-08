@@ -99,4 +99,9 @@ class UserModel with _$UserModel {
         updatedAt: DateTime.now(),
         category: UserCategoryModel.volunteer(),
       );
+
+  Map<String, dynamic> get availabilityJson => {
+        "available": available,
+        "updatedAt": dateTimeToJson(updatedAt),
+      };
 }

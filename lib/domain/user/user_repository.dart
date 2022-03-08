@@ -37,7 +37,7 @@ class UserRepository extends BaseRepository {
         }
       }
 
-      await _collection.doc(user.id.toString()).set(user
+      await _collection.doc(user.id.toString()).update(user
           .copyWith(
             profileImage: ImageModel(
               imageURL: profilePath ?? profileImage.imageURL,
@@ -51,7 +51,24 @@ class UserRepository extends BaseRepository {
       result = OperationResult.failure("error_udating_user".tr());
     } catch (e, stackTrace) {
       logException("Exception in updateUser", error: e, stackTrace: stackTrace);
-      result = OperationResult.failure("unkown_error".tr());
+      result = OperationResult.failure("error_udating_user".tr());
+    }
+    addResultToStream(result);
+  }
+
+  Future<void> updateAvailability(UserModel user) async {
+    OperationResult<String> result =
+        OperationResult.success(user.available! ? "available".tr() : "unavailable".tr());
+    try {
+      await _collection
+          .doc(user.id.toString())
+          .update(user.copyWith(updatedAt: DateTime.now()).availabilityJson);
+    } on FirebaseException catch (error) {
+      logException("Exception in updateAvailability", error: error, stackTrace: error.stackTrace);
+      result = OperationResult.failure("error_udating_user".tr());
+    } catch (e, stackTrace) {
+      logException("Exception in updateAvailability", error: e, stackTrace: stackTrace);
+      result = OperationResult.failure("error_udating_user".tr());
     }
     addResultToStream(result);
   }
