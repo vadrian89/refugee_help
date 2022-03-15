@@ -56,10 +56,10 @@ class UserModel with _$UserModel {
     String? address,
     @JsonKey(name: "profile_image") ImageModel? profileImage,
     String? organization,
-    @Default(false) bool? available,
-    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-        DateTime? createdAt,
+    @JsonKey(name: "is_available") @Default(false) bool? isAvailable,
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+        DateTime? createdAt,
+    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
         DateTime? updatedAt,
     @JsonKey(ignore: true) String? password,
     @JsonKey(ignore: true) @Default(false) bool isAnonymous,
@@ -101,7 +101,7 @@ class UserModel with _$UserModel {
       );
 
   Map<String, dynamic> get availabilityJson => {
-        "available": available,
-        "updatedAt": dateTimeToJson(updatedAt),
+        "is_available": isAvailable,
+        "updated_at": dateTimeToJson(updatedAt),
       };
 }

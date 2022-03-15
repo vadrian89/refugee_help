@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:refugee_help/domain/core/base_repository.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
@@ -163,13 +162,6 @@ class AuthenticationRepository extends BaseRepository {
           UserModel user = UserModel.fromJson(mapFromObject(doc.data())).copyWith(
             emailVerified: authUser.emailVerified,
           );
-          if (user.profileImage != null &&
-              user.profileImage!.isValid &&
-              !user.profileImage!.isUrl) {
-            final url =
-                await FirebaseStorage.instance.ref(user.profileImage!.imageURL).getDownloadURL();
-            user = user.copyWith(profileImage: user.profileImage!.copyWith(imageURL: url));
-          }
           _profileStreamCtrl.add(user);
         }
       });

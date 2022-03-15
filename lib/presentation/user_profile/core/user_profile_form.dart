@@ -11,10 +11,10 @@ import 'package:refugee_help/infrastructure/validators.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/bottom_sheets/image_picker_bottom_sheet.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/widgets/loader_widget.dart';
-import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_field.dart';
+import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_form_field.dart';
 import 'package:refugee_help/presentation/core/widgets/refocus_background.dart';
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
-import 'package:refugee_help/presentation/user_profile/core/user_profile_image.dart';
+import 'package:refugee_help/presentation/core/widgets/editable_profile_image.dart';
 import 'package:path/path.dart' as p;
 import 'package:refugee_help/presentation/user_profile/core/user_button_bar.dart';
 import 'package:refugee_help/presentation/user_profile/core/user_profile_listener.dart';
@@ -136,7 +136,7 @@ class _UserProfileFormState extends State<UserProfileForm> {
             shrinkWrap: true,
             children: [
               const VerticalSpacing(),
-              UserProfileImage(
+              EditableProfileImage(
                 image: _profileImage,
                 editable: editable,
                 onEdit: () => _pickImage(context),
@@ -176,48 +176,48 @@ class _UserProfileFormState extends State<UserProfileForm> {
       );
 
   List<Widget> get _fields => [
-        AppTextField(
+        AppTextFormField(
           controller: _lastNameController,
           hintText: "${"last_name".tr()}*",
           autovalidateMode: AutovalidateMode.always,
           validator: (val) => (val?.isNotEmpty ?? false) ? null : "field_empty_error".tr(),
           readOnly: !editable,
         ),
-        AppTextField(
+        AppTextFormField(
           controller: _firstNameController,
           hintText: "${"first_name".tr()}*",
           autovalidateMode: AutovalidateMode.always,
           validator: (val) => (val?.isNotEmpty ?? false) ? null : "field_empty_error".tr(),
           readOnly: !editable,
         ),
-        AppTextField(
+        AppTextFormField(
           controller: _phoneController,
           hintText: "${"phone".tr()}*",
           validator: (val) => Validators.isValidPhone(val) ? null : "phone_invalid".tr(),
           keyboardType: TextInputType.phone,
           readOnly: !editable,
         ),
-        AppTextField(
+        AppTextFormField(
           controller: _emailController,
           hintText: "E-mail*",
           readOnly: true,
         ),
-        AppTextField(
+        AppTextFormField(
           controller: _countyController,
           hintText: "${"county".tr()}*",
           readOnly: !editable,
         ),
-        AppTextField(
+        AppTextFormField(
           controller: _cityController,
           hintText: "${"city".tr()}*",
           readOnly: !editable,
         ),
-        AppTextField(
+        AppTextFormField(
           controller: _addressController,
           hintText: "${"address".tr()}*",
           readOnly: !editable,
         ),
-        AppTextField(
+        AppTextFormField(
           controller: _organizationController,
           hintText: "organization".tr(),
           readOnly: !editable,

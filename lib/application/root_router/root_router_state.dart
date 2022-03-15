@@ -28,16 +28,20 @@ class RootRouterState with _$RootRouterState {
   /// 404 - page not found state
   static const unknownPath = "/404";
 
+  static const transportPath = "/transport";
+
+  static const addPath = "/add";
+
   /// Getter to quickly check if the router is in unkown state.
   bool get isUknown => maybeWhen(orElse: () => false, unknown: () => true);
 
   /// Check if we the screen is root.
   /// [RootRouterState.unauthenticated] and [RootRouterState.home] show the root of the screen
   /// based on the current [AuthenticationState].
-  bool get isRoot => maybeWhen(
+  bool get isRoot => maybeMap(
         orElse: () => false,
-        unauthenticated: () => true,
-        home: (_, viewProfile) => !viewProfile,
+        unauthenticated: (_) => true,
+        home: (home) => true,
       );
 
   bool get isRegister => maybeWhen(orElse: () => false, register: () => true);
@@ -57,10 +61,9 @@ class RootRouterState with _$RootRouterState {
   const factory RootRouterState.unauthenticated() = _Unauthenticated;
 
   /// [RootRouterState.home] is the state of the router after the user is authenticated.
-  const factory RootRouterState.home({
-    UserModel? user,
-    @Default(false) bool viewProfile,
-  }) = _Home;
+  const factory RootRouterState.home({UserModel? user, @Default(false) bool profile}) = _Home;
+
+  const factory RootRouterState.transport({String? id, @Default(false) bool add}) = _Transport;
 
   /// [RootRouterState.register] shows [RegisterScreen].
   const factory RootRouterState.register() = _Register;
@@ -82,6 +85,8 @@ class RootRouterState with _$RootRouterState {
       return const RootRouterState.unauthenticated();
     } else if (pathSegment == registerPath) {
       return const RootRouterState.register();
+    } else if (pathSegment == transportPath) {
+      return const RootRouterState.transport();
     } else {
       return const RootRouterState.unknown();
     }
@@ -94,7 +99,13 @@ class RootRouterState with _$RootRouterState {
     final pathSegment1 = "/${uri.pathSegments[0]}";
     final pathSegment2 = "/${uri.pathSegments[1]}";
     if (pathSegment1 == homePath && pathSegment2 == profilePath) {
-      return const RootRouterState.home(viewProfile: true);
+      return const RootRouterState.home(profile: true);
+    }
+    if (pathSegment1 == transportPath) {
+      if (pathSegment2 == addPath) {
+        return const RootRouterState.transport(add: true);
+      }
+      return RootRouterState.transport(id: pathSegment2);
     }
     return const RootRouterState.unknown();
   }
@@ -104,7 +115,12 @@ class RootRouterState with _$RootRouterState {
         initial: () => rootPath,
         unauthenticated: () => authPath,
         register: () => registerPath,
-        home: (_, viewProfile) => "$homePath${viewProfile ? profilePath : ""}",
+        home: (_, viewProfile) => "$homePath${_getPath(viewProfile, profilePath)}",
+        transport: (id, add) =>
+            "$transportPath${_getPath(add, addPath)}${_getPath(id?.trim().isNotEmpty ?? false, "/$id")}",
         orElse: () => unknownPath,
       );
+
+  /// Return the path if the expression is `true`, otherwise return an empty string.
+  String _getPath(bool expression, path) => expression ? path : "";
 }

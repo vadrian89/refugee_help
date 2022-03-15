@@ -5,6 +5,7 @@ import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/presentation/authentication/register/register_screen.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/screens/main_screen.dart';
+import 'package:refugee_help/presentation/transport/manage/manage_transport_screen.dart';
 import 'package:refugee_help/presentation/user_profile/user_profile_screen.dart';
 
 /// The root delegate of the app.
@@ -102,6 +103,16 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
         if (viewProfile) {
           tmpList.add(
             _materialPage(valueKey: RootRouterState.profilePath, child: const UserProfileScreen()),
+          );
+        }
+      },
+      transport: (id, add) {
+        if ((id?.isNotEmpty ?? false) || add) {
+          tmpList.add(
+            _materialPage(
+              valueKey: RootRouterState.profilePath,
+              child: ManageTransportScreen(id: id),
+            ),
           );
         }
       },

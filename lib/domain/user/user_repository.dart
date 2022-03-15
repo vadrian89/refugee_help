@@ -6,7 +6,7 @@ import 'package:refugee_help/domain/core/base_repository.dart';
 import 'package:refugee_help/domain/core/image_model.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
-import 'package:refugee_help/domain/util/firebase_storage_manager.dart';
+import 'package:refugee_help/domain/util/firebase_storage_utils.dart';
 
 /// Repository class used for the authentication process
 class UserRepository extends BaseRepository {
@@ -15,19 +15,18 @@ class UserRepository extends BaseRepository {
   CollectionReference get _collection => getCollection(_profilesTable);
 
   Future<void> updateUser(UserModel user) async {
-    OperationResult result = const OperationResult.success();
-    final profileImage = user.profileImage;
-    String? profilePath;
+    OperationResult? result;
+    ImageModel profileImage = user.profileImage!;
     try {
-      if (profileImage!.isLocal) {
-        result = await FirebaseStorageManager.uploadFileBytes(
+      if (profileImage.isLocal) {
+        result = await FirebaseStorageUtils.uploadData(
           cloudPath: "${user.id}/profile_image.${profileImage.fileExtension}",
           fileData: profileImage.imageData!,
         );
         final isFailure = result.when(
           failure: (_) => true,
-          success: (path) {
-            profilePath = path;
+          success: (url) {
+            profileImage = profileImage.copyWith(imageURL: url);
             return false;
           },
         );
@@ -37,15 +36,9 @@ class UserRepository extends BaseRepository {
         }
       }
 
-      await _collection.doc(user.id.toString()).update(user
-          .copyWith(
-            profileImage: ImageModel(
-              imageURL: profilePath ?? profileImage.imageURL,
-              fileExtension: profileImage.fileExtension,
-            ),
-            updatedAt: DateTime.now(),
-          )
-          .toJson());
+      result = const OperationResult.success();
+      final updatedUser = user.copyWith(profileImage: profileImage, updatedAt: DateTime.now());
+      await _collection.doc(user.id.toString()).update(updatedUser.toJson());
     } on FirebaseException catch (error) {
       logException("Exception in updateUser", error: error, stackTrace: error.stackTrace);
       result = OperationResult.failure("error_udating_user".tr());
@@ -57,8 +50,9 @@ class UserRepository extends BaseRepository {
   }
 
   Future<void> updateAvailability(UserModel user) async {
-    OperationResult<String> result =
-        OperationResult.success(user.available! ? "available".tr() : "unavailable".tr());
+    OperationResult<String> result = OperationResult.success(
+      user.isAvailable! ? "available".tr() : "unavailable".tr(),
+    );
     try {
       await _collection
           .doc(user.id.toString())

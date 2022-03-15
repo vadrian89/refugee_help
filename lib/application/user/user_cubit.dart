@@ -30,21 +30,24 @@ class UserCubit extends Cubit<UserState> {
 
   void _parseAuthState(AuthenticationState authState) => authState.maybeWhen(
         orElse: () => null,
-        authenticated: (user) {
-          state.maybeWhen(
-            orElse: () => null,
-            loading: (_) {
-              emit(UserState.success("user_updated".tr()));
-            },
-          );
-          _emitView(user);
-          return;
-        },
+        authenticated: (user) => state.maybeWhen(
+          orElse: () => null,
+          loading: (_) {
+            emit(UserState.success("user_updated".tr()));
+            _emitView(user);
+            return;
+          },
+        ),
       );
 
   void _parseResultSub(OperationResult result) => result.when(
         failure: (message) => emit(UserState.failure(message)),
-        success: (response) => emit(UserState.success(response)),
+        success: (response) {
+          if (response != null) {
+            emit(UserState.success(response));
+          }
+          return;
+        },
       );
 
   void _emitView(UserModel user) => emit(UserState.view(user));

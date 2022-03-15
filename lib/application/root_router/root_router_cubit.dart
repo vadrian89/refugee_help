@@ -36,7 +36,10 @@ class RootRouterCubit extends Cubit<RootRouterState> {
   /// Public method used to show [RegisterInScreen].
   void goToRegister() => _onlyUnauthenticated(const RootRouterState.register());
 
-  void goToUserProfile() => _onlyAuthenticated(const RootRouterState.home(viewProfile: true));
+  void goToUserProfile() => _onlyAuthenticated(const RootRouterState.home(profile: true));
+
+  void goToTransport({String? id, bool add = false}) =>
+      _onlyAuthenticated(RootRouterState.transport(id: id, add: add));
 
   /// Implement the logic for what happens when the back button was called.
   ///
@@ -52,11 +55,19 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           return true;
         },
         home: (home) {
-          if (home.viewProfile) {
+          if (home.profile) {
             goToRoot();
             return true;
           }
           return false;
+        },
+        transport: (transport) {
+          if (transport.add || (transport.id?.isNotEmpty ?? false)) {
+            goToTransport();
+            return true;
+          }
+          goToRoot();
+          return true;
         },
         orElse: () => false,
       );
@@ -74,6 +85,7 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           unauthenticated: (_) => goToRoot(),
           register: (registerState) => _onlyUnauthenticated(registerState),
           home: (homeState) => _onlyAuthenticated(homeState),
+          transport: (transportState) => _onlyAuthenticated(transportState),
           unknown: (unkownState) => emit(unkownState),
         ),
       );
@@ -136,7 +148,7 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           /// The [RootRouterState.user] which should contain the currently authenticated [UserModel].
           /// This argument should be taken from the [AuthenticationState.authenticated] state to ensure the latest data is used.
           /// The [RootRouterState.showScreen] which tells the delegate if it should show the [LoggedInScreen] screen.
-          home: (_, viewProfile) => RootRouterState.home(user: user, viewProfile: viewProfile),
+          home: (_, profile) => RootRouterState.home(user: user, profile: profile),
         ),
       ));
 

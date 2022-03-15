@@ -5,6 +5,7 @@ import 'package:refugee_help/presentation/authentication/authentication_screen.d
 import 'package:refugee_help/presentation/core/screens/loading_screen.dart';
 import 'package:refugee_help/presentation/core/screens/unkown_screen.dart';
 import 'package:refugee_help/presentation/home/home_screen.dart';
+import 'package:refugee_help/presentation/transport/list/transport_list_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class MainScreen extends StatelessWidget {
           unauthenticated: () => const AuthenticationScreen(),
           register: () => const AuthenticationScreen(),
           home: (_, __) => const HomeScreen(),
+          transport: (_, __) => const TransportListScreen(),
         ),
       );
 }

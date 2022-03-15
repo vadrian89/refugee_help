@@ -11,6 +11,8 @@ class BaseTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final String? initialValue;
+  final int? minLines;
+  final int? maxLines;
 
   const BaseTextFormField({
     Key? key,
@@ -24,6 +26,8 @@ class BaseTextFormField extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.initialValue,
+    this.minLines,
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -38,5 +42,7 @@ class BaseTextFormField extends StatelessWidget {
         onChanged: onChanged,
         keyboardType: keyboardType,
         obscureText: obscureText,
+        minLines: minLines,
+        maxLines: maxLines,
       );
 }

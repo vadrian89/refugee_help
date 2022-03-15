@@ -4,6 +4,7 @@ import 'package:refugee_help/application/authentication/register/register_cubit.
 import 'package:refugee_help/domain/authentication/authentication_repository.dart';
 import 'package:refugee_help/presentation/authentication/register/register_form.dart';
 import 'package:refugee_help/presentation/authentication/register/register_listener.dart';
+import 'package:refugee_help/presentation/core/widgets/buttons/alt_back_button.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -14,7 +15,8 @@ class RegisterScreen extends StatelessWidget {
         child: ScaffoldMessenger(
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              leading: const AltBackButton(),
+              backgroundColor: Colors.transparent,
               elevation: 0,
             ),
             body: const RegisterListener(child: RegisterForm()),

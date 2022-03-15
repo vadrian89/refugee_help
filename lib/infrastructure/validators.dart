@@ -12,6 +12,8 @@ class Validators {
     r"^[a-zA-Z0-9_\.!#$%\^&\*]+@[a-zA-Z_]+?\.[a-zA-Z]{2,20}$",
   );
   static final RegExp _phoneRegExp = RegExp(r"^\+40[0-9]{8,9}$");
+  static final RegExp _numberExp = RegExp(r"^\d*[.|,]*\d+$");
+  static final RegExp _integerExp = RegExp(r"^\d*$");
 
   /// Validate that the provided value is a valid e-mail.
   static bool isValidEmail([String? email]) => (email != null) && _emailRegExp.hasMatch(email);
@@ -30,4 +32,13 @@ class Validators {
 
   /// Validate phone number.
   static bool isValidPhone(String? phone) => (phone != null) && _phoneRegExp.hasMatch(phone);
+
+  /// Validate the incoming string is a number.
+  ///
+  /// Validation is done with the following expression `^\d*[.|,]*\d+$`.
+  static bool isNumber([String? string]) => (string != null) ? _numberExp.hasMatch(string) : false;
+
+  /// Validate the incoming string is an integer number.
+  static bool isInteger([String? string]) =>
+      (string != null) ? _integerExp.hasMatch(string) : false;
 }

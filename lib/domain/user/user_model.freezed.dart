@@ -38,10 +38,11 @@ class _$UserModelTearOff {
       @JsonKey(name: "profile_image")
           ImageModel? profileImage,
       String? organization,
-      bool? available = false,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-          DateTime? createdAt,
+      @JsonKey(name: "is_available")
+          bool? isAvailable = false,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+          DateTime? createdAt,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           DateTime? updatedAt,
       @JsonKey(ignore: true)
           String? password,
@@ -61,7 +62,7 @@ class _$UserModelTearOff {
       address: address,
       profileImage: profileImage,
       organization: organization,
-      available: available,
+      isAvailable: isAvailable,
       createdAt: createdAt,
       updatedAt: updatedAt,
       password: password,
@@ -96,12 +97,13 @@ mixin _$UserModel {
   @JsonKey(name: "profile_image")
   ImageModel? get profileImage => throw _privateConstructorUsedError;
   String? get organization => throw _privateConstructorUsedError;
-  bool? get available => throw _privateConstructorUsedError;
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_available")
+  bool? get isAvailable => throw _privateConstructorUsedError;
   @JsonKey(
       fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(
+      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   String? get password => throw _privateConstructorUsedError;
@@ -136,10 +138,11 @@ abstract class $UserModelCopyWith<$Res> {
       @JsonKey(name: "profile_image")
           ImageModel? profileImage,
       String? organization,
-      bool? available,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-          DateTime? createdAt,
+      @JsonKey(name: "is_available")
+          bool? isAvailable,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+          DateTime? createdAt,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           DateTime? updatedAt,
       @JsonKey(ignore: true)
           String? password,
@@ -172,7 +175,7 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
     Object? address = freezed,
     Object? profileImage = freezed,
     Object? organization = freezed,
-    Object? available = freezed,
+    Object? isAvailable = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? password = freezed,
@@ -224,9 +227,9 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.organization
           : organization // ignore: cast_nullable_to_non_nullable
               as String?,
-      available: available == freezed
-          ? _value.available
-          : available // ignore: cast_nullable_to_non_nullable
+      isAvailable: isAvailable == freezed
+          ? _value.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -285,10 +288,11 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       @JsonKey(name: "profile_image")
           ImageModel? profileImage,
       String? organization,
-      bool? available,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-          DateTime? createdAt,
+      @JsonKey(name: "is_available")
+          bool? isAvailable,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+          DateTime? createdAt,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           DateTime? updatedAt,
       @JsonKey(ignore: true)
           String? password,
@@ -323,7 +327,7 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? address = freezed,
     Object? profileImage = freezed,
     Object? organization = freezed,
-    Object? available = freezed,
+    Object? isAvailable = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? password = freezed,
@@ -375,9 +379,9 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.organization
           : organization // ignore: cast_nullable_to_non_nullable
               as String?,
-      available: available == freezed
-          ? _value.available
-          : available // ignore: cast_nullable_to_non_nullable
+      isAvailable: isAvailable == freezed
+          ? _value.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -423,10 +427,11 @@ class _$_UserModel extends _UserModel {
       @JsonKey(name: "profile_image")
           this.profileImage,
       this.organization,
-      this.available = false,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-          this.createdAt,
+      @JsonKey(name: "is_available")
+          this.isAvailable = false,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+          this.createdAt,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           this.updatedAt,
       @JsonKey(ignore: true)
           this.password,
@@ -466,16 +471,16 @@ class _$_UserModel extends _UserModel {
   final ImageModel? profileImage;
   @override
   final String? organization;
-  @JsonKey()
   @override
-  final bool? available;
-  @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-  final DateTime? createdAt;
+  @JsonKey(name: "is_available")
+  final bool? isAvailable;
   @override
   @JsonKey(
       fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+  final DateTime? createdAt;
+  @override
+  @JsonKey(
+      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
   final DateTime? updatedAt;
   @override
   @JsonKey(ignore: true)
@@ -489,7 +494,7 @@ class _$_UserModel extends _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, category: $category, email: $email, lastName: $lastName, firstName: $firstName, phone: $phone, county: $county, city: $city, address: $address, profileImage: $profileImage, organization: $organization, available: $available, createdAt: $createdAt, updatedAt: $updatedAt, password: $password, isAnonymous: $isAnonymous, emailVerified: $emailVerified)';
+    return 'UserModel(id: $id, category: $category, email: $email, lastName: $lastName, firstName: $firstName, phone: $phone, county: $county, city: $city, address: $address, profileImage: $profileImage, organization: $organization, isAvailable: $isAvailable, createdAt: $createdAt, updatedAt: $updatedAt, password: $password, isAnonymous: $isAnonymous, emailVerified: $emailVerified)';
   }
 
   @override
@@ -510,7 +515,8 @@ class _$_UserModel extends _UserModel {
                 .equals(other.profileImage, profileImage) &&
             const DeepCollectionEquality()
                 .equals(other.organization, organization) &&
-            const DeepCollectionEquality().equals(other.available, available) &&
+            const DeepCollectionEquality()
+                .equals(other.isAvailable, isAvailable) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             const DeepCollectionEquality().equals(other.password, password) &&
@@ -534,7 +540,7 @@ class _$_UserModel extends _UserModel {
       const DeepCollectionEquality().hash(address),
       const DeepCollectionEquality().hash(profileImage),
       const DeepCollectionEquality().hash(organization),
-      const DeepCollectionEquality().hash(available),
+      const DeepCollectionEquality().hash(isAvailable),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt),
       const DeepCollectionEquality().hash(password),
@@ -569,10 +575,11 @@ abstract class _UserModel extends UserModel {
       @JsonKey(name: "profile_image")
           ImageModel? profileImage,
       String? organization,
-      bool? available,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-          DateTime? createdAt,
+      @JsonKey(name: "is_available")
+          bool? isAvailable,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+          DateTime? createdAt,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
           DateTime? updatedAt,
       @JsonKey(ignore: true)
           String? password,
@@ -613,14 +620,15 @@ abstract class _UserModel extends UserModel {
   @override
   String? get organization;
   @override
-  bool? get available;
-  @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-  DateTime? get createdAt;
+  @JsonKey(name: "is_available")
+  bool? get isAvailable;
   @override
   @JsonKey(
       fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+  DateTime? get createdAt;
+  @override
+  @JsonKey(
+      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)

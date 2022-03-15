@@ -76,7 +76,8 @@ class AdaptiveDialog extends AdaptiveWidget {
             onPressed: () => Navigator.maybePop(context, true),
           ),
         ],
-      ).show<bool>(context))!;
+      ).show<bool>(context)) ??
+      false;
 
   static Future<void> showNotification(
     BuildContext context, {

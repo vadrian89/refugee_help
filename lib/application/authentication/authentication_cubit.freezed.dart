@@ -156,8 +156,8 @@ class __$InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_Initial extends _Initial {
+  const _$_Initial() : super._();
 
   @override
   String toString() {
@@ -260,8 +260,9 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements AuthenticationState {
+abstract class _Initial extends AuthenticationState {
   const factory _Initial() = _$_Initial;
+  const _Initial._() : super._();
 }
 
 /// @nodoc
@@ -285,8 +286,8 @@ class __$UnauthenticatedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Unauthenticated implements _Unauthenticated {
-  const _$_Unauthenticated();
+class _$_Unauthenticated extends _Unauthenticated {
+  const _$_Unauthenticated() : super._();
 
   @override
   String toString() {
@@ -389,8 +390,9 @@ class _$_Unauthenticated implements _Unauthenticated {
   }
 }
 
-abstract class _Unauthenticated implements AuthenticationState {
+abstract class _Unauthenticated extends AuthenticationState {
   const factory _Unauthenticated() = _$_Unauthenticated;
+  const _Unauthenticated._() : super._();
 }
 
 /// @nodoc
@@ -436,8 +438,8 @@ class __$AuthenticatedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Authenticated implements _Authenticated {
-  const _$_Authenticated(this.user);
+class _$_Authenticated extends _Authenticated {
+  const _$_Authenticated(this.user) : super._();
 
   @override
   final UserModel user;
@@ -551,8 +553,9 @@ class _$_Authenticated implements _Authenticated {
   }
 }
 
-abstract class _Authenticated implements AuthenticationState {
+abstract class _Authenticated extends AuthenticationState {
   const factory _Authenticated(UserModel user) = _$_Authenticated;
+  const _Authenticated._() : super._();
 
   UserModel get user;
   @JsonKey(ignore: true)
@@ -592,8 +595,8 @@ class __$LoadingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading(this.message);
+class _$_Loading extends _Loading {
+  const _$_Loading(this.message) : super._();
 
   @override
   final String message;
@@ -707,8 +710,9 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements AuthenticationState {
+abstract class _Loading extends AuthenticationState {
   const factory _Loading(String message) = _$_Loading;
+  const _Loading._() : super._();
 
   String get message;
   @JsonKey(ignore: true)
@@ -748,8 +752,8 @@ class __$SuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Success implements _Success {
-  const _$_Success([this.message]);
+class _$_Success extends _Success {
+  const _$_Success([this.message]) : super._();
 
   @override
   final String? message;
@@ -863,8 +867,9 @@ class _$_Success implements _Success {
   }
 }
 
-abstract class _Success implements AuthenticationState {
+abstract class _Success extends AuthenticationState {
   const factory _Success([String? message]) = _$_Success;
+  const _Success._() : super._();
 
   String? get message;
   @JsonKey(ignore: true)
@@ -904,8 +909,8 @@ class __$FailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Failure implements _Failure {
-  const _$_Failure(this.message);
+class _$_Failure extends _Failure {
+  const _$_Failure(this.message) : super._();
 
   @override
   final String message;
@@ -1019,8 +1024,9 @@ class _$_Failure implements _Failure {
   }
 }
 
-abstract class _Failure implements AuthenticationState {
+abstract class _Failure extends AuthenticationState {
   const factory _Failure(String message) = _$_Failure;
+  const _Failure._() : super._();
 
   String get message;
   @JsonKey(ignore: true)

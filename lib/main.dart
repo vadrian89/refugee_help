@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/bloc_initialiser.dart';
 import 'package:refugee_help/application/bloc_observer.dart';
-import 'package:refugee_help/infrastructure/firebase/chrashlytics_manager.dart';
+import 'package:refugee_help/infrastructure/firebase/chrashlytics_utils.dart';
 import 'package:refugee_help/presentation/app_root.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -16,8 +16,8 @@ void main() async {
 
   /// So we get rid of the pesky '#' from the browser url.
   setPathUrlStrategy();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  if (kReleaseMode) await ChrashlyticsManager.initialize();
+  await Firebase.initializeApp(options: (kIsWeb) ? null : DefaultFirebaseOptions.currentPlatform);
+  await ChrashlyticsUtils.initialize();
   await EasyLocalization.ensureInitialized();
 
   BlocOverrides.runZoned(

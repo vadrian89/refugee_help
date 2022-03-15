@@ -26,10 +26,17 @@ class _$RootRouterStateTearOff {
     return const _Unauthenticated();
   }
 
-  _Home home({UserModel? user, bool viewProfile = false}) {
+  _Home home({UserModel? user, bool profile = false}) {
     return _Home(
       user: user,
-      viewProfile: viewProfile,
+      profile: profile,
+    );
+  }
+
+  _Transport transport({String? id, bool add = false}) {
+    return _Transport(
+      id: id,
+      add: add,
     );
   }
 
@@ -51,7 +58,8 @@ mixin _$RootRouterState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(UserModel? user, bool viewProfile) home,
+    required TResult Function(UserModel? user, bool profile) home,
+    required TResult Function(String? id, bool add) transport,
     required TResult Function() register,
     required TResult Function() unknown,
   }) =>
@@ -60,7 +68,8 @@ mixin _$RootRouterState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
   }) =>
@@ -69,7 +78,8 @@ mixin _$RootRouterState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -80,6 +90,7 @@ mixin _$RootRouterState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
+    required TResult Function(_Transport value) transport,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
   }) =>
@@ -89,6 +100,7 @@ mixin _$RootRouterState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
   }) =>
@@ -98,6 +110,7 @@ mixin _$RootRouterState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
@@ -162,7 +175,8 @@ class _$_Initial extends _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(UserModel? user, bool viewProfile) home,
+    required TResult Function(UserModel? user, bool profile) home,
+    required TResult Function(String? id, bool add) transport,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
@@ -174,7 +188,8 @@ class _$_Initial extends _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
@@ -186,7 +201,8 @@ class _$_Initial extends _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -203,6 +219,7 @@ class _$_Initial extends _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
+    required TResult Function(_Transport value) transport,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
   }) {
@@ -215,6 +232,7 @@ class _$_Initial extends _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
   }) {
@@ -227,6 +245,7 @@ class _$_Initial extends _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
@@ -286,7 +305,8 @@ class _$_Unauthenticated extends _Unauthenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(UserModel? user, bool viewProfile) home,
+    required TResult Function(UserModel? user, bool profile) home,
+    required TResult Function(String? id, bool add) transport,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
@@ -298,7 +318,8 @@ class _$_Unauthenticated extends _Unauthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
@@ -310,7 +331,8 @@ class _$_Unauthenticated extends _Unauthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -327,6 +349,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
+    required TResult Function(_Transport value) transport,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
   }) {
@@ -339,6 +362,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
   }) {
@@ -351,6 +375,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
@@ -371,7 +396,7 @@ abstract class _Unauthenticated extends RootRouterState {
 abstract class _$HomeCopyWith<$Res> {
   factory _$HomeCopyWith(_Home value, $Res Function(_Home) then) =
       __$HomeCopyWithImpl<$Res>;
-  $Res call({UserModel? user, bool viewProfile});
+  $Res call({UserModel? user, bool profile});
 
   $UserModelCopyWith<$Res>? get user;
 }
@@ -388,16 +413,16 @@ class __$HomeCopyWithImpl<$Res> extends _$RootRouterStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = freezed,
-    Object? viewProfile = freezed,
+    Object? profile = freezed,
   }) {
     return _then(_Home(
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel?,
-      viewProfile: viewProfile == freezed
-          ? _value.viewProfile
-          : viewProfile // ignore: cast_nullable_to_non_nullable
+      profile: profile == freezed
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -417,17 +442,17 @@ class __$HomeCopyWithImpl<$Res> extends _$RootRouterStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Home extends _Home {
-  const _$_Home({this.user, this.viewProfile = false}) : super._();
+  const _$_Home({this.user, this.profile = false}) : super._();
 
   @override
   final UserModel? user;
   @JsonKey()
   @override
-  final bool viewProfile;
+  final bool profile;
 
   @override
   String toString() {
-    return 'RootRouterState.home(user: $user, viewProfile: $viewProfile)';
+    return 'RootRouterState.home(user: $user, profile: $profile)';
   }
 
   @override
@@ -436,15 +461,14 @@ class _$_Home extends _Home {
         (other.runtimeType == runtimeType &&
             other is _Home &&
             const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality()
-                .equals(other.viewProfile, viewProfile));
+            const DeepCollectionEquality().equals(other.profile, profile));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(viewProfile));
+      const DeepCollectionEquality().hash(profile));
 
   @JsonKey(ignore: true)
   @override
@@ -456,11 +480,12 @@ class _$_Home extends _Home {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(UserModel? user, bool viewProfile) home,
+    required TResult Function(UserModel? user, bool profile) home,
+    required TResult Function(String? id, bool add) transport,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
-    return home(user, viewProfile);
+    return home(user, profile);
   }
 
   @override
@@ -468,11 +493,12 @@ class _$_Home extends _Home {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
-    return home?.call(user, viewProfile);
+    return home?.call(user, profile);
   }
 
   @override
@@ -480,13 +506,14 @@ class _$_Home extends _Home {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (home != null) {
-      return home(user, viewProfile);
+      return home(user, profile);
     }
     return orElse();
   }
@@ -497,6 +524,7 @@ class _$_Home extends _Home {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
+    required TResult Function(_Transport value) transport,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
   }) {
@@ -509,6 +537,7 @@ class _$_Home extends _Home {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
   }) {
@@ -521,6 +550,7 @@ class _$_Home extends _Home {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
@@ -533,13 +563,182 @@ class _$_Home extends _Home {
 }
 
 abstract class _Home extends RootRouterState {
-  const factory _Home({UserModel? user, bool viewProfile}) = _$_Home;
+  const factory _Home({UserModel? user, bool profile}) = _$_Home;
   const _Home._() : super._();
 
   UserModel? get user;
-  bool get viewProfile;
+  bool get profile;
   @JsonKey(ignore: true)
   _$HomeCopyWith<_Home> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$TransportCopyWith<$Res> {
+  factory _$TransportCopyWith(
+          _Transport value, $Res Function(_Transport) then) =
+      __$TransportCopyWithImpl<$Res>;
+  $Res call({String? id, bool add});
+}
+
+/// @nodoc
+class __$TransportCopyWithImpl<$Res> extends _$RootRouterStateCopyWithImpl<$Res>
+    implements _$TransportCopyWith<$Res> {
+  __$TransportCopyWithImpl(_Transport _value, $Res Function(_Transport) _then)
+      : super(_value, (v) => _then(v as _Transport));
+
+  @override
+  _Transport get _value => super._value as _Transport;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? add = freezed,
+  }) {
+    return _then(_Transport(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      add: add == freezed
+          ? _value.add
+          : add // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Transport extends _Transport {
+  const _$_Transport({this.id, this.add = false}) : super._();
+
+  @override
+  final String? id;
+  @JsonKey()
+  @override
+  final bool add;
+
+  @override
+  String toString() {
+    return 'RootRouterState.transport(id: $id, add: $add)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Transport &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.add, add));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(add));
+
+  @JsonKey(ignore: true)
+  @override
+  _$TransportCopyWith<_Transport> get copyWith =>
+      __$TransportCopyWithImpl<_Transport>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() unauthenticated,
+    required TResult Function(UserModel? user, bool profile) home,
+    required TResult Function(String? id, bool add) transport,
+    required TResult Function() register,
+    required TResult Function() unknown,
+  }) {
+    return transport(id, add);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? unauthenticated,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
+    TResult Function()? register,
+    TResult Function()? unknown,
+  }) {
+    return transport?.call(id, add);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? unauthenticated,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
+    TResult Function()? register,
+    TResult Function()? unknown,
+    required TResult orElse(),
+  }) {
+    if (transport != null) {
+      return transport(id, add);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_Home value) home,
+    required TResult Function(_Transport value) transport,
+    required TResult Function(_Register value) register,
+    required TResult Function(_Unknown value) unknown,
+  }) {
+    return transport(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
+    TResult Function(_Register value)? register,
+    TResult Function(_Unknown value)? unknown,
+  }) {
+    return transport?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
+    TResult Function(_Register value)? register,
+    TResult Function(_Unknown value)? unknown,
+    required TResult orElse(),
+  }) {
+    if (transport != null) {
+      return transport(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Transport extends RootRouterState {
+  const factory _Transport({String? id, bool add}) = _$_Transport;
+  const _Transport._() : super._();
+
+  String? get id;
+  bool get add;
+  @JsonKey(ignore: true)
+  _$TransportCopyWith<_Transport> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -582,7 +781,8 @@ class _$_Register extends _Register {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(UserModel? user, bool viewProfile) home,
+    required TResult Function(UserModel? user, bool profile) home,
+    required TResult Function(String? id, bool add) transport,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
@@ -594,7 +794,8 @@ class _$_Register extends _Register {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
@@ -606,7 +807,8 @@ class _$_Register extends _Register {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -623,6 +825,7 @@ class _$_Register extends _Register {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
+    required TResult Function(_Transport value) transport,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
   }) {
@@ -635,6 +838,7 @@ class _$_Register extends _Register {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
   }) {
@@ -647,6 +851,7 @@ class _$_Register extends _Register {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),
@@ -703,7 +908,8 @@ class _$_Unknown extends _Unknown {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() unauthenticated,
-    required TResult Function(UserModel? user, bool viewProfile) home,
+    required TResult Function(UserModel? user, bool profile) home,
+    required TResult Function(String? id, bool add) transport,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
@@ -715,7 +921,8 @@ class _$_Unknown extends _Unknown {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
@@ -727,7 +934,8 @@ class _$_Unknown extends _Unknown {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? unauthenticated,
-    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(UserModel? user, bool profile)? home,
+    TResult Function(String? id, bool add)? transport,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -744,6 +952,7 @@ class _$_Unknown extends _Unknown {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
+    required TResult Function(_Transport value) transport,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
   }) {
@@ -756,6 +965,7 @@ class _$_Unknown extends _Unknown {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
   }) {
@@ -768,6 +978,7 @@ class _$_Unknown extends _Unknown {
     TResult Function(_Initial value)? initial,
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
     required TResult orElse(),

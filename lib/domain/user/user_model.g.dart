@@ -20,9 +20,9 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
           ? null
           : ImageModel.fromJson(json['profile_image'] as Map<String, dynamic>),
       organization: json['organization'] as String?,
-      available: json['available'] as bool? ?? false,
-      createdAt: dateTimeFromJson(json['updated_at']),
-      updatedAt: dateTimeFromJson(json['created_at']),
+      isAvailable: json['is_available'] as bool? ?? false,
+      createdAt: dateTimeFromJson(json['created_at']),
+      updatedAt: dateTimeFromJson(json['updated_at']),
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -38,7 +38,7 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'address': instance.address,
       'profile_image': instance.profileImage?.toJson(),
       'organization': instance.organization,
-      'available': instance.available,
-      'updated_at': dateTimeToJson(instance.createdAt),
-      'created_at': dateTimeToJson(instance.updatedAt),
+      'is_available': instance.isAvailable,
+      'created_at': dateTimeToJson(instance.createdAt),
+      'updated_at': dateTimeToJson(instance.updatedAt),
     };

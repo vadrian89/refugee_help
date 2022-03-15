@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:refugee_help/infrastructure/firebase/chrashlytics_manager.dart';
+import 'package:refugee_help/infrastructure/firebase/chrashlytics_utils.dart';
 
 import 'operation_result.dart';
 
@@ -26,14 +26,14 @@ abstract class BaseRepository {
 
   /// Log debug messages.
   void logDebug(String message, {dynamic error, StackTrace? stackTrace}) {
-    ChrashlyticsManager.log(message);
+    ChrashlyticsUtils.log(message);
     _logger.d(message, error, stackTrace);
   }
 
   /// Log exceptions caught.
   void logException(String message, {dynamic error, StackTrace? stackTrace}) {
-    ChrashlyticsManager.log(message);
-    ChrashlyticsManager.recordError(error, stackTrace);
+    ChrashlyticsUtils.log(message);
+    ChrashlyticsUtils.recordError(error, stackTrace);
     _logger.e(message, error, stackTrace);
   }
 
