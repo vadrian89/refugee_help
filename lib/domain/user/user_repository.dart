@@ -16,17 +16,17 @@ class UserRepository extends BaseRepository {
 
   Future<void> updateUser(UserModel user) async {
     OperationResult? result;
-    ImageModel profileImage = user.profileImage!;
+    ImageModel image = user.profileImage!;
     try {
-      if (profileImage.isLocal) {
+      if (image.isLocal) {
         result = await FirebaseStorageUtils.uploadData(
-          cloudPath: "${user.id}/profile_image.${profileImage.fileExtension}",
-          fileData: profileImage.imageData!,
+          cloudPath: user.imageStoragePath,
+          fileData: image.imageData!,
         );
         final isFailure = result.when(
           failure: (_) => true,
           success: (url) {
-            profileImage = profileImage.copyWith(imageURL: url);
+            image = image.copyWith(imageURL: url);
             return false;
           },
         );
@@ -37,7 +37,7 @@ class UserRepository extends BaseRepository {
       }
 
       result = const OperationResult.success();
-      final updatedUser = user.copyWith(profileImage: profileImage, updatedAt: DateTime.now());
+      final updatedUser = user.copyWith(profileImage: image, updatedAt: DateTime.now());
       await _collection.doc(user.id.toString()).update(updatedUser.toJson());
     } on FirebaseException catch (error) {
       logException("Exception in updateUser", error: error, stackTrace: error.stackTrace);

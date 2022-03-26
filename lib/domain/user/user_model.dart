@@ -17,10 +17,7 @@ part 'user_model.g.dart';
 /// Contains all fields, mapped to their respective table columns.
 @freezed
 class UserModel with _$UserModel {
-  /// Make the constructor private to enable custom computed values (getters) and methods.
-  ///
-  /// You can read more, here: https://pub.dev/packages/freezed#custom-getters-and-methods
-  const UserModel._();
+  String get imageStoragePath => "$id/profile_image.${profileImage!.fileExtension}";
 
   /// Get the full name of the user by making use of string interpolation.
   String get fullName => "${lastName ?? ""} ${firstName ?? ""}";
@@ -42,6 +39,12 @@ class UserModel with _$UserModel {
       cityIsValid &&
       addressIsValid &&
       imageIsValid;
+
+  /// Make the constructor private to enable custom computed values (getters) and methods.
+  ///
+  /// You can read more, here: https://pub.dev/packages/freezed#custom-getters-and-methods
+  const UserModel._();
+
   @JsonSerializable(explicitToJson: true)
   const factory UserModel({
     String? id,

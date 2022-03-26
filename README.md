@@ -57,6 +57,10 @@ Patterns and coding guidelines:
 - do not build a BloC for easy tasks; use BloC when dealing with backend and/or there are a lot of changes in the screen;  
 - prefer Cubit over Bloc;  
 - if a class member is not explicitly required to be public, make it private;  
+- declare the type of all class members;  
+- use type inference only inside functions and only if the type is clear and if the variable is initialised at declaration; 
+- prefer explicit type over inference;
+- do not declare variables as "var something;" and leave it like that;
 
 Anyone is welcomed to contribute anyway they can:
 - recommend/request features;
@@ -64,4 +68,4 @@ Anyone is welcomed to contribute anyway they can:
 - recommend improvements;
 - help with coding;
 - add translations;
-- building automated tests (unit/widgets testing);
+- building tests (unit/widgets testing);
