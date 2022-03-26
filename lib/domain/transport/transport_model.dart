@@ -26,35 +26,28 @@ class TransportModel with _$TransportModel {
   @JsonSerializable(explicitToJson: true)
   const factory TransportModel({
     @JsonKey(ignore: true) String? id,
-    @JsonKey(name: "registration_number") String? registrationNumber,
-    @Default(0) @JsonKey(name: "seats_available") int? seatsAvailable,
-    @JsonKey(name: "transport_type") TransportTypeModel? type,
+    String? registrationNumber,
+    @Default(0) int? seatsAvailable,
+    TransportTypeModel? type,
     ImageModel? image,
-    @Default(true) @JsonKey(name: "at_location") bool? atLocation,
+    @Default(true) bool? atLocation,
 
     /// Time, in minutes, until the volunteer can get at site ([from]).
     ///
     /// If this is, he is already at the site.
-    @Default(0) @JsonKey(name: "time_available") int? timeAvailable,
-    @JsonKey(name: "is_available") @Default(false) bool? isAvailable,
-
-    /// The location from where he can pick the refugees.
-    ///
-    /// Currently Isaccea-Tulcea is the only available location.
-    @Default("Isaccea-Tulcea") String? from,
+    @Default(0) int? timeAvailable,
+    @Default(false) bool? isAvailable,
     String? destinations,
     UserInfoModel? user,
-    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-        DateTime? createdAt,
-    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
-        DateTime? updatedAt,
+    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? createdAt,
+    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? updatedAt,
     String? remarks,
   }) = _TransportModel;
 
   factory TransportModel.fromJson(Map<String, dynamic> json) => _$TransportModelFromJson(json);
 
   Map<String, dynamic> get availabilityJson => {
-        "is_available": isAvailable,
-        "updated_at": dateTimeToJson(updatedAt),
+        "isAvailable": isAvailable,
+        "updatedAt": dateTimeToJson(updatedAt),
       };
 }

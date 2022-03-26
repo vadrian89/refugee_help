@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/transport/manage/manage_transport_cubit.dart';
 import 'package:refugee_help/domain/core/image_model.dart';
 import 'package:refugee_help/domain/transport/transport_model.dart';
-import 'package:refugee_help/domain/transport/transport_type_model.dart';
 import 'package:refugee_help/infrastructure/extensions.dart';
 import 'package:refugee_help/infrastructure/validators.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/bottom_sheets/image_picker_bottom_sheet.dart';
@@ -17,6 +16,7 @@ import 'package:refugee_help/presentation/core/widgets/refocus_background.dart';
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
 import 'package:refugee_help/presentation/core/widgets/editable_profile_image.dart';
 import 'package:path/path.dart' as p;
+import 'package:refugee_help/presentation/transport/manage/core/manage_transport_user_info.dart';
 import 'package:refugee_help/presentation/transport/manage/core/transport_arrival_tile.dart';
 import 'package:refugee_help/presentation/transport/manage/core/transport_type_dropdown.dart';
 
@@ -52,11 +52,11 @@ class _ManageTransportFormState extends State<ManageTransportForm> {
   bool editable = false;
 
   TransportModel get _updatedModel => (_model ?? const TransportModel()).copyWith(
-        registrationNumber: _registrationNum.toUpperCase(),
-        seatsAvailable: int.tryParse(_seatsNum),
-        timeAvailable: int.tryParse(_timeAvailable),
-        destinations: _destinations.capitalised,
-        remarks: _remarks.capitalised,
+        registrationNumber: _registrationNum.toUpperCase().trim(),
+        seatsAvailable: int.tryParse(_seatsNum.trim()),
+        timeAvailable: int.tryParse(_timeAvailable.trim()),
+        destinations: _destinations.capitalised.trim(),
+        remarks: _remarks.capitalised.trim(),
         createdAt: _model?.createdAt ?? DateTime.now(),
         updatedAt: DateTime.now(),
       );
@@ -67,7 +67,7 @@ class _ManageTransportFormState extends State<ManageTransportForm> {
     _model = context.read<ManageTransportCubit>().state.maybeWhen(
           orElse: () => const TransportModel(),
           edit: (model) => model,
-          view: (model) => model,
+          view: (model, _, __) => model,
         );
     _regNumController = TextEditingController();
     _seatsNumController = TextEditingController();
@@ -161,7 +161,7 @@ class _ManageTransportFormState extends State<ManageTransportForm> {
             ],
           );
         },
-        buildWhen: (_, current) => current.maybeWhen(
+        buildWhen: (_, current) => current.maybeMap(
           orElse: () => false,
           view: (_) => true,
           edit: (_) => true,
@@ -178,7 +178,6 @@ class _ManageTransportFormState extends State<ManageTransportForm> {
         ),
         TransportTypeDropdown(
           value: _model?.type,
-          list: TransportTypeModel.list,
           onChanged: state.maybeWhen(
             orElse: () => null,
             edit: (_) => (val) => setState(() => _model = _model!.copyWith(type: val)),
@@ -227,6 +226,7 @@ class _ManageTransportFormState extends State<ManageTransportForm> {
           readOnly: !editable,
           maxLines: 5,
         ),
+        const ManageTransportUserInfo(),
       ];
 
   Future<bool> _validateForm(BuildContext context) async {

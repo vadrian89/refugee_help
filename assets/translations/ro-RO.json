@@ -77,8 +77,8 @@
     "registration_number": "Număr de înregistrare",
     "seats_available": "Număr de locuri disponibile",
     "time_availability": "În cât timp poţi ajunge să preiei persoane?",
-    "update_transport_title": "Actualizezi transportul?",
-    "update_transport_confirm": "Eşti sigur că doreşti să actualizezi metoda de transport?",
+    "update_transport_title": "Salvezi transportul?",
+    "update_transport_confirm": "Eşti sigur că doreşti să salvezi metoda de transport?",
     "availability": "Disponibilitate",
     "destinations_list": "Listă destinaţii",
     "at_location": "La locaţie",
@@ -104,5 +104,33 @@
     "delete_something": "Şterge {}",
     "delete_confirmation": {
         "something":"Eşti sigur că doreşti să ştergi {}?"
-    }
+    },
+    "no_remark_feedback": "Nici o observaţie",
+    "problem": "Problemă",
+    "app_feedback": "Părere aplicaţie",
+    "please_complete_profile": "Te rog să îţi completezi profilul pentru a utiliza funcţionalitatea!",
+    "choose_transport": "Alege transportul",
+    "feedback_type": "Tip observaţie",
+    "new_ticket": "Tichet nou",
+    "ticket": {
+        "default": "Tichet",
+        "save": "Salvezi tichetul?",
+        "save_confirm": "Eşti sigur că doreşti să salvezi tichetul?",
+        "deleting": "Se şterge tichetul...",
+        "error_saving": "Eroare la salvarea tichetului!",
+        "error_deleting": "Eroare la ştergerea tichetului!"
+    },
+    "adults_number": "Număr adulţi",
+    "children_number": "Număr copii",
+    "transport_is_required": "Transprtul este obligatoriu!",
+    "destination": "Destinaţie",
+    "finished": "Finalizat",
+    "canceled": "Anulat",
+    "started": "În curs",
+    "created": "Creat",
+    "unkown": "Necunoscut",
+    "status": "Stare",
+    "search": "Caută",
+    "owner": "Proprietar",
+    "transport_info": "Info transport"
 }

@@ -8,41 +8,38 @@ part of 'transport_model.dart';
 
 _$_TransportModel _$$_TransportModelFromJson(Map<String, dynamic> json) =>
     _$_TransportModel(
-      registrationNumber: json['registration_number'] as String?,
-      seatsAvailable: json['seats_available'] as int? ?? 0,
-      type: json['transport_type'] == null
+      registrationNumber: json['registrationNumber'] as String?,
+      seatsAvailable: json['seatsAvailable'] as int? ?? 0,
+      type: json['type'] == null
           ? null
-          : TransportTypeModel.fromJson(
-              json['transport_type'] as Map<String, dynamic>),
+          : TransportTypeModel.fromJson(json['type']),
       image: json['image'] == null
           ? null
           : ImageModel.fromJson(json['image'] as Map<String, dynamic>),
-      atLocation: json['at_location'] as bool? ?? true,
-      timeAvailable: json['time_available'] as int? ?? 0,
-      isAvailable: json['is_available'] as bool? ?? false,
-      from: json['from'] as String? ?? "Isaccea-Tulcea",
+      atLocation: json['atLocation'] as bool? ?? true,
+      timeAvailable: json['timeAvailable'] as int? ?? 0,
+      isAvailable: json['isAvailable'] as bool? ?? false,
       destinations: json['destinations'] as String?,
       user: json['user'] == null
           ? null
           : UserInfoModel.fromJson(json['user'] as Map<String, dynamic>),
-      createdAt: dateTimeFromJson(json['updated_at']),
-      updatedAt: dateTimeFromJson(json['created_at']),
+      createdAt: dateTimeFromJson(json['createdAt']),
+      updatedAt: dateTimeFromJson(json['updatedAt']),
       remarks: json['remarks'] as String?,
     );
 
 Map<String, dynamic> _$$_TransportModelToJson(_$_TransportModel instance) =>
     <String, dynamic>{
-      'registration_number': instance.registrationNumber,
-      'seats_available': instance.seatsAvailable,
-      'transport_type': instance.type?.toJson(),
+      'registrationNumber': instance.registrationNumber,
+      'seatsAvailable': instance.seatsAvailable,
+      'type': instance.type?.toJson(),
       'image': instance.image?.toJson(),
-      'at_location': instance.atLocation,
-      'time_available': instance.timeAvailable,
-      'is_available': instance.isAvailable,
-      'from': instance.from,
+      'atLocation': instance.atLocation,
+      'timeAvailable': instance.timeAvailable,
+      'isAvailable': instance.isAvailable,
       'destinations': instance.destinations,
       'user': instance.user?.toJson(),
-      'updated_at': dateTimeToJson(instance.createdAt),
-      'created_at': dateTimeToJson(instance.updatedAt),
+      'createdAt': dateTimeToJson(instance.createdAt),
+      'updatedAt': dateTimeToJson(instance.updatedAt),
       'remarks': instance.remarks,
     };

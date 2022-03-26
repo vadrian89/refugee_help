@@ -3,6 +3,9 @@ import 'package:equatable/equatable.dart';
 class UserCategoryModel extends Equatable {
   final int id;
   final String name;
+  bool get privileged => isAdmin || isDispatcher;
+  bool get isAdmin => id == 1;
+  bool get isDispatcher => id == 2;
 
   const UserCategoryModel(this.id, this.name);
 

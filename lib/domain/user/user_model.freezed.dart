@@ -27,22 +27,18 @@ class _$UserModelTearOff {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           UserCategoryModel? category,
       String? email,
-      @JsonKey(name: "last_name")
-          String? lastName,
-      @JsonKey(name: "first_name")
-          String? firstName,
+      String? lastName,
+      String? firstName,
       String? phone,
       String? county,
       String? city,
       String? address,
-      @JsonKey(name: "profile_image")
-          ImageModel? profileImage,
+      ImageModel? profileImage,
       String? organization,
-      @JsonKey(name: "is_available")
-          bool? isAvailable = false,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      bool? isAvailable = false,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
       @JsonKey(ignore: true)
           String? password,
@@ -86,24 +82,18 @@ mixin _$UserModel {
       fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
   UserCategoryModel? get category => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  @JsonKey(name: "last_name")
   String? get lastName => throw _privateConstructorUsedError;
-  @JsonKey(name: "first_name")
   String? get firstName => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get county => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
-  @JsonKey(name: "profile_image")
   ImageModel? get profileImage => throw _privateConstructorUsedError;
   String? get organization => throw _privateConstructorUsedError;
-  @JsonKey(name: "is_available")
   bool? get isAvailable => throw _privateConstructorUsedError;
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   String? get password => throw _privateConstructorUsedError;
@@ -127,22 +117,18 @@ abstract class $UserModelCopyWith<$Res> {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           UserCategoryModel? category,
       String? email,
-      @JsonKey(name: "last_name")
-          String? lastName,
-      @JsonKey(name: "first_name")
-          String? firstName,
+      String? lastName,
+      String? firstName,
       String? phone,
       String? county,
       String? city,
       String? address,
-      @JsonKey(name: "profile_image")
-          ImageModel? profileImage,
+      ImageModel? profileImage,
       String? organization,
-      @JsonKey(name: "is_available")
-          bool? isAvailable,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      bool? isAvailable,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
       @JsonKey(ignore: true)
           String? password,
@@ -277,22 +263,18 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           UserCategoryModel? category,
       String? email,
-      @JsonKey(name: "last_name")
-          String? lastName,
-      @JsonKey(name: "first_name")
-          String? firstName,
+      String? lastName,
+      String? firstName,
       String? phone,
       String? county,
       String? city,
       String? address,
-      @JsonKey(name: "profile_image")
-          ImageModel? profileImage,
+      ImageModel? profileImage,
       String? organization,
-      @JsonKey(name: "is_available")
-          bool? isAvailable,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      bool? isAvailable,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
       @JsonKey(ignore: true)
           String? password,
@@ -416,22 +398,18 @@ class _$_UserModel extends _UserModel {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           this.category,
       this.email,
-      @JsonKey(name: "last_name")
-          this.lastName,
-      @JsonKey(name: "first_name")
-          this.firstName,
+      this.lastName,
+      this.firstName,
       this.phone,
       this.county,
       this.city,
       this.address,
-      @JsonKey(name: "profile_image")
-          this.profileImage,
+      this.profileImage,
       this.organization,
-      @JsonKey(name: "is_available")
-          this.isAvailable = false,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      this.isAvailable = false,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           this.createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           this.updatedAt,
       @JsonKey(ignore: true)
           this.password,
@@ -453,10 +431,8 @@ class _$_UserModel extends _UserModel {
   @override
   final String? email;
   @override
-  @JsonKey(name: "last_name")
   final String? lastName;
   @override
-  @JsonKey(name: "first_name")
   final String? firstName;
   @override
   final String? phone;
@@ -467,20 +443,17 @@ class _$_UserModel extends _UserModel {
   @override
   final String? address;
   @override
-  @JsonKey(name: "profile_image")
   final ImageModel? profileImage;
   @override
   final String? organization;
+  @JsonKey()
   @override
-  @JsonKey(name: "is_available")
   final bool? isAvailable;
   @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   final DateTime? createdAt;
   @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   final DateTime? updatedAt;
   @override
   @JsonKey(ignore: true)
@@ -564,22 +537,18 @@ abstract class _UserModel extends UserModel {
       @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
           UserCategoryModel? category,
       String? email,
-      @JsonKey(name: "last_name")
-          String? lastName,
-      @JsonKey(name: "first_name")
-          String? firstName,
+      String? lastName,
+      String? firstName,
       String? phone,
       String? county,
       String? city,
       String? address,
-      @JsonKey(name: "profile_image")
-          ImageModel? profileImage,
+      ImageModel? profileImage,
       String? organization,
-      @JsonKey(name: "is_available")
-          bool? isAvailable,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      bool? isAvailable,
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
       @JsonKey(ignore: true)
           String? password,
@@ -601,10 +570,8 @@ abstract class _UserModel extends UserModel {
   @override
   String? get email;
   @override
-  @JsonKey(name: "last_name")
   String? get lastName;
   @override
-  @JsonKey(name: "first_name")
   String? get firstName;
   @override
   String? get phone;
@@ -615,20 +582,16 @@ abstract class _UserModel extends UserModel {
   @override
   String? get address;
   @override
-  @JsonKey(name: "profile_image")
   ImageModel? get profileImage;
   @override
   String? get organization;
   @override
-  @JsonKey(name: "is_available")
   bool? get isAvailable;
   @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get createdAt;
   @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)

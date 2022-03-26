@@ -9,7 +9,10 @@ class TransportEditButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocBuilder<ManageTransportCubit, ManageTransportState>(
         builder: (context, state) => Visibility(
-          visible: state.maybeMap(orElse: () => false, view: (_) => true),
+          visible: state.maybeMap(
+            orElse: () => false,
+            view: (view) => view.canUpdate!,
+          ),
           child: EditIconButton(onPressed: context.read<ManageTransportCubit>().toggleEdit),
         ),
         buildWhen: (_, current) => current.maybeMap(

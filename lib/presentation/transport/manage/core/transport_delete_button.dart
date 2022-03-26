@@ -8,11 +8,14 @@ class TransportDeleteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<ManageTransportCubit, ManageTransportState>(
-        builder: (context, state) => state.maybeWhen(
+        builder: (context, state) => state.maybeMap(
           orElse: () => const SizedBox(),
-          view: (model) => DeleteIconButton(
-            deletedName: model.registrationNumber!,
-            onPressed: () => context.read<ManageTransportCubit>().delete(model),
+          view: (view) => Visibility(
+            visible: view.canUpdate!,
+            child: DeleteIconButton(
+              deletedName: view.transport.registrationNumber!,
+              onPressed: () => context.read<ManageTransportCubit>().delete(view.transport),
+            ),
           ),
         ),
         buildWhen: (_, current) => current.maybeMap(

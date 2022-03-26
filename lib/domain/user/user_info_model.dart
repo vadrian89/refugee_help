@@ -15,11 +15,11 @@ class UserInfoModel with _$UserInfoModel {
   String get fullName => "$lastName $firstName";
   @JsonSerializable(explicitToJson: true)
   const factory UserInfoModel({
-    required String id,
-    @JsonKey(name: "last_name") required String lastName,
-    @JsonKey(name: "first_name") required String firstName,
-    required String phone,
-    @JsonKey(name: "profile_image") required ImageModel profileImage,
+    String? id,
+    String? lastName,
+    String? firstName,
+    String? phone,
+    ImageModel? profileImage,
   }) = _UserInfoModel;
 
   /// Make a [UserInfoModel] object from the incoming JSON.

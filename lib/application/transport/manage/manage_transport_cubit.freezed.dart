@@ -22,15 +22,20 @@ class _$ManageTransportStateTearOff {
     return const _Initial();
   }
 
-  _View view(TransportModel model) {
+  _View view(
+      {required TransportModel transport,
+      bool? showUserInfo = false,
+      bool? canUpdate = false}) {
     return _View(
-      model,
+      transport: transport,
+      showUserInfo: showUserInfo,
+      canUpdate: canUpdate,
     );
   }
 
-  _Edit edit(TransportModel model) {
+  _Edit edit(TransportModel transport) {
     return _Edit(
-      model,
+      transport,
     );
   }
 
@@ -62,8 +67,10 @@ mixin _$ManageTransportState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TransportModel model) view,
-    required TResult Function(TransportModel model) edit,
+    required TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)
+        view,
+    required TResult Function(TransportModel transport) edit,
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
@@ -72,8 +79,10 @@ mixin _$ManageTransportState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
@@ -82,8 +91,10 @@ mixin _$ManageTransportState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
@@ -180,8 +191,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TransportModel model) view,
-    required TResult Function(TransportModel model) edit,
+    required TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)
+        view,
+    required TResult Function(TransportModel transport) edit,
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
@@ -193,8 +206,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
@@ -206,8 +221,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
@@ -271,9 +288,9 @@ abstract class _Initial implements ManageTransportState {
 abstract class _$ViewCopyWith<$Res> {
   factory _$ViewCopyWith(_View value, $Res Function(_View) then) =
       __$ViewCopyWithImpl<$Res>;
-  $Res call({TransportModel model});
+  $Res call({TransportModel transport, bool? showUserInfo, bool? canUpdate});
 
-  $TransportModelCopyWith<$Res> get model;
+  $TransportModelCopyWith<$Res> get transport;
 }
 
 /// @nodoc
@@ -287,20 +304,30 @@ class __$ViewCopyWithImpl<$Res> extends _$ManageTransportStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? model = freezed,
+    Object? transport = freezed,
+    Object? showUserInfo = freezed,
+    Object? canUpdate = freezed,
   }) {
     return _then(_View(
-      model == freezed
-          ? _value.model
-          : model // ignore: cast_nullable_to_non_nullable
+      transport: transport == freezed
+          ? _value.transport
+          : transport // ignore: cast_nullable_to_non_nullable
               as TransportModel,
+      showUserInfo: showUserInfo == freezed
+          ? _value.showUserInfo
+          : showUserInfo // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      canUpdate: canUpdate == freezed
+          ? _value.canUpdate
+          : canUpdate // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
   @override
-  $TransportModelCopyWith<$Res> get model {
-    return $TransportModelCopyWith<$Res>(_value.model, (value) {
-      return _then(_value.copyWith(model: value));
+  $TransportModelCopyWith<$Res> get transport {
+    return $TransportModelCopyWith<$Res>(_value.transport, (value) {
+      return _then(_value.copyWith(transport: value));
     });
   }
 }
@@ -308,14 +335,23 @@ class __$ViewCopyWithImpl<$Res> extends _$ManageTransportStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_View implements _View {
-  const _$_View(this.model);
+  const _$_View(
+      {required this.transport,
+      this.showUserInfo = false,
+      this.canUpdate = false});
 
   @override
-  final TransportModel model;
+  final TransportModel transport;
+  @JsonKey()
+  @override
+  final bool? showUserInfo;
+  @JsonKey()
+  @override
+  final bool? canUpdate;
 
   @override
   String toString() {
-    return 'ManageTransportState.view(model: $model)';
+    return 'ManageTransportState.view(transport: $transport, showUserInfo: $showUserInfo, canUpdate: $canUpdate)';
   }
 
   @override
@@ -323,12 +359,18 @@ class _$_View implements _View {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _View &&
-            const DeepCollectionEquality().equals(other.model, model));
+            const DeepCollectionEquality().equals(other.transport, transport) &&
+            const DeepCollectionEquality()
+                .equals(other.showUserInfo, showUserInfo) &&
+            const DeepCollectionEquality().equals(other.canUpdate, canUpdate));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(model));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(transport),
+      const DeepCollectionEquality().hash(showUserInfo),
+      const DeepCollectionEquality().hash(canUpdate));
 
   @JsonKey(ignore: true)
   @override
@@ -339,41 +381,47 @@ class _$_View implements _View {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TransportModel model) view,
-    required TResult Function(TransportModel model) edit,
+    required TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)
+        view,
+    required TResult Function(TransportModel transport) edit,
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
   }) {
-    return view(model);
+    return view(transport, showUserInfo, canUpdate);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
   }) {
-    return view?.call(model);
+    return view?.call(transport, showUserInfo, canUpdate);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (view != null) {
-      return view(model);
+      return view(transport, showUserInfo, canUpdate);
     }
     return orElse();
   }
@@ -423,9 +471,14 @@ class _$_View implements _View {
 }
 
 abstract class _View implements ManageTransportState {
-  const factory _View(TransportModel model) = _$_View;
+  const factory _View(
+      {required TransportModel transport,
+      bool? showUserInfo,
+      bool? canUpdate}) = _$_View;
 
-  TransportModel get model;
+  TransportModel get transport;
+  bool? get showUserInfo;
+  bool? get canUpdate;
   @JsonKey(ignore: true)
   _$ViewCopyWith<_View> get copyWith => throw _privateConstructorUsedError;
 }
@@ -434,9 +487,9 @@ abstract class _View implements ManageTransportState {
 abstract class _$EditCopyWith<$Res> {
   factory _$EditCopyWith(_Edit value, $Res Function(_Edit) then) =
       __$EditCopyWithImpl<$Res>;
-  $Res call({TransportModel model});
+  $Res call({TransportModel transport});
 
-  $TransportModelCopyWith<$Res> get model;
+  $TransportModelCopyWith<$Res> get transport;
 }
 
 /// @nodoc
@@ -450,20 +503,20 @@ class __$EditCopyWithImpl<$Res> extends _$ManageTransportStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? model = freezed,
+    Object? transport = freezed,
   }) {
     return _then(_Edit(
-      model == freezed
-          ? _value.model
-          : model // ignore: cast_nullable_to_non_nullable
+      transport == freezed
+          ? _value.transport
+          : transport // ignore: cast_nullable_to_non_nullable
               as TransportModel,
     ));
   }
 
   @override
-  $TransportModelCopyWith<$Res> get model {
-    return $TransportModelCopyWith<$Res>(_value.model, (value) {
-      return _then(_value.copyWith(model: value));
+  $TransportModelCopyWith<$Res> get transport {
+    return $TransportModelCopyWith<$Res>(_value.transport, (value) {
+      return _then(_value.copyWith(transport: value));
     });
   }
 }
@@ -471,14 +524,14 @@ class __$EditCopyWithImpl<$Res> extends _$ManageTransportStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Edit implements _Edit {
-  const _$_Edit(this.model);
+  const _$_Edit(this.transport);
 
   @override
-  final TransportModel model;
+  final TransportModel transport;
 
   @override
   String toString() {
-    return 'ManageTransportState.edit(model: $model)';
+    return 'ManageTransportState.edit(transport: $transport)';
   }
 
   @override
@@ -486,12 +539,12 @@ class _$_Edit implements _Edit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Edit &&
-            const DeepCollectionEquality().equals(other.model, model));
+            const DeepCollectionEquality().equals(other.transport, transport));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(model));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(transport));
 
   @JsonKey(ignore: true)
   @override
@@ -502,41 +555,47 @@ class _$_Edit implements _Edit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TransportModel model) view,
-    required TResult Function(TransportModel model) edit,
+    required TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)
+        view,
+    required TResult Function(TransportModel transport) edit,
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
   }) {
-    return edit(model);
+    return edit(transport);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
   }) {
-    return edit?.call(model);
+    return edit?.call(transport);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (edit != null) {
-      return edit(model);
+      return edit(transport);
     }
     return orElse();
   }
@@ -586,9 +645,9 @@ class _$_Edit implements _Edit {
 }
 
 abstract class _Edit implements ManageTransportState {
-  const factory _Edit(TransportModel model) = _$_Edit;
+  const factory _Edit(TransportModel transport) = _$_Edit;
 
-  TransportModel get model;
+  TransportModel get transport;
   @JsonKey(ignore: true)
   _$EditCopyWith<_Edit> get copyWith => throw _privateConstructorUsedError;
 }
@@ -657,8 +716,10 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TransportModel model) view,
-    required TResult Function(TransportModel model) edit,
+    required TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)
+        view,
+    required TResult Function(TransportModel transport) edit,
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
@@ -670,8 +731,10 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
@@ -683,8 +746,10 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
@@ -824,8 +889,10 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TransportModel model) view,
-    required TResult Function(TransportModel model) edit,
+    required TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)
+        view,
+    required TResult Function(TransportModel transport) edit,
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
@@ -837,8 +904,10 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
@@ -850,8 +919,10 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
@@ -981,8 +1052,10 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TransportModel model) view,
-    required TResult Function(TransportModel model) edit,
+    required TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)
+        view,
+    required TResult Function(TransportModel transport) edit,
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
@@ -994,8 +1067,10 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
@@ -1007,8 +1082,10 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TransportModel model)? view,
-    TResult Function(TransportModel model)? edit,
+    TResult Function(
+            TransportModel transport, bool? showUserInfo, bool? canUpdate)?
+        view,
+    TResult Function(TransportModel transport)? edit,
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,

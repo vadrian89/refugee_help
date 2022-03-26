@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:refugee_help/domain/transport/transport_type_model.dart';
 
 class TransportTypeDropdown extends StatelessWidget {
-  final List<TransportTypeModel> list;
   final void Function(TransportTypeModel? type)? onChanged;
   final TransportTypeModel? value;
+
+  List<TransportTypeModel> get _list => TransportTypeModel.list;
 
   const TransportTypeDropdown({
     Key? key,
     this.value,
-    required this.list,
     required this.onChanged,
   }) : super(key: key);
 
@@ -24,8 +24,8 @@ class TransportTypeDropdown extends StatelessWidget {
       );
 
   List<DropdownMenuItem<TransportTypeModel>> _items(BuildContext context) => List.generate(
-        list.length,
-        (index) => _item(context, model: list[index]),
+        _list.length,
+        (index) => _item(context, model: _list[index]),
       );
 
   DropdownMenuItem<TransportTypeModel> _item(

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
   static DateFormat get globalDateFormat => DateFormat("dd/MM/yyyy HH:mm");
@@ -38,4 +39,10 @@ class Utils {
       return "";
     }
   }
+
+  static void call(String phoneNumber) => launchUrl("tel:$phoneNumber");
+
+  static Future<void> launchUrl(String url) => canLaunch(url).then(
+        (value) => value ? launch(url) : null,
+      );
 }

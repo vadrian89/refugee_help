@@ -61,14 +61,14 @@ class _UserProfileFormState extends State<UserProfileForm> {
   bool editable = false;
 
   UserModel get _updatedUser => _user!.copyWith(
-        lastName: _lastName,
-        firstName: _firstName,
-        phone: _phone,
-        county: _county,
-        city: _city,
-        address: _address,
+        lastName: _lastName.trim(),
+        firstName: _firstName.trim(),
+        phone: _phone.trim(),
+        county: _county.trim(),
+        city: _city.trim(),
+        address: _address.trim(),
         profileImage: _profileImage,
-        organization: _organization,
+        organization: _organization.trim(),
       );
 
   @override

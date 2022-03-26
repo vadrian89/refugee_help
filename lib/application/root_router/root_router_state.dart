@@ -30,6 +30,8 @@ class RootRouterState with _$RootRouterState {
 
   static const transportPath = "/transport";
 
+  static const ticketsPath = "/tickets";
+
   static const addPath = "/add";
 
   /// Getter to quickly check if the router is in unkown state.
@@ -45,6 +47,11 @@ class RootRouterState with _$RootRouterState {
       );
 
   bool get isRegister => maybeWhen(orElse: () => false, register: () => true);
+  bool get isModalOpened => maybeMap(
+        orElse: () => false,
+        tickets: (tickets) => tickets.modalVisible,
+        transport: (transport) => transport.modalVisible,
+      );
 
   /// Define the private constructor to enable support for class methods and properties.
   const RootRouterState._();
@@ -61,9 +68,23 @@ class RootRouterState with _$RootRouterState {
   const factory RootRouterState.unauthenticated() = _Unauthenticated;
 
   /// [RootRouterState.home] is the state of the router after the user is authenticated.
-  const factory RootRouterState.home({UserModel? user, @Default(false) bool profile}) = _Home;
+  const factory RootRouterState.home({
+    UserModel? user,
+    @Default(false) bool viewProfile,
+  }) = _Home;
 
-  const factory RootRouterState.transport({String? id, @Default(false) bool add}) = _Transport;
+  const factory RootRouterState.transport({
+    String? id,
+    @Default(false) bool add,
+    @Default(false) bool modalVisible,
+  }) = _Transport;
+
+  const factory RootRouterState.tickets({
+    String? id,
+    @Default(false) bool add,
+    @Default(false) bool modalVisible,
+    String? transportId,
+  }) = _Tickets;
 
   /// [RootRouterState.register] shows [RegisterScreen].
   const factory RootRouterState.register() = _Register;
@@ -98,14 +119,26 @@ class RootRouterState with _$RootRouterState {
   factory RootRouterState.fromUriLevel2(Uri uri) {
     final pathSegment1 = "/${uri.pathSegments[0]}";
     final pathSegment2 = "/${uri.pathSegments[1]}";
-    if (pathSegment1 == homePath && pathSegment2 == profilePath) {
-      return const RootRouterState.home(profile: true);
+    final queryParameters = uri.queryParametersAll;
+    if (pathSegment1 == homePath) {
+      if (pathSegment2 == profilePath) {
+        return const RootRouterState.home(viewProfile: true);
+      }
     }
     if (pathSegment1 == transportPath) {
       if (pathSegment2 == addPath) {
         return const RootRouterState.transport(add: true);
       }
       return RootRouterState.transport(id: pathSegment2);
+    }
+    if (pathSegment1 == ticketsPath) {
+      if (pathSegment2 == addPath) {
+        return RootRouterState.tickets(
+          add: true,
+          transportId: queryParameters["transportId"]?.first,
+        );
+      }
+      return RootRouterState.tickets(id: pathSegment2);
     }
     return const RootRouterState.unknown();
   }
@@ -116,11 +149,23 @@ class RootRouterState with _$RootRouterState {
         unauthenticated: () => authPath,
         register: () => registerPath,
         home: (_, viewProfile) => "$homePath${_getPath(viewProfile, profilePath)}",
-        transport: (id, add) =>
-            "$transportPath${_getPath(add, addPath)}${_getPath(id?.trim().isNotEmpty ?? false, "/$id")}",
+        transport: (id, add, _) =>
+            "$transportPath${_getPath(add, addPath)}" +
+            _getPath(id?.trim().isNotEmpty ?? false, "/$id"),
+        tickets: (id, add, _, transportId) =>
+            "$ticketsPath${_getPath(add, addPath)}" +
+            _getPath(id?.trim().isNotEmpty ?? false, "/$id") +
+            _getPath(transportId?.trim().isNotEmpty ?? false, "?") +
+            _getParameter("transportId", transportId ?? ""),
         orElse: () => unknownPath,
       );
 
   /// Return the path if the expression is `true`, otherwise return an empty string.
   String _getPath(bool expression, path) => expression ? path : "";
+
+  String _getParameter(String name, String value) {
+    if (value.trim().isEmpty) return "";
+
+    return "$name=$value";
+  }
 }

@@ -9,13 +9,14 @@ import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/util/firebase_storage_utils.dart';
 
 import 'transport_model.dart';
+import 'transport_request.dart';
 
 /// Repository class used for the authentication process
 class TransportRepository extends BaseRepository
     implements CrudRepositoryInterface<TransportModel> {
-  /// Location of user profiles are stored on the database.
-  static const String _profilesTable = "volunteer_transport";
-  CollectionReference get _collection => getCollection(_profilesTable);
+  /// Location in the database.
+  static const String _doc = "volunteer_transport";
+  CollectionReference get _collection => getCollection(_doc);
 
   CollectionReference<TransportModel> get _reference => _collection.withConverter<TransportModel>(
         fromFirestore: (snapshot, _) => TransportModel.fromJson(snapshot.data()!),
@@ -26,6 +27,7 @@ class TransportRepository extends BaseRepository
     OperationResult<String> result = OperationResult.success(
       model.isAvailable! ? "available".tr() : "unavailable".tr(),
     );
+    logDebug("updateAvailability transport: $model", local: true);
     try {
       await _reference
           .doc(model.id.toString())
@@ -67,10 +69,10 @@ class TransportRepository extends BaseRepository
       }
       await _reference.doc(updatedModel.id).update(updatedModel.copyWith(image: image).toJson());
     } on FirebaseException catch (error) {
-      logException("Exception in update", error: error, stackTrace: error.stackTrace);
+      logException("Exception in add", error: error, stackTrace: error.stackTrace);
       result = OperationResult.failure("error_saving_transport".tr());
     } catch (e, stackTrace) {
-      logException("Exception in update", error: e, stackTrace: stackTrace);
+      logException("Exception in add", error: e, stackTrace: stackTrace);
       result = OperationResult.failure("error_saving_transport".tr());
     }
     addResultToStream(result);
@@ -120,11 +122,11 @@ class TransportRepository extends BaseRepository
       await FirebaseStorageUtils.deleteFile(model.imageStoragePath);
       await _reference.doc(model.id).delete();
     } on FirebaseException catch (error) {
-      logException("Exception in update", error: error, stackTrace: error.stackTrace);
-      result = OperationResult.failure("error_saving_transport".tr());
+      logException("Exception in delete", error: error, stackTrace: error.stackTrace);
+      result = OperationResult.failure("error_deleting_transport".tr());
     } catch (e, stackTrace) {
-      logException("Exception in update", error: e, stackTrace: stackTrace);
-      result = OperationResult.failure("error_saving_transport".tr());
+      logException("Exception in delete", error: e, stackTrace: stackTrace);
+      result = OperationResult.failure("error_deleting_transport".tr());
     }
     addResultToStream(result);
   }
@@ -135,11 +137,25 @@ class TransportRepository extends BaseRepository
   }
 
   @override
-  Stream<List<TransportModel>> listStream({String? userId, int limit = 10}) async* {
+  Stream<List<TransportModel>> listStream({
+    String? userId,
+    int limit = 10,
+    TransportRequest? request,
+  }) async* {
     Query<TransportModel> query = _reference;
     if (userId != null) {
       query = query.where("user.id", isEqualTo: userId);
     }
+    if (request?.seatsAvailable != null) {
+      query = query.where("seatsAvailable", isEqualTo: request!.seatsAvailable);
+    }
+    if (request?.transportType != null) {
+      query = query.where("type", isEqualTo: request!.transportType!.id);
+    }
+    if (request?.isAvailable ?? false) {
+      query = query.where("isAvailable", isEqualTo: request!.isAvailable);
+    }
+    logDebug("Firebase query ${query.parameters}", local: true);
     yield* query.limit(limit).snapshots().map(_listFromSnapshot);
   }
 

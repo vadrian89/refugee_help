@@ -23,11 +23,11 @@ class _$UserInfoModelTearOff {
   const _$UserInfoModelTearOff();
 
   _UserInfoModel call(
-      {required String id,
-      @JsonKey(name: "last_name") required String lastName,
-      @JsonKey(name: "first_name") required String firstName,
-      required String phone,
-      @JsonKey(name: "profile_image") required ImageModel profileImage}) {
+      {String? id,
+      String? lastName,
+      String? firstName,
+      String? phone,
+      ImageModel? profileImage}) {
     return _UserInfoModel(
       id: id,
       lastName: lastName,
@@ -47,14 +47,11 @@ const $UserInfoModel = _$UserInfoModelTearOff();
 
 /// @nodoc
 mixin _$UserInfoModel {
-  String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "last_name")
-  String get lastName => throw _privateConstructorUsedError;
-  @JsonKey(name: "first_name")
-  String get firstName => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
-  @JsonKey(name: "profile_image")
-  ImageModel get profileImage => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
+  ImageModel? get profileImage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,13 +65,13 @@ abstract class $UserInfoModelCopyWith<$Res> {
           UserInfoModel value, $Res Function(UserInfoModel) then) =
       _$UserInfoModelCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      @JsonKey(name: "last_name") String lastName,
-      @JsonKey(name: "first_name") String firstName,
-      String phone,
-      @JsonKey(name: "profile_image") ImageModel profileImage});
+      {String? id,
+      String? lastName,
+      String? firstName,
+      String? phone,
+      ImageModel? profileImage});
 
-  $ImageModelCopyWith<$Res> get profileImage;
+  $ImageModelCopyWith<$Res>? get profileImage;
 }
 
 /// @nodoc
@@ -98,29 +95,33 @@ class _$UserInfoModelCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       lastName: lastName == freezed
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       profileImage: profileImage == freezed
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
-              as ImageModel,
+              as ImageModel?,
     ));
   }
 
   @override
-  $ImageModelCopyWith<$Res> get profileImage {
-    return $ImageModelCopyWith<$Res>(_value.profileImage, (value) {
+  $ImageModelCopyWith<$Res>? get profileImage {
+    if (_value.profileImage == null) {
+      return null;
+    }
+
+    return $ImageModelCopyWith<$Res>(_value.profileImage!, (value) {
       return _then(_value.copyWith(profileImage: value));
     });
   }
@@ -134,14 +135,14 @@ abstract class _$UserInfoModelCopyWith<$Res>
       __$UserInfoModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      @JsonKey(name: "last_name") String lastName,
-      @JsonKey(name: "first_name") String firstName,
-      String phone,
-      @JsonKey(name: "profile_image") ImageModel profileImage});
+      {String? id,
+      String? lastName,
+      String? firstName,
+      String? phone,
+      ImageModel? profileImage});
 
   @override
-  $ImageModelCopyWith<$Res> get profileImage;
+  $ImageModelCopyWith<$Res>? get profileImage;
 }
 
 /// @nodoc
@@ -167,23 +168,23 @@ class __$UserInfoModelCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       lastName: lastName == freezed
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       profileImage: profileImage == freezed
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
-              as ImageModel,
+              as ImageModel?,
     ));
   }
 }
@@ -193,29 +194,22 @@ class __$UserInfoModelCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_UserInfoModel extends _UserInfoModel {
   const _$_UserInfoModel(
-      {required this.id,
-      @JsonKey(name: "last_name") required this.lastName,
-      @JsonKey(name: "first_name") required this.firstName,
-      required this.phone,
-      @JsonKey(name: "profile_image") required this.profileImage})
+      {this.id, this.lastName, this.firstName, this.phone, this.profileImage})
       : super._();
 
   factory _$_UserInfoModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserInfoModelFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
-  @JsonKey(name: "last_name")
-  final String lastName;
+  final String? lastName;
   @override
-  @JsonKey(name: "first_name")
-  final String firstName;
+  final String? firstName;
   @override
-  final String phone;
+  final String? phone;
   @override
-  @JsonKey(name: "profile_image")
-  final ImageModel profileImage;
+  final ImageModel? profileImage;
 
   @override
   String toString() {
@@ -257,30 +251,26 @@ class _$_UserInfoModel extends _UserInfoModel {
 
 abstract class _UserInfoModel extends UserInfoModel {
   const factory _UserInfoModel(
-          {required String id,
-          @JsonKey(name: "last_name") required String lastName,
-          @JsonKey(name: "first_name") required String firstName,
-          required String phone,
-          @JsonKey(name: "profile_image") required ImageModel profileImage}) =
-      _$_UserInfoModel;
+      {String? id,
+      String? lastName,
+      String? firstName,
+      String? phone,
+      ImageModel? profileImage}) = _$_UserInfoModel;
   const _UserInfoModel._() : super._();
 
   factory _UserInfoModel.fromJson(Map<String, dynamic> json) =
       _$_UserInfoModel.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
-  @JsonKey(name: "last_name")
-  String get lastName;
+  String? get lastName;
   @override
-  @JsonKey(name: "first_name")
-  String get firstName;
+  String? get firstName;
   @override
-  String get phone;
+  String? get phone;
   @override
-  @JsonKey(name: "profile_image")
-  ImageModel get profileImage;
+  ImageModel? get profileImage;
   @override
   @JsonKey(ignore: true)
   _$UserInfoModelCopyWith<_UserInfoModel> get copyWith =>

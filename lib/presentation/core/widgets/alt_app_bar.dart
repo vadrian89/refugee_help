@@ -10,7 +10,7 @@ class AltAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const SizedBox();
 
-  PreferredSizeWidget get appBar => AppBar(
+  AppBar get appBar => AppBar(
         leading: const AltBackButton(),
         backgroundColor: Colors.transparent,
         elevation: 0,

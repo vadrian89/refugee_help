@@ -16,7 +16,7 @@ class CoreBottomNavigation extends StatelessWidget {
           ),
           items: [
             BottomNavigationBarItem(
-              icon: const Icon(MdiIcons.home),
+              icon: const Icon(MdiIcons.ticket),
               label: "home".tr(),
             ),
             const BottomNavigationBarItem(

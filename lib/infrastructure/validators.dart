@@ -31,14 +31,16 @@ class Validators {
       (password != null) && _passwordRegExp.hasMatch(password);
 
   /// Validate phone number.
-  static bool isValidPhone(String? phone) => (phone != null) && _phoneRegExp.hasMatch(phone);
+  static bool isValidPhone(String? string) =>
+      (string?.isNotEmpty ?? false) && _phoneRegExp.hasMatch(string!);
 
   /// Validate the incoming string is a number.
   ///
   /// Validation is done with the following expression `^\d*[.|,]*\d+$`.
-  static bool isNumber([String? string]) => (string != null) ? _numberExp.hasMatch(string) : false;
+  static bool isNumber([String? string]) =>
+      (string?.isNotEmpty ?? false) && _numberExp.hasMatch(string!);
 
   /// Validate the incoming string is an integer number.
   static bool isInteger([String? string]) =>
-      (string != null) ? _integerExp.hasMatch(string) : false;
+      (string?.isNotEmpty ?? false) && _integerExp.hasMatch(string!);
 }

@@ -5,6 +5,15 @@ part of 'authentication_cubit.dart';
 /// Class which represents the state of the authentication process.
 class AuthenticationState with _$AuthenticationState {
   UserModel? get user => maybeWhen(orElse: () => null, authenticated: (user) => user);
+  bool get isPrivilegedUser => isAdmin || isDispatcher;
+  bool get isAdmin => maybeWhen(
+        orElse: () => false,
+        authenticated: (user) => user.category!.isAdmin,
+      );
+  bool get isDispatcher => maybeWhen(
+        orElse: () => false,
+        authenticated: (user) => user.category!.isDispatcher,
+      );
 
   const AuthenticationState._();
 

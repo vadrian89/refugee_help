@@ -28,49 +28,72 @@ class RootRouterCubit extends Cubit<RootRouterState> {
   /// Go to the root of the app, depending on the current [AuthenticationState].
   ///
   /// Recommended to be used whenever you want to go the root of the app.
-  void goToRoot() => emit(_authCubit.state.maybeWhen(
-        orElse: () => const RootRouterState.unauthenticated(),
-        authenticated: (user) => RootRouterState.home(user: user),
-      ));
+  bool goToRoot() {
+    emit(_authCubit.state.maybeWhen(
+      orElse: () => const RootRouterState.unauthenticated(),
+      authenticated: (user) => RootRouterState.home(user: user),
+    ));
+    return true;
+  }
 
   /// Public method used to show [RegisterInScreen].
   void goToRegister() => _onlyUnauthenticated(const RootRouterState.register());
 
-  void goToUserProfile() => _onlyAuthenticated(const RootRouterState.home(profile: true));
+  void goToUserProfile() => _onlyAuthenticated(const RootRouterState.home(viewProfile: true));
 
   void goToTransport({String? id, bool add = false}) =>
       _onlyAuthenticated(RootRouterState.transport(id: id, add: add));
+
+  void goToTickets({String? id, bool add = false}) =>
+      _onlyAuthenticated(RootRouterState.tickets(id: id, add: add));
+
+  void toggleTicketTransport({String? transportId}) => state.maybeMap(
+        orElse: () => null,
+        tickets: (tickets) => _onlyAuthenticated(tickets.copyWith(transportId: transportId)),
+      );
+
+  void toggleModal(bool value) => state.maybeMap(
+        orElse: () => null,
+        tickets: (tickets) => emit(tickets.copyWith(modalVisible: value)),
+        transport: (transport) => emit(transport.copyWith(modalVisible: value)),
+      );
 
   /// Implement the logic for what happens when the back button was called.
   ///
   /// Return `true` if the app navigated back or `false` if it's the root of the app.
   /// The value of the [result] argument is the value returned by the [Route].
-  bool popRoute(dynamic result) => state.maybeMap(
-        register: (_) {
-          goToRoot();
-          return true;
-        },
-        unknown: (_) {
-          goToRoot();
-          return true;
-        },
-        home: (home) {
-          if (home.profile) {
-            goToRoot();
-            return true;
+  bool popRoute(dynamic result) {
+    return state.maybeMap(
+      register: (_) => goToRoot(),
+      unknown: (_) => goToRoot(),
+      home: (home) {
+        if (home.viewProfile) {
+          return goToRoot();
+        }
+        return false;
+      },
+      tickets: (tickets) {
+        if (tickets.modalVisible) {
+          if (tickets.transportId?.isNotEmpty ?? false) {
+            toggleTicketTransport();
           }
-          return false;
-        },
-        transport: (transport) {
-          if (transport.add || (transport.id?.isNotEmpty ?? false)) {
-            goToTransport();
-            return true;
-          }
-          goToRoot();
           return true;
-        },
-        orElse: () => false,
-      );
+        }
+        return goToRoot();
+      },
+      transport: (transport) {
+        if (transport.modalVisible) {
+          return true;
+        }
+        if (transport.add || (transport.id?.isNotEmpty ?? false)) {
+          goToTransport();
+          return true;
+        }
+        return goToRoot();
+      },
+      orElse: () => false,
+    );
+  }
 
   /// Method called by the overriden [RootRouterDelegate.setNewRoutePath] method.
   ///
@@ -83,9 +106,16 @@ class RootRouterCubit extends Cubit<RootRouterState> {
         () => parsedState.map(
           initial: (_) => goToRoot(),
           unauthenticated: (_) => goToRoot(),
-          register: (registerState) => _onlyUnauthenticated(registerState),
-          home: (homeState) => _onlyAuthenticated(homeState),
-          transport: (transportState) => _onlyAuthenticated(transportState),
+          register: _onlyUnauthenticated,
+          home: _onlyAuthenticated,
+          transport: _onlyAuthenticated,
+          tickets: (tickets) {
+            if ((tickets.id?.isEmpty ?? true) && !tickets.add) {
+              goToRoot();
+              return;
+            }
+            return _onlyAuthenticated(tickets);
+          },
           unknown: (unkownState) => emit(unkownState),
         ),
       );
@@ -147,8 +177,10 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           ///
           /// The [RootRouterState.user] which should contain the currently authenticated [UserModel].
           /// This argument should be taken from the [AuthenticationState.authenticated] state to ensure the latest data is used.
-          /// The [RootRouterState.showScreen] which tells the delegate if it should show the [LoggedInScreen] screen.
-          home: (_, profile) => RootRouterState.home(user: user, profile: profile),
+          home: (_, viewProfile) => RootRouterState.home(
+            user: user,
+            viewProfile: viewProfile,
+          ),
         ),
       ));
 

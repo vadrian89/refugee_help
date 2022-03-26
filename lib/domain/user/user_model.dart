@@ -15,7 +15,6 @@ part 'user_model.g.dart';
 /// Model of the user's profile stored in the database.
 ///
 /// Contains all fields, mapped to their respective table columns.
-/// Because databases and Dart naming convention differs, we make use `@JsonKey(name: "")` to properly map the fields.
 @freezed
 class UserModel with _$UserModel {
   /// Make the constructor private to enable custom computed values (getters) and methods.
@@ -25,10 +24,11 @@ class UserModel with _$UserModel {
 
   /// Get the full name of the user by making use of string interpolation.
   String get fullName => "${lastName ?? ""} ${firstName ?? ""}";
+  bool get isPrivileged => category!.privileged;
   bool get emailIsValid => Validators.isValidEmail(email);
   bool get lastNameIsValid => lastName?.isNotEmpty ?? false;
   bool get firstNameIsValid => firstName?.isNotEmpty ?? false;
-  bool get phoneIsValid => phone?.isNotEmpty ?? false;
+  bool get phoneIsValid => Validators.isValidPhone(phone);
   bool get countyIsValid => county?.isNotEmpty ?? false;
   bool get cityIsValid => city?.isNotEmpty ?? false;
   bool get addressIsValid => address?.isNotEmpty ?? false;
@@ -48,19 +48,17 @@ class UserModel with _$UserModel {
     @JsonKey(fromJson: UserCategoryModel.fromJson, toJson: UserCategoryModel.toJson)
         UserCategoryModel? category,
     String? email,
-    @JsonKey(name: "last_name") String? lastName,
-    @JsonKey(name: "first_name") String? firstName,
+    String? lastName,
+    String? firstName,
     String? phone,
     String? county,
     String? city,
     String? address,
-    @JsonKey(name: "profile_image") ImageModel? profileImage,
+    ImageModel? profileImage,
     String? organization,
-    @JsonKey(name: "is_available") @Default(false) bool? isAvailable,
-    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
-        DateTime? createdAt,
-    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
-        DateTime? updatedAt,
+    @Default(false) bool? isAvailable,
+    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? createdAt,
+    @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? updatedAt,
     @JsonKey(ignore: true) String? password,
     @JsonKey(ignore: true) @Default(false) bool isAnonymous,
     @JsonKey(ignore: true) @Default(false) bool emailVerified,

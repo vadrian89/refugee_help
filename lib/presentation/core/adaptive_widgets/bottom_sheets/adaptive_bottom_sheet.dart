@@ -1,7 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/infrastructure/utils.dart';
+import 'package:refugee_help/presentation/core/widgets/buttons/alt_icon_button.dart';
+import 'package:refugee_help/presentation/core/widgets/text/head6_text.dart';
 
 import '../../widgets/refocus_background.dart';
 import '../core/adaptive_widget.dart';
@@ -17,6 +22,8 @@ class AdaptiveBottomSheet extends AdaptiveWidget {
   final bool enableDrag;
   final RouteSettings? routeSettings;
   final ScrollController? actionScrollController;
+  final EdgeInsets materialChildrenPadding;
+  final bool showMaterialTitle;
 
   const AdaptiveBottomSheet({
     Key? key,
@@ -24,11 +31,13 @@ class AdaptiveBottomSheet extends AdaptiveWidget {
     required this.bodyChildren,
     this.actions,
     this.isScrollControlled = false,
-    this.useRootNavigator = false,
+    this.useRootNavigator = true,
     this.isDismissible = true,
     this.enableDrag = true,
     this.routeSettings,
     this.actionScrollController,
+    this.materialChildrenPadding = EdgeInsets.zero,
+    this.showMaterialTitle = true,
   }) : super(key: key);
 
   @override
@@ -62,13 +71,22 @@ class AdaptiveBottomSheet extends AdaptiveWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (title != null)
+              if (showMaterialTitle)
                 ListTile(
-                  leading: BackButton(color: Theme.of(context).textTheme.headline6?.color),
-                  contentPadding: EdgeInsets.zero,
-                  title: _title(context),
+                  contentPadding: const EdgeInsets.only(left: 64),
+                  title: (title != null) ? _title(context) : null,
+                  trailing: AltIconButton(
+                    icon: MdiIcons.close,
+                    onPressed: () => Navigator.maybePop(context),
+                  ),
                 ),
-              ...bodyChildren,
+              ...List.generate(
+                bodyChildren.length,
+                (index) => Padding(
+                  padding: materialChildrenPadding,
+                  child: bodyChildren[index],
+                ),
+              ),
               if (actions?.isNotEmpty ?? false)
                 ButtonBar(
                   children: actions!,
@@ -79,14 +97,15 @@ class AdaptiveBottomSheet extends AdaptiveWidget {
         ),
       );
 
-  Widget _title(BuildContext context) => Text(
-        title!,
-        textAlign: Utils.isIos ? TextAlign.center : TextAlign.left,
-        style: Theme.of(context).textTheme.headline6,
+  Widget _title(BuildContext context) => Head6Text(
+        text: title!,
+        textAlign: TextAlign.center,
       );
 
-  Future<T?> show<T extends Object?>(BuildContext context) =>
-      Utils.isIos ? _showCupertino(context) : _showMaterial(context);
+  Future<T?> show<T extends Object?>(BuildContext context) {
+    context.read<RootRouterCubit>().toggleModal(true);
+    return Utils.isIos ? _showCupertino(context) : _showMaterial(context);
+  }
 
   Future<T?> _showMaterial<T extends Object?>(BuildContext context) => showModalBottomSheet<T?>(
         context: context,
@@ -98,7 +117,10 @@ class AdaptiveBottomSheet extends AdaptiveWidget {
         isDismissible: isDismissible,
         enableDrag: enableDrag,
         routeSettings: routeSettings,
-      );
+      ).then((value) {
+        context.read<RootRouterCubit>().toggleModal(false);
+        return value;
+      });
 
   Future<T?> _showCupertino<T extends Object?>(BuildContext context) => showCupertinoModalPopup<T?>(
         context: context,
@@ -106,5 +128,8 @@ class AdaptiveBottomSheet extends AdaptiveWidget {
         barrierDismissible: isDismissible,
         useRootNavigator: useRootNavigator,
         routeSettings: routeSettings,
-      );
+      ).then((value) {
+        context.read<RootRouterCubit>().toggleModal(false);
+        return value;
+      });
 }

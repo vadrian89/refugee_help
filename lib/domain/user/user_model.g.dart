@@ -10,19 +10,19 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       id: json['id'] as String?,
       category: UserCategoryModel.fromJson(json['category']),
       email: json['email'] as String?,
-      lastName: json['last_name'] as String?,
-      firstName: json['first_name'] as String?,
+      lastName: json['lastName'] as String?,
+      firstName: json['firstName'] as String?,
       phone: json['phone'] as String?,
       county: json['county'] as String?,
       city: json['city'] as String?,
       address: json['address'] as String?,
-      profileImage: json['profile_image'] == null
+      profileImage: json['profileImage'] == null
           ? null
-          : ImageModel.fromJson(json['profile_image'] as Map<String, dynamic>),
+          : ImageModel.fromJson(json['profileImage'] as Map<String, dynamic>),
       organization: json['organization'] as String?,
-      isAvailable: json['is_available'] as bool? ?? false,
-      createdAt: dateTimeFromJson(json['created_at']),
-      updatedAt: dateTimeFromJson(json['updated_at']),
+      isAvailable: json['isAvailable'] as bool? ?? false,
+      createdAt: dateTimeFromJson(json['createdAt']),
+      updatedAt: dateTimeFromJson(json['updatedAt']),
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -30,15 +30,15 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'id': instance.id,
       'category': UserCategoryModel.toJson(instance.category),
       'email': instance.email,
-      'last_name': instance.lastName,
-      'first_name': instance.firstName,
+      'lastName': instance.lastName,
+      'firstName': instance.firstName,
       'phone': instance.phone,
       'county': instance.county,
       'city': instance.city,
       'address': instance.address,
-      'profile_image': instance.profileImage?.toJson(),
+      'profileImage': instance.profileImage?.toJson(),
       'organization': instance.organization,
-      'is_available': instance.isAvailable,
-      'created_at': dateTimeToJson(instance.createdAt),
-      'updated_at': dateTimeToJson(instance.updatedAt),
+      'isAvailable': instance.isAvailable,
+      'createdAt': dateTimeToJson(instance.createdAt),
+      'updatedAt': dateTimeToJson(instance.updatedAt),
     };

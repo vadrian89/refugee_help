@@ -7,8 +7,8 @@ import 'package:refugee_help/presentation/core/utils/snackbars.dart';
 
 class ManageTransportListener extends StatelessWidget {
   final Widget child;
-  final void Function(TransportModel model) onView;
-  final void Function(TransportModel model) onEdit;
+  final void Function(TransportModel transport) onView;
+  final void Function(TransportModel transport) onEdit;
 
   const ManageTransportListener({
     Key? key,
@@ -29,7 +29,7 @@ class ManageTransportListener extends StatelessWidget {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             return AdaptiveDialog.showError(context, message: message);
           },
-          view: onView,
+          view: (transport, _, __) => onView(transport),
           edit: onEdit,
         ),
         child: child,

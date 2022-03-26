@@ -37,13 +37,13 @@ class TransportTypeModel extends Equatable {
         icon: MdiIcons.bus,
       );
 
-  factory TransportTypeModel.fromJson(Map<String, dynamic> json) => TransportTypeModel.fromId(
-        int.tryParse(json["type"]?.toString() ?? "1")!,
+  factory TransportTypeModel.fromJson(dynamic id) => TransportTypeModel.fromId(
+        int.tryParse(id?.toString() ?? "1")!,
       );
 
   factory TransportTypeModel.fromId(int id) => list.firstWhere((element) => element.id == id);
 
-  Map<String, dynamic> toJson() => {"type": id};
+  int toJson() => id;
 
   @override
   List<Object?> get props => [id, name, seats];

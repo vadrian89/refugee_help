@@ -77,8 +77,8 @@
     "registration_number": "Registration number",
     "seats_available": "Number of seats available",
     "time_availability": "In how much time are you available at site?",
-    "update_transport_title": "Update transport?",
-    "update_transport_confirm": "Are you sure you want to update the transport?",
+    "update_transport_title": "Save transport?",
+    "update_transport_confirm": "Are you sure you want to save the transport?",
     "availability": "Availability",
     "destinations_list": "Destinations list",
     "at_location": "At location",
@@ -104,5 +104,33 @@
     "delete_something": "Delete {}",
     "delete_confirmation": {
         "something":"Are you sure you want to delete {}?"
-    }
+    },
+    "no_remark_feedback": "No remark",
+    "problem": "Problem",
+    "app_feedback": "App feedback",
+    "please_complete_profile": "Please complete your profile to use this feature!",
+    "choose_transport": "Choose transport",
+    "feedback_type": "Feedback type",
+    "new_ticket": "New ticket",
+    "ticket": {
+        "default": "Ticket",
+        "save": "Save ticket?",
+        "save_confirm": "Are you sure you want to save the ticket?",
+        "deleting": "Deleting ticket...",
+        "error_saving": "Error saving ticket!",
+        "error_deleting": "Error deleting ticket!"
+    },
+    "adults_number": "Adults number",
+    "children_number": "Children number",
+    "transport_is_required": "Transport vehicle is required!",
+    "destination": "Destination",
+    "finished": "Finished",
+    "canceled": "Canceled",
+    "started": "Started",
+    "created": "Created",
+    "unkown": "Unkown",
+    "status": "Status",
+    "search": "Search",
+    "owner": "Owner",
+    "transport_info": "Transport info"
 }

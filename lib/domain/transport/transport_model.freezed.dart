@@ -25,25 +25,18 @@ class _$TransportModelTearOff {
   _TransportModel call(
       {@JsonKey(ignore: true)
           String? id,
-      @JsonKey(name: "registration_number")
-          String? registrationNumber,
-      @JsonKey(name: "seats_available")
-          int? seatsAvailable = 0,
-      @JsonKey(name: "transport_type")
-          TransportTypeModel? type,
+      String? registrationNumber,
+      int? seatsAvailable = 0,
+      TransportTypeModel? type,
       ImageModel? image,
-      @JsonKey(name: "at_location")
-          bool? atLocation = true,
-      @JsonKey(name: "time_available")
-          int? timeAvailable = 0,
-      @JsonKey(name: "is_available")
-          bool? isAvailable = false,
-      String? from = "Isaccea-Tulcea",
+      bool? atLocation = true,
+      int? timeAvailable = 0,
+      bool? isAvailable = false,
       String? destinations,
       UserInfoModel? user,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
       String? remarks}) {
     return _TransportModel(
@@ -55,7 +48,6 @@ class _$TransportModelTearOff {
       atLocation: atLocation,
       timeAvailable: timeAvailable,
       isAvailable: isAvailable,
-      from: from,
       destinations: destinations,
       user: user,
       createdAt: createdAt,
@@ -76,35 +68,22 @@ const $TransportModel = _$TransportModelTearOff();
 mixin _$TransportModel {
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "registration_number")
   String? get registrationNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: "seats_available")
   int? get seatsAvailable => throw _privateConstructorUsedError;
-  @JsonKey(name: "transport_type")
   TransportTypeModel? get type => throw _privateConstructorUsedError;
   ImageModel? get image => throw _privateConstructorUsedError;
-  @JsonKey(name: "at_location")
   bool? get atLocation => throw _privateConstructorUsedError;
 
   /// Time, in minutes, until the volunteer can get at site ([from]).
   ///
   /// If this is, he is already at the site.
-  @JsonKey(name: "time_available")
   int? get timeAvailable => throw _privateConstructorUsedError;
-  @JsonKey(name: "is_available")
   bool? get isAvailable => throw _privateConstructorUsedError;
-
-  /// The location from where he can pick the refugees.
-  ///
-  /// Currently Isaccea-Tulcea is the only available location.
-  String? get from => throw _privateConstructorUsedError;
   String? get destinations => throw _privateConstructorUsedError;
   UserInfoModel? get user => throw _privateConstructorUsedError;
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   String? get remarks => throw _privateConstructorUsedError;
 
@@ -122,25 +101,18 @@ abstract class $TransportModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true)
           String? id,
-      @JsonKey(name: "registration_number")
-          String? registrationNumber,
-      @JsonKey(name: "seats_available")
-          int? seatsAvailable,
-      @JsonKey(name: "transport_type")
-          TransportTypeModel? type,
+      String? registrationNumber,
+      int? seatsAvailable,
+      TransportTypeModel? type,
       ImageModel? image,
-      @JsonKey(name: "at_location")
-          bool? atLocation,
-      @JsonKey(name: "time_available")
-          int? timeAvailable,
-      @JsonKey(name: "is_available")
-          bool? isAvailable,
-      String? from,
+      bool? atLocation,
+      int? timeAvailable,
+      bool? isAvailable,
       String? destinations,
       UserInfoModel? user,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
       String? remarks});
 
@@ -167,7 +139,6 @@ class _$TransportModelCopyWithImpl<$Res>
     Object? atLocation = freezed,
     Object? timeAvailable = freezed,
     Object? isAvailable = freezed,
-    Object? from = freezed,
     Object? destinations = freezed,
     Object? user = freezed,
     Object? createdAt = freezed,
@@ -207,10 +178,6 @@ class _$TransportModelCopyWithImpl<$Res>
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
-      from: from == freezed
-          ? _value.from
-          : from // ignore: cast_nullable_to_non_nullable
-              as String?,
       destinations: destinations == freezed
           ? _value.destinations
           : destinations // ignore: cast_nullable_to_non_nullable
@@ -267,25 +234,18 @@ abstract class _$TransportModelCopyWith<$Res>
   $Res call(
       {@JsonKey(ignore: true)
           String? id,
-      @JsonKey(name: "registration_number")
-          String? registrationNumber,
-      @JsonKey(name: "seats_available")
-          int? seatsAvailable,
-      @JsonKey(name: "transport_type")
-          TransportTypeModel? type,
+      String? registrationNumber,
+      int? seatsAvailable,
+      TransportTypeModel? type,
       ImageModel? image,
-      @JsonKey(name: "at_location")
-          bool? atLocation,
-      @JsonKey(name: "time_available")
-          int? timeAvailable,
-      @JsonKey(name: "is_available")
-          bool? isAvailable,
-      String? from,
+      bool? atLocation,
+      int? timeAvailable,
+      bool? isAvailable,
       String? destinations,
       UserInfoModel? user,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
       String? remarks});
 
@@ -316,7 +276,6 @@ class __$TransportModelCopyWithImpl<$Res>
     Object? atLocation = freezed,
     Object? timeAvailable = freezed,
     Object? isAvailable = freezed,
-    Object? from = freezed,
     Object? destinations = freezed,
     Object? user = freezed,
     Object? createdAt = freezed,
@@ -356,10 +315,6 @@ class __$TransportModelCopyWithImpl<$Res>
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
-      from: from == freezed
-          ? _value.from
-          : from // ignore: cast_nullable_to_non_nullable
-              as String?,
       destinations: destinations == freezed
           ? _value.destinations
           : destinations // ignore: cast_nullable_to_non_nullable
@@ -391,25 +346,18 @@ class _$_TransportModel extends _TransportModel {
   const _$_TransportModel(
       {@JsonKey(ignore: true)
           this.id,
-      @JsonKey(name: "registration_number")
-          this.registrationNumber,
-      @JsonKey(name: "seats_available")
-          this.seatsAvailable = 0,
-      @JsonKey(name: "transport_type")
-          this.type,
+      this.registrationNumber,
+      this.seatsAvailable = 0,
+      this.type,
       this.image,
-      @JsonKey(name: "at_location")
-          this.atLocation = true,
-      @JsonKey(name: "time_available")
-          this.timeAvailable = 0,
-      @JsonKey(name: "is_available")
-          this.isAvailable = false,
-      this.from = "Isaccea-Tulcea",
+      this.atLocation = true,
+      this.timeAvailable = 0,
+      this.isAvailable = false,
       this.destinations,
       this.user,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           this.createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           this.updatedAt,
       this.remarks})
       : super._();
@@ -421,54 +369,43 @@ class _$_TransportModel extends _TransportModel {
   @JsonKey(ignore: true)
   final String? id;
   @override
-  @JsonKey(name: "registration_number")
   final String? registrationNumber;
+  @JsonKey()
   @override
-  @JsonKey(name: "seats_available")
   final int? seatsAvailable;
   @override
-  @JsonKey(name: "transport_type")
   final TransportTypeModel? type;
   @override
   final ImageModel? image;
+  @JsonKey()
   @override
-  @JsonKey(name: "at_location")
   final bool? atLocation;
+  @JsonKey()
   @override
 
   /// Time, in minutes, until the volunteer can get at site ([from]).
   ///
   /// If this is, he is already at the site.
-  @JsonKey(name: "time_available")
   final int? timeAvailable;
-  @override
-  @JsonKey(name: "is_available")
-  final bool? isAvailable;
   @JsonKey()
   @override
-
-  /// The location from where he can pick the refugees.
-  ///
-  /// Currently Isaccea-Tulcea is the only available location.
-  final String? from;
+  final bool? isAvailable;
   @override
   final String? destinations;
   @override
   final UserInfoModel? user;
   @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   final DateTime? createdAt;
   @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   final DateTime? updatedAt;
   @override
   final String? remarks;
 
   @override
   String toString() {
-    return 'TransportModel(id: $id, registrationNumber: $registrationNumber, seatsAvailable: $seatsAvailable, type: $type, image: $image, atLocation: $atLocation, timeAvailable: $timeAvailable, isAvailable: $isAvailable, from: $from, destinations: $destinations, user: $user, createdAt: $createdAt, updatedAt: $updatedAt, remarks: $remarks)';
+    return 'TransportModel(id: $id, registrationNumber: $registrationNumber, seatsAvailable: $seatsAvailable, type: $type, image: $image, atLocation: $atLocation, timeAvailable: $timeAvailable, isAvailable: $isAvailable, destinations: $destinations, user: $user, createdAt: $createdAt, updatedAt: $updatedAt, remarks: $remarks)';
   }
 
   @override
@@ -489,7 +426,6 @@ class _$_TransportModel extends _TransportModel {
                 .equals(other.timeAvailable, timeAvailable) &&
             const DeepCollectionEquality()
                 .equals(other.isAvailable, isAvailable) &&
-            const DeepCollectionEquality().equals(other.from, from) &&
             const DeepCollectionEquality()
                 .equals(other.destinations, destinations) &&
             const DeepCollectionEquality().equals(other.user, user) &&
@@ -509,7 +445,6 @@ class _$_TransportModel extends _TransportModel {
       const DeepCollectionEquality().hash(atLocation),
       const DeepCollectionEquality().hash(timeAvailable),
       const DeepCollectionEquality().hash(isAvailable),
-      const DeepCollectionEquality().hash(from),
       const DeepCollectionEquality().hash(destinations),
       const DeepCollectionEquality().hash(user),
       const DeepCollectionEquality().hash(createdAt),
@@ -531,25 +466,18 @@ abstract class _TransportModel extends TransportModel {
   const factory _TransportModel(
       {@JsonKey(ignore: true)
           String? id,
-      @JsonKey(name: "registration_number")
-          String? registrationNumber,
-      @JsonKey(name: "seats_available")
-          int? seatsAvailable,
-      @JsonKey(name: "transport_type")
-          TransportTypeModel? type,
+      String? registrationNumber,
+      int? seatsAvailable,
+      TransportTypeModel? type,
       ImageModel? image,
-      @JsonKey(name: "at_location")
-          bool? atLocation,
-      @JsonKey(name: "time_available")
-          int? timeAvailable,
-      @JsonKey(name: "is_available")
-          bool? isAvailable,
-      String? from,
+      bool? atLocation,
+      int? timeAvailable,
+      bool? isAvailable,
       String? destinations,
       UserInfoModel? user,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
-      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+      @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
       String? remarks}) = _$_TransportModel;
   const _TransportModel._() : super._();
@@ -561,46 +489,32 @@ abstract class _TransportModel extends TransportModel {
   @JsonKey(ignore: true)
   String? get id;
   @override
-  @JsonKey(name: "registration_number")
   String? get registrationNumber;
   @override
-  @JsonKey(name: "seats_available")
   int? get seatsAvailable;
   @override
-  @JsonKey(name: "transport_type")
   TransportTypeModel? get type;
   @override
   ImageModel? get image;
   @override
-  @JsonKey(name: "at_location")
   bool? get atLocation;
   @override
 
   /// Time, in minutes, until the volunteer can get at site ([from]).
   ///
   /// If this is, he is already at the site.
-  @JsonKey(name: "time_available")
   int? get timeAvailable;
   @override
-  @JsonKey(name: "is_available")
   bool? get isAvailable;
-  @override
-
-  /// The location from where he can pick the refugees.
-  ///
-  /// Currently Isaccea-Tulcea is the only available location.
-  String? get from;
   @override
   String? get destinations;
   @override
   UserInfoModel? get user;
   @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "updated_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get createdAt;
   @override
-  @JsonKey(
-      fromJson: dateTimeFromJson, toJson: dateTimeToJson, name: "created_at")
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get updatedAt;
   @override
   String? get remarks;

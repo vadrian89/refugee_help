@@ -59,7 +59,17 @@ void showStandardSnackBar(
           duration: Duration(seconds: duration),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Flexible(child: Text('$message')), icon],
+            children: [
+              Flexible(
+                child: Text(
+                  '$message',
+                  style: TextStyle(
+                    color: backgroundColor == Colors.red ? Colors.white : null,
+                  ),
+                ),
+              ),
+              icon,
+            ],
           ),
           backgroundColor: backgroundColor,
         ),

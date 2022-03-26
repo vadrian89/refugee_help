@@ -18,7 +18,7 @@ class ManageTransportCubit extends Cubit<ManageTransportState> {
   late final StreamSubscription<AuthenticationState> _authStateSub;
   UserModel? _user;
   final TransportRepository _repository;
-  StreamSubscription<TransportModel?>? _modelSub;
+  StreamSubscription<TransportModel?>? _transportSub;
   late final StreamSubscription<OperationResult> _resultSub;
 
   ManageTransportCubit({required AuthenticationCubit authCubit, String? id})
@@ -28,7 +28,7 @@ class ManageTransportCubit extends Cubit<ManageTransportState> {
     _authStateSub = authCubit.stream.listen(_parseAuthStateSub);
     _resultSub = _repository.resultStream.listen(_parseResultSub);
     if (id != null) {
-      _modelSub = _repository.docStream(id).listen(_parseModelSub);
+      _transportSub = _repository.docStream(id).listen(_parseModelSub);
     } else {
       emit(const ManageTransportState.edit(TransportModel()));
     }
@@ -49,45 +49,50 @@ class ManageTransportCubit extends Cubit<ManageTransportState> {
         },
       );
 
-  void _parseModelSub([TransportModel? model]) {
-    if (model != null) {
+  void _parseModelSub([TransportModel? transport]) {
+    if (transport != null) {
       state.maybeWhen(
         orElse: () => null,
         loading: (_) => emit(ManageTransportState.success(message: "saved_changes".tr())),
       );
-      emit(ManageTransportState.view(model));
+      _emitView(transport);
     } else {
       emit(const ManageTransportState.success());
     }
   }
 
-  void toggleEdit() => state.maybeWhen(
+  void toggleEdit() => state.maybeMap(
         orElse: () => null,
-        view: (model) => emit(ManageTransportState.edit(model)),
-        edit: (model) => emit(ManageTransportState.view(model)),
+        view: (view) => emit(ManageTransportState.edit(view.transport)),
+        edit: (edit) => _emitView(edit.transport),
       );
 
-  Future<void> save(TransportModel model) async {
+  void _emitView(TransportModel transport) => emit(ManageTransportState.view(
+        transport: transport,
+        canUpdate: _user!.id == transport.user!.id,
+      ));
+
+  Future<void> save(TransportModel transport) async {
     emit(ManageTransportState.loading("saving".tr()));
     await Utils.repoDelay();
-    if (model.id != null) {
-      await _repository.update(model);
+    if (transport.id != null) {
+      await _repository.update(transport);
     } else {
-      await _repository.add(model.copyWith(user: UserInfoModel.fromUser(_user!)));
+      await _repository.add(transport.copyWith(user: UserInfoModel.fromUser(_user!)));
     }
   }
 
-  Future<void> delete(TransportModel model) async {
-    await _modelSub?.cancel();
+  Future<void> delete(TransportModel transport) async {
+    await _transportSub?.cancel();
     emit(ManageTransportState.loading("deleting_transport".tr()));
     await Utils.repoDelay();
-    await _repository.delete(model, popScreen: true);
+    await _repository.delete(transport, popScreen: true);
   }
 
   @override
   Future<void> close() async {
     await _authStateSub.cancel();
-    await _modelSub?.cancel();
+    await _transportSub?.cancel();
     await _resultSub.cancel();
     return super.close();
   }

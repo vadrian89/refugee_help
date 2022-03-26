@@ -22,7 +22,7 @@ class ExpandedElevatedButton extends StatelessWidget {
               child: Text(label),
               onPressed: onPressed,
               style: ButtonStyle(
-                padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 20)),
+                padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 16)),
                 backgroundColor: MaterialStateProperty.all(backgroundColor),
               ),
             ),

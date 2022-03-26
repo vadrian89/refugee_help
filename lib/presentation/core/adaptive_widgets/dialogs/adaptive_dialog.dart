@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/infrastructure/utils.dart';
 
 import 'adaptive_dialog_action.dart';
@@ -49,11 +51,17 @@ class AdaptiveDialog extends AdaptiveWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       );
 
-  Future<T?> show<T extends Object?>(BuildContext context) => showDialog(
-        context: context,
-        builder: (context) => this,
-        barrierDismissible: !Utils.isIos,
-      );
+  Future<T?> show<T extends Object?>(BuildContext context) {
+    context.read<RootRouterCubit>().toggleModal(true);
+    return showDialog(
+      context: context,
+      builder: (context) => this,
+      barrierDismissible: !Utils.isIos,
+    ).then((value) {
+      context.read<RootRouterCubit>().toggleModal(false);
+      return value;
+    });
+  }
 
   static Future<bool> showConfirmation(
     BuildContext context, {

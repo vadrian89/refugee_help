@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:refugee_help/presentation/core/widgets/text_fields/base_text_form_field.dart';
 
 class AppTextFormField extends StatelessWidget {
   final TextEditingController? controller;
@@ -15,6 +14,7 @@ class AppTextFormField extends StatelessWidget {
   final String? initialValue;
   final int? minLines;
   final int? maxLines;
+  final void Function(String? value)? onSaved;
 
   const AppTextFormField({
     Key? key,
@@ -31,13 +31,14 @@ class AppTextFormField extends StatelessWidget {
     this.initialValue,
     this.minLines,
     this.maxLines = 1,
+    this.onSaved,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BaseTextFormField(
+  Widget build(BuildContext context) => TextFormField(
         initialValue: initialValue,
         controller: controller,
-        inputDecoration: InputDecoration(
+        decoration: InputDecoration(
           hintText: hintText,
           labelText: labelText ?? hintText,
           errorMaxLines: 3,
@@ -51,5 +52,6 @@ class AppTextFormField extends StatelessWidget {
         readOnly: readOnly,
         minLines: minLines,
         maxLines: maxLines,
+        onSaved: onSaved,
       );
 }

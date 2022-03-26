@@ -5,6 +5,7 @@ import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/presentation/authentication/register/register_screen.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/screens/main_screen.dart';
+import 'package:refugee_help/presentation/tickets/manage/manage_ticket_screen.dart';
 import 'package:refugee_help/presentation/transport/manage/manage_transport_screen.dart';
 import 'package:refugee_help/presentation/user_profile/user_profile_screen.dart';
 
@@ -80,8 +81,11 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
   ///
   /// The confirmation dialog should return `false` to confirm and `true` to cancel.
   @override
-  Future<bool> popRoute() {
+  Future<bool> popRoute() async {
     if (_routerCubit.popRoute(_popResult)) {
+      if (currentConfiguration.isModalOpened) {
+        await navigatorKey.currentState!.maybePop();
+      }
       return Future.value(true);
     }
     if (navigatorKey.currentState?.canPop() ?? false) {
@@ -95,7 +99,7 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
   ///
   /// Alternatively to have a cleaner delegate, the list of pages can be built in a separate class.
   List<Page> get _extraPages {
-    List<Page> tmpList = [];
+    final tmpList = <Page>[];
     _routerCubit.state.maybeWhen(
       orElse: () => null,
       register: () => null,
@@ -106,11 +110,29 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
           );
         }
       },
-      transport: (id, add) {
+      tickets: (id, add, _, transportId) {
         if ((id?.isNotEmpty ?? false) || add) {
           tmpList.add(
             _materialPage(
-              valueKey: RootRouterState.profilePath,
+              valueKey: RootRouterState.ticketsPath,
+              child: ManageTicketScreen(id: id),
+            ),
+          );
+        }
+        if (transportId?.isNotEmpty ?? false) {
+          tmpList.add(
+            _materialPage(
+              valueKey: RootRouterState.transportPath,
+              child: ManageTransportScreen(id: transportId),
+            ),
+          );
+        }
+      },
+      transport: (id, add, _) {
+        if ((id?.isNotEmpty ?? false) || add) {
+          tmpList.add(
+            _materialPage(
+              valueKey: RootRouterState.transportPath,
               child: ManageTransportScreen(id: id),
             ),
           );

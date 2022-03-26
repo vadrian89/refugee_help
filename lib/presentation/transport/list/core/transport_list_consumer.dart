@@ -5,12 +5,14 @@ import 'package:refugee_help/application/transport/list/list_transport_cubit.dar
 import 'package:refugee_help/presentation/core/utils/snackbars.dart';
 
 class TransportListConsumer extends StatelessWidget {
+  final ListTransportCubit? bloc;
   final Widget Function(BuildContext context, ListTransportState state) builder;
 
-  const TransportListConsumer({Key? key, required this.builder}) : super(key: key);
+  const TransportListConsumer({Key? key, required this.builder, this.bloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => BlocConsumer<ListTransportCubit, ListTransportState>(
+        bloc: bloc,
         listener: (context, state) => state.maybeWhen(
           orElse: () => null,
           deleting: () => showLoadingSnackBar(context, message: "deleting_transport".tr()),

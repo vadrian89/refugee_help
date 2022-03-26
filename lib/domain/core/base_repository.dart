@@ -25,8 +25,10 @@ abstract class BaseRepository {
   }
 
   /// Log debug messages.
-  void logDebug(String message, {dynamic error, StackTrace? stackTrace}) {
-    ChrashlyticsUtils.log(message);
+  void logDebug(String message, {dynamic error, StackTrace? stackTrace, bool local = false}) {
+    if (!local) {
+      ChrashlyticsUtils.log(message);
+    }
     _logger.d(message, error, stackTrace);
   }
 
