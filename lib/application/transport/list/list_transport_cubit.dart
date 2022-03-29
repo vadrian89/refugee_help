@@ -20,7 +20,7 @@ class ListTransportCubit extends Cubit<ListTransportState> {
   StreamSubscription<List<TransportModel>>? _listSub;
   UserModel? _user;
   List<TransportModel> _list = const [];
-  static const int _pageLimit = 10;
+  static const int _pageLimit = 500;
   int _currentPage = 0;
 
   int get _limit => _pageLimit * _currentPage;

@@ -132,5 +132,6 @@
     "status": "Status",
     "search": "Search",
     "owner": "Owner",
-    "transport_info": "Transport info"
+    "transport_info": "Transport info",
+    "dispatcher": "Dispatcher"
 }
