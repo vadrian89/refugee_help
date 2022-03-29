@@ -129,16 +129,17 @@ class RootRouterState with _$RootRouterState {
       if (pathSegment2 == addPath) {
         return const RootRouterState.transport(add: true);
       }
-      return RootRouterState.transport(id: pathSegment2);
+      return RootRouterState.transport(id: pathSegment2.clean);
     }
     if (pathSegment1 == ticketsPath) {
       if (pathSegment2 == addPath) {
         return RootRouterState.tickets(
           add: true,
+          modalVisible: queryParameters["transportId"] != null,
           transportId: queryParameters["transportId"]?.first,
         );
       }
-      return RootRouterState.tickets(id: pathSegment2);
+      return RootRouterState.tickets(id: pathSegment2.clean);
     }
     return const RootRouterState.unknown();
   }
@@ -168,4 +169,8 @@ class RootRouterState with _$RootRouterState {
 
     return "$name=$value";
   }
+}
+
+extension PathManagement on String {
+  String get clean => replaceAll("/", "");
 }

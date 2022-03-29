@@ -102,7 +102,7 @@ class UserModel with _$UserModel {
       );
 
   Map<String, dynamic> get availabilityJson => {
-        "is_available": isAvailable,
-        "updated_at": dateTimeToJson(updatedAt),
+        "isAvailable": isAvailable,
+        "updatedAt": dateTimeToJson(updatedAt),
       };
 }

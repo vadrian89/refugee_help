@@ -16,6 +16,7 @@ class TransportTypeDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DropdownButton<TransportTypeModel>(
+        isExpanded: true,
         hint: Text("transport_type".tr()),
         value: value,
         items: _items(context),
@@ -33,14 +34,11 @@ class TransportTypeDropdown extends StatelessWidget {
     required TransportTypeModel model,
   }) =>
       DropdownMenuItem(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: CircleAvatar(child: Icon(model.icon)),
-            title: Text(model.name),
-            subtitle: Text(model.seats),
-          ),
+        child: ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: CircleAvatar(child: Icon(model.icon)),
+          title: Text(model.name),
+          subtitle: Text(model.seats),
         ),
         value: model,
       );

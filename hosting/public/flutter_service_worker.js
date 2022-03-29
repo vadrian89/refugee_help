@@ -8,8 +8,8 @@ const RESOURCES = {
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "manifest.json": "169db6f3ec7515b6996817400d00f9fe",
-"index.html": "19c063dd319e821c0a3a0f6278b72ccb",
-"/": "19c063dd319e821c0a3a0f6278b72ccb",
+"index.html": "cd650d84e40579eefdbfb26faa69c7ba",
+"/": "cd650d84e40579eefdbfb26faa69c7ba",
 "assets/NOTICES": "87c0df632296dc794f47ca6a15dd06a7",
 "assets/fonts/MaterialIcons-Regular.otf": "7e7a6cccddf6d7b20012a548461d5d81",
 "assets/AssetManifest.json": "47f494c3b6a6d1321e7fe03cfa720deb",
@@ -43,7 +43,7 @@ const RESOURCES = {
 "assets/packages/easy_localization/i18n/ar-DZ.json": "acc0a8eebb2fcee312764600f7cc41ec",
 "assets/packages/easy_localization/i18n/en-US.json": "5bd908341879a431441c8208ae30e4fd",
 "assets/packages/material_design_icons_flutter/lib/fonts/materialdesignicons-webfont.ttf": "b62641afc9ab487008e996a5c5865e56",
-"main.dart.js": "d97bcee89f1196924b61f38ae89c2f5c",
+"main.dart.js": "89cca91223e5d3aaf3d078221ff9b15b",
 "version.json": "b51e014729b3c203dcdc6b17c3df265e",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796"
 };

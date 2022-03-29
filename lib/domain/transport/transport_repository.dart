@@ -133,6 +133,7 @@ class TransportRepository extends BaseRepository
 
   @override
   Stream<TransportModel?> docStream(String id) async* {
+    logDebug("docStream id: $id");
     yield* _reference.doc(id).snapshots().map((doc) => doc.data()?.copyWith(id: id));
   }
 

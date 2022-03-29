@@ -6,7 +6,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:refugee_help/application/transport/list/list_transport_cubit.dart';
 import 'package:refugee_help/domain/transport/transport_model.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
-import 'package:refugee_help/presentation/transport/list/core/transport_list_tile.dart';
+
+import 'transport_list_tile.dart';
 
 class TransportListSlidable extends StatelessWidget {
   final TransportModel model;

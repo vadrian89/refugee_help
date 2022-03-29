@@ -70,6 +70,7 @@ class ManageTransportCubit extends Cubit<ManageTransportState> {
   void _emitView(TransportModel transport) => emit(ManageTransportState.view(
         transport: transport,
         canUpdate: _user!.id == transport.user!.id,
+        showUserInfo: _user?.isPrivileged ?? false,
       ));
 
   Future<void> save(TransportModel transport) async {

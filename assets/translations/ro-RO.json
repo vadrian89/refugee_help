@@ -132,5 +132,6 @@
     "status": "Stare",
     "search": "Caută",
     "owner": "Proprietar",
-    "transport_info": "Info transport"
+    "transport_info": "Info transport",
+    "dispatcher": "Dispecer"
 }

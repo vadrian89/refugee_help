@@ -4,7 +4,7 @@ import 'package:refugee_help/application/authentication/authentication_cubit.dar
 import 'package:refugee_help/application/tickets/list/list_tickets_cubit.dart';
 import 'package:refugee_help/presentation/core/widgets/loader_widget.dart';
 import 'package:refugee_help/presentation/core/widgets/no_data_placeholder.dart';
-import 'package:refugee_help/presentation/tickets/list/core/ticket_list_tile.dart';
+import 'package:refugee_help/presentation/tickets/list/core/body/ticket_list_body_view.dart';
 
 import 'ticket_list_consumer.dart';
 
@@ -23,11 +23,7 @@ class TicketListBody extends StatelessWidget {
               if (list.isEmpty) {
                 return const NoDataPlaceholder();
               }
-              return ListView.separated(
-                itemBuilder: (context, index) => TicketListTile(ticket: list[index]),
-                separatorBuilder: (_, __) => const Divider(),
-                itemCount: list.length,
-              );
+              return TicketListBodyView(list: list);
             },
           ),
         ),

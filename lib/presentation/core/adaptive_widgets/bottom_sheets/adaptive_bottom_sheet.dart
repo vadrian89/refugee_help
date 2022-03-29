@@ -117,6 +117,7 @@ class AdaptiveBottomSheet extends AdaptiveWidget {
         isDismissible: isDismissible,
         enableDrag: enableDrag,
         routeSettings: routeSettings,
+        constraints: const BoxConstraints(maxWidth: 600),
       ).then((value) {
         context.read<RootRouterCubit>().toggleModal(false);
         return value;

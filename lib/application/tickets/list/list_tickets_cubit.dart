@@ -19,7 +19,7 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
   StreamSubscription<List<TicketModel>>? _listSub;
   UserModel? _user;
   List<TicketModel> _list = const [];
-  static const int _pageLimit = 10;
+  static const int _pageLimit = 20;
   int _currentPage = 0;
 
   int get _limit => _pageLimit * _currentPage;
