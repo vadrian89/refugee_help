@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
+import 'package:refugee_help/presentation/core/widgets/scrollable_widget.dart';
 
 class TicketListBodyTable extends StatelessWidget {
   final List<TicketModel> list;
@@ -10,22 +11,16 @@ class TicketListBodyTable extends StatelessWidget {
   const TicketListBodyTable({Key? key, required this.list}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-        child: Row(
-          children: [
-            Expanded(
-              child: PaginatedDataTable(
-                columns: _tableColumns,
-                source: _TicketsDataSource(
-                  tickets: list,
-                  onPressed: (ticket) => context.read<RootRouterCubit>().goToTickets(id: ticket.id),
-                ),
-                showCheckboxColumn: false,
-                rowsPerPage: 20,
-                showFirstLastButtons: true,
-              ),
-            ),
-          ],
+  Widget build(BuildContext context) => ScrollableWidget(
+        child: PaginatedDataTable(
+          columns: _tableColumns,
+          source: _TicketsDataSource(
+            tickets: list,
+            onPressed: (ticket) => context.read<RootRouterCubit>().goToTickets(id: ticket.id),
+          ),
+          showCheckboxColumn: false,
+          rowsPerPage: 20,
+          showFirstLastButtons: true,
         ),
       );
 

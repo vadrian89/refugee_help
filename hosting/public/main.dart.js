@@ -85146,7 +85146,7 @@ o=q.cy
 n=q.ch.gqx().a
 if(n===1||n===2)n=null
 else{n=q.ch
-n=n.gc1(n)}q.Q=p.Ag(20*o,n).dz(0,q.gag2())
+n=n.gc1(n)}q.Q=p.Ag(500*o,n).dz(0,q.gag2())
 return A.x(null,r)}})
 return A.y($async$qW,r)},
 ag3(a){var s=this
@@ -85465,7 +85465,7 @@ s=3
 return A.p(p==null?null:p.a6(0),$async$oL)
 case 3:++q.cy
 p=A.b(q.y,"_repo")
-o=a!=null?1000:10*q.cy
+o=a!=null?1000:500*q.cy
 n=q.ch
 if(n==null)n=null
 else{n=n.gqx().a
