@@ -36,30 +36,27 @@ class _DataListTableState extends State<DataListTable> {
   }
 
   @override
-  Widget build(BuildContext context) => Card(
-        child: LayoutBuilder(
-          builder: (context, constraints) => Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: _horizontalScrollBar(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: constraints.maxWidth),
-                    child: _verticalScrollBar(
-                      child: DataTable(
-                        columns: List.generate(
-                          widget.columns.length,
-                          (index) => widget.columns[index],
-                        ),
-                        rows: widget.rows,
-                        showCheckboxColumn: false,
+  Widget build(BuildContext context) => LayoutBuilder(
+        builder: (context, constraints) => Row(
+          children: [
+            Expanded(
+              child: _horizontalScrollBar(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                  child: _verticalScrollBar(
+                    child: DataTable(
+                      columns: List.generate(
+                        widget.columns.length,
+                        (index) => widget.columns[index],
                       ),
+                      rows: widget.rows,
+                      showCheckboxColumn: false,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
 

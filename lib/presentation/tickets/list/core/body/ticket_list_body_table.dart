@@ -50,7 +50,7 @@ class TicketListBodyTable extends StatelessWidget {
                 color: list[index].status.color,
               ),
             ],
-            onSelectChanged: (_) => context.read<RootRouterCubit>().goToTransport(
+            onSelectChanged: (_) => context.read<RootRouterCubit>().goToTickets(
                   id: list[index].id,
                 ),
           ),
