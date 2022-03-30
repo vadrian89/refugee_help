@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
-import 'package:refugee_help/presentation/core/widgets/scrollable_widget.dart';
+import 'package:refugee_help/presentation/core/widgets/tables/data_list_table.dart';
 
 class TicketListBodyTable extends StatelessWidget {
   final List<TicketModel> list;
@@ -11,16 +11,49 @@ class TicketListBodyTable extends StatelessWidget {
   const TicketListBodyTable({Key? key, required this.list}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ScrollableWidget(
-        child: PaginatedDataTable(
-          columns: _tableColumns,
-          source: _TicketsDataSource(
-            tickets: list,
-            onPressed: (ticket) => context.read<RootRouterCubit>().goToTickets(id: ticket.id),
+  Widget build(BuildContext context) => DataListTable(
+        columns: _tableColumns,
+        rows: List.generate(
+          list.length,
+          (index) => DataRow(
+            cells: [
+              _cell(
+                value: list[index].adultsNumber.toString(),
+                color: list[index].status.color,
+              ),
+              _cell(
+                value: list[index].childrenNumber.toString(),
+                color: list[index].status.color,
+              ),
+              _cell(
+                value: list[index].destination,
+                color: list[index].status.color,
+              ),
+              _cell(
+                value: list[index].transport?.registrationNumber,
+                color: list[index].status.color,
+              ),
+              _cell(
+                value: list[index].transport?.user?.fullName,
+                color: list[index].status.color,
+              ),
+              _cell(
+                value: list[index].transport?.user?.phone,
+                color: list[index].status.color,
+              ),
+              _cell(
+                value: list[index].status.name,
+                color: list[index].status.color,
+              ),
+              _cell(
+                value: list[index].dispatcher?.fullName,
+                color: list[index].status.color,
+              ),
+            ],
+            onSelectChanged: (_) => context.read<RootRouterCubit>().goToTransport(
+                  id: list[index].id,
+                ),
           ),
-          showCheckboxColumn: false,
-          rowsPerPage: 20,
-          showFirstLastButtons: true,
         ),
       );
 
@@ -34,52 +67,6 @@ class TicketListBodyTable extends StatelessWidget {
         DataColumn(label: Text("status".tr())),
         DataColumn(label: Text("dispatcher".tr())),
       ];
-}
-
-class _TicketsDataSource extends DataTableSource {
-  final List<TicketModel> tickets;
-  final void Function(TicketModel ticket) onPressed;
-
-  _TicketsDataSource({required this.tickets, required this.onPressed});
-
-  @override
-  DataRow? getRow(int index) => DataRow(
-        cells: [
-          _cell(
-            value: tickets[index].adultsNumber.toString(),
-            color: tickets[index].status.color,
-          ),
-          _cell(
-            value: tickets[index].childrenNumber.toString(),
-            color: tickets[index].status.color,
-          ),
-          _cell(
-            value: tickets[index].destination,
-            color: tickets[index].status.color,
-          ),
-          _cell(
-            value: tickets[index].transport?.registrationNumber,
-            color: tickets[index].status.color,
-          ),
-          _cell(
-            value: tickets[index].transport?.user?.fullName,
-            color: tickets[index].status.color,
-          ),
-          _cell(
-            value: tickets[index].transport?.user?.phone,
-            color: tickets[index].status.color,
-          ),
-          _cell(
-            value: tickets[index].status.name,
-            color: tickets[index].status.color,
-          ),
-          _cell(
-            value: tickets[index].dispatcher?.fullName,
-            color: tickets[index].status.color,
-          ),
-        ],
-        onSelectChanged: (_) => onPressed(tickets[index]),
-      );
 
   DataCell _cell({
     String? value,
@@ -89,13 +76,4 @@ class _TicketsDataSource extends DataTableSource {
         value ?? "n/a",
         style: TextStyle(color: color),
       ));
-
-  @override
-  bool get isRowCountApproximate => false;
-
-  @override
-  int get rowCount => tickets.length;
-
-  @override
-  int get selectedRowCount => 0;
 }

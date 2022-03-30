@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:refugee_help/presentation/core/responsive_widgets/responsive_widget.dart';
 import 'package:refugee_help/presentation/core/widgets/app_drawer.dart';
