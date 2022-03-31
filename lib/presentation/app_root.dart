@@ -13,6 +13,7 @@ class AppRoot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         theme: AppTheme.appTheme,
         darkTheme: AppTheme.appThemeDark,
         localizationsDelegates: context.localizationDelegates,

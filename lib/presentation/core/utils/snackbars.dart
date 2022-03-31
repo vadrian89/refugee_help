@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:refugee_help/presentation/core/utils/widgets_utils.dart';
 
 /// Show errors to the users using a pre-defined [SnackBar].
 void showErrorSnackBar(
@@ -50,27 +51,31 @@ void showStandardSnackBar(
   Color? backgroundColor,
   int duration = 4,
   SnackBarBehavior? behavior,
-}) =>
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          behavior: behavior,
-          duration: Duration(seconds: duration),
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(
-                  '$message',
-                  style: TextStyle(
-                    color: backgroundColor == Colors.red ? Colors.white : null,
-                  ),
+}) {
+  final snackBarBehavior =
+      behavior ?? (WidgetUtils.isDesktop(context) ? SnackBarBehavior.floating : null);
+  ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(
+      SnackBar(
+        behavior: snackBarBehavior,
+        duration: Duration(seconds: duration),
+        width: (snackBarBehavior == SnackBarBehavior.floating) ? 400 : null,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: Text(
+                '$message',
+                style: TextStyle(
+                  color: backgroundColor == Colors.red ? Colors.white : null,
                 ),
               ),
-              icon,
-            ],
-          ),
-          backgroundColor: backgroundColor,
+            ),
+            icon,
+          ],
         ),
-      );
+        backgroundColor: backgroundColor,
+      ),
+    );
+}

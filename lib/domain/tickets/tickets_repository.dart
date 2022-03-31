@@ -6,6 +6,7 @@ import 'package:refugee_help/domain/core/base_repository.dart';
 import 'package:refugee_help/domain/core/crud_repository_interface.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/transport/transport_repository.dart';
+import 'package:refugee_help/infrastructure/utils.dart';
 
 import 'ticket_model.dart';
 import 'ticket_status_model.dart';
@@ -88,27 +89,45 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
 
   @override
   Stream<TicketModel?> docStream(String id) async* {
-    yield* _reference.doc(id).snapshots().map((doc) => doc.data()?.copyWith(id: id));
+    yield* _reference
+        .doc(id)
+        .snapshots(includeMetadataChanges: true)
+        .map((doc) => doc.data()?.copyWith(id: id));
   }
 
   @override
-  Stream<List<TicketModel>> listStream({String? userId, int limit = 10}) async* {
+  Stream<List<TicketModel>> listStream({
+    String? userId,
+    int limit = 10,
+    String? docId,
+    bool goBack = false,
+  }) async* {
     Query<TicketModel> query = _reference;
+    query = query
+        .orderBy("createdAt", descending: true)
+        .orderBy("adultsNumber", descending: true)
+        .orderBy("childrenNumber", descending: true);
     if (userId != null) {
       query = query.where("transport.user.id", isEqualTo: userId);
     }
+    if (docId != null) {
+      if (goBack) {
+        query = query.endBeforeDocument(await _reference.doc(docId).get());
+      } else {
+        query = query.startAfterDocument(await _reference.doc(docId).get());
+      }
+    }
     logDebug("Firebase query parameters ${query.parameters}", local: true);
-    yield* query
-        .limit(limit)
-        .orderBy("createdAt", descending: true)
-        .snapshots()
-        .map(_listFromSnapshot);
+    yield* query.limit(limit).snapshots().asyncMap(_listFromSnapshot);
   }
 
-  List<TicketModel> _listFromSnapshot(QuerySnapshot<TicketModel>? snapshot) =>
-      snapshot?.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList() ?? [];
+  Future<List<TicketModel>> _listFromSnapshot(QuerySnapshot<TicketModel>? snapshot) async {
+    addResultToStream(OperationResult.success(await getTotalCount()));
+    await Utils.streamDelay();
+    return snapshot?.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList() ?? [];
+  }
 
-  Future<int> getCount() => count(_collection.id);
+  Future<int> getTotalCount() => count(_counterDoc);
 
   @override
   Future<void> close() async {

@@ -19,8 +19,9 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
   StreamSubscription<List<TicketModel>>? _listSub;
   UserModel? _user;
   List<TicketModel> _list = const [];
-  static const int _pageLimit = 500;
+  static const int _pageLimit = 20;
   int _currentPage = 0;
+  int _totalRows = 0;
 
   int get _limit => _pageLimit * _currentPage;
 
@@ -36,18 +37,22 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
           if (response is String) {
             emit(ListTicketsState.success(response));
           }
+          if (response is int) {
+            _totalRows = response;
+          }
           return;
         },
         failure: (message) => emit(ListTicketsState.failure(message)),
       );
 
-  Future<void> fetchList() async {
+  Future<void> fetchList({bool isTable = false, String? docId, bool goBack = false}) async {
     emit(const ListTicketsState.loading(""));
     await _listSub?.cancel();
     _currentPage++;
     _listSub = _repository
         .listStream(
-          limit: _limit,
+          docId: docId,
+          limit: isTable ? _pageLimit : _limit,
           userId: _user!.isPrivileged ? null : _user!.id,
         )
         .listen(_parseListSub);
@@ -59,7 +64,7 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
       orElse: () => null,
       deleting: () => emit(ListTicketsState.success("deleted_ticket".tr())),
     );
-    emit(ListTicketsState.view(_list));
+    emit(ListTicketsState.view(list: _list, page: _currentPage, totalRows: _totalRows));
   }
 
   Future<void> delete(TicketModel model) async {

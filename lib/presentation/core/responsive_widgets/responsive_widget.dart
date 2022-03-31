@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:refugee_help/presentation/core/utils/widgets_utils.dart';
 
 abstract class ResponsiveWidget extends StatelessWidget {
   const ResponsiveWidget({Key? key}) : super(key: key);
@@ -10,9 +11,8 @@ abstract class ResponsiveWidget extends StatelessWidget {
   @protected
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    if (width < 600) return phone(context);
-    if (width < 840) return tablet(context);
+    if (WidgetUtils.isPhone(context)) return phone(context);
+    if (WidgetUtils.isTablet(context)) return tablet(context);
     return desktop(context);
   }
 }

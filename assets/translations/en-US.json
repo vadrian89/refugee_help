@@ -133,5 +133,6 @@
     "search": "Search",
     "owner": "Owner",
     "transport_info": "Transport info",
-    "dispatcher": "Dispatcher"
+    "dispatcher": "Dispatcher",
+    "of": "Of"
 }

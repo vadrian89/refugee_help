@@ -30,6 +30,6 @@ class TicketListConsumer extends StatelessWidget {
           loading: (message) => message.isNotEmpty,
         ),
         builder: builder,
-        buildWhen: (_, current) => current.maybeWhen(orElse: () => false, view: (_) => true),
+        buildWhen: (_, current) => current.maybeMap(orElse: () => false, view: (_) => true),
       );
 }
