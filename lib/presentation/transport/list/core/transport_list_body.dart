@@ -10,13 +10,17 @@ class TransportListBody extends StatelessWidget {
 
   @override
   Widget build(_) => TransportListConsumer(
-        builder: (context, state) => state.maybeWhen(
+        builder: (context, state) => state.maybeMap(
           orElse: () => const LoaderWidget(),
-          view: (list) {
-            if (list.isEmpty) {
+          view: (view) {
+            if (view.list.isEmpty) {
               return const NoDataPlaceholder();
             }
-            return TransportListBodyView(list: list);
+            return TransportListBodyView(
+              list: view.list,
+              page: view.page,
+              totalRows: view.totalRows,
+            );
           },
         ),
       );

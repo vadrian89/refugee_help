@@ -16,16 +16,23 @@ class TransportListConsumer extends StatelessWidget {
         listener: (context, state) => state.maybeWhen(
           orElse: () => null,
           deleting: () => showLoadingSnackBar(context, message: "deleting_transport".tr()),
-          success: (message) => showSuccessSnackBar(context, message: message),
+          success: (message) {
+            message.isNotEmpty
+                ? showSuccessSnackBar(context, message: message)
+                : ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            return;
+          },
           failure: (message) => showErrorSnackBar(context, message: message),
+          loading: (message) => showLoadingSnackBar(context, message: message),
         ),
         listenWhen: (_, current) => current.maybeWhen(
           orElse: () => false,
           deleting: () => true,
           success: (_) => true,
           failure: (_) => true,
+          loading: (message) => message.isNotEmpty,
         ),
         builder: builder,
-        buildWhen: (_, current) => current.maybeWhen(orElse: () => false, view: (_) => true),
+        buildWhen: (_, current) => current.maybeMap(orElse: () => false, view: (_) => true),
       );
 }

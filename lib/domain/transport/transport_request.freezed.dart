@@ -21,11 +21,15 @@ class _$TransportRequestTearOff {
   _TransportRequest call(
       {int? seatsAvailable,
       TransportTypeModel? transportType,
-      bool? isAvailable = true}) {
+      bool? isAvailable = true,
+      String? docId,
+      bool goBack = false}) {
     return _TransportRequest(
       seatsAvailable: seatsAvailable,
       transportType: transportType,
       isAvailable: isAvailable,
+      docId: docId,
+      goBack: goBack,
     );
   }
 }
@@ -38,6 +42,8 @@ mixin _$TransportRequest {
   int? get seatsAvailable => throw _privateConstructorUsedError;
   TransportTypeModel? get transportType => throw _privateConstructorUsedError;
   bool? get isAvailable => throw _privateConstructorUsedError;
+  String? get docId => throw _privateConstructorUsedError;
+  bool get goBack => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransportRequestCopyWith<TransportRequest> get copyWith =>
@@ -52,7 +58,9 @@ abstract class $TransportRequestCopyWith<$Res> {
   $Res call(
       {int? seatsAvailable,
       TransportTypeModel? transportType,
-      bool? isAvailable});
+      bool? isAvailable,
+      String? docId,
+      bool goBack});
 }
 
 /// @nodoc
@@ -69,6 +77,8 @@ class _$TransportRequestCopyWithImpl<$Res>
     Object? seatsAvailable = freezed,
     Object? transportType = freezed,
     Object? isAvailable = freezed,
+    Object? docId = freezed,
+    Object? goBack = freezed,
   }) {
     return _then(_value.copyWith(
       seatsAvailable: seatsAvailable == freezed
@@ -83,6 +93,14 @@ class _$TransportRequestCopyWithImpl<$Res>
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
+      docId: docId == freezed
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      goBack: goBack == freezed
+          ? _value.goBack
+          : goBack // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -97,7 +115,9 @@ abstract class _$TransportRequestCopyWith<$Res>
   $Res call(
       {int? seatsAvailable,
       TransportTypeModel? transportType,
-      bool? isAvailable});
+      bool? isAvailable,
+      String? docId,
+      bool goBack});
 }
 
 /// @nodoc
@@ -116,6 +136,8 @@ class __$TransportRequestCopyWithImpl<$Res>
     Object? seatsAvailable = freezed,
     Object? transportType = freezed,
     Object? isAvailable = freezed,
+    Object? docId = freezed,
+    Object? goBack = freezed,
   }) {
     return _then(_TransportRequest(
       seatsAvailable: seatsAvailable == freezed
@@ -130,6 +152,14 @@ class __$TransportRequestCopyWithImpl<$Res>
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
+      docId: docId == freezed
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      goBack: goBack == freezed
+          ? _value.goBack
+          : goBack // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -138,7 +168,11 @@ class __$TransportRequestCopyWithImpl<$Res>
 
 class _$_TransportRequest implements _TransportRequest {
   const _$_TransportRequest(
-      {this.seatsAvailable, this.transportType, this.isAvailable = true});
+      {this.seatsAvailable,
+      this.transportType,
+      this.isAvailable = true,
+      this.docId,
+      this.goBack = false});
 
   @override
   final int? seatsAvailable;
@@ -147,10 +181,15 @@ class _$_TransportRequest implements _TransportRequest {
   @JsonKey()
   @override
   final bool? isAvailable;
+  @override
+  final String? docId;
+  @JsonKey()
+  @override
+  final bool goBack;
 
   @override
   String toString() {
-    return 'TransportRequest(seatsAvailable: $seatsAvailable, transportType: $transportType, isAvailable: $isAvailable)';
+    return 'TransportRequest(seatsAvailable: $seatsAvailable, transportType: $transportType, isAvailable: $isAvailable, docId: $docId, goBack: $goBack)';
   }
 
   @override
@@ -163,7 +202,9 @@ class _$_TransportRequest implements _TransportRequest {
             const DeepCollectionEquality()
                 .equals(other.transportType, transportType) &&
             const DeepCollectionEquality()
-                .equals(other.isAvailable, isAvailable));
+                .equals(other.isAvailable, isAvailable) &&
+            const DeepCollectionEquality().equals(other.docId, docId) &&
+            const DeepCollectionEquality().equals(other.goBack, goBack));
   }
 
   @override
@@ -171,7 +212,9 @@ class _$_TransportRequest implements _TransportRequest {
       runtimeType,
       const DeepCollectionEquality().hash(seatsAvailable),
       const DeepCollectionEquality().hash(transportType),
-      const DeepCollectionEquality().hash(isAvailable));
+      const DeepCollectionEquality().hash(isAvailable),
+      const DeepCollectionEquality().hash(docId),
+      const DeepCollectionEquality().hash(goBack));
 
   @JsonKey(ignore: true)
   @override
@@ -183,7 +226,9 @@ abstract class _TransportRequest implements TransportRequest {
   const factory _TransportRequest(
       {int? seatsAvailable,
       TransportTypeModel? transportType,
-      bool? isAvailable}) = _$_TransportRequest;
+      bool? isAvailable,
+      String? docId,
+      bool goBack}) = _$_TransportRequest;
 
   @override
   int? get seatsAvailable;
@@ -191,6 +236,10 @@ abstract class _TransportRequest implements TransportRequest {
   TransportTypeModel? get transportType;
   @override
   bool? get isAvailable;
+  @override
+  String? get docId;
+  @override
+  bool get goBack;
   @override
   @JsonKey(ignore: true)
   _$TransportRequestCopyWith<_TransportRequest> get copyWith =>

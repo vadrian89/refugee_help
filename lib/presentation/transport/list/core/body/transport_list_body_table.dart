@@ -2,13 +2,22 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
+import 'package:refugee_help/application/transport/list/list_transport_cubit.dart';
 import 'package:refugee_help/domain/transport/transport_model.dart';
+import 'package:refugee_help/domain/transport/transport_request.dart';
 import 'package:refugee_help/presentation/core/widgets/tables/data_list_table.dart';
 
 class TransportListBodyTable extends StatelessWidget {
   final List<TransportModel> list;
+  final int page;
+  final int? totalRows;
 
-  const TransportListBodyTable({Key? key, required this.list}) : super(key: key);
+  const TransportListBodyTable({
+    Key? key,
+    required this.list,
+    this.page = 1,
+    this.totalRows,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => DataListTable(
@@ -31,6 +40,15 @@ class TransportListBodyTable extends StatelessWidget {
                 ),
           ),
         ),
+        onNext: () => context.read<ListTransportCubit>().fetchList(
+              request: TransportRequest(docId: list.isNotEmpty ? list.last.id : null),
+            ),
+        onBack: () => context.read<ListTransportCubit>().fetchList(
+              request: TransportRequest(
+                docId: list.isNotEmpty ? list.first.id : null,
+                goBack: true,
+              ),
+            ),
       );
 
   List<DataColumn> get _tableColumns => [

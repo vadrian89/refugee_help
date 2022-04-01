@@ -64,17 +64,17 @@ class _TicketTransportSheetBodyState extends State<TicketTransportSheetBody> {
           const VerticalSpacing(40),
           TransportListConsumer(
             bloc: _bloc,
-            builder: (context, state) => state.maybeWhen(
+            builder: (context, state) => state.maybeMap(
               orElse: () => const LoaderWidget(),
-              view: (list) {
-                if (list.isEmpty) {
+              view: (view) {
+                if (view.list.isEmpty) {
                   return const NoDataPlaceholder();
                 }
                 return ListView.builder(
                   shrinkWrap: true,
-                  itemCount: list.length,
+                  itemCount: view.list.length,
                   itemBuilder: (context, index) => TicketTransportSheetTile(
-                    transport: list[index],
+                    transport: view.list[index],
                     onPressed: (model) => Navigator.maybePop(context, model),
                   ),
                 );

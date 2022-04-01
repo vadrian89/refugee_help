@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:refugee_help/domain/core/base_repository.dart';
 import 'package:refugee_help/domain/core/crud_repository_interface.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
+import 'package:refugee_help/domain/tickets/ticket_request.dart';
 import 'package:refugee_help/domain/transport/transport_repository.dart';
 import 'package:refugee_help/infrastructure/utils.dart';
 
@@ -95,12 +96,10 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
         .map((doc) => doc.data()?.copyWith(id: id));
   }
 
-  @override
   Stream<List<TicketModel>> listStream({
-    String? userId,
+    TicketRequest? request,
     int limit = 10,
-    String? docId,
-    bool goBack = false,
+    String? userId,
   }) async* {
     Query<TicketModel> query = _reference;
     query = query
@@ -110,11 +109,11 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
     if (userId != null) {
       query = query.where("transport.user.id", isEqualTo: userId);
     }
-    if (docId != null) {
-      if (goBack) {
-        query = query.endBeforeDocument(await _reference.doc(docId).get());
+    if (request?.docId != null) {
+      if (request!.goBack) {
+        query = query.endBeforeDocument(await _reference.doc(request.docId).get());
       } else {
-        query = query.startAfterDocument(await _reference.doc(docId).get());
+        query = query.startAfterDocument(await _reference.doc(request.docId).get());
       }
     }
     logDebug("Firebase query parameters ${query.parameters}", local: true);

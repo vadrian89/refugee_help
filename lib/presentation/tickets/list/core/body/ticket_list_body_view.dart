@@ -7,8 +7,15 @@ import 'ticket_list_body_table.dart';
 
 class TicketListBodyView extends ResponsiveWidget {
   final List<TicketModel> list;
+  final int page;
+  final int? totalRows;
 
-  const TicketListBodyView({Key? key, required this.list}) : super(key: key);
+  const TicketListBodyView({
+    Key? key,
+    required this.list,
+    this.page = 1,
+    this.totalRows,
+  }) : super(key: key);
 
   @override
   Widget phone(BuildContext context) => ListView.separated(
@@ -18,5 +25,9 @@ class TicketListBodyView extends ResponsiveWidget {
       );
 
   @override
-  Widget desktop(BuildContext context) => TicketListBodyTable(list: list);
+  Widget desktop(BuildContext context) => TicketListBodyTable(
+        list: list,
+        page: page,
+        totalRows: totalRows,
+      );
 }

@@ -10,5 +10,7 @@ class TransportRequest with _$TransportRequest {
     int? seatsAvailable,
     TransportTypeModel? transportType,
     @Default(true) bool? isAvailable,
+    String? docId,
+    @Default(false) bool goBack,
   }) = _TransportRequest;
 }

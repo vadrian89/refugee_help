@@ -13,23 +13,24 @@ class TicketListBody extends StatelessWidget {
   const TicketListBody({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final isDesktop = WidgetUtils.isDesktop(context);
-    return BlocProvider(
-      create: (context) => ListTicketsCubit(
-        authCubit: context.read<AuthenticationCubit>(),
-      )..fetchList(isTable: isDesktop),
-      child: TicketListConsumer(
-        builder: (context, state) => state.maybeMap(
-          orElse: () => const LoaderWidget(),
-          view: (view) {
-            if (view.list.isEmpty) {
-              return const NoDataPlaceholder();
-            }
-            return TicketListBodyView(list: view.list);
-          },
+  Widget build(BuildContext context) => BlocProvider(
+        create: (providerContext) => ListTicketsCubit(
+          authCubit: providerContext.read<AuthenticationCubit>(),
+        )..fetchList(isTable: WidgetUtils.isDesktop(context)),
+        child: TicketListConsumer(
+          builder: (context, state) => state.maybeMap(
+            orElse: () => const LoaderWidget(),
+            view: (view) {
+              if (view.list.isEmpty) {
+                return const NoDataPlaceholder();
+              }
+              return TicketListBodyView(
+                list: view.list,
+                page: view.page,
+                totalRows: view.totalRows,
+              );
+            },
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

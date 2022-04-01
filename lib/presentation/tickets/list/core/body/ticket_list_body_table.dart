@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/application/tickets/list/list_tickets_cubit.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
+import 'package:refugee_help/domain/tickets/ticket_request.dart';
 import 'package:refugee_help/presentation/core/widgets/tables/data_list_table.dart';
 
 class TicketListBodyTable extends StatelessWidget {
@@ -28,12 +29,13 @@ class TicketListBodyTable extends StatelessWidget {
           (index) => _row(context, list[index]),
         ),
         onNext: () => context.read<ListTicketsCubit>().fetchList(
-              isTable: true,
-              docId: list.last.id,
+              request: TicketRequest(docId: list.isNotEmpty ? list.last.id : null),
             ),
         onBack: () => context.read<ListTicketsCubit>().fetchList(
-              isTable: true,
-              docId: list.first.id,
+              request: TicketRequest(
+                docId: list.isNotEmpty ? list.first.id : null,
+                goBack: true,
+              ),
             ),
       );
 

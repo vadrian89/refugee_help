@@ -20,8 +20,9 @@ class ListTransportCubit extends Cubit<ListTransportState> {
   StreamSubscription<List<TransportModel>>? _listSub;
   UserModel? _user;
   List<TransportModel> _list = const [];
-  static const int _pageLimit = 500;
+  static const int _pageLimit = 20;
   int _currentPage = 0;
+  int _totalRows = 0;
 
   int get _limit => _pageLimit * _currentPage;
   String? get _userId => (_user?.isPrivileged ?? true) ? null : _user?.id;
@@ -38,18 +39,26 @@ class ListTransportCubit extends Cubit<ListTransportState> {
           if (response is String) {
             emit(ListTransportState.success(response));
           }
+          if (response is int) {
+            emit(const ListTransportState.success(""));
+            _totalRows = response;
+          }
           return;
         },
         failure: (message) => emit(ListTransportState.failure(message)),
       );
 
-  Future<void> fetchList({TransportRequest? request}) async {
-    emit(const ListTransportState.loading(""));
+  Future<void> fetchList({TransportRequest? request, bool isTable = false}) async {
+    emit(ListTransportState.loading((request != null) ? "retrieving_data".tr() : ""));
     await Utils.repoDelay();
     await _listSub?.cancel();
     _currentPage++;
     _listSub = _repo
-        .listStream(limit: (request != null) ? 1000 : _limit, userId: _userId, request: request)
+        .listStream(
+          userId: _userId,
+          limit: (isTable || request?.docId != null) ? _pageLimit : _limit,
+          request: request,
+        )
         .listen(_parseList);
   }
 
@@ -59,7 +68,7 @@ class ListTransportCubit extends Cubit<ListTransportState> {
       orElse: () => null,
       deleting: () => emit(ListTransportState.success("deleted_transport".tr())),
     );
-    emit(ListTransportState.view(_list));
+    emit(ListTransportState.view(list: _list, page: _currentPage, totalRows: _totalRows));
   }
 
   Future<void> delete(TransportModel model) async {

@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
+import 'package:refugee_help/domain/tickets/ticket_request.dart';
 import 'package:refugee_help/domain/tickets/tickets_repository.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
 import 'package:refugee_help/infrastructure/utils.dart';
@@ -24,6 +25,7 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
   int _totalRows = 0;
 
   int get _limit => _pageLimit * _currentPage;
+  String? get _userId => (_user?.isPrivileged ?? true) ? null : _user?.id;
 
   ListTicketsCubit({required AuthenticationCubit authCubit})
       : _repository = TicketsRepository(),
@@ -38,6 +40,7 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
             emit(ListTicketsState.success(response));
           }
           if (response is int) {
+            emit(const ListTicketsState.success(""));
             _totalRows = response;
           }
           return;
@@ -45,15 +48,15 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
         failure: (message) => emit(ListTicketsState.failure(message)),
       );
 
-  Future<void> fetchList({bool isTable = false, String? docId, bool goBack = false}) async {
-    emit(const ListTicketsState.loading(""));
+  Future<void> fetchList({TicketRequest? request, bool isTable = false}) async {
+    emit(ListTicketsState.loading((request != null) ? "retrieving_data".tr() : ""));
     await _listSub?.cancel();
     _currentPage++;
     _listSub = _repository
         .listStream(
-          docId: docId,
-          limit: isTable ? _pageLimit : _limit,
-          userId: _user!.isPrivileged ? null : _user!.id,
+          userId: _userId,
+          limit: (isTable || request?.docId != null) ? _pageLimit : _limit,
+          request: request,
         )
         .listen(_parseListSub);
   }

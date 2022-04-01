@@ -17,10 +17,14 @@ class TicketListConsumer extends StatelessWidget {
         listener: (context, state) => state.maybeWhen(
           orElse: () => null,
           deleting: () => showLoadingSnackBar(context, message: "ticket.deleting".tr()),
-          success: (message) => showSuccessSnackBar(context, message: message),
+          success: (message) {
+            message.isNotEmpty
+                ? showSuccessSnackBar(context, message: message)
+                : ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            return;
+          },
           failure: (message) => AdaptiveDialog.showError(context, message: message),
-          loading: (message) =>
-              message.isNotEmpty ? showLoadingSnackBar(context, message: message) : null,
+          loading: (message) => showLoadingSnackBar(context, message: message),
         ),
         listenWhen: (_, current) => current.maybeWhen(
           orElse: () => false,
