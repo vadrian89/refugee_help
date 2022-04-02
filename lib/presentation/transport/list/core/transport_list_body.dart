@@ -20,6 +20,7 @@ class TransportListBody extends StatelessWidget {
               list: view.list,
               page: view.page,
               totalRows: view.totalRows,
+              pageLimit: view.pageLimit,
             );
           },
         ),

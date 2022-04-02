@@ -38,7 +38,8 @@ class _$TransportModelTearOff {
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
-      String? remarks}) {
+      String? remarks,
+      bool? isMock = false}) {
     return _TransportModel(
       id: id,
       registrationNumber: registrationNumber,
@@ -53,6 +54,7 @@ class _$TransportModelTearOff {
       createdAt: createdAt,
       updatedAt: updatedAt,
       remarks: remarks,
+      isMock: isMock,
     );
   }
 
@@ -87,6 +89,9 @@ mixin _$TransportModel {
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   String? get remarks => throw _privateConstructorUsedError;
 
+  /// For development purposes.
+  bool? get isMock => throw _privateConstructorUsedError;
+
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TransportModelCopyWith<TransportModel> get copyWith =>
@@ -114,7 +119,8 @@ abstract class $TransportModelCopyWith<$Res> {
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
-      String? remarks});
+      String? remarks,
+      bool? isMock});
 
   $ImageModelCopyWith<$Res>? get image;
   $UserInfoModelCopyWith<$Res>? get user;
@@ -144,6 +150,7 @@ class _$TransportModelCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? remarks = freezed,
+    Object? isMock = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -198,6 +205,10 @@ class _$TransportModelCopyWithImpl<$Res>
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String?,
+      isMock: isMock == freezed
+          ? _value.isMock
+          : isMock // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -247,7 +258,8 @@ abstract class _$TransportModelCopyWith<$Res>
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
-      String? remarks});
+      String? remarks,
+      bool? isMock});
 
   @override
   $ImageModelCopyWith<$Res>? get image;
@@ -281,6 +293,7 @@ class __$TransportModelCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? remarks = freezed,
+    Object? isMock = freezed,
   }) {
     return _then(_TransportModel(
       id: id == freezed
@@ -335,6 +348,10 @@ class __$TransportModelCopyWithImpl<$Res>
           ? _value.remarks
           : remarks // ignore: cast_nullable_to_non_nullable
               as String?,
+      isMock: isMock == freezed
+          ? _value.isMock
+          : isMock // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -359,7 +376,8 @@ class _$_TransportModel extends _TransportModel {
           this.createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           this.updatedAt,
-      this.remarks})
+      this.remarks,
+      this.isMock = false})
       : super._();
 
   factory _$_TransportModel.fromJson(Map<String, dynamic> json) =>
@@ -402,10 +420,15 @@ class _$_TransportModel extends _TransportModel {
   final DateTime? updatedAt;
   @override
   final String? remarks;
+  @JsonKey()
+  @override
+
+  /// For development purposes.
+  final bool? isMock;
 
   @override
   String toString() {
-    return 'TransportModel(id: $id, registrationNumber: $registrationNumber, seatsAvailable: $seatsAvailable, type: $type, image: $image, atLocation: $atLocation, timeAvailable: $timeAvailable, isAvailable: $isAvailable, destinations: $destinations, user: $user, createdAt: $createdAt, updatedAt: $updatedAt, remarks: $remarks)';
+    return 'TransportModel(id: $id, registrationNumber: $registrationNumber, seatsAvailable: $seatsAvailable, type: $type, image: $image, atLocation: $atLocation, timeAvailable: $timeAvailable, isAvailable: $isAvailable, destinations: $destinations, user: $user, createdAt: $createdAt, updatedAt: $updatedAt, remarks: $remarks, isMock: $isMock)';
   }
 
   @override
@@ -431,7 +454,8 @@ class _$_TransportModel extends _TransportModel {
             const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
-            const DeepCollectionEquality().equals(other.remarks, remarks));
+            const DeepCollectionEquality().equals(other.remarks, remarks) &&
+            const DeepCollectionEquality().equals(other.isMock, isMock));
   }
 
   @override
@@ -449,7 +473,8 @@ class _$_TransportModel extends _TransportModel {
       const DeepCollectionEquality().hash(user),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt),
-      const DeepCollectionEquality().hash(remarks));
+      const DeepCollectionEquality().hash(remarks),
+      const DeepCollectionEquality().hash(isMock));
 
   @JsonKey(ignore: true)
   @override
@@ -479,7 +504,8 @@ abstract class _TransportModel extends TransportModel {
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? updatedAt,
-      String? remarks}) = _$_TransportModel;
+      String? remarks,
+      bool? isMock}) = _$_TransportModel;
   const _TransportModel._() : super._();
 
   factory _TransportModel.fromJson(Map<String, dynamic> json) =
@@ -518,6 +544,10 @@ abstract class _TransportModel extends TransportModel {
   DateTime? get updatedAt;
   @override
   String? get remarks;
+  @override
+
+  /// For development purposes.
+  bool? get isMock;
   @override
   @JsonKey(ignore: true)
   _$TransportModelCopyWith<_TransportModel> get copyWith =>

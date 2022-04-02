@@ -42,6 +42,9 @@ class TransportModel with _$TransportModel {
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? createdAt,
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? updatedAt,
     String? remarks,
+
+    /// For development purposes.
+    @Default(false) bool? isMock,
   }) = _TransportModel;
 
   factory TransportModel.fromJson(Map<String, dynamic> json) => _$TransportModelFromJson(json);

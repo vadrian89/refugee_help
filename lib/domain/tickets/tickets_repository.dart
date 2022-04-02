@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:refugee_help/domain/core/base_repository.dart';
 import 'package:refugee_help/domain/core/crud_repository_interface.dart';
+import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/tickets/ticket_request.dart';
 import 'package:refugee_help/domain/transport/transport_repository.dart';
@@ -21,9 +22,9 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
       __transportResultSub ??= _transportRepo.resultStream.listen(addResultToStream);
 
   /// Location in the database.
-  static const String _doc = "tickets";
-  String get _counterDoc => "${_doc}_counter";
-  CollectionReference get _collection => getCollection(_doc);
+  String get _colName => BaseRepository.ticketsCollection;
+  String get _counterDoc => "${_colName}_counter";
+  CollectionReference get _collection => getCollection(_colName);
 
   TicketsRepository();
 
@@ -101,27 +102,31 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
     int limit = 10,
     String? userId,
   }) async* {
-    Query<TicketModel> query = _reference;
-    query = query
+    Query<TicketModel> query = _reference
         .orderBy("createdAt", descending: true)
         .orderBy("adultsNumber", descending: true)
         .orderBy("childrenNumber", descending: true);
     if (userId != null) {
       query = query.where("transport.user.id", isEqualTo: userId);
     }
-    if (request?.docId != null) {
-      if (request!.goBack) {
-        query = query.endBeforeDocument(await _reference.doc(request.docId).get());
-      } else {
-        query = query.startAfterDocument(await _reference.doc(request.docId).get());
-      }
-    }
+    query = pagedQuery<TicketModel>(
+      query: query,
+      paginationInfo: request?.paginationInfo,
+      goBack: request?.goBack ?? false,
+      limit: limit,
+    );
     logDebug("Firebase query parameters ${query.parameters}", local: true);
-    yield* query.limit(limit).snapshots().asyncMap(_listFromSnapshot);
+    yield* query.snapshots().asyncMap(_listFromSnapshot);
   }
 
   Future<List<TicketModel>> _listFromSnapshot(QuerySnapshot<TicketModel>? snapshot) async {
-    addResultToStream(OperationResult.success(await getTotalCount()));
+    if (snapshot != null) {
+      addResultToStream(OperationResult.success(FirestorePaginationInfo(
+        firstDoc: snapshot.docs.first,
+        lastDoc: snapshot.docs.last,
+      )));
+      addResultToStream(OperationResult.success(await getTotalCount()));
+    }
     await Utils.streamDelay();
     return snapshot?.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList() ?? [];
   }

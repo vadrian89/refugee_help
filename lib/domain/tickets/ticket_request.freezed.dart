@@ -18,10 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$TicketRequestTearOff {
   const _$TicketRequestTearOff();
 
-  _TicketRequest call({String? docId, bool goBack = false}) {
+  _TicketRequest call(
+      {bool goBack = false, FirestorePaginationInfo<dynamic>? paginationInfo}) {
     return _TicketRequest(
-      docId: docId,
       goBack: goBack,
+      paginationInfo: paginationInfo,
     );
   }
 }
@@ -31,8 +32,9 @@ const $TicketRequest = _$TicketRequestTearOff();
 
 /// @nodoc
 mixin _$TicketRequest {
-  String? get docId => throw _privateConstructorUsedError;
   bool get goBack => throw _privateConstructorUsedError;
+  FirestorePaginationInfo<dynamic>? get paginationInfo =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TicketRequestCopyWith<TicketRequest> get copyWith =>
@@ -44,7 +46,7 @@ abstract class $TicketRequestCopyWith<$Res> {
   factory $TicketRequestCopyWith(
           TicketRequest value, $Res Function(TicketRequest) then) =
       _$TicketRequestCopyWithImpl<$Res>;
-  $Res call({String? docId, bool goBack});
+  $Res call({bool goBack, FirestorePaginationInfo<dynamic>? paginationInfo});
 }
 
 /// @nodoc
@@ -58,18 +60,18 @@ class _$TicketRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? docId = freezed,
     Object? goBack = freezed,
+    Object? paginationInfo = freezed,
   }) {
     return _then(_value.copyWith(
-      docId: docId == freezed
-          ? _value.docId
-          : docId // ignore: cast_nullable_to_non_nullable
-              as String?,
       goBack: goBack == freezed
           ? _value.goBack
           : goBack // ignore: cast_nullable_to_non_nullable
               as bool,
+      paginationInfo: paginationInfo == freezed
+          ? _value.paginationInfo
+          : paginationInfo // ignore: cast_nullable_to_non_nullable
+              as FirestorePaginationInfo<dynamic>?,
     ));
   }
 }
@@ -81,7 +83,7 @@ abstract class _$TicketRequestCopyWith<$Res>
           _TicketRequest value, $Res Function(_TicketRequest) then) =
       __$TicketRequestCopyWithImpl<$Res>;
   @override
-  $Res call({String? docId, bool goBack});
+  $Res call({bool goBack, FirestorePaginationInfo<dynamic>? paginationInfo});
 }
 
 /// @nodoc
@@ -97,18 +99,18 @@ class __$TicketRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? docId = freezed,
     Object? goBack = freezed,
+    Object? paginationInfo = freezed,
   }) {
     return _then(_TicketRequest(
-      docId: docId == freezed
-          ? _value.docId
-          : docId // ignore: cast_nullable_to_non_nullable
-              as String?,
       goBack: goBack == freezed
           ? _value.goBack
           : goBack // ignore: cast_nullable_to_non_nullable
               as bool,
+      paginationInfo: paginationInfo == freezed
+          ? _value.paginationInfo
+          : paginationInfo // ignore: cast_nullable_to_non_nullable
+              as FirestorePaginationInfo<dynamic>?,
     ));
   }
 }
@@ -116,17 +118,17 @@ class __$TicketRequestCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TicketRequest implements _TicketRequest {
-  const _$_TicketRequest({this.docId, this.goBack = false});
+  const _$_TicketRequest({this.goBack = false, this.paginationInfo});
 
-  @override
-  final String? docId;
   @JsonKey()
   @override
   final bool goBack;
+  @override
+  final FirestorePaginationInfo<dynamic>? paginationInfo;
 
   @override
   String toString() {
-    return 'TicketRequest(docId: $docId, goBack: $goBack)';
+    return 'TicketRequest(goBack: $goBack, paginationInfo: $paginationInfo)';
   }
 
   @override
@@ -134,15 +136,16 @@ class _$_TicketRequest implements _TicketRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _TicketRequest &&
-            const DeepCollectionEquality().equals(other.docId, docId) &&
-            const DeepCollectionEquality().equals(other.goBack, goBack));
+            const DeepCollectionEquality().equals(other.goBack, goBack) &&
+            const DeepCollectionEquality()
+                .equals(other.paginationInfo, paginationInfo));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(docId),
-      const DeepCollectionEquality().hash(goBack));
+      const DeepCollectionEquality().hash(goBack),
+      const DeepCollectionEquality().hash(paginationInfo));
 
   @JsonKey(ignore: true)
   @override
@@ -151,12 +154,14 @@ class _$_TicketRequest implements _TicketRequest {
 }
 
 abstract class _TicketRequest implements TicketRequest {
-  const factory _TicketRequest({String? docId, bool goBack}) = _$_TicketRequest;
+  const factory _TicketRequest(
+      {bool goBack,
+      FirestorePaginationInfo<dynamic>? paginationInfo}) = _$_TicketRequest;
 
   @override
-  String? get docId;
-  @override
   bool get goBack;
+  @override
+  FirestorePaginationInfo<dynamic>? get paginationInfo;
   @override
   @JsonKey(ignore: true)
   _$TicketRequestCopyWith<_TicketRequest> get copyWith =>

@@ -32,6 +32,9 @@ class TicketModel with _$TicketModel {
     TicketFeedbackModel? cancelFeedback,
     TicketFeedbackModel? ticketFeedback,
     String? remarks,
+
+    /// For development purposes.
+    @Default(false) bool? isMock,
   }) = _TicketModel;
 
   factory TicketModel.newTicket() => TicketModel(createdAt: DateTime.now());

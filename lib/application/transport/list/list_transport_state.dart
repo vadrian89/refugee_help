@@ -6,6 +6,7 @@ class ListTransportState with _$ListTransportState {
   const factory ListTransportState.view({
     required List<TransportModel> list,
     required int page,
+    required int pageLimit,
     required int totalRows,
   }) = _View;
   const factory ListTransportState.deleting() = _Deleting;

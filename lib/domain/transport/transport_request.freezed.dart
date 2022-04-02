@@ -22,14 +22,14 @@ class _$TransportRequestTearOff {
       {int? seatsAvailable,
       TransportTypeModel? transportType,
       bool? isAvailable = true,
-      String? docId,
-      bool goBack = false}) {
+      bool goBack = false,
+      FirestorePaginationInfo<dynamic>? paginationInfo}) {
     return _TransportRequest(
       seatsAvailable: seatsAvailable,
       transportType: transportType,
       isAvailable: isAvailable,
-      docId: docId,
       goBack: goBack,
+      paginationInfo: paginationInfo,
     );
   }
 }
@@ -42,8 +42,9 @@ mixin _$TransportRequest {
   int? get seatsAvailable => throw _privateConstructorUsedError;
   TransportTypeModel? get transportType => throw _privateConstructorUsedError;
   bool? get isAvailable => throw _privateConstructorUsedError;
-  String? get docId => throw _privateConstructorUsedError;
   bool get goBack => throw _privateConstructorUsedError;
+  FirestorePaginationInfo<dynamic>? get paginationInfo =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TransportRequestCopyWith<TransportRequest> get copyWith =>
@@ -59,8 +60,8 @@ abstract class $TransportRequestCopyWith<$Res> {
       {int? seatsAvailable,
       TransportTypeModel? transportType,
       bool? isAvailable,
-      String? docId,
-      bool goBack});
+      bool goBack,
+      FirestorePaginationInfo<dynamic>? paginationInfo});
 }
 
 /// @nodoc
@@ -77,8 +78,8 @@ class _$TransportRequestCopyWithImpl<$Res>
     Object? seatsAvailable = freezed,
     Object? transportType = freezed,
     Object? isAvailable = freezed,
-    Object? docId = freezed,
     Object? goBack = freezed,
+    Object? paginationInfo = freezed,
   }) {
     return _then(_value.copyWith(
       seatsAvailable: seatsAvailable == freezed
@@ -93,14 +94,14 @@ class _$TransportRequestCopyWithImpl<$Res>
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
-      docId: docId == freezed
-          ? _value.docId
-          : docId // ignore: cast_nullable_to_non_nullable
-              as String?,
       goBack: goBack == freezed
           ? _value.goBack
           : goBack // ignore: cast_nullable_to_non_nullable
               as bool,
+      paginationInfo: paginationInfo == freezed
+          ? _value.paginationInfo
+          : paginationInfo // ignore: cast_nullable_to_non_nullable
+              as FirestorePaginationInfo<dynamic>?,
     ));
   }
 }
@@ -116,8 +117,8 @@ abstract class _$TransportRequestCopyWith<$Res>
       {int? seatsAvailable,
       TransportTypeModel? transportType,
       bool? isAvailable,
-      String? docId,
-      bool goBack});
+      bool goBack,
+      FirestorePaginationInfo<dynamic>? paginationInfo});
 }
 
 /// @nodoc
@@ -136,8 +137,8 @@ class __$TransportRequestCopyWithImpl<$Res>
     Object? seatsAvailable = freezed,
     Object? transportType = freezed,
     Object? isAvailable = freezed,
-    Object? docId = freezed,
     Object? goBack = freezed,
+    Object? paginationInfo = freezed,
   }) {
     return _then(_TransportRequest(
       seatsAvailable: seatsAvailable == freezed
@@ -152,14 +153,14 @@ class __$TransportRequestCopyWithImpl<$Res>
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
-      docId: docId == freezed
-          ? _value.docId
-          : docId // ignore: cast_nullable_to_non_nullable
-              as String?,
       goBack: goBack == freezed
           ? _value.goBack
           : goBack // ignore: cast_nullable_to_non_nullable
               as bool,
+      paginationInfo: paginationInfo == freezed
+          ? _value.paginationInfo
+          : paginationInfo // ignore: cast_nullable_to_non_nullable
+              as FirestorePaginationInfo<dynamic>?,
     ));
   }
 }
@@ -171,8 +172,8 @@ class _$_TransportRequest implements _TransportRequest {
       {this.seatsAvailable,
       this.transportType,
       this.isAvailable = true,
-      this.docId,
-      this.goBack = false});
+      this.goBack = false,
+      this.paginationInfo});
 
   @override
   final int? seatsAvailable;
@@ -181,15 +182,15 @@ class _$_TransportRequest implements _TransportRequest {
   @JsonKey()
   @override
   final bool? isAvailable;
-  @override
-  final String? docId;
   @JsonKey()
   @override
   final bool goBack;
+  @override
+  final FirestorePaginationInfo<dynamic>? paginationInfo;
 
   @override
   String toString() {
-    return 'TransportRequest(seatsAvailable: $seatsAvailable, transportType: $transportType, isAvailable: $isAvailable, docId: $docId, goBack: $goBack)';
+    return 'TransportRequest(seatsAvailable: $seatsAvailable, transportType: $transportType, isAvailable: $isAvailable, goBack: $goBack, paginationInfo: $paginationInfo)';
   }
 
   @override
@@ -203,8 +204,9 @@ class _$_TransportRequest implements _TransportRequest {
                 .equals(other.transportType, transportType) &&
             const DeepCollectionEquality()
                 .equals(other.isAvailable, isAvailable) &&
-            const DeepCollectionEquality().equals(other.docId, docId) &&
-            const DeepCollectionEquality().equals(other.goBack, goBack));
+            const DeepCollectionEquality().equals(other.goBack, goBack) &&
+            const DeepCollectionEquality()
+                .equals(other.paginationInfo, paginationInfo));
   }
 
   @override
@@ -213,8 +215,8 @@ class _$_TransportRequest implements _TransportRequest {
       const DeepCollectionEquality().hash(seatsAvailable),
       const DeepCollectionEquality().hash(transportType),
       const DeepCollectionEquality().hash(isAvailable),
-      const DeepCollectionEquality().hash(docId),
-      const DeepCollectionEquality().hash(goBack));
+      const DeepCollectionEquality().hash(goBack),
+      const DeepCollectionEquality().hash(paginationInfo));
 
   @JsonKey(ignore: true)
   @override
@@ -227,8 +229,8 @@ abstract class _TransportRequest implements TransportRequest {
       {int? seatsAvailable,
       TransportTypeModel? transportType,
       bool? isAvailable,
-      String? docId,
-      bool goBack}) = _$_TransportRequest;
+      bool goBack,
+      FirestorePaginationInfo<dynamic>? paginationInfo}) = _$_TransportRequest;
 
   @override
   int? get seatsAvailable;
@@ -237,9 +239,9 @@ abstract class _TransportRequest implements TransportRequest {
   @override
   bool? get isAvailable;
   @override
-  String? get docId;
-  @override
   bool get goBack;
+  @override
+  FirestorePaginationInfo<dynamic>? get paginationInfo;
   @override
   @JsonKey(ignore: true)
   _$TransportRequestCopyWith<_TransportRequest> get copyWith =>

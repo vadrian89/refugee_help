@@ -10,6 +10,7 @@ class DataListTable extends StatefulWidget {
   final List<DataRow> rows;
   final bool enableHorizontalScroll;
   final int page;
+  final int pageLimit;
   final int? totalRows;
   final VoidCallback? onBack;
   final VoidCallback? onNext;
@@ -20,6 +21,7 @@ class DataListTable extends StatefulWidget {
     required this.rows,
     this.enableHorizontalScroll = true,
     this.page = 1,
+    this.pageLimit = 1,
     this.totalRows,
     this.onBack,
     this.onNext,
@@ -33,19 +35,18 @@ class _DataListTableState extends State<DataListTable> {
   late final ScrollController _verticalScrollCtrl;
   ScrollController? _horizontalScrollCtrl;
 
-  int get _startIndex => (widget.page - 1) * widget.rows.length;
-  int get _pageLimit => _startIndex + widget.rows.length;
+  int get _startIndex => (widget.page - 1) * widget.pageLimit;
+  int get _endIndex => _startIndex + widget.rows.length;
+  bool get _hasLess => widget.page > 1;
+  bool get _hasMore => _endIndex < (widget.totalRows ?? 0);
+
   String get _rowsInfo {
-    String rowsInfo = "${_startIndex + 1} - $_pageLimit";
+    String rowsInfo = "${_startIndex + 1} - $_endIndex";
     if (widget.totalRows != null) {
       rowsInfo = "$rowsInfo ${"of".tr().toLowerCase()} ${widget.totalRows ?? ""}";
     }
     return rowsInfo;
   }
-
-  bool get _hasLess => widget.page > 1;
-
-  bool get _hasMore => _pageLimit < (widget.totalRows ?? 0);
 
   @override
   void initState() {

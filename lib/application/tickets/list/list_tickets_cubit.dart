@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
+import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
 import 'package:refugee_help/domain/tickets/ticket_request.dart';
@@ -23,9 +24,11 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
   static const int _pageLimit = 20;
   int _currentPage = 0;
   int _totalRows = 0;
+  FirestorePaginationInfo? _paginationInfo;
 
   int get _limit => _pageLimit * _currentPage;
   String? get _userId => (_user?.isPrivileged ?? true) ? null : _user?.id;
+  bool get _stateInProgress => state.maybeMap(orElse: () => false, loading: (_) => true);
 
   ListTicketsCubit({required AuthenticationCubit authCubit})
       : _repository = TicketsRepository(),
@@ -39,6 +42,9 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
           if (response is String) {
             emit(ListTicketsState.success(response));
           }
+          if (response is FirestorePaginationInfo) {
+            _paginationInfo = response;
+          }
           if (response is int) {
             emit(const ListTicketsState.success(""));
             _totalRows = response;
@@ -49,14 +55,24 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
       );
 
   Future<void> fetchList({TicketRequest? request, bool isTable = false}) async {
+    if (_stateInProgress) {
+      return;
+    }
     emit(ListTicketsState.loading((request != null) ? "retrieving_data".tr() : ""));
     await _listSub?.cancel();
-    _currentPage++;
+    if (request?.goBack ?? false) {
+      _currentPage--;
+    } else {
+      _currentPage++;
+    }
+    if (_currentPage == 0) {
+      _paginationInfo = null;
+    }
     _listSub = _repository
         .listStream(
           userId: _userId,
-          limit: (isTable || request?.docId != null) ? _pageLimit : _limit,
-          request: request,
+          limit: isTable ? _pageLimit : _limit,
+          request: request?.copyWith(paginationInfo: _paginationInfo),
         )
         .listen(_parseListSub);
   }
@@ -67,7 +83,12 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
       orElse: () => null,
       deleting: () => emit(ListTicketsState.success("deleted_ticket".tr())),
     );
-    emit(ListTicketsState.view(list: _list, page: _currentPage, totalRows: _totalRows));
+    emit(ListTicketsState.view(
+      list: _list,
+      page: _currentPage,
+      pageLimit: _pageLimit,
+      totalRows: _totalRows,
+    ));
   }
 
   Future<void> delete(TicketModel model) async {

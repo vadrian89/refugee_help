@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 
 import 'transport_type_model.dart';
 
@@ -10,7 +11,7 @@ class TransportRequest with _$TransportRequest {
     int? seatsAvailable,
     TransportTypeModel? transportType,
     @Default(true) bool? isAvailable,
-    String? docId,
     @Default(false) bool goBack,
+    FirestorePaginationInfo? paginationInfo,
   }) = _TransportRequest;
 }

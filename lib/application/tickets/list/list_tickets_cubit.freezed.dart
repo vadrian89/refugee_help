@@ -25,10 +25,12 @@ class _$ListTicketsStateTearOff {
   _View view(
       {required List<TicketModel> list,
       required int page,
+      required int pageLimit,
       required int totalRows}) {
     return _View(
       list: list,
       page: page,
+      pageLimit: pageLimit,
       totalRows: totalRows,
     );
   }
@@ -64,7 +66,8 @@ mixin _$ListTicketsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TicketModel> list, int page, int totalRows)
+    required TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)
         view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
@@ -75,7 +78,9 @@ mixin _$ListTicketsState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -85,7 +90,9 @@ mixin _$ListTicketsState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -182,7 +189,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TicketModel> list, int page, int totalRows)
+    required TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)
         view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
@@ -196,7 +204,9 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -209,7 +219,9 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -274,7 +286,7 @@ abstract class _Initial implements ListTicketsState {
 abstract class _$ViewCopyWith<$Res> {
   factory _$ViewCopyWith(_View value, $Res Function(_View) then) =
       __$ViewCopyWithImpl<$Res>;
-  $Res call({List<TicketModel> list, int page, int totalRows});
+  $Res call({List<TicketModel> list, int page, int pageLimit, int totalRows});
 }
 
 /// @nodoc
@@ -290,6 +302,7 @@ class __$ViewCopyWithImpl<$Res> extends _$ListTicketsStateCopyWithImpl<$Res>
   $Res call({
     Object? list = freezed,
     Object? page = freezed,
+    Object? pageLimit = freezed,
     Object? totalRows = freezed,
   }) {
     return _then(_View(
@@ -300,6 +313,10 @@ class __$ViewCopyWithImpl<$Res> extends _$ListTicketsStateCopyWithImpl<$Res>
       page: page == freezed
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageLimit: pageLimit == freezed
+          ? _value.pageLimit
+          : pageLimit // ignore: cast_nullable_to_non_nullable
               as int,
       totalRows: totalRows == freezed
           ? _value.totalRows
@@ -313,18 +330,23 @@ class __$ViewCopyWithImpl<$Res> extends _$ListTicketsStateCopyWithImpl<$Res>
 
 class _$_View implements _View {
   const _$_View(
-      {required this.list, required this.page, required this.totalRows});
+      {required this.list,
+      required this.page,
+      required this.pageLimit,
+      required this.totalRows});
 
   @override
   final List<TicketModel> list;
   @override
   final int page;
   @override
+  final int pageLimit;
+  @override
   final int totalRows;
 
   @override
   String toString() {
-    return 'ListTicketsState.view(list: $list, page: $page, totalRows: $totalRows)';
+    return 'ListTicketsState.view(list: $list, page: $page, pageLimit: $pageLimit, totalRows: $totalRows)';
   }
 
   @override
@@ -334,6 +356,7 @@ class _$_View implements _View {
             other is _View &&
             const DeepCollectionEquality().equals(other.list, list) &&
             const DeepCollectionEquality().equals(other.page, page) &&
+            const DeepCollectionEquality().equals(other.pageLimit, pageLimit) &&
             const DeepCollectionEquality().equals(other.totalRows, totalRows));
   }
 
@@ -342,6 +365,7 @@ class _$_View implements _View {
       runtimeType,
       const DeepCollectionEquality().hash(list),
       const DeepCollectionEquality().hash(page),
+      const DeepCollectionEquality().hash(pageLimit),
       const DeepCollectionEquality().hash(totalRows));
 
   @JsonKey(ignore: true)
@@ -353,34 +377,39 @@ class _$_View implements _View {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TicketModel> list, int page, int totalRows)
+    required TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)
         view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
     required TResult Function(String message) success,
   }) {
-    return view(list, page, totalRows);
+    return view(list, page, pageLimit, totalRows);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
     TResult Function(String message)? success,
   }) {
-    return view?.call(list, page, totalRows);
+    return view?.call(list, page, pageLimit, totalRows);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -388,7 +417,7 @@ class _$_View implements _View {
     required TResult orElse(),
   }) {
     if (view != null) {
-      return view(list, page, totalRows);
+      return view(list, page, pageLimit, totalRows);
     }
     return orElse();
   }
@@ -441,10 +470,12 @@ abstract class _View implements ListTicketsState {
   const factory _View(
       {required List<TicketModel> list,
       required int page,
+      required int pageLimit,
       required int totalRows}) = _$_View;
 
   List<TicketModel> get list;
   int get page;
+  int get pageLimit;
   int get totalRows;
   @JsonKey(ignore: true)
   _$ViewCopyWith<_View> get copyWith => throw _privateConstructorUsedError;
@@ -489,7 +520,8 @@ class _$_Deleting implements _Deleting {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TicketModel> list, int page, int totalRows)
+    required TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)
         view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
@@ -503,7 +535,9 @@ class _$_Deleting implements _Deleting {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -516,7 +550,9 @@ class _$_Deleting implements _Deleting {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -640,7 +676,8 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TicketModel> list, int page, int totalRows)
+    required TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)
         view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
@@ -654,7 +691,9 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -667,7 +706,9 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -796,7 +837,8 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TicketModel> list, int page, int totalRows)
+    required TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)
         view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
@@ -810,7 +852,9 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -823,7 +867,9 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -952,7 +998,8 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TicketModel> list, int page, int totalRows)
+    required TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)
         view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
@@ -966,7 +1013,9 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -979,7 +1028,9 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketModel> list, int page, int totalRows)? view,
+    TResult Function(
+            List<TicketModel> list, int page, int pageLimit, int totalRows)?
+        view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,

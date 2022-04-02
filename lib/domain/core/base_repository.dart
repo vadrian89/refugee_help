@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/infrastructure/firebase/chrashlytics_utils.dart';
 
 import 'operation_result.dart';
@@ -13,6 +14,8 @@ import 'operation_result.dart';
 /// Should contain all common properties used in repositories classes.
 abstract class BaseRepository {
   static const String _project = 'refugee_help';
+  static const String transportCollection = "volunteer_transport";
+  static const String ticketsCollection = "tickets";
   static const int _shardsCount = 2;
 
   late final Logger _logger;
@@ -97,6 +100,23 @@ abstract class BaseRepository {
     }
 
     return batch.commit();
+  }
+
+  Query<T> pagedQuery<T>({
+    required Query<T> query,
+    FirestorePaginationInfo? paginationInfo,
+    bool goBack = false,
+    int limit = 10,
+  }) {
+    Query<T> newQuery = query;
+    if (paginationInfo != null) {
+      newQuery = goBack
+          ? newQuery.endBeforeDocument(paginationInfo.firstDoc!)
+          : newQuery.startAfterDocument(paginationInfo.lastDoc!);
+    }
+    newQuery =
+        (goBack && paginationInfo != null) ? newQuery.limitToLast(limit) : newQuery.limit(limit);
+    return newQuery;
   }
 
   /// Close all resources used in repository.

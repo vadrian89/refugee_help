@@ -27,6 +27,7 @@ class TicketListBody extends StatelessWidget {
               return TicketListBodyView(
                 list: view.list,
                 page: view.page,
+                pageLimit: view.pageLimit,
                 totalRows: view.totalRows,
               );
             },

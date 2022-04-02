@@ -6,6 +6,7 @@ class ListTicketsState with _$ListTicketsState {
   const factory ListTicketsState.view({
     required List<TicketModel> list,
     required int page,
+    required int pageLimit,
     required int totalRows,
   }) = _View;
   const factory ListTicketsState.deleting() = _Deleting;

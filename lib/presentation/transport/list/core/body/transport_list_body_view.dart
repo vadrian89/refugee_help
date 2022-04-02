@@ -10,12 +10,14 @@ import 'transport_list_tile.dart';
 class TransportListBodyView extends ResponsiveWidget {
   final List<TransportModel> list;
   final int page;
+  final int pageLimit;
   final int? totalRows;
 
   const TransportListBodyView({
     Key? key,
     required this.list,
     this.page = 1,
+    this.pageLimit = 1,
     this.totalRows,
   }) : super(key: key);
 
@@ -34,6 +36,7 @@ class TransportListBodyView extends ResponsiveWidget {
   Widget desktop(BuildContext context) => TransportListBodyTable(
         list: list,
         page: page,
+        pageLimit: pageLimit,
         totalRows: totalRows,
       );
 }

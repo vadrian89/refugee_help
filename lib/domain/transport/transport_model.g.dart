@@ -26,6 +26,7 @@ _$_TransportModel _$$_TransportModelFromJson(Map<String, dynamic> json) =>
       createdAt: dateTimeFromJson(json['createdAt']),
       updatedAt: dateTimeFromJson(json['updatedAt']),
       remarks: json['remarks'] as String?,
+      isMock: json['isMock'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_TransportModelToJson(_$_TransportModel instance) =>
@@ -42,4 +43,5 @@ Map<String, dynamic> _$$_TransportModelToJson(_$_TransportModel instance) =>
       'createdAt': dateTimeToJson(instance.createdAt),
       'updatedAt': dateTimeToJson(instance.updatedAt),
       'remarks': instance.remarks,
+      'isMock': instance.isMock,
     };

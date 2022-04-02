@@ -10,22 +10,28 @@ import 'package:refugee_help/presentation/core/widgets/tables/data_list_table.da
 class TransportListBodyTable extends StatelessWidget {
   final List<TransportModel> list;
   final int page;
+  final int pageLimit;
   final int? totalRows;
 
   const TransportListBodyTable({
     Key? key,
     required this.list,
     this.page = 1,
+    this.pageLimit = 1,
     this.totalRows,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => DataListTable(
         columns: _tableColumns,
+        page: page,
+        pageLimit: pageLimit,
+        totalRows: totalRows,
         rows: List.generate(
           list.length,
           (index) => DataRow(
             cells: [
+              _cell(value: list[index].id),
               _cell(value: list[index].seatsAvailable.toString()),
               _cell(value: list[index].registrationNumber.toString()),
               _cell(value: list[index].type?.name),
@@ -41,24 +47,18 @@ class TransportListBodyTable extends StatelessWidget {
           ),
         ),
         onNext: () => context.read<ListTransportCubit>().fetchList(
-              request: TransportRequest(docId: list.isNotEmpty ? list.last.id : null),
+              request: const TransportRequest(),
+              isTable: true,
             ),
         onBack: () => context.read<ListTransportCubit>().fetchList(
-              request: TransportRequest(
-                docId: list.isNotEmpty ? list.first.id : null,
-                goBack: true,
-              ),
+              request: const TransportRequest(goBack: true),
+              isTable: true,
             ),
       );
 
   List<DataColumn> get _tableColumns => [
-        DataColumn(
-            label: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Flexible(child: Text("seats_available".tr())),
-          ],
-        )),
+        const DataColumn(label: Text("ID")),
+        DataColumn(label: Text("seats_available".tr())),
         DataColumn(label: Text("registration_number".tr())),
         DataColumn(label: Text("transport_type".tr())),
         DataColumn(label: Text("at_location".tr())),

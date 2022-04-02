@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:refugee_help/domain/core/base_repository.dart';
 import 'package:refugee_help/domain/core/crud_repository_interface.dart';
+import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/core/image_model.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/util/firebase_storage_utils.dart';
@@ -16,9 +17,9 @@ import 'transport_request.dart';
 class TransportRepository extends BaseRepository
     implements CrudRepositoryInterface<TransportModel> {
   /// Location in the database.
-  static const String _doc = "volunteer_transport";
-  String get _counterDoc => "${_doc}_counter";
-  CollectionReference get _collection => getCollection(_doc);
+  String get _colName => BaseRepository.transportCollection;
+  String get _counterDoc => "${_colName}_counter";
+  CollectionReference get _collection => getCollection(_colName);
 
   CollectionReference<TransportModel> get _reference => _collection.withConverter<TransportModel>(
         fromFirestore: (snapshot, _) => TransportModel.fromJson(snapshot.data()!),
@@ -158,21 +159,27 @@ class TransportRepository extends BaseRepository
     if (request?.isAvailable ?? false) {
       query = query.where("isAvailable", isEqualTo: request?.isAvailable);
     }
-    if (request?.docId != null) {
-      if (request!.goBack) {
-        query = query.endBeforeDocument(await _reference.doc(request.docId).get());
-      } else {
-        query = query.startAfterDocument(await _reference.doc(request.docId).get());
-      }
-    }
+    query = query.orderBy("timeAvailable").orderBy("updatedAt", descending: true);
+    query = pagedQuery<TransportModel>(
+      query: query,
+      paginationInfo: request?.paginationInfo,
+      goBack: request?.goBack ?? false,
+      limit: limit,
+    );
     logDebug("Firebase query ${query.parameters}", local: true);
-    yield* query.limit(limit).snapshots().asyncMap(_listFromSnapshot);
+    yield* query.snapshots(includeMetadataChanges: true).asyncMap(_listFromSnapshot);
   }
 
-  Future<List<TransportModel>> _listFromSnapshot(QuerySnapshot<TransportModel>? data) async {
-    addResultToStream(OperationResult.success(await getTotalCount()));
+  Future<List<TransportModel>> _listFromSnapshot(QuerySnapshot<TransportModel>? snapshot) async {
+    if (snapshot != null) {
+      addResultToStream(OperationResult.success(FirestorePaginationInfo(
+        firstDoc: snapshot.docs.first,
+        lastDoc: snapshot.docs.last,
+      )));
+      addResultToStream(OperationResult.success(await getTotalCount()));
+    }
     await Utils.streamDelay();
-    return data?.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList() ?? [];
+    return snapshot?.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList() ?? [];
   }
 
   Future<int> getTotalCount() => count(_counterDoc);

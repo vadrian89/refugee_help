@@ -8,12 +8,14 @@ import 'ticket_list_body_table.dart';
 class TicketListBodyView extends ResponsiveWidget {
   final List<TicketModel> list;
   final int page;
+  final int pageLimit;
   final int? totalRows;
 
   const TicketListBodyView({
     Key? key,
     required this.list,
     this.page = 1,
+    this.pageLimit = 1,
     this.totalRows,
   }) : super(key: key);
 
@@ -28,6 +30,7 @@ class TicketListBodyView extends ResponsiveWidget {
   Widget desktop(BuildContext context) => TicketListBodyTable(
         list: list,
         page: page,
+        pageLimit: pageLimit,
         totalRows: totalRows,
       );
 }

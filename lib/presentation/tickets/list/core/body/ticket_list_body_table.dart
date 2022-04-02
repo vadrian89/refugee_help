@@ -10,12 +10,14 @@ import 'package:refugee_help/presentation/core/widgets/tables/data_list_table.da
 class TicketListBodyTable extends StatelessWidget {
   final List<TicketModel> list;
   final int page;
+  final int pageLimit;
   final int? totalRows;
 
   const TicketListBodyTable({
     Key? key,
     required this.list,
     this.page = 1,
+    this.pageLimit = 1,
     this.totalRows,
   }) : super(key: key);
 
@@ -23,19 +25,19 @@ class TicketListBodyTable extends StatelessWidget {
   Widget build(BuildContext context) => DataListTable(
         columns: _tableColumns,
         page: page,
+        pageLimit: pageLimit,
         totalRows: totalRows,
         rows: List.generate(
           list.length,
           (index) => _row(context, list[index]),
         ),
         onNext: () => context.read<ListTicketsCubit>().fetchList(
-              request: TicketRequest(docId: list.isNotEmpty ? list.last.id : null),
+              request: const TicketRequest(),
+              isTable: true,
             ),
         onBack: () => context.read<ListTicketsCubit>().fetchList(
-              request: TicketRequest(
-                docId: list.isNotEmpty ? list.first.id : null,
-                goBack: true,
-              ),
+              request: const TicketRequest(goBack: true),
+              isTable: true,
             ),
       );
 

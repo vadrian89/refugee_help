@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
+import 'package:refugee_help/domain/dev/dev_repository.dart';
 import 'package:refugee_help/presentation/core/responsive_widgets/responsive_widget.dart';
 
 import 'app_drawer/app_drawer_header.dart';
@@ -59,6 +61,7 @@ class AppDrawer extends ResponsiveWidget {
                 onPressed: context.read<RootRouterCubit>().goToTransport,
               ),
               const VolunteeringAvailabilityTile(),
+              if (kDebugMode) ..._devTiles,
               const Spacer(),
               DrawerListTile(
                 icon: MdiIcons.logout,
@@ -69,4 +72,43 @@ class AppDrawer extends ResponsiveWidget {
           ),
         ),
       );
+
+  List<Widget> get _devTiles => [
+        DrawerListTile(
+          icon: MdiIcons.car2Plus,
+          label: "Multiply transport",
+          onPressed: () async {
+            final repo = DevRepository();
+            await repo.multiplyTransport();
+            repo.close();
+          },
+        ),
+        DrawerListTile(
+          icon: MdiIcons.delete,
+          label: "Clear transport",
+          onPressed: () async {
+            final repo = DevRepository();
+            await repo.clearTransport();
+            repo.close();
+          },
+        ),
+        DrawerListTile(
+          icon: MdiIcons.ticketConfirmation,
+          label: "Multiply tickets",
+          onPressed: () async {
+            final repo = DevRepository();
+            await repo.multiplyTickets();
+            repo.close();
+          },
+        ),
+        DrawerListTile(
+          icon: MdiIcons.delete,
+          label: "Clear tickets",
+          onPressed: () async {
+            final repo = DevRepository();
+            await repo.clearTickets();
+            repo.close();
+          },
+        )
+      ];
 }

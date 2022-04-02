@@ -29,6 +29,7 @@ _$_TicketModel _$$_TicketModelFromJson(Map<String, dynamic> json) =>
           : TicketFeedbackModel.fromJson(
               json['ticketFeedback'] as Map<String, dynamic>),
       remarks: json['remarks'] as String?,
+      isMock: json['isMock'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_TicketModelToJson(_$_TicketModel instance) =>
@@ -43,4 +44,5 @@ Map<String, dynamic> _$$_TicketModelToJson(_$_TicketModel instance) =>
       'cancelFeedback': instance.cancelFeedback?.toJson(),
       'ticketFeedback': instance.ticketFeedback?.toJson(),
       'remarks': instance.remarks,
+      'isMock': instance.isMock,
     };
