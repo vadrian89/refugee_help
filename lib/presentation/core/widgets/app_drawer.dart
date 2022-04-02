@@ -7,6 +7,7 @@ import 'package:refugee_help/application/authentication/authentication_cubit.dar
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/domain/dev/dev_repository.dart';
 import 'package:refugee_help/presentation/core/responsive_widgets/responsive_widget.dart';
+import 'package:refugee_help/presentation/core/widgets/text/head6_text.dart';
 
 import 'app_drawer/app_drawer_header.dart';
 import 'app_drawer/drawer_list_tile.dart';
@@ -61,8 +62,8 @@ class AppDrawer extends ResponsiveWidget {
                 onPressed: context.read<RootRouterCubit>().goToTransport,
               ),
               const VolunteeringAvailabilityTile(),
-              if (kDebugMode) ..._devTiles,
               const Spacer(),
+              if (kDebugMode) ..._devTiles,
               DrawerListTile(
                 icon: MdiIcons.logout,
                 label: "sign_out".tr(),
@@ -74,6 +75,7 @@ class AppDrawer extends ResponsiveWidget {
       );
 
   List<Widget> get _devTiles => [
+        const Head6Text(text: "Dev options"),
         DrawerListTile(
           icon: MdiIcons.car2Plus,
           label: "Multiply transport",
@@ -109,6 +111,7 @@ class AppDrawer extends ResponsiveWidget {
             await repo.clearTickets();
             repo.close();
           },
-        )
+        ),
+        const Spacer(),
       ];
 }

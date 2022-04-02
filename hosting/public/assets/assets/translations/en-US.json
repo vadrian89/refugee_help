@@ -134,5 +134,6 @@
     "owner": "Owner",
     "transport_info": "Transport info",
     "dispatcher": "Dispatcher",
-    "of": "Of"
+    "of": "Of",
+    "retrieving_data": "Retrieving data..."
 }

@@ -31,7 +31,6 @@ class TransportListBodyTable extends StatelessWidget {
           list.length,
           (index) => DataRow(
             cells: [
-              _cell(value: list[index].id),
               _cell(value: list[index].seatsAvailable.toString()),
               _cell(value: list[index].registrationNumber.toString()),
               _cell(value: list[index].type?.name),
@@ -57,7 +56,6 @@ class TransportListBodyTable extends StatelessWidget {
       );
 
   List<DataColumn> get _tableColumns => [
-        const DataColumn(label: Text("ID")),
         DataColumn(label: Text("seats_available".tr())),
         DataColumn(label: Text("registration_number".tr())),
         DataColumn(label: Text("transport_type".tr())),

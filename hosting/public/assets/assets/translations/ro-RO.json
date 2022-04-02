@@ -134,5 +134,6 @@
     "owner": "Proprietar",
     "transport_info": "Info transport",
     "dispatcher": "Dispecer",
-    "of": "Din"
+    "of": "Din",
+    "retrieving_data": "Se preiau datele..."
 }
