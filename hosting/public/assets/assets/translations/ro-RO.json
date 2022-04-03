@@ -105,6 +105,7 @@
     "delete_confirmation": {
         "something":"Eşti sigur că doreşti să ştergi {}?"
     },
+    "offer_feedback": "Cum a decurs totul?",
     "no_remark_feedback": "Nici o observaţie",
     "problem": "Problemă",
     "app_feedback": "Părere aplicaţie",
@@ -135,5 +136,7 @@
     "transport_info": "Info transport",
     "dispatcher": "Dispecer",
     "of": "Din",
-    "retrieving_data": "Se preiau datele..."
+    "retrieving_data": "Se preiau datele...",
+    "user": "Utilizator",
+    "date": "Dată"
 }
