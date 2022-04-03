@@ -16,7 +16,7 @@ class TicketFeedbackBottomSheet extends StatelessWidget {
     TicketFeedbackModel feedback = TicketFeedbackModel.noProblem();
 
     final save = await AdaptiveBottomSheet(
-          title: "offer_feedback",
+          title: "offer_feedback".tr(),
           isScrollControlled: true,
           bodyChildren: [
             TicketFeedbackTypeFormField(
