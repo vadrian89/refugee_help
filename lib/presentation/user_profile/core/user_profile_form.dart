@@ -8,7 +8,7 @@ import 'package:refugee_help/application/user/user_cubit.dart';
 import 'package:refugee_help/domain/core/image_model.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
 import 'package:refugee_help/infrastructure/validators.dart';
-import 'package:refugee_help/presentation/core/adaptive_widgets/bottom_sheets/image_picker_bottom_sheet.dart';
+import 'package:refugee_help/presentation/core/bottom_sheets/image_picker_bottom_sheet.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/widgets/loader_widget.dart';
 import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_form_field.dart';

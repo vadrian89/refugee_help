@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'adaptive_bottom_sheet.dart';
+import '../adaptive_widgets/bottom_sheets/adaptive_bottom_sheet.dart';
 
 class ImagePickerBottomSheet extends StatelessWidget {
   final ImagePicker _imagePicker;
@@ -15,6 +15,7 @@ class ImagePickerBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) => const SizedBox();
 
   Future<XFile?> show(BuildContext context) => AdaptiveBottomSheet(
+        showMaterialTitle: false,
         bodyChildren: [
           _selectionTile(
             icon: Icons.photo_library,

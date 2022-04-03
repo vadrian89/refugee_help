@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
+import 'package:refugee_help/domain/tickets/ticket_status_model.dart';
 import 'package:refugee_help/domain/tickets/tickets_repository.dart';
 import 'package:refugee_help/domain/user/user_info_model.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
@@ -82,7 +83,14 @@ class ManageTicketCubit extends Cubit<ManageTicketState> {
   Future<void> updateStatus(TicketModel ticket) async {
     emit(ManageTicketState.loading("saving".tr()));
     await Utils.repoDelay();
-    await _repository.updateStatus(ticket);
+    TicketModel updatedTicket = ticket;
+    if (ticket.status == TicketStatusModel.finished() ||
+        ticket.status == TicketStatusModel.canceled()) {
+      updatedTicket = ticket.updateFeedback(ticket.feedback!.copyWith(
+        user: UserInfoModel.fromUser(_user!),
+      ));
+    }
+    await _repository.updateStatus(updatedTicket);
   }
 
   Future<void> delete(TicketModel ticket) async {

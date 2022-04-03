@@ -11,6 +11,8 @@ import 'package:refugee_help/presentation/core/widgets/text/head4_text.dart';
 import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_form_field.dart';
 import 'package:refugee_help/presentation/core/widgets/refocus_background.dart';
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
+import 'package:refugee_help/presentation/tickets/manage/core/ticket_feedback_bottom_sheet.dart';
+import 'package:refugee_help/presentation/tickets/manage/core/ticket_feedback_tile.dart';
 import 'package:refugee_help/presentation/tickets/manage/core/ticket_status_button.dart';
 import 'package:refugee_help/presentation/tickets/manage/core/ticket_transport_form_field.dart';
 import 'manage_ticket_listener.dart';
@@ -143,16 +145,29 @@ class _ManageTicketFormState extends State<ManageTicketForm> {
           maxLines: 5,
           onSaved: (val) => _ticket = _ticket.copyWith(remarks: val),
         ),
+        const VerticalSpacing(20),
         if (!editable)
           TicketStatusButton(
             status: _ticket.status,
-            onChanged: _updateStatus,
+            onChanged: (value) => _updateStatus(context, value),
           ),
+        if (!editable && _ticket.feedback != null) TicketFeedbackTile(feedback: _ticket.feedback!),
       ];
 
-  void _updateStatus([TicketStatusModel? status]) {
-    if (status == null || status == TicketStatusModel.created()) return;
-    setState(() => _ticket = _ticket.updateStatus(status));
-    context.read<ManageTicketCubit>().updateStatus(_ticket);
+  void _updateStatus(BuildContext context, [TicketStatusModel? status]) {
+    if (status == null || status == TicketStatusModel.created() || _ticket.status == status) return;
+
+    if (status == TicketStatusModel.finished() || status == TicketStatusModel.canceled()) {
+      Navigator.maybePop(context);
+      const TicketFeedbackBottomSheet().show(context).then((value) {
+        if (value != null) {
+          setState(() => _ticket = _ticket.updateStatus(status).updateFeedback(value));
+          context.read<ManageTicketCubit>().updateStatus(_ticket);
+        }
+      });
+    } else {
+      setState(() => _ticket = _ticket.updateStatus(status));
+      context.read<ManageTicketCubit>().updateStatus(_ticket);
+    }
   }
 }

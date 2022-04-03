@@ -5,6 +5,6 @@ class WidgetUtils {
 
   static bool isPhone(BuildContext context) => MediaQuery.of(context).size.width < 600;
   static bool isTablet(BuildContext context) =>
-      !isPhone(context) && MediaQuery.of(context).size.width < 840;
+      !isPhone(context) && MediaQuery.of(context).size.width < 1280;
   static bool isDesktop(BuildContext context) => !isPhone(context) && !isTablet(context);
 }

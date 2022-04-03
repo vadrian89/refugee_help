@@ -15,6 +15,8 @@ part 'ticket_model.freezed.dart';
 
 @freezed
 class TicketModel with _$TicketModel {
+  TicketFeedbackModel? get feedback => cancelFeedback ?? finishedFeedback;
+
   const TicketModel._();
 
   @JsonSerializable(explicitToJson: true)
@@ -30,7 +32,7 @@ class TicketModel with _$TicketModel {
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? createdAt,
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? startedAt,
     TicketFeedbackModel? cancelFeedback,
-    TicketFeedbackModel? ticketFeedback,
+    TicketFeedbackModel? finishedFeedback,
     String? remarks,
 
     /// For development purposes.
@@ -45,22 +47,27 @@ class TicketModel with _$TicketModel {
     if (status == TicketStatusModel.started()) {
       return copyWith(
         startedAt: DateTime.now(),
-        ticketFeedback: null,
+        finishedFeedback: null,
         cancelFeedback: null,
       );
     } else if (status == TicketStatusModel.finished()) {
-      return copyWith(ticketFeedback: TicketFeedbackModel.noProblem());
+      return copyWith(finishedFeedback: TicketFeedbackModel.noProblem());
     } else if (status == TicketStatusModel.canceled()) {
       return copyWith(
-        ticketFeedback: null,
+        finishedFeedback: null,
         cancelFeedback: TicketFeedbackModel.noProblem(),
       );
     }
     return this;
   }
 
+  TicketModel updateFeedback(TicketFeedbackModel feedback) => copyWith(
+        cancelFeedback: status == TicketStatusModel.canceled() ? feedback : null,
+        finishedFeedback: status == TicketStatusModel.finished() ? feedback : null,
+      );
+
   TicketStatusModel get status {
-    if (ticketFeedback != null) {
+    if (finishedFeedback != null) {
       return TicketStatusModel.finished();
     }
     if (cancelFeedback != null) {

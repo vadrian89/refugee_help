@@ -15,6 +15,9 @@ _$_TicketFeedbackModel _$$_TicketFeedbackModelFromJson(
               json['feedbackType'] as Map<String, dynamic>),
       remarks: json['remarks'] as String? ?? "",
       createdAt: dateTimeFromJson(json['createdAt']),
+      user: json['user'] == null
+          ? null
+          : UserInfoModel.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_TicketFeedbackModelToJson(
@@ -23,4 +26,5 @@ Map<String, dynamic> _$$_TicketFeedbackModelToJson(
       'feedbackType': instance.feedbackType?.toJson(),
       'remarks': instance.remarks,
       'createdAt': dateTimeToJson(instance.createdAt),
+      'user': instance.user?.toJson(),
     };

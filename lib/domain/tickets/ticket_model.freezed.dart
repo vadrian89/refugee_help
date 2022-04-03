@@ -35,7 +35,7 @@ class _$TicketModelTearOff {
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? startedAt,
       TicketFeedbackModel? cancelFeedback,
-      TicketFeedbackModel? ticketFeedback,
+      TicketFeedbackModel? finishedFeedback,
       String? remarks,
       bool? isMock = false}) {
     return _TicketModel(
@@ -48,7 +48,7 @@ class _$TicketModelTearOff {
       createdAt: createdAt,
       startedAt: startedAt,
       cancelFeedback: cancelFeedback,
-      ticketFeedback: ticketFeedback,
+      finishedFeedback: finishedFeedback,
       remarks: remarks,
       isMock: isMock,
     );
@@ -78,7 +78,8 @@ mixin _$TicketModel {
   @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get startedAt => throw _privateConstructorUsedError;
   TicketFeedbackModel? get cancelFeedback => throw _privateConstructorUsedError;
-  TicketFeedbackModel? get ticketFeedback => throw _privateConstructorUsedError;
+  TicketFeedbackModel? get finishedFeedback =>
+      throw _privateConstructorUsedError;
   String? get remarks => throw _privateConstructorUsedError;
 
   /// For development purposes.
@@ -108,14 +109,14 @@ abstract class $TicketModelCopyWith<$Res> {
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? startedAt,
       TicketFeedbackModel? cancelFeedback,
-      TicketFeedbackModel? ticketFeedback,
+      TicketFeedbackModel? finishedFeedback,
       String? remarks,
       bool? isMock});
 
   $TransportInfoModelCopyWith<$Res>? get transport;
   $UserInfoModelCopyWith<$Res>? get dispatcher;
   $TicketFeedbackModelCopyWith<$Res>? get cancelFeedback;
-  $TicketFeedbackModelCopyWith<$Res>? get ticketFeedback;
+  $TicketFeedbackModelCopyWith<$Res>? get finishedFeedback;
 }
 
 /// @nodoc
@@ -137,7 +138,7 @@ class _$TicketModelCopyWithImpl<$Res> implements $TicketModelCopyWith<$Res> {
     Object? createdAt = freezed,
     Object? startedAt = freezed,
     Object? cancelFeedback = freezed,
-    Object? ticketFeedback = freezed,
+    Object? finishedFeedback = freezed,
     Object? remarks = freezed,
     Object? isMock = freezed,
   }) {
@@ -178,9 +179,9 @@ class _$TicketModelCopyWithImpl<$Res> implements $TicketModelCopyWith<$Res> {
           ? _value.cancelFeedback
           : cancelFeedback // ignore: cast_nullable_to_non_nullable
               as TicketFeedbackModel?,
-      ticketFeedback: ticketFeedback == freezed
-          ? _value.ticketFeedback
-          : ticketFeedback // ignore: cast_nullable_to_non_nullable
+      finishedFeedback: finishedFeedback == freezed
+          ? _value.finishedFeedback
+          : finishedFeedback // ignore: cast_nullable_to_non_nullable
               as TicketFeedbackModel?,
       remarks: remarks == freezed
           ? _value.remarks
@@ -227,13 +228,14 @@ class _$TicketModelCopyWithImpl<$Res> implements $TicketModelCopyWith<$Res> {
   }
 
   @override
-  $TicketFeedbackModelCopyWith<$Res>? get ticketFeedback {
-    if (_value.ticketFeedback == null) {
+  $TicketFeedbackModelCopyWith<$Res>? get finishedFeedback {
+    if (_value.finishedFeedback == null) {
       return null;
     }
 
-    return $TicketFeedbackModelCopyWith<$Res>(_value.ticketFeedback!, (value) {
-      return _then(_value.copyWith(ticketFeedback: value));
+    return $TicketFeedbackModelCopyWith<$Res>(_value.finishedFeedback!,
+        (value) {
+      return _then(_value.copyWith(finishedFeedback: value));
     });
   }
 }
@@ -258,7 +260,7 @@ abstract class _$TicketModelCopyWith<$Res>
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? startedAt,
       TicketFeedbackModel? cancelFeedback,
-      TicketFeedbackModel? ticketFeedback,
+      TicketFeedbackModel? finishedFeedback,
       String? remarks,
       bool? isMock});
 
@@ -269,7 +271,7 @@ abstract class _$TicketModelCopyWith<$Res>
   @override
   $TicketFeedbackModelCopyWith<$Res>? get cancelFeedback;
   @override
-  $TicketFeedbackModelCopyWith<$Res>? get ticketFeedback;
+  $TicketFeedbackModelCopyWith<$Res>? get finishedFeedback;
 }
 
 /// @nodoc
@@ -293,7 +295,7 @@ class __$TicketModelCopyWithImpl<$Res> extends _$TicketModelCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? startedAt = freezed,
     Object? cancelFeedback = freezed,
-    Object? ticketFeedback = freezed,
+    Object? finishedFeedback = freezed,
     Object? remarks = freezed,
     Object? isMock = freezed,
   }) {
@@ -334,9 +336,9 @@ class __$TicketModelCopyWithImpl<$Res> extends _$TicketModelCopyWithImpl<$Res>
           ? _value.cancelFeedback
           : cancelFeedback // ignore: cast_nullable_to_non_nullable
               as TicketFeedbackModel?,
-      ticketFeedback: ticketFeedback == freezed
-          ? _value.ticketFeedback
-          : ticketFeedback // ignore: cast_nullable_to_non_nullable
+      finishedFeedback: finishedFeedback == freezed
+          ? _value.finishedFeedback
+          : finishedFeedback // ignore: cast_nullable_to_non_nullable
               as TicketFeedbackModel?,
       remarks: remarks == freezed
           ? _value.remarks
@@ -367,7 +369,7 @@ class _$_TicketModel extends _TicketModel {
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           this.startedAt,
       this.cancelFeedback,
-      this.ticketFeedback,
+      this.finishedFeedback,
       this.remarks,
       this.isMock = false})
       : super._();
@@ -399,7 +401,7 @@ class _$_TicketModel extends _TicketModel {
   @override
   final TicketFeedbackModel? cancelFeedback;
   @override
-  final TicketFeedbackModel? ticketFeedback;
+  final TicketFeedbackModel? finishedFeedback;
   @override
   final String? remarks;
   @JsonKey()
@@ -410,7 +412,7 @@ class _$_TicketModel extends _TicketModel {
 
   @override
   String toString() {
-    return 'TicketModel(id: $id, adultsNumber: $adultsNumber, childrenNumber: $childrenNumber, transport: $transport, dispatcher: $dispatcher, destination: $destination, createdAt: $createdAt, startedAt: $startedAt, cancelFeedback: $cancelFeedback, ticketFeedback: $ticketFeedback, remarks: $remarks, isMock: $isMock)';
+    return 'TicketModel(id: $id, adultsNumber: $adultsNumber, childrenNumber: $childrenNumber, transport: $transport, dispatcher: $dispatcher, destination: $destination, createdAt: $createdAt, startedAt: $startedAt, cancelFeedback: $cancelFeedback, finishedFeedback: $finishedFeedback, remarks: $remarks, isMock: $isMock)';
   }
 
   @override
@@ -433,7 +435,7 @@ class _$_TicketModel extends _TicketModel {
             const DeepCollectionEquality()
                 .equals(other.cancelFeedback, cancelFeedback) &&
             const DeepCollectionEquality()
-                .equals(other.ticketFeedback, ticketFeedback) &&
+                .equals(other.finishedFeedback, finishedFeedback) &&
             const DeepCollectionEquality().equals(other.remarks, remarks) &&
             const DeepCollectionEquality().equals(other.isMock, isMock));
   }
@@ -450,7 +452,7 @@ class _$_TicketModel extends _TicketModel {
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(startedAt),
       const DeepCollectionEquality().hash(cancelFeedback),
-      const DeepCollectionEquality().hash(ticketFeedback),
+      const DeepCollectionEquality().hash(finishedFeedback),
       const DeepCollectionEquality().hash(remarks),
       const DeepCollectionEquality().hash(isMock));
 
@@ -479,7 +481,7 @@ abstract class _TicketModel extends TicketModel {
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? startedAt,
       TicketFeedbackModel? cancelFeedback,
-      TicketFeedbackModel? ticketFeedback,
+      TicketFeedbackModel? finishedFeedback,
       String? remarks,
       bool? isMock}) = _$_TicketModel;
   const _TicketModel._() : super._();
@@ -511,7 +513,7 @@ abstract class _TicketModel extends TicketModel {
   @override
   TicketFeedbackModel? get cancelFeedback;
   @override
-  TicketFeedbackModel? get ticketFeedback;
+  TicketFeedbackModel? get finishedFeedback;
   @override
   String? get remarks;
   @override

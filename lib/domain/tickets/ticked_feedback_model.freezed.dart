@@ -26,11 +26,13 @@ class _$TicketFeedbackModelTearOff {
       {FeedbackTypeModel? feedbackType,
       String? remarks = "",
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
-          DateTime? createdAt}) {
+          DateTime? createdAt,
+      UserInfoModel? user}) {
     return _TicketFeedbackModel(
       feedbackType: feedbackType,
       remarks: remarks,
       createdAt: createdAt,
+      user: user,
     );
   }
 
@@ -48,6 +50,7 @@ mixin _$TicketFeedbackModel {
   String? get remarks => throw _privateConstructorUsedError;
   @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  UserInfoModel? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,7 +67,10 @@ abstract class $TicketFeedbackModelCopyWith<$Res> {
       {FeedbackTypeModel? feedbackType,
       String? remarks,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
-          DateTime? createdAt});
+          DateTime? createdAt,
+      UserInfoModel? user});
+
+  $UserInfoModelCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -81,6 +87,7 @@ class _$TicketFeedbackModelCopyWithImpl<$Res>
     Object? feedbackType = freezed,
     Object? remarks = freezed,
     Object? createdAt = freezed,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       feedbackType: feedbackType == freezed
@@ -95,7 +102,22 @@ class _$TicketFeedbackModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserInfoModel?,
     ));
+  }
+
+  @override
+  $UserInfoModelCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserInfoModelCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value));
+    });
   }
 }
 
@@ -110,7 +132,11 @@ abstract class _$TicketFeedbackModelCopyWith<$Res>
       {FeedbackTypeModel? feedbackType,
       String? remarks,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
-          DateTime? createdAt});
+          DateTime? createdAt,
+      UserInfoModel? user});
+
+  @override
+  $UserInfoModelCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -129,6 +155,7 @@ class __$TicketFeedbackModelCopyWithImpl<$Res>
     Object? feedbackType = freezed,
     Object? remarks = freezed,
     Object? createdAt = freezed,
+    Object? user = freezed,
   }) {
     return _then(_TicketFeedbackModel(
       feedbackType: feedbackType == freezed
@@ -143,6 +170,10 @@ class __$TicketFeedbackModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      user: user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserInfoModel?,
     ));
   }
 }
@@ -155,7 +186,8 @@ class _$_TicketFeedbackModel implements _TicketFeedbackModel {
       {this.feedbackType,
       this.remarks = "",
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
-          this.createdAt});
+          this.createdAt,
+      this.user});
 
   factory _$_TicketFeedbackModel.fromJson(Map<String, dynamic> json) =>
       _$$_TicketFeedbackModelFromJson(json);
@@ -168,10 +200,12 @@ class _$_TicketFeedbackModel implements _TicketFeedbackModel {
   @override
   @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   final DateTime? createdAt;
+  @override
+  final UserInfoModel? user;
 
   @override
   String toString() {
-    return 'TicketFeedbackModel(feedbackType: $feedbackType, remarks: $remarks, createdAt: $createdAt)';
+    return 'TicketFeedbackModel(feedbackType: $feedbackType, remarks: $remarks, createdAt: $createdAt, user: $user)';
   }
 
   @override
@@ -182,7 +216,8 @@ class _$_TicketFeedbackModel implements _TicketFeedbackModel {
             const DeepCollectionEquality()
                 .equals(other.feedbackType, feedbackType) &&
             const DeepCollectionEquality().equals(other.remarks, remarks) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt));
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
@@ -190,7 +225,8 @@ class _$_TicketFeedbackModel implements _TicketFeedbackModel {
       runtimeType,
       const DeepCollectionEquality().hash(feedbackType),
       const DeepCollectionEquality().hash(remarks),
-      const DeepCollectionEquality().hash(createdAt));
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
@@ -209,7 +245,8 @@ abstract class _TicketFeedbackModel implements TicketFeedbackModel {
       {FeedbackTypeModel? feedbackType,
       String? remarks,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
-          DateTime? createdAt}) = _$_TicketFeedbackModel;
+          DateTime? createdAt,
+      UserInfoModel? user}) = _$_TicketFeedbackModel;
 
   factory _TicketFeedbackModel.fromJson(Map<String, dynamic> json) =
       _$_TicketFeedbackModel.fromJson;
@@ -221,6 +258,8 @@ abstract class _TicketFeedbackModel implements TicketFeedbackModel {
   @override
   @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get createdAt;
+  @override
+  UserInfoModel? get user;
   @override
   @JsonKey(ignore: true)
   _$TicketFeedbackModelCopyWith<_TicketFeedbackModel> get copyWith =>

@@ -105,6 +105,7 @@
     "delete_confirmation": {
         "something":"Are you sure you want to delete {}?"
     },
+    "offer_feedback": "Offer feedback",
     "no_remark_feedback": "No remark",
     "problem": "Problem",
     "app_feedback": "App feedback",
@@ -135,5 +136,7 @@
     "transport_info": "Transport info",
     "dispatcher": "Dispatcher",
     "of": "Of",
-    "retrieving_data": "Retrieving data..."
+    "retrieving_data": "Retrieving data...",
+    "user": "User",
+    "date": "Date"
 }

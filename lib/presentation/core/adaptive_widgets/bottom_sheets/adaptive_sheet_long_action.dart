@@ -26,6 +26,7 @@ class AdaptiveSheetLongAction extends AdaptiveSheetAction {
           fixedSize: MaterialStateProperty.all(
             Size.fromWidth(MediaQuery.of(context).size.width * 0.9),
           ),
+          visualDensity: VisualDensity.comfortable,
         ),
         onPressed: onPressed,
       );

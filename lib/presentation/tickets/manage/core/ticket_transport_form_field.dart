@@ -4,7 +4,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:refugee_help/domain/transport/transport_info_model.dart';
 import 'package:refugee_help/domain/transport/transport_model.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/bottom_sheets/adaptive_bottom_sheet.dart';
-import 'package:refugee_help/presentation/core/tiles/field_placeholder_tile.dart';
+import 'package:refugee_help/presentation/core/widgets/tiles/field_placeholder_tile.dart';
 import 'package:refugee_help/presentation/core/widgets/text/form_error_text.dart';
 
 import 'transport/ticket_transport_info_tile.dart';
