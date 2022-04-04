@@ -11,4 +11,5 @@ class ManageTicketState with _$ManageTicketState {
     @Default(false) bool popScreen,
   }) = _Success;
   const factory ManageTicketState.failure(String message) = _Failure;
+  const factory ManageTicketState.unkown() = _Unkown;
 }

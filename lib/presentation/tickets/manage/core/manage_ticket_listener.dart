@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/application/tickets/manage/manage_ticket_cubit.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
@@ -31,6 +32,7 @@ class ManageTicketListener extends StatelessWidget {
           },
           view: (ticket) => onView(ticket),
           edit: onEdit,
+          unkown: context.read<RootRouterCubit>().goToRoot,
         ),
         child: child,
       );

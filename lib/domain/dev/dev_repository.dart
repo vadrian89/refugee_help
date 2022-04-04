@@ -52,20 +52,22 @@ class DevRepository extends BaseRepository {
   Future<void> multiplyTickets() async {
     final model = (await _ticketsRef.limit(1).get()).docs.first.data();
     for (int i = 0; i < 50; i++) {
+      final counterDoc = "${model.type!.name}_$_ticketsCounterDoc";
       await _ticketsRef.add(model.copyWith(isMock: true));
-      await incrementCount(_ticketsCounterDoc);
+      await incrementCount(counterDoc);
       _logger.d("Added $model");
-      _logger.d("Ticket count ${await count(_ticketsCounterDoc)}");
+      _logger.d("Ticket count ${await count(counterDoc)}");
     }
   }
 
   Future<void> clearTickets() async {
     final snapshot = await _ticketsRef.where("isMock", isEqualTo: true).get();
     for (final doc in snapshot.docs) {
+      final counterDoc = "${doc.data().type!.name}_$_ticketsCounterDoc";
       await doc.reference.delete();
-      await decrementCount(_ticketsCounterDoc);
+      await decrementCount(counterDoc);
       _logger.d("Deleted ${doc.data()}");
-      _logger.d("Ticket count ${await count(_ticketsCounterDoc)}");
+      _logger.d("Ticket count ${await count(counterDoc)}");
     }
   }
 }

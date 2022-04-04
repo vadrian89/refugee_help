@@ -52,6 +52,10 @@ class _$ManageTicketStateTearOff {
       message,
     );
   }
+
+  _Unkown unkown() {
+    return const _Unkown();
+  }
 }
 
 /// @nodoc
@@ -67,6 +71,7 @@ mixin _$ManageTicketState {
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
+    required TResult Function() unkown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +82,7 @@ mixin _$ManageTicketState {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +93,7 @@ mixin _$ManageTicketState {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -98,6 +105,7 @@ mixin _$ManageTicketState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Unkown value) unkown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -108,6 +116,7 @@ mixin _$ManageTicketState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -118,6 +127,7 @@ mixin _$ManageTicketState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -184,6 +194,7 @@ class _$_Initial implements _Initial {
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
+    required TResult Function() unkown,
   }) {
     return initial();
   }
@@ -197,6 +208,7 @@ class _$_Initial implements _Initial {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
   }) {
     return initial?.call();
   }
@@ -210,6 +222,7 @@ class _$_Initial implements _Initial {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -227,6 +240,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Unkown value) unkown,
   }) {
     return initial(this);
   }
@@ -240,6 +254,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
   }) {
     return initial?.call(this);
   }
@@ -253,6 +268,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -343,6 +359,7 @@ class _$_View implements _View {
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
+    required TResult Function() unkown,
   }) {
     return view(ticket);
   }
@@ -356,6 +373,7 @@ class _$_View implements _View {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
   }) {
     return view?.call(ticket);
   }
@@ -369,6 +387,7 @@ class _$_View implements _View {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
     required TResult orElse(),
   }) {
     if (view != null) {
@@ -386,6 +405,7 @@ class _$_View implements _View {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Unkown value) unkown,
   }) {
     return view(this);
   }
@@ -399,6 +419,7 @@ class _$_View implements _View {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
   }) {
     return view?.call(this);
   }
@@ -412,6 +433,7 @@ class _$_View implements _View {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
     required TResult orElse(),
   }) {
     if (view != null) {
@@ -506,6 +528,7 @@ class _$_Edit implements _Edit {
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
+    required TResult Function() unkown,
   }) {
     return edit(ticket);
   }
@@ -519,6 +542,7 @@ class _$_Edit implements _Edit {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
   }) {
     return edit?.call(ticket);
   }
@@ -532,6 +556,7 @@ class _$_Edit implements _Edit {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
     required TResult orElse(),
   }) {
     if (edit != null) {
@@ -549,6 +574,7 @@ class _$_Edit implements _Edit {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Unkown value) unkown,
   }) {
     return edit(this);
   }
@@ -562,6 +588,7 @@ class _$_Edit implements _Edit {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
   }) {
     return edit?.call(this);
   }
@@ -575,6 +602,7 @@ class _$_Edit implements _Edit {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
     required TResult orElse(),
   }) {
     if (edit != null) {
@@ -660,6 +688,7 @@ class _$_Loading implements _Loading {
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
+    required TResult Function() unkown,
   }) {
     return loading(message);
   }
@@ -673,6 +702,7 @@ class _$_Loading implements _Loading {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
   }) {
     return loading?.call(message);
   }
@@ -686,6 +716,7 @@ class _$_Loading implements _Loading {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -703,6 +734,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Unkown value) unkown,
   }) {
     return loading(this);
   }
@@ -716,6 +748,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
   }) {
     return loading?.call(this);
   }
@@ -729,6 +762,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -826,6 +860,7 @@ class _$_Success implements _Success {
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
+    required TResult Function() unkown,
   }) {
     return success(message, popScreen);
   }
@@ -839,6 +874,7 @@ class _$_Success implements _Success {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
   }) {
     return success?.call(message, popScreen);
   }
@@ -852,6 +888,7 @@ class _$_Success implements _Success {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -869,6 +906,7 @@ class _$_Success implements _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Unkown value) unkown,
   }) {
     return success(this);
   }
@@ -882,6 +920,7 @@ class _$_Success implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
   }) {
     return success?.call(this);
   }
@@ -895,6 +934,7 @@ class _$_Success implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -982,6 +1022,7 @@ class _$_Failure implements _Failure {
     required TResult Function(String message) loading,
     required TResult Function(String? message, bool popScreen) success,
     required TResult Function(String message) failure,
+    required TResult Function() unkown,
   }) {
     return failure(message);
   }
@@ -995,6 +1036,7 @@ class _$_Failure implements _Failure {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
   }) {
     return failure?.call(message);
   }
@@ -1008,6 +1050,7 @@ class _$_Failure implements _Failure {
     TResult Function(String message)? loading,
     TResult Function(String? message, bool popScreen)? success,
     TResult Function(String message)? failure,
+    TResult Function()? unkown,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1025,6 +1068,7 @@ class _$_Failure implements _Failure {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
+    required TResult Function(_Unkown value) unkown,
   }) {
     return failure(this);
   }
@@ -1038,6 +1082,7 @@ class _$_Failure implements _Failure {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
   }) {
     return failure?.call(this);
   }
@@ -1051,6 +1096,7 @@ class _$_Failure implements _Failure {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1067,4 +1113,136 @@ abstract class _Failure implements ManageTicketState {
   @JsonKey(ignore: true)
   _$FailureCopyWith<_Failure> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$UnkownCopyWith<$Res> {
+  factory _$UnkownCopyWith(_Unkown value, $Res Function(_Unkown) then) =
+      __$UnkownCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$UnkownCopyWithImpl<$Res> extends _$ManageTicketStateCopyWithImpl<$Res>
+    implements _$UnkownCopyWith<$Res> {
+  __$UnkownCopyWithImpl(_Unkown _value, $Res Function(_Unkown) _then)
+      : super(_value, (v) => _then(v as _Unkown));
+
+  @override
+  _Unkown get _value => super._value as _Unkown;
+}
+
+/// @nodoc
+
+class _$_Unkown implements _Unkown {
+  const _$_Unkown();
+
+  @override
+  String toString() {
+    return 'ManageTicketState.unkown()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Unkown);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(TicketModel ticket) view,
+    required TResult Function(TicketModel ticket) edit,
+    required TResult Function(String message) loading,
+    required TResult Function(String? message, bool popScreen) success,
+    required TResult Function(String message) failure,
+    required TResult Function() unkown,
+  }) {
+    return unkown();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(TicketModel ticket)? view,
+    TResult Function(TicketModel ticket)? edit,
+    TResult Function(String message)? loading,
+    TResult Function(String? message, bool popScreen)? success,
+    TResult Function(String message)? failure,
+    TResult Function()? unkown,
+  }) {
+    return unkown?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(TicketModel ticket)? view,
+    TResult Function(TicketModel ticket)? edit,
+    TResult Function(String message)? loading,
+    TResult Function(String? message, bool popScreen)? success,
+    TResult Function(String message)? failure,
+    TResult Function()? unkown,
+    required TResult orElse(),
+  }) {
+    if (unkown != null) {
+      return unkown();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_View value) view,
+    required TResult Function(_Edit value) edit,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Failure value) failure,
+    required TResult Function(_Unkown value) unkown,
+  }) {
+    return unkown(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_View value)? view,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
+  }) {
+    return unkown?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_View value)? view,
+    TResult Function(_Edit value)? edit,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_Failure value)? failure,
+    TResult Function(_Unkown value)? unkown,
+    required TResult orElse(),
+  }) {
+    if (unkown != null) {
+      return unkown(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Unkown implements ManageTicketState {
+  const factory _Unkown() = _$_Unkown;
 }

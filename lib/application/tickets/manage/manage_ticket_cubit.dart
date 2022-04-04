@@ -7,6 +7,7 @@ import 'package:refugee_help/application/authentication/authentication_cubit.dar
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
 import 'package:refugee_help/domain/tickets/ticket_status_model.dart';
+import 'package:refugee_help/domain/tickets/ticket_type_model.dart';
 import 'package:refugee_help/domain/tickets/tickets_repository.dart';
 import 'package:refugee_help/domain/user/user_info_model.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
@@ -21,9 +22,14 @@ class ManageTicketCubit extends Cubit<ManageTicketState> {
   final TicketsRepository _repository;
   StreamSubscription<TicketModel?>? _ticketSub;
   late final StreamSubscription<OperationResult> _resultSub;
+  final TicketTypeModel _type;
 
-  ManageTicketCubit({required AuthenticationCubit authCubit, String? id})
-      : _repository = TicketsRepository(),
+  ManageTicketCubit({
+    required AuthenticationCubit authCubit,
+    String? id,
+    required TicketTypeModel type,
+  })  : _type = type,
+        _repository = TicketsRepository(),
         super(const ManageTicketState.initial()) {
     _parseAuthStateSub(authCubit.state);
     _authStateSub = authCubit.stream.listen(_parseAuthStateSub);
@@ -52,6 +58,10 @@ class ManageTicketCubit extends Cubit<ManageTicketState> {
 
   void _parseModelSub([TicketModel? ticket]) {
     if (ticket != null) {
+      if (ticket.type != _type) {
+        emit(const ManageTicketState.unkown());
+        return;
+      }
       state.maybeWhen(
         orElse: () => null,
         loading: (_) => emit(ManageTicketState.success(message: "saved_changes".tr())),

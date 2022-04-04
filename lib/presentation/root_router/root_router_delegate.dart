@@ -115,7 +115,7 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
           tmpList.add(
             _materialPage(
               valueKey: RootRouterState.ticketsPath,
-              child: ManageTicketScreen(id: tickets.id),
+              child: ManageTicketScreen(id: tickets.id, type: tickets.type!),
             ),
           );
         }
