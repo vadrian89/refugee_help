@@ -18,6 +18,8 @@ class RootRouterParser extends RouteInformationParser<RootRouterState> {
         state = RootRouterState.fromUriLevel1(uri);
       } else if (uri.pathSegments.length == 2) {
         state = RootRouterState.fromUriLevel2(uri);
+      } else if (uri.pathSegments.length == 3) {
+        state = RootRouterState.fromUriLevel3(uri);
       } else {
         state = const RootRouterState.unknown();
       }

@@ -9,6 +9,7 @@ import 'package:refugee_help/domain/util/json_util.dart';
 
 import 'ticked_feedback_model.dart';
 import 'ticket_status_model.dart';
+import 'ticket_type_model.dart';
 
 part 'ticket_model.g.dart';
 part 'ticket_model.freezed.dart';
@@ -22,6 +23,7 @@ class TicketModel with _$TicketModel {
   @JsonSerializable(explicitToJson: true)
   const factory TicketModel({
     @JsonKey(ignore: true) String? id,
+    TicketTypeModel? type,
     int? adultsNumber,
     int? childrenNumber,
     TransportInfoModel? transport,
@@ -39,7 +41,10 @@ class TicketModel with _$TicketModel {
     @Default(false) bool? isMock,
   }) = _TicketModel;
 
-  factory TicketModel.newTicket() => TicketModel(createdAt: DateTime.now());
+  factory TicketModel.newTicket([TicketTypeModel? type]) => TicketModel(
+        type: type ?? TicketTypeModel.transport(),
+        createdAt: DateTime.now(),
+      );
 
   factory TicketModel.fromJson(Map<String, dynamic> json) => _$TicketModelFromJson(json);
 

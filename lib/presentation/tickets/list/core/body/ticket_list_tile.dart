@@ -35,6 +35,9 @@ class TicketListTile extends StatelessWidget {
             ),
           ],
         ),
-        onTap: () => context.read<RootRouterCubit>().goToTickets(id: ticket.id),
+        onTap: () => context.read<RootRouterCubit>().goToTickets(
+              id: ticket.id,
+              type: ticket.type,
+            ),
       );
 }

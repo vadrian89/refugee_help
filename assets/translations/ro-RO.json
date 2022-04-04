@@ -138,5 +138,9 @@
     "of": "Din",
     "retrieving_data": "Se preiau datele...",
     "user": "Utilizator",
-    "date": "Dată"
+    "date": "Dată",
+    "transport_tickets": "Tichete transport",
+    "housing_tickets": "Tichete cazare",
+    "transport": "Transport",
+    "food": "Alimente"
 }

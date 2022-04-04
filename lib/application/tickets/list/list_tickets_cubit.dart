@@ -8,6 +8,7 @@ import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
 import 'package:refugee_help/domain/tickets/ticket_request.dart';
+import 'package:refugee_help/domain/tickets/ticket_type_model.dart';
 import 'package:refugee_help/domain/tickets/tickets_repository.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
 import 'package:refugee_help/infrastructure/utils.dart';
@@ -25,13 +26,17 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
   int _currentPage = 0;
   int _totalRows = 0;
   FirestorePaginationInfo? _paginationInfo;
+  final TicketTypeModel _type;
 
   int get _limit => _pageLimit * _currentPage;
   String? get _userId => (_user?.isPrivileged ?? true) ? null : _user?.id;
   bool get _stateInProgress => state.maybeMap(orElse: () => false, loading: (_) => true);
 
-  ListTicketsCubit({required AuthenticationCubit authCubit})
-      : _repository = TicketsRepository(),
+  ListTicketsCubit({
+    required TicketTypeModel type,
+    required AuthenticationCubit authCubit,
+  })  : _type = type,
+        _repository = TicketsRepository(),
         super(const ListTicketsState.initial()) {
     _user = authCubit.state.user;
     _resultSub = _repository.resultStream.listen(_parseResult);
@@ -72,7 +77,10 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
         .listStream(
           userId: _userId,
           limit: isTable ? _pageLimit : _limit,
-          request: request?.copyWith(paginationInfo: _paginationInfo),
+          request: (request ?? const TicketRequest()).copyWith(
+            type: _type,
+            paginationInfo: _paginationInfo,
+          ),
         )
         .listen(_parseListSub);
   }

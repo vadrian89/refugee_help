@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
+import 'package:refugee_help/domain/tickets/ticket_type_model.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
 import 'package:refugee_help/infrastructure/utils.dart';
 
@@ -44,8 +45,12 @@ class RootRouterCubit extends Cubit<RootRouterState> {
   void goToTransport({String? id, bool add = false}) =>
       _onlyAuthenticated(RootRouterState.transport(id: id, add: add));
 
-  void goToTickets({String? id, bool add = false}) =>
-      _onlyAuthenticated(RootRouterState.tickets(id: id, add: add));
+  void goToTickets({
+    String? id,
+    TicketTypeModel? type,
+    bool add = false,
+  }) =>
+      _onlyAuthenticated(RootRouterState.tickets(id: id, type: type, add: add));
 
   void toggleTicketTransport({String? transportId}) => state.maybeMap(
         orElse: () => null,
@@ -79,6 +84,10 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           }
           return true;
         }
+        if (tickets.id != null || tickets.add) {
+          goToTickets(type: tickets.type);
+          return true;
+        }
         return goToRoot();
       },
       transport: (transport) {
@@ -110,7 +119,7 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           home: _onlyAuthenticated,
           transport: _onlyAuthenticated,
           tickets: (tickets) {
-            if ((tickets.id?.isEmpty ?? true) && !tickets.add) {
+            if (tickets.type == null) {
               goToRoot();
               return;
             }

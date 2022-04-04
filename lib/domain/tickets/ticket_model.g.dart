@@ -8,6 +8,9 @@ part of 'ticket_model.dart';
 
 _$_TicketModel _$$_TicketModelFromJson(Map<String, dynamic> json) =>
     _$_TicketModel(
+      type: json['type'] == null
+          ? null
+          : TicketTypeModel.fromJson(json['type'] as Map<String, dynamic>),
       adultsNumber: json['adultsNumber'] as int?,
       childrenNumber: json['childrenNumber'] as int?,
       transport: json['transport'] == null
@@ -34,6 +37,7 @@ _$_TicketModel _$$_TicketModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_TicketModelToJson(_$_TicketModel instance) =>
     <String, dynamic>{
+      'type': instance.type?.toJson(),
       'adultsNumber': instance.adultsNumber,
       'childrenNumber': instance.childrenNumber,
       'transport': instance.transport?.toJson(),

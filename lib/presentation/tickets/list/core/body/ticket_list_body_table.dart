@@ -89,6 +89,7 @@ class TicketListBodyTable extends StatelessWidget {
         ],
         onSelectChanged: (_) => context.read<RootRouterCubit>().goToTickets(
               id: ticket.id,
+              type: ticket.type,
             ),
       );
 

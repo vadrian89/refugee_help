@@ -19,8 +19,11 @@ class _$TicketRequestTearOff {
   const _$TicketRequestTearOff();
 
   _TicketRequest call(
-      {bool goBack = false, FirestorePaginationInfo<dynamic>? paginationInfo}) {
+      {TicketTypeModel? type,
+      bool goBack = false,
+      FirestorePaginationInfo<dynamic>? paginationInfo}) {
     return _TicketRequest(
+      type: type,
       goBack: goBack,
       paginationInfo: paginationInfo,
     );
@@ -32,6 +35,7 @@ const $TicketRequest = _$TicketRequestTearOff();
 
 /// @nodoc
 mixin _$TicketRequest {
+  TicketTypeModel? get type => throw _privateConstructorUsedError;
   bool get goBack => throw _privateConstructorUsedError;
   FirestorePaginationInfo<dynamic>? get paginationInfo =>
       throw _privateConstructorUsedError;
@@ -46,7 +50,10 @@ abstract class $TicketRequestCopyWith<$Res> {
   factory $TicketRequestCopyWith(
           TicketRequest value, $Res Function(TicketRequest) then) =
       _$TicketRequestCopyWithImpl<$Res>;
-  $Res call({bool goBack, FirestorePaginationInfo<dynamic>? paginationInfo});
+  $Res call(
+      {TicketTypeModel? type,
+      bool goBack,
+      FirestorePaginationInfo<dynamic>? paginationInfo});
 }
 
 /// @nodoc
@@ -60,10 +67,15 @@ class _$TicketRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? type = freezed,
     Object? goBack = freezed,
     Object? paginationInfo = freezed,
   }) {
     return _then(_value.copyWith(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TicketTypeModel?,
       goBack: goBack == freezed
           ? _value.goBack
           : goBack // ignore: cast_nullable_to_non_nullable
@@ -83,7 +95,10 @@ abstract class _$TicketRequestCopyWith<$Res>
           _TicketRequest value, $Res Function(_TicketRequest) then) =
       __$TicketRequestCopyWithImpl<$Res>;
   @override
-  $Res call({bool goBack, FirestorePaginationInfo<dynamic>? paginationInfo});
+  $Res call(
+      {TicketTypeModel? type,
+      bool goBack,
+      FirestorePaginationInfo<dynamic>? paginationInfo});
 }
 
 /// @nodoc
@@ -99,10 +114,15 @@ class __$TicketRequestCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? type = freezed,
     Object? goBack = freezed,
     Object? paginationInfo = freezed,
   }) {
     return _then(_TicketRequest(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TicketTypeModel?,
       goBack: goBack == freezed
           ? _value.goBack
           : goBack // ignore: cast_nullable_to_non_nullable
@@ -118,8 +138,10 @@ class __$TicketRequestCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TicketRequest implements _TicketRequest {
-  const _$_TicketRequest({this.goBack = false, this.paginationInfo});
+  const _$_TicketRequest({this.type, this.goBack = false, this.paginationInfo});
 
+  @override
+  final TicketTypeModel? type;
   @JsonKey()
   @override
   final bool goBack;
@@ -128,7 +150,7 @@ class _$_TicketRequest implements _TicketRequest {
 
   @override
   String toString() {
-    return 'TicketRequest(goBack: $goBack, paginationInfo: $paginationInfo)';
+    return 'TicketRequest(type: $type, goBack: $goBack, paginationInfo: $paginationInfo)';
   }
 
   @override
@@ -136,6 +158,7 @@ class _$_TicketRequest implements _TicketRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _TicketRequest &&
+            const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.goBack, goBack) &&
             const DeepCollectionEquality()
                 .equals(other.paginationInfo, paginationInfo));
@@ -144,6 +167,7 @@ class _$_TicketRequest implements _TicketRequest {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(goBack),
       const DeepCollectionEquality().hash(paginationInfo));
 
@@ -155,9 +179,12 @@ class _$_TicketRequest implements _TicketRequest {
 
 abstract class _TicketRequest implements TicketRequest {
   const factory _TicketRequest(
-      {bool goBack,
+      {TicketTypeModel? type,
+      bool goBack,
       FirestorePaginationInfo<dynamic>? paginationInfo}) = _$_TicketRequest;
 
+  @override
+  TicketTypeModel? get type;
   @override
   bool get goBack;
   @override

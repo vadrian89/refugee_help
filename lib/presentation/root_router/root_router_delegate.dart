@@ -100,40 +100,40 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
   /// Alternatively to have a cleaner delegate, the list of pages can be built in a separate class.
   List<Page> get _extraPages {
     final tmpList = <Page>[];
-    _routerCubit.state.maybeWhen(
+    _routerCubit.state.maybeMap(
       orElse: () => null,
-      register: () => null,
-      home: (_, viewProfile) {
-        if (viewProfile) {
+      register: (_) => null,
+      home: (home) {
+        if (home.viewProfile) {
           tmpList.add(
             _materialPage(valueKey: RootRouterState.profilePath, child: const UserProfileScreen()),
           );
         }
       },
-      tickets: (id, add, _, transportId) {
-        if ((id?.isNotEmpty ?? false) || add) {
+      tickets: (tickets) {
+        if ((tickets.id?.isNotEmpty ?? false) || tickets.add) {
           tmpList.add(
             _materialPage(
               valueKey: RootRouterState.ticketsPath,
-              child: ManageTicketScreen(id: id),
+              child: ManageTicketScreen(id: tickets.id),
             ),
           );
         }
-        if (transportId?.isNotEmpty ?? false) {
+        if (tickets.transportId?.isNotEmpty ?? false) {
           tmpList.add(
             _materialPage(
               valueKey: RootRouterState.transportPath,
-              child: ManageTransportScreen(id: transportId),
+              child: ManageTransportScreen(id: tickets.transportId),
             ),
           );
         }
       },
-      transport: (id, add, _) {
-        if ((id?.isNotEmpty ?? false) || add) {
+      transport: (transport) {
+        if ((transport.id?.isNotEmpty ?? false) || transport.add) {
           tmpList.add(
             _materialPage(
               valueKey: RootRouterState.transportPath,
-              child: ManageTransportScreen(id: id),
+              child: ManageTransportScreen(id: transport.id),
             ),
           );
         }

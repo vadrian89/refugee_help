@@ -12,6 +12,7 @@ import 'package:refugee_help/infrastructure/utils.dart';
 
 import 'ticket_model.dart';
 import 'ticket_status_model.dart';
+import 'ticket_type_model.dart';
 
 /// Repository class used for the authentication process
 class TicketsRepository extends BaseRepository implements CrudRepositoryInterface<TicketModel> {
@@ -38,7 +39,7 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
     OperationResult<bool> result = const OperationResult.success(true);
     try {
       await _reference.add(model);
-      await incrementCount(_counterDoc);
+      await incrementCount("${model.type!.name}_$_counterDoc");
     } on FirebaseException catch (error) {
       logException("Exception in add", error: error, stackTrace: error.stackTrace);
       result = OperationResult.failure("ticket.error_saving".tr());
@@ -78,7 +79,7 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
     OperationResult<bool> result = OperationResult.success(popScreen);
     try {
       await _reference.doc(model.id).delete();
-      await decrementCount(_counterDoc);
+      await decrementCount("${model.type!.name}_$_counterDoc");
     } on FirebaseException catch (error) {
       logException("Exception in delete", error: error, stackTrace: error.stackTrace);
       result = OperationResult.failure("ticket.error_deleting".tr());
@@ -98,11 +99,12 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
   }
 
   Stream<List<TicketModel>> listStream({
-    TicketRequest? request,
+    required TicketRequest request,
     int limit = 10,
     String? userId,
   }) async* {
     Query<TicketModel> query = _reference
+        .where("type.id", isEqualTo: request.type!.id)
         .orderBy("createdAt", descending: true)
         .orderBy("adultsNumber", descending: true)
         .orderBy("childrenNumber", descending: true);
@@ -111,27 +113,29 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
     }
     query = pagedQuery<TicketModel>(
       query: query,
-      paginationInfo: request?.paginationInfo,
-      goBack: request?.goBack ?? false,
+      paginationInfo: request.paginationInfo,
+      goBack: request.goBack,
       limit: limit,
     );
     logDebug("Firebase query parameters ${query.parameters}", local: true);
-    yield* query.snapshots().asyncMap(_listFromSnapshot);
+    yield* query.snapshots().asyncMap((event) => _listFromSnapshot(request.type!, event));
   }
 
-  Future<List<TicketModel>> _listFromSnapshot(QuerySnapshot<TicketModel>? snapshot) async {
-    if (snapshot != null) {
+  Future<List<TicketModel>> _listFromSnapshot(
+    TicketTypeModel type, [
+    QuerySnapshot<TicketModel>? snapshot,
+  ]) async {
+    if (snapshot?.docs.isNotEmpty ?? false) {
       addResultToStream(OperationResult.success(FirestorePaginationInfo(
-        firstDoc: snapshot.docs.first,
+        firstDoc: snapshot!.docs.first,
         lastDoc: snapshot.docs.last,
       )));
-      addResultToStream(OperationResult.success(await getTotalCount()));
+      addResultToStream(OperationResult.success(await count("${type.name}_$_counterDoc")));
+      await Utils.streamDelay();
+      return snapshot.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList();
     }
-    await Utils.streamDelay();
-    return snapshot?.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList() ?? [];
+    return [];
   }
-
-  Future<int> getTotalCount() => count(_counterDoc);
 
   @override
   Future<void> close() async {

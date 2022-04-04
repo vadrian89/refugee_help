@@ -81,6 +81,7 @@ class RootRouterState with _$RootRouterState {
 
   const factory RootRouterState.tickets({
     String? id,
+    TicketTypeModel? type,
     @Default(false) bool add,
     @Default(false) bool modalVisible,
     String? transportId,
@@ -118,46 +119,66 @@ class RootRouterState with _$RootRouterState {
   /// This constructor is used inside [RootRouterParser.parseRouteInformation].
   factory RootRouterState.fromUriLevel2(Uri uri) {
     final pathSegment1 = "/${uri.pathSegments[0]}";
-    final pathSegment2 = "/${uri.pathSegments[1]}";
-    final queryParameters = uri.queryParametersAll;
+    final pathSegment2 = uri.pathSegments[1];
     if (pathSegment1 == homePath) {
-      if (pathSegment2 == profilePath) {
+      if ("/$pathSegment2" == profilePath) {
         return const RootRouterState.home(viewProfile: true);
       }
     }
     if (pathSegment1 == transportPath) {
-      if (pathSegment2 == addPath) {
+      if ("/$pathSegment2" == addPath) {
         return const RootRouterState.transport(add: true);
       }
-      return RootRouterState.transport(id: pathSegment2.clean);
+      return RootRouterState.transport(id: pathSegment2);
     }
-    if (pathSegment1 == ticketsPath) {
-      if (pathSegment2 == addPath) {
+    if (pathSegment1 == ticketsPath && TicketTypeModel.isValidType(pathSegment2)) {
+      return RootRouterState.tickets(
+        type: TicketTypeModel.values.firstWhereOrNull((element) => element.name == pathSegment2),
+      );
+    }
+    return const RootRouterState.unknown();
+  }
+
+  /// Factory constructor used to get the correct state from an [Uri] when [Uri.length] is 3.
+  ///
+  /// This constructor is used inside [RootRouterParser.parseRouteInformation].
+  factory RootRouterState.fromUriLevel3(Uri uri) {
+    final pathSegment1 = "/${uri.pathSegments[0]}";
+    final pathSegment2 = uri.pathSegments[1];
+    final pathSegment3 = uri.pathSegments[2];
+    final queryParameters = uri.queryParametersAll;
+    if (pathSegment1 == ticketsPath && TicketTypeModel.isValidType(pathSegment2)) {
+      if ("/$pathSegment3" == addPath) {
         return RootRouterState.tickets(
           add: true,
           modalVisible: queryParameters["transportId"] != null,
           transportId: queryParameters["transportId"]?.first,
+          type: TicketTypeModel.values.firstWhereOrNull((element) => element.name == pathSegment2),
         );
       }
-      return RootRouterState.tickets(id: pathSegment2.clean);
+      return RootRouterState.tickets(
+        id: pathSegment3,
+        type: TicketTypeModel.values.firstWhereOrNull((element) => element.name == pathSegment2),
+      );
     }
     return const RootRouterState.unknown();
   }
 
   /// Get the corresponding url for each state
-  String get urlPath => maybeWhen(
-        initial: () => rootPath,
-        unauthenticated: () => authPath,
-        register: () => registerPath,
-        home: (_, viewProfile) => "$homePath${_getPath(viewProfile, profilePath)}",
-        transport: (id, add, _) =>
-            "$transportPath${_getPath(add, addPath)}" +
-            _getPath(id?.trim().isNotEmpty ?? false, "/$id"),
-        tickets: (id, add, _, transportId) =>
-            "$ticketsPath${_getPath(add, addPath)}" +
-            _getPath(id?.trim().isNotEmpty ?? false, "/$id") +
-            _getPath(transportId?.trim().isNotEmpty ?? false, "?") +
-            _getParameter("transportId", transportId ?? ""),
+  String get urlPath => maybeMap(
+        initial: (_) => rootPath,
+        unauthenticated: (_) => authPath,
+        register: (_) => registerPath,
+        home: (home) => "$homePath${_getPath(home.viewProfile, profilePath)}",
+        transport: (transport) =>
+            "$transportPath${_getPath(transport.add, addPath)}" +
+            _getPath(transport.id?.trim().isNotEmpty ?? false, "/${transport.id}"),
+        tickets: (tickets) =>
+            "$ticketsPath${_getPath(tickets.add, addPath)}" +
+            _getPath(tickets.type?.name.trim().isNotEmpty ?? false, "/${tickets.type!.name}") +
+            _getPath(tickets.id?.trim().isNotEmpty ?? false, "/${tickets.id}") +
+            _getPath(tickets.transportId?.trim().isNotEmpty ?? false, "?") +
+            _getParameter("transportId", tickets.transportId ?? ""),
         orElse: () => unknownPath,
       );
 
@@ -169,8 +190,4 @@ class RootRouterState with _$RootRouterState {
 
     return "$name=$value";
   }
-}
-
-extension PathManagement on String {
-  String get clean => replaceAll("/", "");
 }

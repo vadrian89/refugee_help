@@ -25,6 +25,7 @@ class _$TicketModelTearOff {
   _TicketModel call(
       {@JsonKey(ignore: true)
           String? id,
+      TicketTypeModel? type,
       int? adultsNumber,
       int? childrenNumber,
       TransportInfoModel? transport,
@@ -40,6 +41,7 @@ class _$TicketModelTearOff {
       bool? isMock = false}) {
     return _TicketModel(
       id: id,
+      type: type,
       adultsNumber: adultsNumber,
       childrenNumber: childrenNumber,
       transport: transport,
@@ -66,6 +68,7 @@ const $TicketModel = _$TicketModelTearOff();
 mixin _$TicketModel {
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
+  TicketTypeModel? get type => throw _privateConstructorUsedError;
   int? get adultsNumber => throw _privateConstructorUsedError;
   int? get childrenNumber => throw _privateConstructorUsedError;
   TransportInfoModel? get transport => throw _privateConstructorUsedError;
@@ -99,6 +102,7 @@ abstract class $TicketModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true)
           String? id,
+      TicketTypeModel? type,
       int? adultsNumber,
       int? childrenNumber,
       TransportInfoModel? transport,
@@ -130,6 +134,7 @@ class _$TicketModelCopyWithImpl<$Res> implements $TicketModelCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? type = freezed,
     Object? adultsNumber = freezed,
     Object? childrenNumber = freezed,
     Object? transport = freezed,
@@ -147,6 +152,10 @@ class _$TicketModelCopyWithImpl<$Res> implements $TicketModelCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TicketTypeModel?,
       adultsNumber: adultsNumber == freezed
           ? _value.adultsNumber
           : adultsNumber // ignore: cast_nullable_to_non_nullable
@@ -250,6 +259,7 @@ abstract class _$TicketModelCopyWith<$Res>
   $Res call(
       {@JsonKey(ignore: true)
           String? id,
+      TicketTypeModel? type,
       int? adultsNumber,
       int? childrenNumber,
       TransportInfoModel? transport,
@@ -287,6 +297,7 @@ class __$TicketModelCopyWithImpl<$Res> extends _$TicketModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? type = freezed,
     Object? adultsNumber = freezed,
     Object? childrenNumber = freezed,
     Object? transport = freezed,
@@ -304,6 +315,10 @@ class __$TicketModelCopyWithImpl<$Res> extends _$TicketModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TicketTypeModel?,
       adultsNumber: adultsNumber == freezed
           ? _value.adultsNumber
           : adultsNumber // ignore: cast_nullable_to_non_nullable
@@ -359,6 +374,7 @@ class _$_TicketModel extends _TicketModel {
   const _$_TicketModel(
       {@JsonKey(ignore: true)
           this.id,
+      this.type,
       this.adultsNumber,
       this.childrenNumber,
       this.transport,
@@ -380,6 +396,8 @@ class _$_TicketModel extends _TicketModel {
   @override
   @JsonKey(ignore: true)
   final String? id;
+  @override
+  final TicketTypeModel? type;
   @override
   final int? adultsNumber;
   @override
@@ -412,7 +430,7 @@ class _$_TicketModel extends _TicketModel {
 
   @override
   String toString() {
-    return 'TicketModel(id: $id, adultsNumber: $adultsNumber, childrenNumber: $childrenNumber, transport: $transport, dispatcher: $dispatcher, destination: $destination, createdAt: $createdAt, startedAt: $startedAt, cancelFeedback: $cancelFeedback, finishedFeedback: $finishedFeedback, remarks: $remarks, isMock: $isMock)';
+    return 'TicketModel(id: $id, type: $type, adultsNumber: $adultsNumber, childrenNumber: $childrenNumber, transport: $transport, dispatcher: $dispatcher, destination: $destination, createdAt: $createdAt, startedAt: $startedAt, cancelFeedback: $cancelFeedback, finishedFeedback: $finishedFeedback, remarks: $remarks, isMock: $isMock)';
   }
 
   @override
@@ -421,6 +439,7 @@ class _$_TicketModel extends _TicketModel {
         (other.runtimeType == runtimeType &&
             other is _TicketModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality()
                 .equals(other.adultsNumber, adultsNumber) &&
             const DeepCollectionEquality()
@@ -444,6 +463,7 @@ class _$_TicketModel extends _TicketModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(adultsNumber),
       const DeepCollectionEquality().hash(childrenNumber),
       const DeepCollectionEquality().hash(transport),
@@ -471,6 +491,7 @@ abstract class _TicketModel extends TicketModel {
   const factory _TicketModel(
       {@JsonKey(ignore: true)
           String? id,
+      TicketTypeModel? type,
       int? adultsNumber,
       int? childrenNumber,
       TransportInfoModel? transport,
@@ -492,6 +513,8 @@ abstract class _TicketModel extends TicketModel {
   @override
   @JsonKey(ignore: true)
   String? get id;
+  @override
+  TicketTypeModel? get type;
   @override
   int? get adultsNumber;
   @override

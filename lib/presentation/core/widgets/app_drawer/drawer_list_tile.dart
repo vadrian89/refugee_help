@@ -4,14 +4,14 @@ import 'package:refugee_help/presentation/core/responsive_widgets/responsive_wid
 class DrawerListTile extends ResponsiveWidget {
   final IconData icon;
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool isSelected;
 
   const DrawerListTile({
     Key? key,
     required this.icon,
     required this.label,
-    required this.onPressed,
+    this.onPressed,
     this.isSelected = false,
   }) : super(key: key);
 

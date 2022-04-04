@@ -6,6 +6,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/domain/dev/dev_repository.dart';
+import 'package:refugee_help/domain/tickets/ticket_type_model.dart';
 import 'package:refugee_help/presentation/core/responsive_widgets/responsive_widget.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head6_text.dart';
 
@@ -56,10 +57,32 @@ class AppDrawer extends ResponsiveWidget {
                 onPressed: context.read<RootRouterCubit>().goToRoot,
               ),
               DrawerListTile(
+                icon: MdiIcons.ticket,
+                label: "transport_tickets".tr(),
+                isSelected: state.maybeMap(
+                  orElse: () => false,
+                  tickets: (tickets) => tickets.type == TicketTypeModel.transport(),
+                ),
+                onPressed: () =>
+                    context.read<RootRouterCubit>().goToTickets(type: TicketTypeModel.transport()),
+              ),
+              DrawerListTile(
+                icon: MdiIcons.ticket,
+                label: "housing_tickets".tr(),
+                isSelected: state.maybeMap(
+                  orElse: () => false,
+                  tickets: (tickets) => tickets.type == TicketTypeModel.housing(),
+                ),
+              ),
+              DrawerListTile(
                 icon: MdiIcons.car,
                 label: "Transport",
                 isSelected: state.maybeMap(orElse: () => false, transport: (_) => true),
                 onPressed: context.read<RootRouterCubit>().goToTransport,
+              ),
+              DrawerListTile(
+                icon: MdiIcons.homeGroup,
+                label: "housing".tr(),
               ),
               const VolunteeringAvailabilityTile(),
               const Spacer(),

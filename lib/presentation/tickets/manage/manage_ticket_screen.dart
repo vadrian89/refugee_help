@@ -20,9 +20,7 @@ class ManageTicketScreen extends StatelessWidget {
         ),
         child: ScaffoldMessenger(
           child: Scaffold(
-            appBar: const AltAppBar(
-              actions: [TicketEditButton()],
-            ).appBar,
+            appBar: const AltAppBar(actions: [TicketEditButton()]).appBar,
             body: const ManageTicketForm(),
           ),
         ),

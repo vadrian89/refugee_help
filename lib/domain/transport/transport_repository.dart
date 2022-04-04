@@ -171,15 +171,16 @@ class TransportRepository extends BaseRepository
   }
 
   Future<List<TransportModel>> _listFromSnapshot(QuerySnapshot<TransportModel>? snapshot) async {
-    if (snapshot != null) {
+    if (snapshot?.docs.isNotEmpty ?? false) {
       addResultToStream(OperationResult.success(FirestorePaginationInfo(
-        firstDoc: snapshot.docs.first,
+        firstDoc: snapshot!.docs.first,
         lastDoc: snapshot.docs.last,
       )));
       addResultToStream(OperationResult.success(await getTotalCount()));
+      await Utils.streamDelay();
+      return snapshot.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList();
     }
-    await Utils.streamDelay();
-    return snapshot?.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList() ?? [];
+    return [];
   }
 
   Future<int> getTotalCount() => count(_counterDoc);
