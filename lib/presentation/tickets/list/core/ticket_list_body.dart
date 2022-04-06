@@ -3,12 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
 import 'package:refugee_help/application/tickets/list/list_tickets_cubit.dart';
 import 'package:refugee_help/domain/tickets/ticket_type_model.dart';
-import 'package:refugee_help/presentation/core/utils/widgets_utils.dart';
-import 'package:refugee_help/presentation/core/widgets/loader_widget.dart';
-import 'package:refugee_help/presentation/core/widgets/no_data_placeholder.dart';
 import 'package:refugee_help/presentation/tickets/list/core/body/ticket_list_body_view.dart';
 
-import 'ticket_list_consumer.dart';
+import 'ticket_list_listener.dart';
 
 class TicketListBody extends StatelessWidget {
   final TicketTypeModel type;
@@ -20,22 +17,7 @@ class TicketListBody extends StatelessWidget {
         create: (providerContext) => ListTicketsCubit(
           type: type,
           authCubit: providerContext.read<AuthenticationCubit>(),
-        )..fetchList(isTable: WidgetUtils.isDesktop(context)),
-        child: TicketListConsumer(
-          builder: (context, state) => state.maybeMap(
-            orElse: () => const LoaderWidget(),
-            view: (view) {
-              if (view.list.isEmpty) {
-                return const NoDataPlaceholder();
-              }
-              return TicketListBodyView(
-                list: view.list,
-                page: view.page,
-                pageLimit: view.pageLimit,
-                totalRows: view.totalRows,
-              );
-            },
-          ),
         ),
+        child: const TicketListListener(child: TicketListBodyView()),
       );
 }

@@ -6,9 +6,9 @@ import 'package:refugee_help/domain/core/base_repository.dart';
 import 'package:refugee_help/domain/core/crud_repository_interface.dart';
 import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
-import 'package:refugee_help/domain/tickets/ticket_request.dart';
+import 'package:refugee_help/domain/tickets/list_tickets_request_model.dart';
+import 'package:refugee_help/domain/tickets/list_tickets_response_model.dart';
 import 'package:refugee_help/domain/transport/transport_repository.dart';
-import 'package:refugee_help/infrastructure/utils.dart';
 
 import 'ticket_model.dart';
 import 'ticket_status_model.dart';
@@ -98,43 +98,40 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
         .map((doc) => doc.data()?.copyWith(id: id));
   }
 
-  Stream<List<TicketModel>> listStream({
-    required TicketRequest request,
-    int limit = 10,
-    String? userId,
-  }) async* {
+  Stream<ListTicketsResponseModel> listStream(ListTicketsRequestModel request) async* {
     Query<TicketModel> query = _reference
         .where("type.id", isEqualTo: request.type!.id)
         .orderBy("createdAt", descending: true)
         .orderBy("adultsNumber", descending: true)
         .orderBy("childrenNumber", descending: true);
-    if (userId != null) {
-      query = query.where("transport.user.id", isEqualTo: userId);
+    if (request.userId != null) {
+      query = query.where("transport.user.id", isEqualTo: request.userId);
     }
     query = pagedQuery<TicketModel>(
       query: query,
       paginationInfo: request.paginationInfo,
       goBack: request.goBack,
-      limit: limit,
+      limit: request.limit,
     );
     logDebug("Firebase query parameters ${query.parameters}", local: true);
     yield* query.snapshots().asyncMap((event) => _listFromSnapshot(request.type!, event));
   }
 
-  Future<List<TicketModel>> _listFromSnapshot(
+  Future<ListTicketsResponseModel> _listFromSnapshot(
     TicketTypeModel type, [
     QuerySnapshot<TicketModel>? snapshot,
   ]) async {
     if (snapshot?.docs.isNotEmpty ?? false) {
-      addResultToStream(OperationResult.success(FirestorePaginationInfo(
-        firstDoc: snapshot!.docs.first,
-        lastDoc: snapshot.docs.last,
-      )));
-      addResultToStream(OperationResult.success(await count("${type.name}_$_counterDoc")));
-      await Utils.streamDelay();
-      return snapshot.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList();
+      return ListTicketsResponseModel(
+        list: snapshot!.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList(),
+        paginationInfo: FirestorePaginationInfo(
+          firstDoc: snapshot.docs.first,
+          lastDoc: snapshot.docs.last,
+        ),
+        totalRows: await count("${type.name}_$_counterDoc"),
+      );
     }
-    return [];
+    return ListTicketsResponseModel.empty();
   }
 
   @override

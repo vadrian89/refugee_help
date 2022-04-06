@@ -138,5 +138,9 @@
     "of": "Of",
     "retrieving_data": "Retrieving data...",
     "user": "User",
-    "date": "Date"
+    "date": "Date",
+    "transport_tickets": "Transport tickets",
+    "housing_tickets": "Housing tickets",
+    "transport": "Transport",
+    "food": "Food"
 }

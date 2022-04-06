@@ -3,43 +3,82 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/application/tickets/list/list_tickets_cubit.dart';
+import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
-import 'package:refugee_help/domain/tickets/ticket_request.dart';
+import 'package:refugee_help/domain/tickets/list_tickets_request_model.dart';
 import 'package:refugee_help/presentation/core/widgets/tables/data_list_table.dart';
 
-class TicketListBodyTable extends StatelessWidget {
-  final List<TicketModel> list;
-  final int page;
-  final int pageLimit;
-  final int? totalRows;
+import 'tickets_list_consumer.dart';
 
-  const TicketListBodyTable({
-    Key? key,
-    required this.list,
-    this.page = 1,
-    this.pageLimit = 1,
-    this.totalRows,
-  }) : super(key: key);
+class TicketListDesktopBody extends StatefulWidget {
+  const TicketListDesktopBody({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => DataListTable(
-        columns: _tableColumns,
-        page: page,
-        pageLimit: pageLimit,
-        totalRows: totalRows,
-        rows: List.generate(
-          list.length,
-          (index) => _row(context, list[index]),
-        ),
-        onNext: () => context.read<ListTicketsCubit>().fetchList(
-              request: const TicketRequest(),
-              isTable: true,
-            ),
-        onBack: () => context.read<ListTicketsCubit>().fetchList(
-              request: const TicketRequest(goBack: true),
-              isTable: true,
-            ),
+  State<TicketListDesktopBody> createState() => _TicketListDesktopBodyState();
+}
+
+class _TicketListDesktopBodyState extends State<TicketListDesktopBody> {
+  static const int _pageLimit = 20;
+  late final ListTicketsCubit _bloc;
+  int _currentPage = 0;
+  bool _inProgress = true;
+
+  FirestorePaginationInfo? _paginationInfo;
+
+  ListTicketsRequestModel get _request => ListTicketsRequestModel(
+        limit: _pageLimit,
+        paginationInfo: (_currentPage == 0) ? null : _paginationInfo,
       );
+
+  @override
+  void initState() {
+    super.initState();
+    _currentPage++;
+    _bloc = context.read<ListTicketsCubit>()..fetchList(_request);
+  }
+
+  @override
+  Widget build(_) => TicketsListConsumer(
+        onFinished: () {
+          setState(() => _inProgress = false);
+        },
+        builder: (context, response) {
+          _paginationInfo = response.paginationInfo;
+
+          return DataListTable(
+            columns: _tableColumns,
+            page: _currentPage,
+            pageLimit: _pageLimit,
+            totalRows: response.totalRows,
+            rows: List.generate(
+              response.list.length,
+              (index) => _row(context, response.list[index]),
+            ),
+            onNext: _inProgress ? null : () => _next(context),
+            onBack: _inProgress ? null : () => _previous(context),
+          );
+        },
+      );
+
+  void _next(BuildContext context) {
+    if (_inProgress) {
+      return;
+    }
+    setState(() => _inProgress = true);
+    _currentPage++;
+
+    _bloc.fetchList(_request);
+  }
+
+  void _previous(BuildContext context) {
+    if (_inProgress) {
+      return;
+    }
+    setState(() => _inProgress = true);
+    _currentPage--;
+
+    _bloc.fetchList(_request.copyWith(goBack: true));
+  }
 
   List<DataColumn> get _tableColumns => [
         DataColumn(label: Text("adults_number".tr())),

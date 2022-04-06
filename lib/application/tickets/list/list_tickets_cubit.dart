@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
-import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
+import 'package:refugee_help/domain/tickets/list_tickets_response_model.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
-import 'package:refugee_help/domain/tickets/ticket_request.dart';
+import 'package:refugee_help/domain/tickets/list_tickets_request_model.dart';
 import 'package:refugee_help/domain/tickets/ticket_type_model.dart';
 import 'package:refugee_help/domain/tickets/tickets_repository.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
@@ -17,20 +17,15 @@ part 'list_tickets_state.dart';
 part 'list_tickets_cubit.freezed.dart';
 
 class ListTicketsCubit extends Cubit<ListTicketsState> {
-  late final TicketsRepository _repository;
-  late final StreamSubscription<OperationResult> _resultSub;
-  StreamSubscription<List<TicketModel>>? _listSub;
-  UserModel? _user;
-  List<TicketModel> _list = const [];
-  static const int _pageLimit = 20;
-  int _currentPage = 0;
-  int _totalRows = 0;
-  FirestorePaginationInfo? _paginationInfo;
   final TicketTypeModel _type;
+  final TicketsRepository _repository;
 
-  int get _limit => _pageLimit * _currentPage;
+  late final StreamSubscription<OperationResult> _resultSub;
+
+  StreamSubscription<ListTicketsResponseModel>? _listSub;
+  UserModel? _user;
+
   String? get _userId => (_user?.isPrivileged ?? true) ? null : _user?.id;
-  bool get _stateInProgress => state.maybeMap(orElse: () => false, loading: (_) => true);
 
   ListTicketsCubit({
     required TicketTypeModel type,
@@ -47,56 +42,33 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
           if (response is String) {
             emit(ListTicketsState.success(response));
           }
-          if (response is FirestorePaginationInfo) {
-            _paginationInfo = response;
-          }
-          if (response is int) {
-            emit(const ListTicketsState.success(""));
-            _totalRows = response;
-          }
           return;
         },
         failure: (message) => emit(ListTicketsState.failure(message)),
       );
 
-  Future<void> fetchList({TicketRequest? request, bool isTable = false}) async {
-    if (_stateInProgress) {
+  Future<void> fetchList(ListTicketsRequestModel request) async {
+    final isLoading = state.maybeWhen(orElse: () => false, loading: (_) => true);
+    if (isLoading) {
       return;
     }
-    emit(ListTicketsState.loading((request != null) ? "retrieving_data".tr() : ""));
+    state.maybeMap(
+      initial: (_) => null,
+      orElse: () => emit(ListTicketsState.loading("retrieving_data".tr())),
+    );
     await _listSub?.cancel();
-    if (request?.goBack ?? false) {
-      _currentPage--;
-    } else {
-      _currentPage++;
-    }
-    if (_currentPage == 0) {
-      _paginationInfo = null;
-    }
     _listSub = _repository
-        .listStream(
-          userId: _userId,
-          limit: isTable ? _pageLimit : _limit,
-          request: (request ?? const TicketRequest()).copyWith(
-            type: _type,
-            paginationInfo: _paginationInfo,
-          ),
-        )
+        .listStream(request.copyWith(type: _type, userId: _userId))
         .listen(_parseListSub);
   }
 
-  void _parseListSub(List<TicketModel> list) {
-    _list = list;
+  Future<void> _parseListSub(ListTicketsResponseModel response) async {
     state.maybeWhen(
       orElse: () => null,
+      loading: (_) => emit(const ListTicketsState.success("")),
       deleting: () => emit(ListTicketsState.success("deleted_ticket".tr())),
     );
-    emit(ListTicketsState.view(
-      list: _list,
-      page: _currentPage,
-      pageLimit: _pageLimit,
-      totalRows: _totalRows,
-    ));
+    emit(ListTicketsState.view(response));
   }
 
   Future<void> delete(TicketModel model) async {

@@ -62,23 +62,26 @@ class _TicketTransportSheetBodyState extends State<TicketTransportSheetBody> {
             onSearch: () => _bloc.fetchList(request: _request),
           ),
           const VerticalSpacing(40),
-          TransportListConsumer(
-            bloc: _bloc,
-            builder: (context, state) => state.maybeMap(
-              orElse: () => const LoaderWidget(),
-              view: (view) {
-                if (view.list.isEmpty) {
-                  return const NoDataPlaceholder();
-                }
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: view.list.length,
-                  itemBuilder: (context, index) => TicketTransportSheetTile(
-                    transport: view.list[index],
-                    onPressed: (model) => Navigator.maybePop(context, model),
-                  ),
-                );
-              },
+          ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.5),
+            child: TransportListConsumer(
+              bloc: _bloc,
+              builder: (context, state) => state.maybeMap(
+                orElse: () => const LoaderWidget(),
+                view: (view) {
+                  if (view.list.isEmpty) {
+                    return const NoDataPlaceholder();
+                  }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: view.list.length,
+                    itemBuilder: (context, index) => TicketTransportSheetTile(
+                      transport: view.list[index],
+                      onPressed: (model) => Navigator.maybePop(context, model),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],

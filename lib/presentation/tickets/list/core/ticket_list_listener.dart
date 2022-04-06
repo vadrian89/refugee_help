@@ -5,15 +5,13 @@ import 'package:refugee_help/application/tickets/list/list_tickets_cubit.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/utils/snackbars.dart';
 
-class TicketListConsumer extends StatelessWidget {
-  final ListTicketsCubit? bloc;
-  final Widget Function(BuildContext context, ListTicketsState state) builder;
+class TicketListListener extends StatelessWidget {
+  final Widget child;
 
-  const TicketListConsumer({Key? key, required this.builder, this.bloc}) : super(key: key);
+  const TicketListListener({Key? key, required this.child}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BlocConsumer<ListTicketsCubit, ListTicketsState>(
-        bloc: bloc,
+  Widget build(BuildContext context) => BlocListener<ListTicketsCubit, ListTicketsState>(
         listener: (context, state) => state.maybeWhen(
           orElse: () => null,
           deleting: () => showLoadingSnackBar(context, message: "ticket.deleting".tr()),
@@ -33,7 +31,6 @@ class TicketListConsumer extends StatelessWidget {
           failure: (_) => true,
           loading: (message) => message.isNotEmpty,
         ),
-        builder: builder,
-        buildWhen: (_, current) => current.maybeMap(orElse: () => false, view: (_) => true),
+        child: child,
       );
 }
