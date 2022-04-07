@@ -19,7 +19,6 @@ void main() async {
   await Firebase.initializeApp(options: (kIsWeb) ? null : DefaultFirebaseOptions.currentPlatform);
   await ChrashlyticsUtils.initialize();
   await EasyLocalization.ensureInitialized();
-
   BlocOverrides.runZoned(
     () => runApp(
       EasyLocalization(

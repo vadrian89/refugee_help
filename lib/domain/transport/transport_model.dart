@@ -25,7 +25,7 @@ class TransportModel with _$TransportModel {
 
   @JsonSerializable(explicitToJson: true)
   const factory TransportModel({
-    @JsonKey(ignore: true) String? id,
+    String? id,
     String? registrationNumber,
     @Default(0) int? seatsAvailable,
     TransportTypeModel? type,

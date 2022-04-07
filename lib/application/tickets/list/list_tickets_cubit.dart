@@ -17,8 +17,8 @@ part 'list_tickets_state.dart';
 part 'list_tickets_cubit.freezed.dart';
 
 class ListTicketsCubit extends Cubit<ListTicketsState> {
-  final TicketTypeModel _type;
-  final TicketsRepository _repository;
+  final TicketTypeModel type;
+  final TicketsRepository _repo;
 
   late final StreamSubscription<OperationResult> _resultSub;
 
@@ -28,13 +28,12 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
   String? get _userId => (_user?.isPrivileged ?? true) ? null : _user?.id;
 
   ListTicketsCubit({
-    required TicketTypeModel type,
+    required this.type,
     required AuthenticationCubit authCubit,
-  })  : _type = type,
-        _repository = TicketsRepository(),
+  })  : _repo = TicketsRepository(),
         super(const ListTicketsState.initial()) {
     _user = authCubit.state.user;
-    _resultSub = _repository.resultStream.listen(_parseResult);
+    _resultSub = _repo.resultStream.listen(_parseResult);
   }
 
   void _parseResult(OperationResult result) => result.when(
@@ -57,9 +56,8 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
       orElse: () => emit(ListTicketsState.loading("retrieving_data".tr())),
     );
     await _listSub?.cancel();
-    _listSub = _repository
-        .listStream(request.copyWith(type: _type, userId: _userId))
-        .listen(_parseListSub);
+    _listSub =
+        _repo.listStream(request.copyWith(type: type, userId: _userId)).listen(_parseListSub);
   }
 
   Future<void> _parseListSub(ListTicketsResponseModel response) async {
@@ -74,12 +72,12 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
   Future<void> delete(TicketModel model) async {
     emit(const ListTicketsState.deleting());
     await Utils.repoDelay();
-    await _repository.delete(model);
+    await _repo.delete(model);
   }
 
   @override
   Future<void> close() async {
-    await _repository.close();
+    await _repo.close();
     await _listSub?.cancel();
     await _resultSub.cancel();
     return super.close();

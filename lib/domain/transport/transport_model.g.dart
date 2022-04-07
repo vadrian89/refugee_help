@@ -8,6 +8,7 @@ part of 'transport_model.dart';
 
 _$_TransportModel _$$_TransportModelFromJson(Map<String, dynamic> json) =>
     _$_TransportModel(
+      id: json['id'] as String?,
       registrationNumber: json['registrationNumber'] as String?,
       seatsAvailable: json['seatsAvailable'] as int? ?? 0,
       type: json['type'] == null
@@ -31,6 +32,7 @@ _$_TransportModel _$$_TransportModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_TransportModelToJson(_$_TransportModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'registrationNumber': instance.registrationNumber,
       'seatsAvailable': instance.seatsAvailable,
       'type': instance.type?.toJson(),

@@ -1,42 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:refugee_help/domain/transport/transport_model.dart';
-import 'package:refugee_help/presentation/core/bloc_builders/privileged_builder.dart';
 import 'package:refugee_help/presentation/core/responsive_widgets/responsive_widget.dart';
-import 'package:refugee_help/presentation/transport/list/core/body/transport_list_body_table.dart';
-
-import 'transport_list_slidable.dart';
-import 'transport_list_tile.dart';
+import 'package:refugee_help/presentation/transport/list/core/body/transport_list_desktop_body.dart';
+import 'package:refugee_help/presentation/transport/list/core/body/transport_list_mobile_body.dart';
 
 class TransportListBodyView extends ResponsiveWidget {
-  final List<TransportModel> list;
-  final int page;
-  final int pageLimit;
-  final int? totalRows;
-
-  const TransportListBodyView({
-    Key? key,
-    required this.list,
-    this.page = 1,
-    this.pageLimit = 1,
-    this.totalRows,
-  }) : super(key: key);
+  const TransportListBodyView({Key? key}) : super(key: key);
 
   @override
-  Widget phone(BuildContext context) => ListView.separated(
-        itemBuilder: (context, index) => PrivilegedBuilder(
-          builder: (context, isPrivileged) => isPrivileged
-              ? TransportListSlidable(model: list[index])
-              : TransportListTile(model: list[index]),
-        ),
-        separatorBuilder: (_, __) => const Divider(),
-        itemCount: list.length,
-      );
+  Widget phone(BuildContext context) => const TransportListMobileBody();
 
   @override
-  Widget desktop(BuildContext context) => TransportListBodyTable(
-        list: list,
-        page: page,
-        pageLimit: pageLimit,
-        totalRows: totalRows,
-      );
+  Widget desktop(BuildContext context) => const TransportListDesktopBody();
 }

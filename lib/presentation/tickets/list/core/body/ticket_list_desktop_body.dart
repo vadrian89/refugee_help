@@ -20,7 +20,7 @@ class TicketListDesktopBody extends StatefulWidget {
 class _TicketListDesktopBodyState extends State<TicketListDesktopBody> {
   static const int _pageLimit = 20;
   late final ListTicketsCubit _bloc;
-  int _currentPage = 0;
+  int _currentPage = 1;
   bool _inProgress = true;
 
   FirestorePaginationInfo? _paginationInfo;
@@ -33,7 +33,6 @@ class _TicketListDesktopBodyState extends State<TicketListDesktopBody> {
   @override
   void initState() {
     super.initState();
-    _currentPage++;
     _bloc = context.read<ListTicketsCubit>()..fetchList(_request);
   }
 

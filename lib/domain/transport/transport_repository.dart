@@ -1,17 +1,14 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:refugee_help/domain/core/base_repository.dart';
 import 'package:refugee_help/domain/core/crud_repository_interface.dart';
-import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/core/image_model.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/util/firebase_storage_utils.dart';
-import 'package:refugee_help/infrastructure/utils.dart';
 
 import 'transport_model.dart';
-import 'transport_request.dart';
+import 'list_transport_request_model.dart';
 
 /// Repository class used for the authentication process
 class TransportRepository extends BaseRepository
@@ -141,47 +138,32 @@ class TransportRepository extends BaseRepository
     yield* _reference.doc(id).snapshots().map((doc) => doc.data()?.copyWith(id: id));
   }
 
-  Stream<List<TransportModel>> listStream({
-    TransportRequest? request,
-    int limit = 10,
-    String? userId,
-  }) async* {
+  Stream<List<TransportModel>> listStream(ListTransportRequestModel request) async* {
     Query<TransportModel> query = _reference;
-    if (userId != null) {
-      query = query.where("user.id", isEqualTo: userId);
+    if (request.userId != null) {
+      query = query.where("user.id", isEqualTo: request.userId);
     }
-    if (request?.seatsAvailable != null) {
-      query = query.where("seatsAvailable", isEqualTo: request?.seatsAvailable);
+    if (request.seatsAvailable != null) {
+      query = query.where("seatsAvailable", isEqualTo: request.seatsAvailable);
     }
-    if (request?.transportType != null) {
-      query = query.where("type", isEqualTo: request?.transportType!.id);
+    if (request.transportType != null) {
+      query = query.where("type", isEqualTo: request.transportType!.id);
     }
-    if (request?.isAvailable ?? false) {
-      query = query.where("isAvailable", isEqualTo: request?.isAvailable);
+    if (request.isAvailable != null) {
+      query = query.where("isAvailable", isEqualTo: request.isAvailable);
     }
     query = query.orderBy("timeAvailable").orderBy("updatedAt", descending: true);
-    query = pagedQuery<TransportModel>(
-      query: query,
-      paginationInfo: request?.paginationInfo,
-      goBack: request?.goBack ?? false,
-      limit: limit,
-    );
+    if (request.limit != null) {
+      query = query.limit(request.limit!);
+    }
     logDebug("Firebase query ${query.parameters}", local: true);
     yield* query.snapshots(includeMetadataChanges: true).asyncMap(_listFromSnapshot);
   }
 
   Future<List<TransportModel>> _listFromSnapshot(QuerySnapshot<TransportModel>? snapshot) async {
     if (snapshot?.docs.isNotEmpty ?? false) {
-      addResultToStream(OperationResult.success(FirestorePaginationInfo(
-        firstDoc: snapshot!.docs.first,
-        lastDoc: snapshot.docs.last,
-      )));
-      addResultToStream(OperationResult.success(await getTotalCount()));
-      await Utils.streamDelay();
-      return snapshot.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList();
+      return snapshot!.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList();
     }
     return [];
   }
-
-  Future<int> getTotalCount() => count(_counterDoc);
 }

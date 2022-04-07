@@ -2,17 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/transport/list/list_transport_cubit.dart';
+import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/utils/snackbars.dart';
 
-class TransportListConsumer extends StatelessWidget {
-  final ListTransportCubit? bloc;
-  final Widget Function(BuildContext context, ListTransportState state) builder;
+class TransportListListener extends StatelessWidget {
+  final Widget child;
 
-  const TransportListConsumer({Key? key, required this.builder, this.bloc}) : super(key: key);
+  const TransportListListener({Key? key, required this.child}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BlocConsumer<ListTransportCubit, ListTransportState>(
-        bloc: bloc,
+  Widget build(BuildContext context) => BlocListener<ListTransportCubit, ListTransportState>(
         listener: (context, state) => state.maybeWhen(
           orElse: () => null,
           deleting: () => showLoadingSnackBar(context, message: "deleting_transport".tr()),
@@ -22,7 +21,7 @@ class TransportListConsumer extends StatelessWidget {
                 : ScaffoldMessenger.of(context).hideCurrentSnackBar();
             return;
           },
-          failure: (message) => showErrorSnackBar(context, message: message),
+          failure: (message) => AdaptiveDialog.showError(context, message: message),
           loading: (message) => showLoadingSnackBar(context, message: message),
         ),
         listenWhen: (_, current) => current.maybeWhen(
@@ -32,7 +31,6 @@ class TransportListConsumer extends StatelessWidget {
           failure: (_) => true,
           loading: (message) => message.isNotEmpty,
         ),
-        builder: builder,
-        buildWhen: (_, current) => current.maybeMap(orElse: () => false, view: (_) => true),
+        child: child,
       );
 }

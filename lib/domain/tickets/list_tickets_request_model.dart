@@ -12,5 +12,6 @@ class ListTicketsRequestModel with _$ListTicketsRequestModel {
     @Default(false) bool goBack,
     FirestorePaginationInfo? paginationInfo,
     String? userId,
+    @Default(false) bool isDesktop,
   }) = _ListTicketsRequestModel;
 }

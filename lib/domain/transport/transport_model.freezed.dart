@@ -23,8 +23,7 @@ class _$TransportModelTearOff {
   const _$TransportModelTearOff();
 
   _TransportModel call(
-      {@JsonKey(ignore: true)
-          String? id,
+      {String? id,
       String? registrationNumber,
       int? seatsAvailable = 0,
       TransportTypeModel? type,
@@ -68,7 +67,6 @@ const $TransportModel = _$TransportModelTearOff();
 
 /// @nodoc
 mixin _$TransportModel {
-  @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
   String? get registrationNumber => throw _privateConstructorUsedError;
   int? get seatsAvailable => throw _privateConstructorUsedError;
@@ -104,8 +102,7 @@ abstract class $TransportModelCopyWith<$Res> {
           TransportModel value, $Res Function(TransportModel) then) =
       _$TransportModelCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(ignore: true)
-          String? id,
+      {String? id,
       String? registrationNumber,
       int? seatsAvailable,
       TransportTypeModel? type,
@@ -243,8 +240,7 @@ abstract class _$TransportModelCopyWith<$Res>
       __$TransportModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(ignore: true)
-          String? id,
+      {String? id,
       String? registrationNumber,
       int? seatsAvailable,
       TransportTypeModel? type,
@@ -361,8 +357,7 @@ class __$TransportModelCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_TransportModel extends _TransportModel {
   const _$_TransportModel(
-      {@JsonKey(ignore: true)
-          this.id,
+      {this.id,
       this.registrationNumber,
       this.seatsAvailable = 0,
       this.type,
@@ -384,7 +379,6 @@ class _$_TransportModel extends _TransportModel {
       _$$_TransportModelFromJson(json);
 
   @override
-  @JsonKey(ignore: true)
   final String? id;
   @override
   final String? registrationNumber;
@@ -489,8 +483,7 @@ class _$_TransportModel extends _TransportModel {
 
 abstract class _TransportModel extends TransportModel {
   const factory _TransportModel(
-      {@JsonKey(ignore: true)
-          String? id,
+      {String? id,
       String? registrationNumber,
       int? seatsAvailable,
       TransportTypeModel? type,
@@ -512,7 +505,6 @@ abstract class _TransportModel extends TransportModel {
       _$_TransportModel.fromJson;
 
   @override
-  @JsonKey(ignore: true)
   String? get id;
   @override
   String? get registrationNumber;

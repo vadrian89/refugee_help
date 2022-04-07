@@ -4,11 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
-import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/transport/transport_model.dart';
 import 'package:refugee_help/domain/transport/transport_repository.dart';
-import 'package:refugee_help/domain/transport/transport_request.dart';
+import 'package:refugee_help/domain/transport/list_transport_request_model.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
 import 'package:refugee_help/infrastructure/utils.dart';
 
@@ -20,15 +19,6 @@ class ListTransportCubit extends Cubit<ListTransportState> {
   late final StreamSubscription<OperationResult> _resultSub;
   StreamSubscription<List<TransportModel>>? _listSub;
   UserModel? _user;
-  List<TransportModel> _list = const [];
-  static const int _pageLimit = 20;
-  int _currentPage = 0;
-  int _totalRows = 0;
-  FirestorePaginationInfo? _paginationInfo;
-
-  int get _limit => _pageLimit * _currentPage;
-  String? get _userId => (_user?.isPrivileged ?? true) ? null : _user?.id;
-  bool get _stateInProgress => state.maybeMap(orElse: () => false, loading: (_) => true);
 
   ListTransportCubit({required AuthenticationCubit authCubit})
       : _repo = TransportRepository(),
@@ -42,54 +32,32 @@ class ListTransportCubit extends Cubit<ListTransportState> {
           if (response is String) {
             emit(ListTransportState.success(response));
           }
-          if (response is FirestorePaginationInfo) {
-            _paginationInfo = response;
-          }
-          if (response is int) {
-            emit(const ListTransportState.success(""));
-            _totalRows = response;
-          }
-
           return;
         },
         failure: (message) => emit(ListTransportState.failure(message)),
       );
 
-  Future<void> fetchList({TransportRequest? request, bool isTable = false}) async {
-    if (_stateInProgress) {
+  Future<void> fetchList(ListTransportRequestModel request, {bool all = false}) async {
+    final isLoading = state.maybeWhen(orElse: () => false, loading: (_) => true);
+    if (isLoading) {
       return;
     }
-    emit(ListTransportState.loading((request != null) ? "retrieving_data".tr() : ""));
+    state.maybeMap(
+      initial: (_) => null,
+      orElse: () => emit(ListTransportState.loading("retrieving_data".tr())),
+    );
+    final updatedRequest = request.copyWith(userId: all ? null : _user!.id);
     await _listSub?.cancel();
-    if (request?.goBack ?? false) {
-      _currentPage--;
-    } else {
-      _currentPage++;
-    }
-    if (_currentPage == 0) {
-      _paginationInfo = null;
-    }
-    _listSub = _repo
-        .listStream(
-          userId: _userId,
-          limit: isTable ? _pageLimit : _limit,
-          request: request?.copyWith(paginationInfo: _paginationInfo),
-        )
-        .listen(_parseList);
+    _listSub = _repo.listStream(updatedRequest).listen(_parseListSub);
   }
 
-  void _parseList(List<TransportModel> list) {
-    _list = list;
+  void _parseListSub(List<TransportModel> list) {
     state.maybeWhen(
       orElse: () => null,
+      loading: (_) => emit(const ListTransportState.success("")),
       deleting: () => emit(ListTransportState.success("deleted_transport".tr())),
     );
-    emit(ListTransportState.view(
-      list: _list,
-      page: _currentPage,
-      pageLimit: _pageLimit,
-      totalRows: _totalRows,
-    ));
+    emit(ListTransportState.view(list));
   }
 
   Future<void> delete(TransportModel model) async {

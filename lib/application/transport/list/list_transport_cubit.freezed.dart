@@ -22,16 +22,9 @@ class _$ListTransportStateTearOff {
     return const _Initial();
   }
 
-  _View view(
-      {required List<TransportModel> list,
-      required int page,
-      required int pageLimit,
-      required int totalRows}) {
+  _View view(List<TransportModel> list) {
     return _View(
-      list: list,
-      page: page,
-      pageLimit: pageLimit,
-      totalRows: totalRows,
+      list,
     );
   }
 
@@ -66,9 +59,7 @@ mixin _$ListTransportState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)
-        view,
+    required TResult Function(List<TransportModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -78,9 +69,7 @@ mixin _$ListTransportState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -90,9 +79,7 @@ mixin _$ListTransportState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -190,9 +177,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)
-        view,
+    required TResult Function(List<TransportModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -205,9 +190,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -220,9 +203,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -287,8 +268,7 @@ abstract class _Initial implements ListTransportState {
 abstract class _$ViewCopyWith<$Res> {
   factory _$ViewCopyWith(_View value, $Res Function(_View) then) =
       __$ViewCopyWithImpl<$Res>;
-  $Res call(
-      {List<TransportModel> list, int page, int pageLimit, int totalRows});
+  $Res call({List<TransportModel> list});
 }
 
 /// @nodoc
@@ -303,27 +283,12 @@ class __$ViewCopyWithImpl<$Res> extends _$ListTransportStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? list = freezed,
-    Object? page = freezed,
-    Object? pageLimit = freezed,
-    Object? totalRows = freezed,
   }) {
     return _then(_View(
-      list: list == freezed
+      list == freezed
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
               as List<TransportModel>,
-      page: page == freezed
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      pageLimit: pageLimit == freezed
-          ? _value.pageLimit
-          : pageLimit // ignore: cast_nullable_to_non_nullable
-              as int,
-      totalRows: totalRows == freezed
-          ? _value.totalRows
-          : totalRows // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -331,24 +296,14 @@ class __$ViewCopyWithImpl<$Res> extends _$ListTransportStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_View implements _View {
-  const _$_View(
-      {required this.list,
-      required this.page,
-      required this.pageLimit,
-      required this.totalRows});
+  const _$_View(this.list);
 
   @override
   final List<TransportModel> list;
-  @override
-  final int page;
-  @override
-  final int pageLimit;
-  @override
-  final int totalRows;
 
   @override
   String toString() {
-    return 'ListTransportState.view(list: $list, page: $page, pageLimit: $pageLimit, totalRows: $totalRows)';
+    return 'ListTransportState.view(list: $list)';
   }
 
   @override
@@ -356,19 +311,12 @@ class _$_View implements _View {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _View &&
-            const DeepCollectionEquality().equals(other.list, list) &&
-            const DeepCollectionEquality().equals(other.page, page) &&
-            const DeepCollectionEquality().equals(other.pageLimit, pageLimit) &&
-            const DeepCollectionEquality().equals(other.totalRows, totalRows));
+            const DeepCollectionEquality().equals(other.list, list));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(list),
-      const DeepCollectionEquality().hash(page),
-      const DeepCollectionEquality().hash(pageLimit),
-      const DeepCollectionEquality().hash(totalRows));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(list));
 
   @JsonKey(ignore: true)
   @override
@@ -379,39 +327,33 @@ class _$_View implements _View {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)
-        view,
+    required TResult Function(List<TransportModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
     required TResult Function(String message) success,
   }) {
-    return view(list, page, pageLimit, totalRows);
+    return view(list);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
     TResult Function(String message)? success,
   }) {
-    return view?.call(list, page, pageLimit, totalRows);
+    return view?.call(list);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -419,7 +361,7 @@ class _$_View implements _View {
     required TResult orElse(),
   }) {
     if (view != null) {
-      return view(list, page, pageLimit, totalRows);
+      return view(list);
     }
     return orElse();
   }
@@ -469,16 +411,9 @@ class _$_View implements _View {
 }
 
 abstract class _View implements ListTransportState {
-  const factory _View(
-      {required List<TransportModel> list,
-      required int page,
-      required int pageLimit,
-      required int totalRows}) = _$_View;
+  const factory _View(List<TransportModel> list) = _$_View;
 
   List<TransportModel> get list;
-  int get page;
-  int get pageLimit;
-  int get totalRows;
   @JsonKey(ignore: true)
   _$ViewCopyWith<_View> get copyWith => throw _privateConstructorUsedError;
 }
@@ -523,9 +458,7 @@ class _$_Deleting implements _Deleting {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)
-        view,
+    required TResult Function(List<TransportModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -538,9 +471,7 @@ class _$_Deleting implements _Deleting {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -553,9 +484,7 @@ class _$_Deleting implements _Deleting {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -680,9 +609,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)
-        view,
+    required TResult Function(List<TransportModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -695,9 +622,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -710,9 +635,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -842,9 +765,7 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)
-        view,
+    required TResult Function(List<TransportModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -857,9 +778,7 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -872,9 +791,7 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -1004,9 +921,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)
-        view,
+    required TResult Function(List<TransportModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -1019,9 +934,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -1034,9 +947,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(
-            List<TransportModel> list, int page, int pageLimit, int totalRows)?
-        view,
+    TResult Function(List<TransportModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,

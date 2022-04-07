@@ -21,7 +21,10 @@ class SheetSearchTransportButton extends StatelessWidget {
             label: "search".tr(),
             icon: const Icon(MdiIcons.magnify),
             isLoading: isSearching,
-            onPressed: () => isSearching ? null : onSearch(),
+            onPressed: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+              isSearching ? null : onSearch();
+            },
           );
         },
       );

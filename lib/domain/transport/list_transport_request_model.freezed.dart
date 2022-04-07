@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'transport_request.dart';
+part of 'list_transport_request_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,71 +15,70 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$TransportRequestTearOff {
-  const _$TransportRequestTearOff();
+class _$ListTransportRequestModelTearOff {
+  const _$ListTransportRequestModelTearOff();
 
-  _TransportRequest call(
+  _ListTransportRequestModel call(
       {int? seatsAvailable,
       TransportTypeModel? transportType,
-      bool? isAvailable = true,
-      bool goBack = false,
-      FirestorePaginationInfo<dynamic>? paginationInfo}) {
-    return _TransportRequest(
+      int? limit,
+      bool? isAvailable,
+      String? userId}) {
+    return _ListTransportRequestModel(
       seatsAvailable: seatsAvailable,
       transportType: transportType,
+      limit: limit,
       isAvailable: isAvailable,
-      goBack: goBack,
-      paginationInfo: paginationInfo,
+      userId: userId,
     );
   }
 }
 
 /// @nodoc
-const $TransportRequest = _$TransportRequestTearOff();
+const $ListTransportRequestModel = _$ListTransportRequestModelTearOff();
 
 /// @nodoc
-mixin _$TransportRequest {
+mixin _$ListTransportRequestModel {
   int? get seatsAvailable => throw _privateConstructorUsedError;
   TransportTypeModel? get transportType => throw _privateConstructorUsedError;
+  int? get limit => throw _privateConstructorUsedError;
   bool? get isAvailable => throw _privateConstructorUsedError;
-  bool get goBack => throw _privateConstructorUsedError;
-  FirestorePaginationInfo<dynamic>? get paginationInfo =>
-      throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TransportRequestCopyWith<TransportRequest> get copyWith =>
+  $ListTransportRequestModelCopyWith<ListTransportRequestModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TransportRequestCopyWith<$Res> {
-  factory $TransportRequestCopyWith(
-          TransportRequest value, $Res Function(TransportRequest) then) =
-      _$TransportRequestCopyWithImpl<$Res>;
+abstract class $ListTransportRequestModelCopyWith<$Res> {
+  factory $ListTransportRequestModelCopyWith(ListTransportRequestModel value,
+          $Res Function(ListTransportRequestModel) then) =
+      _$ListTransportRequestModelCopyWithImpl<$Res>;
   $Res call(
       {int? seatsAvailable,
       TransportTypeModel? transportType,
+      int? limit,
       bool? isAvailable,
-      bool goBack,
-      FirestorePaginationInfo<dynamic>? paginationInfo});
+      String? userId});
 }
 
 /// @nodoc
-class _$TransportRequestCopyWithImpl<$Res>
-    implements $TransportRequestCopyWith<$Res> {
-  _$TransportRequestCopyWithImpl(this._value, this._then);
+class _$ListTransportRequestModelCopyWithImpl<$Res>
+    implements $ListTransportRequestModelCopyWith<$Res> {
+  _$ListTransportRequestModelCopyWithImpl(this._value, this._then);
 
-  final TransportRequest _value;
+  final ListTransportRequestModel _value;
   // ignore: unused_field
-  final $Res Function(TransportRequest) _then;
+  final $Res Function(ListTransportRequestModel) _then;
 
   @override
   $Res call({
     Object? seatsAvailable = freezed,
     Object? transportType = freezed,
+    Object? limit = freezed,
     Object? isAvailable = freezed,
-    Object? goBack = freezed,
-    Object? paginationInfo = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_value.copyWith(
       seatsAvailable: seatsAvailable == freezed
@@ -90,57 +89,58 @@ class _$TransportRequestCopyWithImpl<$Res>
           ? _value.transportType
           : transportType // ignore: cast_nullable_to_non_nullable
               as TransportTypeModel?,
+      limit: limit == freezed
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
       isAvailable: isAvailable == freezed
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
-      goBack: goBack == freezed
-          ? _value.goBack
-          : goBack // ignore: cast_nullable_to_non_nullable
-              as bool,
-      paginationInfo: paginationInfo == freezed
-          ? _value.paginationInfo
-          : paginationInfo // ignore: cast_nullable_to_non_nullable
-              as FirestorePaginationInfo<dynamic>?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$TransportRequestCopyWith<$Res>
-    implements $TransportRequestCopyWith<$Res> {
-  factory _$TransportRequestCopyWith(
-          _TransportRequest value, $Res Function(_TransportRequest) then) =
-      __$TransportRequestCopyWithImpl<$Res>;
+abstract class _$ListTransportRequestModelCopyWith<$Res>
+    implements $ListTransportRequestModelCopyWith<$Res> {
+  factory _$ListTransportRequestModelCopyWith(_ListTransportRequestModel value,
+          $Res Function(_ListTransportRequestModel) then) =
+      __$ListTransportRequestModelCopyWithImpl<$Res>;
   @override
   $Res call(
       {int? seatsAvailable,
       TransportTypeModel? transportType,
+      int? limit,
       bool? isAvailable,
-      bool goBack,
-      FirestorePaginationInfo<dynamic>? paginationInfo});
+      String? userId});
 }
 
 /// @nodoc
-class __$TransportRequestCopyWithImpl<$Res>
-    extends _$TransportRequestCopyWithImpl<$Res>
-    implements _$TransportRequestCopyWith<$Res> {
-  __$TransportRequestCopyWithImpl(
-      _TransportRequest _value, $Res Function(_TransportRequest) _then)
-      : super(_value, (v) => _then(v as _TransportRequest));
+class __$ListTransportRequestModelCopyWithImpl<$Res>
+    extends _$ListTransportRequestModelCopyWithImpl<$Res>
+    implements _$ListTransportRequestModelCopyWith<$Res> {
+  __$ListTransportRequestModelCopyWithImpl(_ListTransportRequestModel _value,
+      $Res Function(_ListTransportRequestModel) _then)
+      : super(_value, (v) => _then(v as _ListTransportRequestModel));
 
   @override
-  _TransportRequest get _value => super._value as _TransportRequest;
+  _ListTransportRequestModel get _value =>
+      super._value as _ListTransportRequestModel;
 
   @override
   $Res call({
     Object? seatsAvailable = freezed,
     Object? transportType = freezed,
+    Object? limit = freezed,
     Object? isAvailable = freezed,
-    Object? goBack = freezed,
-    Object? paginationInfo = freezed,
+    Object? userId = freezed,
   }) {
-    return _then(_TransportRequest(
+    return _then(_ListTransportRequestModel(
       seatsAvailable: seatsAvailable == freezed
           ? _value.seatsAvailable
           : seatsAvailable // ignore: cast_nullable_to_non_nullable
@@ -149,64 +149,61 @@ class __$TransportRequestCopyWithImpl<$Res>
           ? _value.transportType
           : transportType // ignore: cast_nullable_to_non_nullable
               as TransportTypeModel?,
+      limit: limit == freezed
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
       isAvailable: isAvailable == freezed
           ? _value.isAvailable
           : isAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
-      goBack: goBack == freezed
-          ? _value.goBack
-          : goBack // ignore: cast_nullable_to_non_nullable
-              as bool,
-      paginationInfo: paginationInfo == freezed
-          ? _value.paginationInfo
-          : paginationInfo // ignore: cast_nullable_to_non_nullable
-              as FirestorePaginationInfo<dynamic>?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_TransportRequest implements _TransportRequest {
-  const _$_TransportRequest(
+class _$_ListTransportRequestModel implements _ListTransportRequestModel {
+  const _$_ListTransportRequestModel(
       {this.seatsAvailable,
       this.transportType,
-      this.isAvailable = true,
-      this.goBack = false,
-      this.paginationInfo});
+      this.limit,
+      this.isAvailable,
+      this.userId});
 
   @override
   final int? seatsAvailable;
   @override
   final TransportTypeModel? transportType;
-  @JsonKey()
+  @override
+  final int? limit;
   @override
   final bool? isAvailable;
-  @JsonKey()
   @override
-  final bool goBack;
-  @override
-  final FirestorePaginationInfo<dynamic>? paginationInfo;
+  final String? userId;
 
   @override
   String toString() {
-    return 'TransportRequest(seatsAvailable: $seatsAvailable, transportType: $transportType, isAvailable: $isAvailable, goBack: $goBack, paginationInfo: $paginationInfo)';
+    return 'ListTransportRequestModel(seatsAvailable: $seatsAvailable, transportType: $transportType, limit: $limit, isAvailable: $isAvailable, userId: $userId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _TransportRequest &&
+            other is _ListTransportRequestModel &&
             const DeepCollectionEquality()
                 .equals(other.seatsAvailable, seatsAvailable) &&
             const DeepCollectionEquality()
                 .equals(other.transportType, transportType) &&
+            const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality()
                 .equals(other.isAvailable, isAvailable) &&
-            const DeepCollectionEquality().equals(other.goBack, goBack) &&
-            const DeepCollectionEquality()
-                .equals(other.paginationInfo, paginationInfo));
+            const DeepCollectionEquality().equals(other.userId, userId));
   }
 
   @override
@@ -214,36 +211,38 @@ class _$_TransportRequest implements _TransportRequest {
       runtimeType,
       const DeepCollectionEquality().hash(seatsAvailable),
       const DeepCollectionEquality().hash(transportType),
+      const DeepCollectionEquality().hash(limit),
       const DeepCollectionEquality().hash(isAvailable),
-      const DeepCollectionEquality().hash(goBack),
-      const DeepCollectionEquality().hash(paginationInfo));
+      const DeepCollectionEquality().hash(userId));
 
   @JsonKey(ignore: true)
   @override
-  _$TransportRequestCopyWith<_TransportRequest> get copyWith =>
-      __$TransportRequestCopyWithImpl<_TransportRequest>(this, _$identity);
+  _$ListTransportRequestModelCopyWith<_ListTransportRequestModel>
+      get copyWith =>
+          __$ListTransportRequestModelCopyWithImpl<_ListTransportRequestModel>(
+              this, _$identity);
 }
 
-abstract class _TransportRequest implements TransportRequest {
-  const factory _TransportRequest(
+abstract class _ListTransportRequestModel implements ListTransportRequestModel {
+  const factory _ListTransportRequestModel(
       {int? seatsAvailable,
       TransportTypeModel? transportType,
+      int? limit,
       bool? isAvailable,
-      bool goBack,
-      FirestorePaginationInfo<dynamic>? paginationInfo}) = _$_TransportRequest;
+      String? userId}) = _$_ListTransportRequestModel;
 
   @override
   int? get seatsAvailable;
   @override
   TransportTypeModel? get transportType;
   @override
+  int? get limit;
+  @override
   bool? get isAvailable;
   @override
-  bool get goBack;
-  @override
-  FirestorePaginationInfo<dynamic>? get paginationInfo;
+  String? get userId;
   @override
   @JsonKey(ignore: true)
-  _$TransportRequestCopyWith<_TransportRequest> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$ListTransportRequestModelCopyWith<_ListTransportRequestModel>
+      get copyWith => throw _privateConstructorUsedError;
 }

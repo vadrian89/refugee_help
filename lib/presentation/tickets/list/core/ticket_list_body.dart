@@ -13,10 +13,10 @@ class TicketListBody extends StatelessWidget {
   const TicketListBody({Key? key, required this.type}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-        create: (providerContext) => ListTicketsCubit(
+  Widget build(_) => BlocProvider(
+        create: (context) => ListTicketsCubit(
           type: type,
-          authCubit: providerContext.read<AuthenticationCubit>(),
+          authCubit: context.read<AuthenticationCubit>(),
         ),
         child: const TicketListListener(child: TicketListBodyView()),
       );
