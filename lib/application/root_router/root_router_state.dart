@@ -174,8 +174,9 @@ class RootRouterState with _$RootRouterState {
             "$transportPath${_getPath(transport.add, addPath)}" +
             _getPath(transport.id?.trim().isNotEmpty ?? false, "/${transport.id}"),
         tickets: (tickets) =>
-            "$ticketsPath${_getPath(tickets.add, addPath)}" +
+            ticketsPath +
             _getPath(tickets.type?.name.trim().isNotEmpty ?? false, "/${tickets.type!.name}") +
+            _getPath(tickets.add, addPath) +
             _getPath(tickets.id?.trim().isNotEmpty ?? false, "/${tickets.id}") +
             _getPath(tickets.transportId?.trim().isNotEmpty ?? false, "?") +
             _getParameter("transportId", tickets.transportId ?? ""),

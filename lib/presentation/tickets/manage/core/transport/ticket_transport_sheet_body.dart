@@ -21,19 +21,27 @@ class TicketTransportSheetBody extends StatefulWidget {
 }
 
 class _TicketTransportSheetBodyState extends State<TicketTransportSheetBody> {
-  ListTransportRequestModel _request = const ListTransportRequestModel();
   late ListTransportCubit _bloc;
+  late final ScrollController _controller;
+  int _currentPage = 1;
+  int _totalRows = 0;
+
+  int get _pageLimit => _currentPage * 10;
+
+  ListTransportRequestModel _request = const ListTransportRequestModel(isAvailable: true);
 
   @override
   void initState() {
     super.initState();
-    _bloc = ListTransportCubit(
-      authCubit: context.read<AuthenticationCubit>(),
-    )..fetchList(_request);
+    _request = _request.copyWith(limit: _pageLimit);
+    _controller = ScrollController()..addListener(_scrollEventListener);
+    _bloc = ListTransportCubit(authCubit: context.read<AuthenticationCubit>());
+    _fetch();
   }
 
   @override
   void dispose() {
+    _controller.removeListener(_scrollEventListener);
     _bloc.close();
     super.dispose();
   }
@@ -57,10 +65,7 @@ class _TicketTransportSheetBodyState extends State<TicketTransportSheetBody> {
             ),
           ),
           const VerticalSpacing(20),
-          SheetSearchTransportButton(
-            bloc: _bloc,
-            onSearch: () => _bloc.fetchList(_request),
-          ),
+          SheetSearchTransportButton(bloc: _bloc, onSearch: _fetch),
           const VerticalSpacing(40),
           ConstrainedBox(
             constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.5),
@@ -74,17 +79,20 @@ class _TicketTransportSheetBodyState extends State<TicketTransportSheetBody> {
                 orElse: () => false,
                 failure: (_) => true,
               ),
-              builder: (context, state) => state.maybeMap(
+              builder: (context, state) => state.maybeWhen(
                 orElse: () => const LoaderWidget(),
-                view: (view) {
-                  if (view.list.isEmpty) {
+                view: (list) {
+                  _totalRows = list.length;
+
+                  if (list.isEmpty) {
                     return const NoDataPlaceholder();
                   }
                   return ListView.builder(
+                    controller: _controller,
                     shrinkWrap: true,
-                    itemCount: view.list.length,
+                    itemCount: list.length,
                     itemBuilder: (context, index) => TicketTransportSheetTile(
-                      transport: view.list[index],
+                      transport: list[index],
                       onPressed: (model) => Navigator.maybePop(context, model),
                     ),
                   );
@@ -94,5 +102,19 @@ class _TicketTransportSheetBodyState extends State<TicketTransportSheetBody> {
             ),
           ),
         ],
+      );
+
+  void _scrollEventListener() {
+    if (_controller.position.pixels > 0 &&
+        _controller.position.pixels == _controller.position.maxScrollExtent &&
+        _pageLimit <= _totalRows) {
+      _currentPage++;
+      _fetch();
+    }
+  }
+
+  void _fetch() => _bloc.fetchList(
+        _request.copyWith(limit: _pageLimit),
+        all: true,
       );
 }
