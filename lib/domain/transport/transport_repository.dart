@@ -15,7 +15,6 @@ class TransportRepository extends BaseRepository
     implements CrudRepositoryInterface<TransportModel> {
   /// Location in the database.
   String get _colName => BaseRepository.transportCollection;
-  String get _counterDoc => "${_colName}_counter";
   CollectionReference get _collection => getCollection(_colName);
 
   CollectionReference<TransportModel> get _reference => _collection.withConverter<TransportModel>(
@@ -68,7 +67,6 @@ class TransportRepository extends BaseRepository
         return;
       }
       await _reference.doc(updatedModel.id).update(updatedModel.copyWith(image: image).toJson());
-      await incrementCount(_counterDoc);
     } on FirebaseException catch (error) {
       logException("Exception in add", error: error, stackTrace: error.stackTrace);
       result = OperationResult.failure("error_saving_transport".tr());
@@ -122,7 +120,6 @@ class TransportRepository extends BaseRepository
     try {
       await FirebaseStorageUtils.deleteFile(model.imageStoragePath);
       await _reference.doc(model.id).delete();
-      await decrementCount(_counterDoc);
     } on FirebaseException catch (error) {
       logException("Exception in delete", error: error, stackTrace: error.stackTrace);
       result = OperationResult.failure("error_deleting_transport".tr());
@@ -164,6 +161,6 @@ class TransportRepository extends BaseRepository
     if (snapshot?.docs.isNotEmpty ?? false) {
       return snapshot!.docs.map((doc) => doc.data().copyWith(id: doc.id)).toList();
     }
-    return [];
+    return const [];
   }
 }

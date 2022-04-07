@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/application/tickets/list/list_tickets_cubit.dart';
-import 'package:refugee_help/domain/core/firestore_pagination_info.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
 import 'package:refugee_help/domain/tickets/list_tickets_request_model.dart';
 import 'package:refugee_help/presentation/core/widgets/tables/data_list_table.dart';
@@ -18,66 +17,44 @@ class TicketListDesktopBody extends StatefulWidget {
 }
 
 class _TicketListDesktopBodyState extends State<TicketListDesktopBody> {
+  List<TicketModel> _list = const [];
   static const int _pageLimit = 20;
-  late final ListTicketsCubit _bloc;
   int _currentPage = 1;
-  bool _inProgress = true;
 
-  FirestorePaginationInfo? _paginationInfo;
+  ListTicketsRequestModel get _request => const ListTicketsRequestModel();
+  int get _startIndex => _pageLimit * (_currentPage - 1);
+  int get _endIndex {
+    final endIndex = _startIndex + _pageLimit;
+    return (endIndex < _list.length) ? endIndex : _list.length;
+  }
 
-  ListTicketsRequestModel get _request => ListTicketsRequestModel(
-        limit: _pageLimit,
-        paginationInfo: (_currentPage == 0) ? null : _paginationInfo,
-      );
+  List<TicketModel> get _filteredList => _list.getRange(_startIndex, _endIndex).toList();
 
   @override
   void initState() {
     super.initState();
-    _bloc = context.read<ListTicketsCubit>()..fetchList(_request);
+    context.read<ListTicketsCubit>().fetchList(_request);
   }
 
   @override
   Widget build(_) => TicketsListConsumer(
-        onFinished: () {
-          setState(() => _inProgress = false);
-        },
-        builder: (context, response) {
-          _paginationInfo = response.paginationInfo;
+        builder: (context, list) {
+          _list = list;
 
           return DataListTable(
             columns: _tableColumns,
             page: _currentPage,
             pageLimit: _pageLimit,
-            totalRows: response.totalRows,
+            totalRows: _list.length,
             rows: List.generate(
-              response.list.length,
-              (index) => _row(context, response.list[index]),
+              _filteredList.length,
+              (index) => _row(context, _filteredList[index]),
             ),
-            onNext: _inProgress ? null : () => _next(context),
-            onBack: _inProgress ? null : () => _previous(context),
+            onNext: () => setState(() => ++_currentPage),
+            onBack: () => setState(() => --_currentPage),
           );
         },
       );
-
-  void _next(BuildContext context) {
-    if (_inProgress) {
-      return;
-    }
-    setState(() => _inProgress = true);
-    _currentPage++;
-
-    _bloc.fetchList(_request);
-  }
-
-  void _previous(BuildContext context) {
-    if (_inProgress) {
-      return;
-    }
-    setState(() => _inProgress = true);
-    _currentPage--;
-
-    _bloc.fetchList(_request.copyWith(goBack: true));
-  }
 
   List<DataColumn> get _tableColumns => [
         DataColumn(label: Text("adults_number".tr())),

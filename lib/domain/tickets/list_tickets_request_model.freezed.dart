@@ -19,19 +19,11 @@ class _$ListTicketsRequestModelTearOff {
   const _$ListTicketsRequestModelTearOff();
 
   _ListTicketsRequestModel call(
-      {int limit = 20,
-      TicketTypeModel? type,
-      bool goBack = false,
-      FirestorePaginationInfo<dynamic>? paginationInfo,
-      String? userId,
-      bool isDesktop = false}) {
+      {int? limit, TicketTypeModel? type, String? transportOwnerId}) {
     return _ListTicketsRequestModel(
       limit: limit,
       type: type,
-      goBack: goBack,
-      paginationInfo: paginationInfo,
-      userId: userId,
-      isDesktop: isDesktop,
+      transportOwnerId: transportOwnerId,
     );
   }
 }
@@ -41,13 +33,9 @@ const $ListTicketsRequestModel = _$ListTicketsRequestModelTearOff();
 
 /// @nodoc
 mixin _$ListTicketsRequestModel {
-  int get limit => throw _privateConstructorUsedError;
+  int? get limit => throw _privateConstructorUsedError;
   TicketTypeModel? get type => throw _privateConstructorUsedError;
-  bool get goBack => throw _privateConstructorUsedError;
-  FirestorePaginationInfo<dynamic>? get paginationInfo =>
-      throw _privateConstructorUsedError;
-  String? get userId => throw _privateConstructorUsedError;
-  bool get isDesktop => throw _privateConstructorUsedError;
+  String? get transportOwnerId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListTicketsRequestModelCopyWith<ListTicketsRequestModel> get copyWith =>
@@ -59,13 +47,7 @@ abstract class $ListTicketsRequestModelCopyWith<$Res> {
   factory $ListTicketsRequestModelCopyWith(ListTicketsRequestModel value,
           $Res Function(ListTicketsRequestModel) then) =
       _$ListTicketsRequestModelCopyWithImpl<$Res>;
-  $Res call(
-      {int limit,
-      TicketTypeModel? type,
-      bool goBack,
-      FirestorePaginationInfo<dynamic>? paginationInfo,
-      String? userId,
-      bool isDesktop});
+  $Res call({int? limit, TicketTypeModel? type, String? transportOwnerId});
 }
 
 /// @nodoc
@@ -81,36 +63,21 @@ class _$ListTicketsRequestModelCopyWithImpl<$Res>
   $Res call({
     Object? limit = freezed,
     Object? type = freezed,
-    Object? goBack = freezed,
-    Object? paginationInfo = freezed,
-    Object? userId = freezed,
-    Object? isDesktop = freezed,
+    Object? transportOwnerId = freezed,
   }) {
     return _then(_value.copyWith(
       limit: limit == freezed
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as TicketTypeModel?,
-      goBack: goBack == freezed
-          ? _value.goBack
-          : goBack // ignore: cast_nullable_to_non_nullable
-              as bool,
-      paginationInfo: paginationInfo == freezed
-          ? _value.paginationInfo
-          : paginationInfo // ignore: cast_nullable_to_non_nullable
-              as FirestorePaginationInfo<dynamic>?,
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      transportOwnerId: transportOwnerId == freezed
+          ? _value.transportOwnerId
+          : transportOwnerId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isDesktop: isDesktop == freezed
-          ? _value.isDesktop
-          : isDesktop // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -122,13 +89,7 @@ abstract class _$ListTicketsRequestModelCopyWith<$Res>
           $Res Function(_ListTicketsRequestModel) then) =
       __$ListTicketsRequestModelCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int limit,
-      TicketTypeModel? type,
-      bool goBack,
-      FirestorePaginationInfo<dynamic>? paginationInfo,
-      String? userId,
-      bool isDesktop});
+  $Res call({int? limit, TicketTypeModel? type, String? transportOwnerId});
 }
 
 /// @nodoc
@@ -147,36 +108,21 @@ class __$ListTicketsRequestModelCopyWithImpl<$Res>
   $Res call({
     Object? limit = freezed,
     Object? type = freezed,
-    Object? goBack = freezed,
-    Object? paginationInfo = freezed,
-    Object? userId = freezed,
-    Object? isDesktop = freezed,
+    Object? transportOwnerId = freezed,
   }) {
     return _then(_ListTicketsRequestModel(
       limit: limit == freezed
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as TicketTypeModel?,
-      goBack: goBack == freezed
-          ? _value.goBack
-          : goBack // ignore: cast_nullable_to_non_nullable
-              as bool,
-      paginationInfo: paginationInfo == freezed
-          ? _value.paginationInfo
-          : paginationInfo // ignore: cast_nullable_to_non_nullable
-              as FirestorePaginationInfo<dynamic>?,
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      transportOwnerId: transportOwnerId == freezed
+          ? _value.transportOwnerId
+          : transportOwnerId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isDesktop: isDesktop == freezed
-          ? _value.isDesktop
-          : isDesktop // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -185,32 +131,18 @@ class __$ListTicketsRequestModelCopyWithImpl<$Res>
 
 class _$_ListTicketsRequestModel implements _ListTicketsRequestModel {
   const _$_ListTicketsRequestModel(
-      {this.limit = 20,
-      this.type,
-      this.goBack = false,
-      this.paginationInfo,
-      this.userId,
-      this.isDesktop = false});
+      {this.limit, this.type, this.transportOwnerId});
 
-  @JsonKey()
   @override
-  final int limit;
+  final int? limit;
   @override
   final TicketTypeModel? type;
-  @JsonKey()
   @override
-  final bool goBack;
-  @override
-  final FirestorePaginationInfo<dynamic>? paginationInfo;
-  @override
-  final String? userId;
-  @JsonKey()
-  @override
-  final bool isDesktop;
+  final String? transportOwnerId;
 
   @override
   String toString() {
-    return 'ListTicketsRequestModel(limit: $limit, type: $type, goBack: $goBack, paginationInfo: $paginationInfo, userId: $userId, isDesktop: $isDesktop)';
+    return 'ListTicketsRequestModel(limit: $limit, type: $type, transportOwnerId: $transportOwnerId)';
   }
 
   @override
@@ -220,11 +152,8 @@ class _$_ListTicketsRequestModel implements _ListTicketsRequestModel {
             other is _ListTicketsRequestModel &&
             const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.goBack, goBack) &&
             const DeepCollectionEquality()
-                .equals(other.paginationInfo, paginationInfo) &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality().equals(other.isDesktop, isDesktop));
+                .equals(other.transportOwnerId, transportOwnerId));
   }
 
   @override
@@ -232,10 +161,7 @@ class _$_ListTicketsRequestModel implements _ListTicketsRequestModel {
       runtimeType,
       const DeepCollectionEquality().hash(limit),
       const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(goBack),
-      const DeepCollectionEquality().hash(paginationInfo),
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(isDesktop));
+      const DeepCollectionEquality().hash(transportOwnerId));
 
   @JsonKey(ignore: true)
   @override
@@ -246,25 +172,16 @@ class _$_ListTicketsRequestModel implements _ListTicketsRequestModel {
 
 abstract class _ListTicketsRequestModel implements ListTicketsRequestModel {
   const factory _ListTicketsRequestModel(
-      {int limit,
+      {int? limit,
       TicketTypeModel? type,
-      bool goBack,
-      FirestorePaginationInfo<dynamic>? paginationInfo,
-      String? userId,
-      bool isDesktop}) = _$_ListTicketsRequestModel;
+      String? transportOwnerId}) = _$_ListTicketsRequestModel;
 
   @override
-  int get limit;
+  int? get limit;
   @override
   TicketTypeModel? get type;
   @override
-  bool get goBack;
-  @override
-  FirestorePaginationInfo<dynamic>? get paginationInfo;
-  @override
-  String? get userId;
-  @override
-  bool get isDesktop;
+  String? get transportOwnerId;
   @override
   @JsonKey(ignore: true)
   _$ListTicketsRequestModelCopyWith<_ListTicketsRequestModel> get copyWith =>

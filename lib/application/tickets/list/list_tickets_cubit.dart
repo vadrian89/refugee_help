@@ -5,7 +5,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
-import 'package:refugee_help/domain/tickets/list_tickets_response_model.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
 import 'package:refugee_help/domain/tickets/list_tickets_request_model.dart';
 import 'package:refugee_help/domain/tickets/ticket_type_model.dart';
@@ -22,9 +21,8 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
 
   late final StreamSubscription<OperationResult> _resultSub;
 
-  StreamSubscription<ListTicketsResponseModel>? _listSub;
+  StreamSubscription<List<TicketModel>>? _listSub;
   UserModel? _user;
-
   String? get _userId => (_user?.isPrivileged ?? true) ? null : _user?.id;
 
   ListTicketsCubit({
@@ -55,18 +53,21 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
       initial: (_) => null,
       orElse: () => emit(ListTicketsState.loading("retrieving_data".tr())),
     );
+    final updatedRequest = request.copyWith(
+      type: type,
+      transportOwnerId: _userId,
+    );
     await _listSub?.cancel();
-    _listSub =
-        _repo.listStream(request.copyWith(type: type, userId: _userId)).listen(_parseListSub);
+    _listSub = _repo.listStream(updatedRequest).listen(_parseListSub);
   }
 
-  Future<void> _parseListSub(ListTicketsResponseModel response) async {
+  Future<void> _parseListSub(List<TicketModel> list) async {
     state.maybeWhen(
       orElse: () => null,
       loading: (_) => emit(const ListTicketsState.success("")),
       deleting: () => emit(ListTicketsState.success("deleted_ticket".tr())),
     );
-    emit(ListTicketsState.view(response));
+    emit(ListTicketsState.view(list));
   }
 
   Future<void> delete(TicketModel model) async {

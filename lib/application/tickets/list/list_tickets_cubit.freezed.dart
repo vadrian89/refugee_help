@@ -22,9 +22,9 @@ class _$ListTicketsStateTearOff {
     return const _Initial();
   }
 
-  _View view(ListTicketsResponseModel response) {
+  _View view(List<TicketModel> list) {
     return _View(
-      response,
+      list,
     );
   }
 
@@ -59,7 +59,7 @@ mixin _$ListTicketsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ListTicketsResponseModel response) view,
+    required TResult Function(List<TicketModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -69,7 +69,7 @@ mixin _$ListTicketsState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -79,7 +79,7 @@ mixin _$ListTicketsState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -176,7 +176,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ListTicketsResponseModel response) view,
+    required TResult Function(List<TicketModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -189,7 +189,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -202,7 +202,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -267,9 +267,7 @@ abstract class _Initial implements ListTicketsState {
 abstract class _$ViewCopyWith<$Res> {
   factory _$ViewCopyWith(_View value, $Res Function(_View) then) =
       __$ViewCopyWithImpl<$Res>;
-  $Res call({ListTicketsResponseModel response});
-
-  $ListTicketsResponseModelCopyWith<$Res> get response;
+  $Res call({List<TicketModel> list});
 }
 
 /// @nodoc
@@ -283,35 +281,28 @@ class __$ViewCopyWithImpl<$Res> extends _$ListTicketsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? response = freezed,
+    Object? list = freezed,
   }) {
     return _then(_View(
-      response == freezed
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
-              as ListTicketsResponseModel,
+      list == freezed
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as List<TicketModel>,
     ));
-  }
-
-  @override
-  $ListTicketsResponseModelCopyWith<$Res> get response {
-    return $ListTicketsResponseModelCopyWith<$Res>(_value.response, (value) {
-      return _then(_value.copyWith(response: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$_View implements _View {
-  const _$_View(this.response);
+  const _$_View(this.list);
 
   @override
-  final ListTicketsResponseModel response;
+  final List<TicketModel> list;
 
   @override
   String toString() {
-    return 'ListTicketsState.view(response: $response)';
+    return 'ListTicketsState.view(list: $list)';
   }
 
   @override
@@ -319,12 +310,12 @@ class _$_View implements _View {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _View &&
-            const DeepCollectionEquality().equals(other.response, response));
+            const DeepCollectionEquality().equals(other.list, list));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(response));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(list));
 
   @JsonKey(ignore: true)
   @override
@@ -335,33 +326,33 @@ class _$_View implements _View {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ListTicketsResponseModel response) view,
+    required TResult Function(List<TicketModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
     required TResult Function(String message) success,
   }) {
-    return view(response);
+    return view(list);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
     TResult Function(String message)? success,
   }) {
-    return view?.call(response);
+    return view?.call(list);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -369,7 +360,7 @@ class _$_View implements _View {
     required TResult orElse(),
   }) {
     if (view != null) {
-      return view(response);
+      return view(list);
     }
     return orElse();
   }
@@ -419,9 +410,9 @@ class _$_View implements _View {
 }
 
 abstract class _View implements ListTicketsState {
-  const factory _View(ListTicketsResponseModel response) = _$_View;
+  const factory _View(List<TicketModel> list) = _$_View;
 
-  ListTicketsResponseModel get response;
+  List<TicketModel> get list;
   @JsonKey(ignore: true)
   _$ViewCopyWith<_View> get copyWith => throw _privateConstructorUsedError;
 }
@@ -465,7 +456,7 @@ class _$_Deleting implements _Deleting {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ListTicketsResponseModel response) view,
+    required TResult Function(List<TicketModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -478,7 +469,7 @@ class _$_Deleting implements _Deleting {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -491,7 +482,7 @@ class _$_Deleting implements _Deleting {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -615,7 +606,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ListTicketsResponseModel response) view,
+    required TResult Function(List<TicketModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -628,7 +619,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -641,7 +632,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -770,7 +761,7 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ListTicketsResponseModel response) view,
+    required TResult Function(List<TicketModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -783,7 +774,7 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -796,7 +787,7 @@ class _$_Failure implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -925,7 +916,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(ListTicketsResponseModel response) view,
+    required TResult Function(List<TicketModel> list) view,
     required TResult Function() deleting,
     required TResult Function(String message) loading,
     required TResult Function(String message) failure,
@@ -938,7 +929,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,
@@ -951,7 +942,7 @@ class _$_Success implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(ListTicketsResponseModel response)? view,
+    TResult Function(List<TicketModel> list)? view,
     TResult Function()? deleting,
     TResult Function(String message)? loading,
     TResult Function(String message)? failure,

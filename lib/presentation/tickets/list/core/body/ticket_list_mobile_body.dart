@@ -16,7 +16,7 @@ class TicketListMobileBody extends StatefulWidget {
 class _TicketListMobileBodyState extends State<TicketListMobileBody> {
   late final ListTicketsCubit _bloc;
   late final ScrollController _controller;
-  int _currentPage = 0;
+  int _currentPage = 1;
   int _totalRows = 0;
 
   int get _pageLimit => _currentPage * 20;
@@ -26,7 +26,6 @@ class _TicketListMobileBodyState extends State<TicketListMobileBody> {
   void initState() {
     super.initState();
     _controller = ScrollController()..addListener(_scrollEventListener);
-    _currentPage++;
     _bloc = context.read<ListTicketsCubit>()..fetchList(_request);
   }
 
@@ -39,14 +38,14 @@ class _TicketListMobileBodyState extends State<TicketListMobileBody> {
 
   @override
   Widget build(BuildContext context) => TicketsListConsumer(
-        builder: (context, response) {
-          _totalRows = response.totalRows;
+        builder: (context, list) {
+          _totalRows = list.length;
 
           return ListView.separated(
             controller: _controller,
-            itemBuilder: (context, index) => TicketListTile(ticket: response.list[index]),
+            itemBuilder: (context, index) => TicketListTile(ticket: list[index]),
             separatorBuilder: (_, __) => const Divider(),
-            itemCount: response.list.length,
+            itemCount: list.length,
           );
         },
       );
@@ -54,7 +53,7 @@ class _TicketListMobileBodyState extends State<TicketListMobileBody> {
   void _scrollEventListener() {
     if (_controller.position.pixels > 0 &&
         _controller.position.pixels == _controller.position.maxScrollExtent &&
-        _pageLimit < _totalRows) {
+        _pageLimit <= _totalRows) {
       _currentPage++;
       _bloc.fetchList(_request);
     }
