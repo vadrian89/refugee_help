@@ -54,7 +54,6 @@ Patterns and coding guidelines:
 - do not extend widgets, prefer composition over inheritance when dealing with widgets;  
 - do not make every widget stateful, use stateful widget only if is needed;  
 - build widgets in separate classes, instead of helper methods, to keep code cleaner;  
-- do not build a BloC for easy tasks; use BloC when dealing with backend and/or there are a lot of changes in the screen;  
 - prefer Cubit over Bloc;  
 - if a class member is not explicitly required to be public, make it private;  
 - declare the type of all class members;  
