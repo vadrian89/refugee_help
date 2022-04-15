@@ -6,10 +6,10 @@ import 'package:refugee_help/domain/tickets/ticket_model.dart';
 import 'package:refugee_help/domain/tickets/ticket_status_model.dart';
 import 'package:refugee_help/infrastructure/validators.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
+import 'package:refugee_help/presentation/core/widgets/constrained_form.dart';
 import 'package:refugee_help/presentation/core/widgets/loader_widget.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head4_text.dart';
 import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_form_field.dart';
-import 'package:refugee_help/presentation/core/widgets/refocus_background.dart';
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
 import 'package:refugee_help/presentation/tickets/manage/core/ticket_feedback_bottom_sheet.dart';
 import 'package:refugee_help/presentation/tickets/manage/core/ticket_feedback_tile.dart';
@@ -28,7 +28,8 @@ class ManageTicketForm extends StatefulWidget {
 class _ManageTicketFormState extends State<ManageTicketForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TicketModel _ticket;
-  bool editable = false;
+  bool _editable = false;
+
   @override
   void initState() {
     super.initState();
@@ -43,14 +44,7 @@ class _ManageTicketFormState extends State<ManageTicketForm> {
   Widget build(_) => ManageTicketListener(
         onEdit: (ticket) => setState(() => _ticket = ticket),
         onView: (ticket) => setState(() => _ticket = ticket),
-        child: RefocusBackground(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 500),
-              child: _formBuilder,
-            ),
-          ),
-        ),
+        child: _formBuilder,
       );
 
   Widget get _formBuilder => BlocBuilder<ManageTicketCubit, ManageTicketState>(
@@ -59,46 +53,39 @@ class _ManageTicketFormState extends State<ManageTicketForm> {
           if (isInitial) {
             return const LoaderWidget();
           }
-          editable = state.maybeWhen(orElse: () => false, edit: (_) => true);
+          _editable = state.maybeWhen(orElse: () => false, edit: (_) => true);
 
-          return Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            key: _formKey,
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              shrinkWrap: true,
-              children: [
-                if (_ticket.id == null) Head4Text(text: "new_ticket".tr()),
-                const VerticalSpacing(20),
-                ..._fields(),
-                const VerticalSpacing(20),
-                TicketButtonBar(
-                  onCancel: () => (_ticket.id != null)
-                      ? context.read<ManageTicketCubit>().toggleEdit()
-                      : Navigator.maybePop(context),
-                  onSave: () async {
-                    if (!(_formKey.currentState?.validate() ?? false)) {
-                      return await AdaptiveDialog.showError(
-                        context,
-                        message: "form_is_not_valid".tr(),
-                      );
-                    }
-
-                    return AdaptiveDialog.showConfirmation(
+          return ConstrainedForm(
+            formKey: _formKey,
+            children: [
+              if (_ticket.id == null) Head4Text(text: "new_ticket".tr()),
+              const VerticalSpacing(20),
+              ..._fields(),
+              TicketButtonBar(
+                onCancel: () => (_ticket.id != null)
+                    ? context.read<ManageTicketCubit>().toggleEdit()
+                    : Navigator.maybePop(context),
+                onSave: () async {
+                  if (!(_formKey.currentState?.validate() ?? false)) {
+                    return await AdaptiveDialog.showError(
                       context,
-                      title: "ticket.save".tr(),
-                      content: "ticket.save_confirm".tr(),
-                      confirmText: "save".tr(),
-                      cancelText: "cancel".tr(),
-                    ).then((save) {
-                      _formKey.currentState!.save();
-                      save ? context.read<ManageTicketCubit>().save(_ticket) : null;
-                    });
-                  },
-                ),
-                const VerticalSpacing(40),
-              ],
-            ),
+                      message: "form_is_not_valid".tr(),
+                    );
+                  }
+
+                  return AdaptiveDialog.showConfirmation(
+                    context,
+                    title: "ticket.save".tr(),
+                    content: "ticket.save_confirm".tr(),
+                    confirmText: "save".tr(),
+                    cancelText: "cancel".tr(),
+                  ).then((save) {
+                    _formKey.currentState!.save();
+                    save ? context.read<ManageTicketCubit>().save(_ticket) : null;
+                  });
+                },
+              ),
+            ],
           );
         },
         buildWhen: (_, current) => current.maybeMap(
@@ -114,7 +101,7 @@ class _ManageTicketFormState extends State<ManageTicketForm> {
           hintText: "${"adults_number".tr()}*",
           validator: (val) => Validators.isInteger(val) ? null : "number_validator_fail".tr(),
           keyboardType: TextInputType.number,
-          readOnly: !editable,
+          readOnly: !_editable,
           onSaved: (val) => _ticket = _ticket.copyWith(adultsNumber: int.tryParse(val!)),
         ),
         AppTextFormField(
@@ -122,11 +109,11 @@ class _ManageTicketFormState extends State<ManageTicketForm> {
           hintText: "${"children_number".tr()}*",
           validator: (val) => Validators.isInteger(val) ? null : "number_validator_fail".tr(),
           keyboardType: TextInputType.number,
-          readOnly: !editable,
+          readOnly: !_editable,
           onSaved: (val) => _ticket = _ticket.copyWith(childrenNumber: int.tryParse(val!)),
         ),
         TicketTransportFormField(
-          editable: editable,
+          editable: _editable,
           initialValue: _ticket.transport,
           validator: (val) => (val == null) ? "transport_is_required".tr() : null,
           onSaved: (val) => _ticket = _ticket.copyWith(transport: val),
@@ -135,23 +122,23 @@ class _ManageTicketFormState extends State<ManageTicketForm> {
           initialValue: _ticket.destination,
           hintText: "${"destination".tr()}*",
           validator: (val) => (val?.isNotEmpty ?? false) ? null : "field_empty_error".tr(),
-          readOnly: !editable,
+          readOnly: !_editable,
           onSaved: (val) => _ticket = _ticket.copyWith(destination: val),
         ),
         AppTextFormField(
           initialValue: _ticket.remarks,
           hintText: "remarks".tr(),
-          readOnly: !editable,
+          readOnly: !_editable,
           maxLines: 5,
           onSaved: (val) => _ticket = _ticket.copyWith(remarks: val),
         ),
         const VerticalSpacing(20),
-        if (!editable)
+        if (!_editable)
           TicketStatusButton(
             status: _ticket.status,
             onChanged: (value) => _updateStatus(context, value),
           ),
-        if (!editable && _ticket.feedback != null) TicketFeedbackTile(feedback: _ticket.feedback!),
+        if (!_editable && _ticket.feedback != null) TicketFeedbackTile(feedback: _ticket.feedback!),
       ];
 
   void _updateStatus(BuildContext context, [TicketStatusModel? status]) {

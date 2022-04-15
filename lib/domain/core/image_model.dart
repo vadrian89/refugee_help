@@ -12,13 +12,13 @@ class ImageModel with _$ImageModel {
   const ImageModel._();
 
   bool get isLocal => imageData != null;
-  bool get isUrl => imageURL?.contains("http") ?? false;
   bool get isValid => (imageURL?.isNotEmpty ?? false) || isLocal;
 
   const factory ImageModel({
     @JsonKey(ignore: true) Uint8List? imageData,
     String? fileExtension,
     String? imageURL,
+    String? storagePath,
   }) = _ImageModel;
 
   factory ImageModel.fromJson(Map<String, dynamic> data) => _$ImageModelFromJson(data);

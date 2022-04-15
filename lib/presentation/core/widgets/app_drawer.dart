@@ -83,6 +83,8 @@ class AppDrawer extends ResponsiveWidget {
               DrawerListTile(
                 icon: MdiIcons.homeGroup,
                 label: "housing".tr(),
+                isSelected: state.maybeMap(orElse: () => false, housing: (_) => true),
+                onPressed: context.read<RootRouterCubit>().goToHousing,
               ),
               const VolunteeringAvailabilityTile(),
               const Spacer(),

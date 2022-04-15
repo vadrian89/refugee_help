@@ -25,11 +25,13 @@ class _$ImageModelTearOff {
   _ImageModel call(
       {@JsonKey(ignore: true) Uint8List? imageData,
       String? fileExtension,
-      String? imageURL}) {
+      String? imageURL,
+      String? storagePath}) {
     return _ImageModel(
       imageData: imageData,
       fileExtension: fileExtension,
       imageURL: imageURL,
+      storagePath: storagePath,
     );
   }
 
@@ -47,6 +49,7 @@ mixin _$ImageModel {
   Uint8List? get imageData => throw _privateConstructorUsedError;
   String? get fileExtension => throw _privateConstructorUsedError;
   String? get imageURL => throw _privateConstructorUsedError;
+  String? get storagePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,7 +65,8 @@ abstract class $ImageModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true) Uint8List? imageData,
       String? fileExtension,
-      String? imageURL});
+      String? imageURL,
+      String? storagePath});
 }
 
 /// @nodoc
@@ -78,6 +82,7 @@ class _$ImageModelCopyWithImpl<$Res> implements $ImageModelCopyWith<$Res> {
     Object? imageData = freezed,
     Object? fileExtension = freezed,
     Object? imageURL = freezed,
+    Object? storagePath = freezed,
   }) {
     return _then(_value.copyWith(
       imageData: imageData == freezed
@@ -92,6 +97,10 @@ class _$ImageModelCopyWithImpl<$Res> implements $ImageModelCopyWith<$Res> {
           ? _value.imageURL
           : imageURL // ignore: cast_nullable_to_non_nullable
               as String?,
+      storagePath: storagePath == freezed
+          ? _value.storagePath
+          : storagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -105,7 +114,8 @@ abstract class _$ImageModelCopyWith<$Res> implements $ImageModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true) Uint8List? imageData,
       String? fileExtension,
-      String? imageURL});
+      String? imageURL,
+      String? storagePath});
 }
 
 /// @nodoc
@@ -123,6 +133,7 @@ class __$ImageModelCopyWithImpl<$Res> extends _$ImageModelCopyWithImpl<$Res>
     Object? imageData = freezed,
     Object? fileExtension = freezed,
     Object? imageURL = freezed,
+    Object? storagePath = freezed,
   }) {
     return _then(_ImageModel(
       imageData: imageData == freezed
@@ -137,6 +148,10 @@ class __$ImageModelCopyWithImpl<$Res> extends _$ImageModelCopyWithImpl<$Res>
           ? _value.imageURL
           : imageURL // ignore: cast_nullable_to_non_nullable
               as String?,
+      storagePath: storagePath == freezed
+          ? _value.storagePath
+          : storagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -147,7 +162,8 @@ class _$_ImageModel extends _ImageModel {
   const _$_ImageModel(
       {@JsonKey(ignore: true) this.imageData,
       this.fileExtension,
-      this.imageURL})
+      this.imageURL,
+      this.storagePath})
       : super._();
 
   factory _$_ImageModel.fromJson(Map<String, dynamic> json) =>
@@ -160,10 +176,12 @@ class _$_ImageModel extends _ImageModel {
   final String? fileExtension;
   @override
   final String? imageURL;
+  @override
+  final String? storagePath;
 
   @override
   String toString() {
-    return 'ImageModel(imageData: $imageData, fileExtension: $fileExtension, imageURL: $imageURL)';
+    return 'ImageModel(imageData: $imageData, fileExtension: $fileExtension, imageURL: $imageURL, storagePath: $storagePath)';
   }
 
   @override
@@ -174,7 +192,9 @@ class _$_ImageModel extends _ImageModel {
             const DeepCollectionEquality().equals(other.imageData, imageData) &&
             const DeepCollectionEquality()
                 .equals(other.fileExtension, fileExtension) &&
-            const DeepCollectionEquality().equals(other.imageURL, imageURL));
+            const DeepCollectionEquality().equals(other.imageURL, imageURL) &&
+            const DeepCollectionEquality()
+                .equals(other.storagePath, storagePath));
   }
 
   @override
@@ -182,7 +202,8 @@ class _$_ImageModel extends _ImageModel {
       runtimeType,
       const DeepCollectionEquality().hash(imageData),
       const DeepCollectionEquality().hash(fileExtension),
-      const DeepCollectionEquality().hash(imageURL));
+      const DeepCollectionEquality().hash(imageURL),
+      const DeepCollectionEquality().hash(storagePath));
 
   @JsonKey(ignore: true)
   @override
@@ -199,7 +220,8 @@ abstract class _ImageModel extends ImageModel {
   const factory _ImageModel(
       {@JsonKey(ignore: true) Uint8List? imageData,
       String? fileExtension,
-      String? imageURL}) = _$_ImageModel;
+      String? imageURL,
+      String? storagePath}) = _$_ImageModel;
   const _ImageModel._() : super._();
 
   factory _ImageModel.fromJson(Map<String, dynamic> json) =
@@ -212,6 +234,8 @@ abstract class _ImageModel extends ImageModel {
   String? get fileExtension;
   @override
   String? get imageURL;
+  @override
+  String? get storagePath;
   @override
   @JsonKey(ignore: true)
   _$ImageModelCopyWith<_ImageModel> get copyWith =>

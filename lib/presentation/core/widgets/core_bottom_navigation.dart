@@ -13,6 +13,7 @@ class CoreBottomNavigation extends StatelessWidget {
           currentIndex: state.maybeMap(
             orElse: () => 0,
             transport: (_) => 1,
+            housing: (_) => 2,
           ),
           items: [
             BottomNavigationBarItem(
@@ -38,6 +39,7 @@ class CoreBottomNavigation extends StatelessWidget {
         context.read<RootRouterCubit>().goToTransport();
         break;
       case 2:
+        context.read<RootRouterCubit>().goToHousing();
         break;
       default:
         context.read<RootRouterCubit>().goToRoot();

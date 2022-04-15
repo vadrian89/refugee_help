@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:refugee_help/infrastructure/validators.dart';
 import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_form_field.dart';
 
-class TransportArrival extends StatelessWidget {
+class TransportArrivalTile extends StatelessWidget {
   final TextEditingController textController;
   final bool readOnly;
   final bool atLocation;
   final void Function(bool? atLocation)? onAtLocationChanged;
 
-  const TransportArrival({
+  const TransportArrivalTile({
     Key? key,
     required this.textController,
     required this.readOnly,

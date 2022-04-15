@@ -29,6 +29,7 @@ class _$TicketModelTearOff {
       int? adultsNumber,
       int? childrenNumber,
       TransportInfoModel? transport,
+      HousingInfoModel? housing,
       UserInfoModel? dispatcher,
       String? destination,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -45,6 +46,7 @@ class _$TicketModelTearOff {
       adultsNumber: adultsNumber,
       childrenNumber: childrenNumber,
       transport: transport,
+      housing: housing,
       dispatcher: dispatcher,
       destination: destination,
       createdAt: createdAt,
@@ -72,6 +74,7 @@ mixin _$TicketModel {
   int? get adultsNumber => throw _privateConstructorUsedError;
   int? get childrenNumber => throw _privateConstructorUsedError;
   TransportInfoModel? get transport => throw _privateConstructorUsedError;
+  HousingInfoModel? get housing => throw _privateConstructorUsedError;
 
   /// User which created the ticket.
   UserInfoModel? get dispatcher => throw _privateConstructorUsedError;
@@ -106,6 +109,7 @@ abstract class $TicketModelCopyWith<$Res> {
       int? adultsNumber,
       int? childrenNumber,
       TransportInfoModel? transport,
+      HousingInfoModel? housing,
       UserInfoModel? dispatcher,
       String? destination,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -118,6 +122,7 @@ abstract class $TicketModelCopyWith<$Res> {
       bool? isMock});
 
   $TransportInfoModelCopyWith<$Res>? get transport;
+  $HousingInfoModelCopyWith<$Res>? get housing;
   $UserInfoModelCopyWith<$Res>? get dispatcher;
   $TicketFeedbackModelCopyWith<$Res>? get cancelFeedback;
   $TicketFeedbackModelCopyWith<$Res>? get finishedFeedback;
@@ -138,6 +143,7 @@ class _$TicketModelCopyWithImpl<$Res> implements $TicketModelCopyWith<$Res> {
     Object? adultsNumber = freezed,
     Object? childrenNumber = freezed,
     Object? transport = freezed,
+    Object? housing = freezed,
     Object? dispatcher = freezed,
     Object? destination = freezed,
     Object? createdAt = freezed,
@@ -168,6 +174,10 @@ class _$TicketModelCopyWithImpl<$Res> implements $TicketModelCopyWith<$Res> {
           ? _value.transport
           : transport // ignore: cast_nullable_to_non_nullable
               as TransportInfoModel?,
+      housing: housing == freezed
+          ? _value.housing
+          : housing // ignore: cast_nullable_to_non_nullable
+              as HousingInfoModel?,
       dispatcher: dispatcher == freezed
           ? _value.dispatcher
           : dispatcher // ignore: cast_nullable_to_non_nullable
@@ -211,6 +221,17 @@ class _$TicketModelCopyWithImpl<$Res> implements $TicketModelCopyWith<$Res> {
 
     return $TransportInfoModelCopyWith<$Res>(_value.transport!, (value) {
       return _then(_value.copyWith(transport: value));
+    });
+  }
+
+  @override
+  $HousingInfoModelCopyWith<$Res>? get housing {
+    if (_value.housing == null) {
+      return null;
+    }
+
+    return $HousingInfoModelCopyWith<$Res>(_value.housing!, (value) {
+      return _then(_value.copyWith(housing: value));
     });
   }
 
@@ -263,6 +284,7 @@ abstract class _$TicketModelCopyWith<$Res>
       int? adultsNumber,
       int? childrenNumber,
       TransportInfoModel? transport,
+      HousingInfoModel? housing,
       UserInfoModel? dispatcher,
       String? destination,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -276,6 +298,8 @@ abstract class _$TicketModelCopyWith<$Res>
 
   @override
   $TransportInfoModelCopyWith<$Res>? get transport;
+  @override
+  $HousingInfoModelCopyWith<$Res>? get housing;
   @override
   $UserInfoModelCopyWith<$Res>? get dispatcher;
   @override
@@ -301,6 +325,7 @@ class __$TicketModelCopyWithImpl<$Res> extends _$TicketModelCopyWithImpl<$Res>
     Object? adultsNumber = freezed,
     Object? childrenNumber = freezed,
     Object? transport = freezed,
+    Object? housing = freezed,
     Object? dispatcher = freezed,
     Object? destination = freezed,
     Object? createdAt = freezed,
@@ -331,6 +356,10 @@ class __$TicketModelCopyWithImpl<$Res> extends _$TicketModelCopyWithImpl<$Res>
           ? _value.transport
           : transport // ignore: cast_nullable_to_non_nullable
               as TransportInfoModel?,
+      housing: housing == freezed
+          ? _value.housing
+          : housing // ignore: cast_nullable_to_non_nullable
+              as HousingInfoModel?,
       dispatcher: dispatcher == freezed
           ? _value.dispatcher
           : dispatcher // ignore: cast_nullable_to_non_nullable
@@ -378,6 +407,7 @@ class _$_TicketModel extends _TicketModel {
       this.adultsNumber,
       this.childrenNumber,
       this.transport,
+      this.housing,
       this.dispatcher,
       this.destination,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -405,6 +435,8 @@ class _$_TicketModel extends _TicketModel {
   @override
   final TransportInfoModel? transport;
   @override
+  final HousingInfoModel? housing;
+  @override
 
   /// User which created the ticket.
   final UserInfoModel? dispatcher;
@@ -430,7 +462,7 @@ class _$_TicketModel extends _TicketModel {
 
   @override
   String toString() {
-    return 'TicketModel(id: $id, type: $type, adultsNumber: $adultsNumber, childrenNumber: $childrenNumber, transport: $transport, dispatcher: $dispatcher, destination: $destination, createdAt: $createdAt, startedAt: $startedAt, cancelFeedback: $cancelFeedback, finishedFeedback: $finishedFeedback, remarks: $remarks, isMock: $isMock)';
+    return 'TicketModel(id: $id, type: $type, adultsNumber: $adultsNumber, childrenNumber: $childrenNumber, transport: $transport, housing: $housing, dispatcher: $dispatcher, destination: $destination, createdAt: $createdAt, startedAt: $startedAt, cancelFeedback: $cancelFeedback, finishedFeedback: $finishedFeedback, remarks: $remarks, isMock: $isMock)';
   }
 
   @override
@@ -445,6 +477,7 @@ class _$_TicketModel extends _TicketModel {
             const DeepCollectionEquality()
                 .equals(other.childrenNumber, childrenNumber) &&
             const DeepCollectionEquality().equals(other.transport, transport) &&
+            const DeepCollectionEquality().equals(other.housing, housing) &&
             const DeepCollectionEquality()
                 .equals(other.dispatcher, dispatcher) &&
             const DeepCollectionEquality()
@@ -467,6 +500,7 @@ class _$_TicketModel extends _TicketModel {
       const DeepCollectionEquality().hash(adultsNumber),
       const DeepCollectionEquality().hash(childrenNumber),
       const DeepCollectionEquality().hash(transport),
+      const DeepCollectionEquality().hash(housing),
       const DeepCollectionEquality().hash(dispatcher),
       const DeepCollectionEquality().hash(destination),
       const DeepCollectionEquality().hash(createdAt),
@@ -495,6 +529,7 @@ abstract class _TicketModel extends TicketModel {
       int? adultsNumber,
       int? childrenNumber,
       TransportInfoModel? transport,
+      HousingInfoModel? housing,
       UserInfoModel? dispatcher,
       String? destination,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -521,6 +556,8 @@ abstract class _TicketModel extends TicketModel {
   int? get childrenNumber;
   @override
   TransportInfoModel? get transport;
+  @override
+  HousingInfoModel? get housing;
   @override
 
   /// User which created the ticket.

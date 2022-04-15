@@ -33,10 +33,10 @@ class TransportRepository extends BaseRepository
           .update(model.copyWith(updatedAt: DateTime.now()).availabilityJson);
     } on FirebaseException catch (error) {
       logException("Exception in updateAvailability", error: error, stackTrace: error.stackTrace);
-      result = OperationResult.failure("error_udating_user".tr());
+      result = OperationResult.failure("error_saving_transport".tr());
     } catch (e, stackTrace) {
       logException("Exception in updateAvailability", error: e, stackTrace: stackTrace);
-      result = OperationResult.failure("error_udating_user".tr());
+      result = OperationResult.failure("error_saving_transport".tr());
     }
     addResultToStream(result);
   }

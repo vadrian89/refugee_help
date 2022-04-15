@@ -1,10 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/transport/manage/manage_transport_cubit.dart';
-import 'package:refugee_help/domain/core/image_model.dart';
 import 'package:refugee_help/domain/transport/transport_model.dart';
 import 'package:refugee_help/infrastructure/extensions.dart';
 import 'package:refugee_help/infrastructure/validators.dart';
@@ -15,7 +12,6 @@ import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_form
 import 'package:refugee_help/presentation/core/widgets/refocus_background.dart';
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
 import 'package:refugee_help/presentation/core/widgets/editable_profile_image.dart';
-import 'package:path/path.dart' as p;
 import 'package:refugee_help/presentation/transport/manage/core/manage_transport_user_info.dart';
 import 'package:refugee_help/presentation/transport/manage/core/transport_arrival_tile.dart';
 import 'package:refugee_help/presentation/transport/manage/core/transport_type_dropdown.dart';
@@ -191,7 +187,7 @@ class _ManageTransportFormState extends State<ManageTransportForm> {
           keyboardType: TextInputType.number,
           readOnly: !editable,
         ),
-        TransportArrival(
+        TransportArrivalTile(
           textController: _timeAvailableController,
           atLocation: _model!.atLocation!,
           onAtLocationChanged: (val) => state.maybeWhen(
@@ -232,7 +228,7 @@ class _ManageTransportFormState extends State<ManageTransportForm> {
   Future<bool> _validateForm(BuildContext context) async {
     String? error;
     if (!_updatedModel.imageIsValid) {
-      error = "no_image_selected_error".tr();
+      error = "no_vehicle_image_error".tr();
     } else if (!_updatedModel.regNumberIsValid || !_updatedModel.destinationsIsValid) {
       error = "field_empty_error".tr();
     } else if (!_updatedModel.seatsAvailableIsValid) {
@@ -250,37 +246,10 @@ class _ManageTransportFormState extends State<ManageTransportForm> {
   }
 
   Future<void> _pickImage(BuildContext context) async {
-    if (kIsWeb) {
-      await _selectImageWeb(context);
-      return;
-    }
-    await _selectImageMobile(context);
-  }
+    final pickedImage = await ImagePickerBottomSheet().show(context);
+    if (pickedImage == null) return;
 
-  Future<void> _selectImageMobile(BuildContext context) async {
-    final pickedFile = await ImagePickerBottomSheet().show(context);
-    if (pickedFile == null) return;
-
-    final imageBytes = await pickedFile.readAsBytes();
-    setState(() => _model = _model!.copyWith(
-          image: ImageModel(
-            imageData: imageBytes,
-            fileExtension: p.extension(pickedFile.path),
-          ),
-        ));
-  }
-
-  Future<void> _selectImageWeb(BuildContext context) async {
-    final pickedFile = await FilePicker.platform.pickFiles();
-    if (pickedFile == null) return;
-
-    final selected = pickedFile.files.single;
-    setState(() => _model = _model!.copyWith(
-          image: ImageModel(
-            imageData: selected.bytes,
-            fileExtension: selected.extension,
-          ),
-        ));
+    setState(() => _model = _model!.copyWith(image: pickedImage));
   }
 
   void _updateForm() {

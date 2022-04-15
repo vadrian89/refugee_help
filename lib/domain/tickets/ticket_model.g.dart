@@ -17,6 +17,9 @@ _$_TicketModel _$$_TicketModelFromJson(Map<String, dynamic> json) =>
           ? null
           : TransportInfoModel.fromJson(
               json['transport'] as Map<String, dynamic>),
+      housing: json['housing'] == null
+          ? null
+          : HousingInfoModel.fromJson(json['housing'] as Map<String, dynamic>),
       dispatcher: json['dispatcher'] == null
           ? null
           : UserInfoModel.fromJson(json['dispatcher'] as Map<String, dynamic>),
@@ -41,6 +44,7 @@ Map<String, dynamic> _$$_TicketModelToJson(_$_TicketModel instance) =>
       'adultsNumber': instance.adultsNumber,
       'childrenNumber': instance.childrenNumber,
       'transport': instance.transport?.toJson(),
+      'housing': instance.housing?.toJson(),
       'dispatcher': instance.dispatcher?.toJson(),
       'destination': instance.destination,
       'createdAt': dateTimeToJson(instance.createdAt),

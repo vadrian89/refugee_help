@@ -13,6 +13,7 @@ import 'operation_result.dart';
 abstract class BaseRepository {
   static const String _project = 'refugee_help';
   static const String transportCollection = "volunteer_transport";
+  static const String housingCollection = "volunteer_housing";
   static const String ticketsCollection = "tickets";
 
   late final Logger _logger;

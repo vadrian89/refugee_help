@@ -9,7 +9,6 @@ import 'transport_type_model.dart';
 part 'transport_info_model.freezed.dart';
 part 'transport_info_model.g.dart';
 
-/// Model of the user's info used inside other firebase documents (such as: transport, housing, ticket, etc.).
 @freezed
 class TransportInfoModel with _$TransportInfoModel {
   const TransportInfoModel._();

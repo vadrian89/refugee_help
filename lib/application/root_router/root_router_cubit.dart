@@ -45,6 +45,9 @@ class RootRouterCubit extends Cubit<RootRouterState> {
   void goToTransport({String? id, bool add = false}) =>
       _onlyAuthenticated(RootRouterState.transport(id: id, add: add));
 
+  void goToHousing({String? id, bool add = false}) =>
+      _onlyAuthenticated(RootRouterState.housing(id: id, add: add));
+
   void goToTickets({
     String? id,
     TicketTypeModel? type,
@@ -61,6 +64,7 @@ class RootRouterCubit extends Cubit<RootRouterState> {
         orElse: () => null,
         tickets: (tickets) => emit(tickets.copyWith(modalVisible: value)),
         transport: (transport) => emit(transport.copyWith(modalVisible: value)),
+        housing: (housing) => emit(housing.copyWith(modalVisible: value)),
       );
 
   /// Implement the logic for what happens when the back button was called.
@@ -100,6 +104,16 @@ class RootRouterCubit extends Cubit<RootRouterState> {
         }
         return goToRoot();
       },
+      housing: (housing) {
+        if (housing.modalVisible) {
+          return true;
+        }
+        if (housing.add || (housing.id?.isNotEmpty ?? false)) {
+          goToHousing();
+          return true;
+        }
+        return goToRoot();
+      },
       orElse: () => false,
     );
   }
@@ -118,6 +132,7 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           register: _onlyUnauthenticated,
           home: _onlyAuthenticated,
           transport: _onlyAuthenticated,
+          housing: _onlyAuthenticated,
           tickets: (tickets) {
             if (tickets.type == null) {
               goToRoot();
@@ -163,7 +178,7 @@ class RootRouterCubit extends Cubit<RootRouterState> {
     }
   }
 
-  /// Helper recursive method to wait the authentication process to get past the initial state.
+  /// Wait for the authentication process to get past the initial state.
   ///
   /// We need this to ensure the authentication process has finished checking if there is a user signed in or not.
   /// Otherwise we would end up in a situation where the state is changed to the parsed state then, afterwards,

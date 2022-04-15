@@ -5,6 +5,7 @@ import 'package:refugee_help/presentation/authentication/authentication_screen.d
 import 'package:refugee_help/presentation/core/screens/loading_screen.dart';
 import 'package:refugee_help/presentation/core/screens/unkown_screen.dart';
 import 'package:refugee_help/presentation/home/home_screen.dart';
+import 'package:refugee_help/presentation/housing/list/housing_list_screen.dart';
 import 'package:refugee_help/presentation/tickets/list/tickets_list_screen.dart';
 import 'package:refugee_help/presentation/transport/list/transport_list_screen.dart';
 
@@ -22,6 +23,7 @@ class MainScreen extends StatelessWidget {
           tickets: (tickets) =>
               (tickets.type == null) ? const HomeScreen() : TicketsListScreen(type: tickets.type!),
           transport: (_) => const TransportListScreen(),
+          housing: (_) => const HousingListScreen(),
         ),
       );
 }

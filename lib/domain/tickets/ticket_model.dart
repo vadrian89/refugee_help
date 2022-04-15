@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:refugee_help/domain/housing/housing_info_model.dart';
 
 import 'package:refugee_help/domain/transport/transport_info_model.dart';
 import 'package:refugee_help/domain/transport/transport_model.dart';
@@ -27,6 +28,7 @@ class TicketModel with _$TicketModel {
     int? adultsNumber,
     int? childrenNumber,
     TransportInfoModel? transport,
+    HousingInfoModel? housing,
 
     /// User which created the ticket.
     UserInfoModel? dispatcher,

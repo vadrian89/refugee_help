@@ -30,6 +30,8 @@ class RootRouterState with _$RootRouterState {
 
   static const transportPath = "/transport";
 
+  static const housingPath = "/housing";
+
   static const ticketsPath = "/tickets";
 
   static const addPath = "/add";
@@ -79,6 +81,12 @@ class RootRouterState with _$RootRouterState {
     @Default(false) bool modalVisible,
   }) = _Transport;
 
+  const factory RootRouterState.housing({
+    String? id,
+    @Default(false) bool add,
+    @Default(false) bool modalVisible,
+  }) = _Housing;
+
   const factory RootRouterState.tickets({
     String? id,
     TicketTypeModel? type,
@@ -109,6 +117,8 @@ class RootRouterState with _$RootRouterState {
       return const RootRouterState.register();
     } else if (pathSegment == transportPath) {
       return const RootRouterState.transport();
+    } else if (pathSegment == housingPath) {
+      return const RootRouterState.housing();
     } else {
       return const RootRouterState.unknown();
     }
@@ -130,6 +140,12 @@ class RootRouterState with _$RootRouterState {
         return const RootRouterState.transport(add: true);
       }
       return RootRouterState.transport(id: pathSegment2);
+    }
+    if (pathSegment1 == housingPath) {
+      if ("/$pathSegment2" == addPath) {
+        return const RootRouterState.housing(add: true);
+      }
+      return RootRouterState.housing(id: pathSegment2);
     }
     if (pathSegment1 == ticketsPath && TicketTypeModel.isValidType(pathSegment2)) {
       return RootRouterState.tickets(
@@ -171,8 +187,13 @@ class RootRouterState with _$RootRouterState {
         register: (_) => registerPath,
         home: (home) => "$homePath${_getPath(home.viewProfile, profilePath)}",
         transport: (transport) =>
-            "$transportPath${_getPath(transport.add, addPath)}" +
+            transportPath +
+            _getPath(transport.add, addPath) +
             _getPath(transport.id?.trim().isNotEmpty ?? false, "/${transport.id}"),
+        housing: (housing) =>
+            housingPath +
+            _getPath(housing.add, addPath) +
+            _getPath(housing.id?.trim().isNotEmpty ?? false, "/${housing.id}"),
         tickets: (tickets) =>
             ticketsPath +
             _getPath(tickets.type?.name.trim().isNotEmpty ?? false, "/${tickets.type!.name}") +

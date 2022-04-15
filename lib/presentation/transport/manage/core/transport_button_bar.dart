@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/transport/manage/manage_transport_cubit.dart';
-import 'package:refugee_help/presentation/authentication/core/buttons/cancel_button.dart';
+import 'package:refugee_help/presentation/core/widgets/buttons/cancel_button.dart';
 import 'package:refugee_help/presentation/core/widgets/buttons/save_button.dart';
 
 class TransportButtonBar extends StatelessWidget {

@@ -5,6 +5,7 @@ import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/presentation/authentication/register/register_screen.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/screens/main_screen.dart';
+import 'package:refugee_help/presentation/housing/manage/manage_housing_screen.dart';
 import 'package:refugee_help/presentation/tickets/manage/manage_ticket_screen.dart';
 import 'package:refugee_help/presentation/transport/manage/manage_transport_screen.dart';
 import 'package:refugee_help/presentation/user_profile/user_profile_screen.dart';
@@ -134,6 +135,16 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
             _materialPage(
               valueKey: RootRouterState.transportPath,
               child: ManageTransportScreen(id: transport.id),
+            ),
+          );
+        }
+      },
+      housing: (housing) {
+        if ((housing.id?.isNotEmpty ?? false) || housing.add) {
+          tmpList.add(
+            _materialPage(
+              valueKey: RootRouterState.transportPath,
+              child: ManageHousingScreen(id: housing.id),
             ),
           );
         }

@@ -42,6 +42,14 @@ class _$RootRouterStateTearOff {
     );
   }
 
+  _Housing housing({String? id, bool add = false, bool modalVisible = false}) {
+    return _Housing(
+      id: id,
+      add: add,
+      modalVisible: modalVisible,
+    );
+  }
+
   _Tickets tickets(
       {String? id,
       TicketTypeModel? type,
@@ -78,6 +86,7 @@ mixin _$RootRouterState {
     required TResult Function(UserModel? user, bool viewProfile) home,
     required TResult Function(String? id, bool add, bool modalVisible)
         transport,
+    required TResult Function(String? id, bool add, bool modalVisible) housing,
     required TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)
         tickets,
@@ -91,6 +100,7 @@ mixin _$RootRouterState {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -104,6 +114,7 @@ mixin _$RootRouterState {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -118,6 +129,7 @@ mixin _$RootRouterState {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Transport value) transport,
+    required TResult Function(_Housing value) housing,
     required TResult Function(_Tickets value) tickets,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
@@ -129,6 +141,7 @@ mixin _$RootRouterState {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -140,6 +153,7 @@ mixin _$RootRouterState {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -208,6 +222,7 @@ class _$_Initial extends _Initial {
     required TResult Function(UserModel? user, bool viewProfile) home,
     required TResult Function(String? id, bool add, bool modalVisible)
         transport,
+    required TResult Function(String? id, bool add, bool modalVisible) housing,
     required TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)
         tickets,
@@ -224,6 +239,7 @@ class _$_Initial extends _Initial {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -240,6 +256,7 @@ class _$_Initial extends _Initial {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -260,6 +277,7 @@ class _$_Initial extends _Initial {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Transport value) transport,
+    required TResult Function(_Housing value) housing,
     required TResult Function(_Tickets value) tickets,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
@@ -274,6 +292,7 @@ class _$_Initial extends _Initial {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -288,6 +307,7 @@ class _$_Initial extends _Initial {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -351,6 +371,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     required TResult Function(UserModel? user, bool viewProfile) home,
     required TResult Function(String? id, bool add, bool modalVisible)
         transport,
+    required TResult Function(String? id, bool add, bool modalVisible) housing,
     required TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)
         tickets,
@@ -367,6 +388,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -383,6 +405,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -403,6 +426,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Transport value) transport,
+    required TResult Function(_Housing value) housing,
     required TResult Function(_Tickets value) tickets,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
@@ -417,6 +441,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -431,6 +456,7 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -540,6 +566,7 @@ class _$_Home extends _Home {
     required TResult Function(UserModel? user, bool viewProfile) home,
     required TResult Function(String? id, bool add, bool modalVisible)
         transport,
+    required TResult Function(String? id, bool add, bool modalVisible) housing,
     required TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)
         tickets,
@@ -556,6 +583,7 @@ class _$_Home extends _Home {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -572,6 +600,7 @@ class _$_Home extends _Home {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -592,6 +621,7 @@ class _$_Home extends _Home {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Transport value) transport,
+    required TResult Function(_Housing value) housing,
     required TResult Function(_Tickets value) tickets,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
@@ -606,6 +636,7 @@ class _$_Home extends _Home {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -620,6 +651,7 @@ class _$_Home extends _Home {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -733,6 +765,7 @@ class _$_Transport extends _Transport {
     required TResult Function(UserModel? user, bool viewProfile) home,
     required TResult Function(String? id, bool add, bool modalVisible)
         transport,
+    required TResult Function(String? id, bool add, bool modalVisible) housing,
     required TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)
         tickets,
@@ -749,6 +782,7 @@ class _$_Transport extends _Transport {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -765,6 +799,7 @@ class _$_Transport extends _Transport {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -785,6 +820,7 @@ class _$_Transport extends _Transport {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Transport value) transport,
+    required TResult Function(_Housing value) housing,
     required TResult Function(_Tickets value) tickets,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
@@ -799,6 +835,7 @@ class _$_Transport extends _Transport {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -813,6 +850,7 @@ class _$_Transport extends _Transport {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -835,6 +873,207 @@ abstract class _Transport extends RootRouterState {
   bool get modalVisible;
   @JsonKey(ignore: true)
   _$TransportCopyWith<_Transport> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$HousingCopyWith<$Res> {
+  factory _$HousingCopyWith(_Housing value, $Res Function(_Housing) then) =
+      __$HousingCopyWithImpl<$Res>;
+  $Res call({String? id, bool add, bool modalVisible});
+}
+
+/// @nodoc
+class __$HousingCopyWithImpl<$Res> extends _$RootRouterStateCopyWithImpl<$Res>
+    implements _$HousingCopyWith<$Res> {
+  __$HousingCopyWithImpl(_Housing _value, $Res Function(_Housing) _then)
+      : super(_value, (v) => _then(v as _Housing));
+
+  @override
+  _Housing get _value => super._value as _Housing;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? add = freezed,
+    Object? modalVisible = freezed,
+  }) {
+    return _then(_Housing(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      add: add == freezed
+          ? _value.add
+          : add // ignore: cast_nullable_to_non_nullable
+              as bool,
+      modalVisible: modalVisible == freezed
+          ? _value.modalVisible
+          : modalVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Housing extends _Housing {
+  const _$_Housing({this.id, this.add = false, this.modalVisible = false})
+      : super._();
+
+  @override
+  final String? id;
+  @JsonKey()
+  @override
+  final bool add;
+  @JsonKey()
+  @override
+  final bool modalVisible;
+
+  @override
+  String toString() {
+    return 'RootRouterState.housing(id: $id, add: $add, modalVisible: $modalVisible)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Housing &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.add, add) &&
+            const DeepCollectionEquality()
+                .equals(other.modalVisible, modalVisible));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(add),
+      const DeepCollectionEquality().hash(modalVisible));
+
+  @JsonKey(ignore: true)
+  @override
+  _$HousingCopyWith<_Housing> get copyWith =>
+      __$HousingCopyWithImpl<_Housing>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() unauthenticated,
+    required TResult Function(UserModel? user, bool viewProfile) home,
+    required TResult Function(String? id, bool add, bool modalVisible)
+        transport,
+    required TResult Function(String? id, bool add, bool modalVisible) housing,
+    required TResult Function(String? id, TicketTypeModel? type, bool add,
+            bool modalVisible, String? transportId)
+        tickets,
+    required TResult Function() register,
+    required TResult Function() unknown,
+  }) {
+    return housing(id, add, modalVisible);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? unauthenticated,
+    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
+    TResult Function(String? id, TicketTypeModel? type, bool add,
+            bool modalVisible, String? transportId)?
+        tickets,
+    TResult Function()? register,
+    TResult Function()? unknown,
+  }) {
+    return housing?.call(id, add, modalVisible);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? unauthenticated,
+    TResult Function(UserModel? user, bool viewProfile)? home,
+    TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
+    TResult Function(String? id, TicketTypeModel? type, bool add,
+            bool modalVisible, String? transportId)?
+        tickets,
+    TResult Function()? register,
+    TResult Function()? unknown,
+    required TResult orElse(),
+  }) {
+    if (housing != null) {
+      return housing(id, add, modalVisible);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_Home value) home,
+    required TResult Function(_Transport value) transport,
+    required TResult Function(_Housing value) housing,
+    required TResult Function(_Tickets value) tickets,
+    required TResult Function(_Register value) register,
+    required TResult Function(_Unknown value) unknown,
+  }) {
+    return housing(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
+    TResult Function(_Tickets value)? tickets,
+    TResult Function(_Register value)? register,
+    TResult Function(_Unknown value)? unknown,
+  }) {
+    return housing?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_Home value)? home,
+    TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
+    TResult Function(_Tickets value)? tickets,
+    TResult Function(_Register value)? register,
+    TResult Function(_Unknown value)? unknown,
+    required TResult orElse(),
+  }) {
+    if (housing != null) {
+      return housing(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Housing extends RootRouterState {
+  const factory _Housing({String? id, bool add, bool modalVisible}) =
+      _$_Housing;
+  const _Housing._() : super._();
+
+  String? get id;
+  bool get add;
+  bool get modalVisible;
+  @JsonKey(ignore: true)
+  _$HousingCopyWith<_Housing> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -957,6 +1196,7 @@ class _$_Tickets extends _Tickets {
     required TResult Function(UserModel? user, bool viewProfile) home,
     required TResult Function(String? id, bool add, bool modalVisible)
         transport,
+    required TResult Function(String? id, bool add, bool modalVisible) housing,
     required TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)
         tickets,
@@ -973,6 +1213,7 @@ class _$_Tickets extends _Tickets {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -989,6 +1230,7 @@ class _$_Tickets extends _Tickets {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -1009,6 +1251,7 @@ class _$_Tickets extends _Tickets {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Transport value) transport,
+    required TResult Function(_Housing value) housing,
     required TResult Function(_Tickets value) tickets,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
@@ -1023,6 +1266,7 @@ class _$_Tickets extends _Tickets {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -1037,6 +1281,7 @@ class _$_Tickets extends _Tickets {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -1111,6 +1356,7 @@ class _$_Register extends _Register {
     required TResult Function(UserModel? user, bool viewProfile) home,
     required TResult Function(String? id, bool add, bool modalVisible)
         transport,
+    required TResult Function(String? id, bool add, bool modalVisible) housing,
     required TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)
         tickets,
@@ -1127,6 +1373,7 @@ class _$_Register extends _Register {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -1143,6 +1390,7 @@ class _$_Register extends _Register {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -1163,6 +1411,7 @@ class _$_Register extends _Register {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Transport value) transport,
+    required TResult Function(_Housing value) housing,
     required TResult Function(_Tickets value) tickets,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
@@ -1177,6 +1426,7 @@ class _$_Register extends _Register {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -1191,6 +1441,7 @@ class _$_Register extends _Register {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -1251,6 +1502,7 @@ class _$_Unknown extends _Unknown {
     required TResult Function(UserModel? user, bool viewProfile) home,
     required TResult Function(String? id, bool add, bool modalVisible)
         transport,
+    required TResult Function(String? id, bool add, bool modalVisible) housing,
     required TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)
         tickets,
@@ -1267,6 +1519,7 @@ class _$_Unknown extends _Unknown {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -1283,6 +1536,7 @@ class _$_Unknown extends _Unknown {
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
     TResult Function(String? id, bool add, bool modalVisible)? transport,
+    TResult Function(String? id, bool add, bool modalVisible)? housing,
     TResult Function(String? id, TicketTypeModel? type, bool add,
             bool modalVisible, String? transportId)?
         tickets,
@@ -1303,6 +1557,7 @@ class _$_Unknown extends _Unknown {
     required TResult Function(_Unauthenticated value) unauthenticated,
     required TResult Function(_Home value) home,
     required TResult Function(_Transport value) transport,
+    required TResult Function(_Housing value) housing,
     required TResult Function(_Tickets value) tickets,
     required TResult Function(_Register value) register,
     required TResult Function(_Unknown value) unknown,
@@ -1317,6 +1572,7 @@ class _$_Unknown extends _Unknown {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
@@ -1331,6 +1587,7 @@ class _$_Unknown extends _Unknown {
     TResult Function(_Unauthenticated value)? unauthenticated,
     TResult Function(_Home value)? home,
     TResult Function(_Transport value)? transport,
+    TResult Function(_Housing value)? housing,
     TResult Function(_Tickets value)? tickets,
     TResult Function(_Register value)? register,
     TResult Function(_Unknown value)? unknown,
