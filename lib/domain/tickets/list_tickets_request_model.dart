@@ -8,6 +8,6 @@ class ListTicketsRequestModel with _$ListTicketsRequestModel {
   const factory ListTicketsRequestModel({
     int? limit,
     TicketTypeModel? type,
-    String? transportOwnerId,
+    String? ownerId,
   }) = _ListTicketsRequestModel;
 }

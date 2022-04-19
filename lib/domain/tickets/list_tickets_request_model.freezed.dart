@@ -19,11 +19,11 @@ class _$ListTicketsRequestModelTearOff {
   const _$ListTicketsRequestModelTearOff();
 
   _ListTicketsRequestModel call(
-      {int? limit, TicketTypeModel? type, String? transportOwnerId}) {
+      {int? limit, TicketTypeModel? type, String? ownerId}) {
     return _ListTicketsRequestModel(
       limit: limit,
       type: type,
-      transportOwnerId: transportOwnerId,
+      ownerId: ownerId,
     );
   }
 }
@@ -35,7 +35,7 @@ const $ListTicketsRequestModel = _$ListTicketsRequestModelTearOff();
 mixin _$ListTicketsRequestModel {
   int? get limit => throw _privateConstructorUsedError;
   TicketTypeModel? get type => throw _privateConstructorUsedError;
-  String? get transportOwnerId => throw _privateConstructorUsedError;
+  String? get ownerId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListTicketsRequestModelCopyWith<ListTicketsRequestModel> get copyWith =>
@@ -47,7 +47,7 @@ abstract class $ListTicketsRequestModelCopyWith<$Res> {
   factory $ListTicketsRequestModelCopyWith(ListTicketsRequestModel value,
           $Res Function(ListTicketsRequestModel) then) =
       _$ListTicketsRequestModelCopyWithImpl<$Res>;
-  $Res call({int? limit, TicketTypeModel? type, String? transportOwnerId});
+  $Res call({int? limit, TicketTypeModel? type, String? ownerId});
 }
 
 /// @nodoc
@@ -63,7 +63,7 @@ class _$ListTicketsRequestModelCopyWithImpl<$Res>
   $Res call({
     Object? limit = freezed,
     Object? type = freezed,
-    Object? transportOwnerId = freezed,
+    Object? ownerId = freezed,
   }) {
     return _then(_value.copyWith(
       limit: limit == freezed
@@ -74,9 +74,9 @@ class _$ListTicketsRequestModelCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as TicketTypeModel?,
-      transportOwnerId: transportOwnerId == freezed
-          ? _value.transportOwnerId
-          : transportOwnerId // ignore: cast_nullable_to_non_nullable
+      ownerId: ownerId == freezed
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -89,7 +89,7 @@ abstract class _$ListTicketsRequestModelCopyWith<$Res>
           $Res Function(_ListTicketsRequestModel) then) =
       __$ListTicketsRequestModelCopyWithImpl<$Res>;
   @override
-  $Res call({int? limit, TicketTypeModel? type, String? transportOwnerId});
+  $Res call({int? limit, TicketTypeModel? type, String? ownerId});
 }
 
 /// @nodoc
@@ -108,7 +108,7 @@ class __$ListTicketsRequestModelCopyWithImpl<$Res>
   $Res call({
     Object? limit = freezed,
     Object? type = freezed,
-    Object? transportOwnerId = freezed,
+    Object? ownerId = freezed,
   }) {
     return _then(_ListTicketsRequestModel(
       limit: limit == freezed
@@ -119,9 +119,9 @@ class __$ListTicketsRequestModelCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as TicketTypeModel?,
-      transportOwnerId: transportOwnerId == freezed
-          ? _value.transportOwnerId
-          : transportOwnerId // ignore: cast_nullable_to_non_nullable
+      ownerId: ownerId == freezed
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -130,19 +130,18 @@ class __$ListTicketsRequestModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ListTicketsRequestModel implements _ListTicketsRequestModel {
-  const _$_ListTicketsRequestModel(
-      {this.limit, this.type, this.transportOwnerId});
+  const _$_ListTicketsRequestModel({this.limit, this.type, this.ownerId});
 
   @override
   final int? limit;
   @override
   final TicketTypeModel? type;
   @override
-  final String? transportOwnerId;
+  final String? ownerId;
 
   @override
   String toString() {
-    return 'ListTicketsRequestModel(limit: $limit, type: $type, transportOwnerId: $transportOwnerId)';
+    return 'ListTicketsRequestModel(limit: $limit, type: $type, ownerId: $ownerId)';
   }
 
   @override
@@ -152,8 +151,7 @@ class _$_ListTicketsRequestModel implements _ListTicketsRequestModel {
             other is _ListTicketsRequestModel &&
             const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality()
-                .equals(other.transportOwnerId, transportOwnerId));
+            const DeepCollectionEquality().equals(other.ownerId, ownerId));
   }
 
   @override
@@ -161,7 +159,7 @@ class _$_ListTicketsRequestModel implements _ListTicketsRequestModel {
       runtimeType,
       const DeepCollectionEquality().hash(limit),
       const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(transportOwnerId));
+      const DeepCollectionEquality().hash(ownerId));
 
   @JsonKey(ignore: true)
   @override
@@ -174,14 +172,14 @@ abstract class _ListTicketsRequestModel implements ListTicketsRequestModel {
   const factory _ListTicketsRequestModel(
       {int? limit,
       TicketTypeModel? type,
-      String? transportOwnerId}) = _$_ListTicketsRequestModel;
+      String? ownerId}) = _$_ListTicketsRequestModel;
 
   @override
   int? get limit;
   @override
   TicketTypeModel? get type;
   @override
-  String? get transportOwnerId;
+  String? get ownerId;
   @override
   @JsonKey(ignore: true)
   _$ListTicketsRequestModelCopyWith<_ListTicketsRequestModel> get copyWith =>

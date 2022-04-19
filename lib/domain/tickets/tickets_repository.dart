@@ -7,6 +7,7 @@ import 'package:refugee_help/domain/core/crud_repository_interface.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
 import 'package:refugee_help/domain/housing/housing_repository.dart';
 import 'package:refugee_help/domain/tickets/list_tickets_request_model.dart';
+import 'package:refugee_help/domain/tickets/ticket_type_model.dart';
 import 'package:refugee_help/domain/transport/transport_repository.dart';
 
 import 'ticket_model.dart';
@@ -113,8 +114,11 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
         .orderBy("createdAt", descending: true)
         .orderBy("adultsNumber", descending: true)
         .orderBy("childrenNumber", descending: true);
-    if (request.transportOwnerId != null) {
-      query = query.where("transport.user.id", isEqualTo: request.transportOwnerId);
+    if (request.ownerId != null) {
+      query = query.where(
+        (request.type == TicketTypeModel.transport()) ? "transport.user.id" : "housing.user.id",
+        isEqualTo: request.ownerId,
+      );
     }
     if (request.limit != null) {
       query = query.limit(request.limit!);

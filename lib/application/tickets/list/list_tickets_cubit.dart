@@ -55,7 +55,7 @@ class ListTicketsCubit extends Cubit<ListTicketsState> {
     );
     final updatedRequest = request.copyWith(
       type: type,
-      transportOwnerId: _userId,
+      ownerId: _userId,
     );
     await _listSub?.cancel();
     _listSub = _repo.listStream(updatedRequest).listen(_parseListSub);
