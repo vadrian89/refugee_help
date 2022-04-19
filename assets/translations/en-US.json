@@ -158,5 +158,8 @@
     "offers_transport": "Offers transport",
     "update_housing_title": "Update housing?",
     "update_housing_confirm": "Are you sure you want to update the housing option?",
-    "beds_available": "Number of beds available"
+    "beds_available": "Number of beds available",
+    "choose_housing": "Choose housing",
+    "housing_is_required": "Housing option is required!",
+    "housing_info": "Housing info"
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/domain/core/image_model.dart';
 import 'package:refugee_help/domain/user/user_info_model.dart';
@@ -31,6 +32,9 @@ class HousingModel with _$HousingModel {
 
   /// If there are images which should be deleted from the cloud.
   bool get hasImagesToDelete => imagesToDelete?.isNotEmpty ?? false;
+
+  /// The period as translated string
+  String get periodStr => (period == 2) ? "long_period".tr() : "short_period".tr();
 
   const HousingModel._();
 

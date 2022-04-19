@@ -60,6 +60,11 @@ class RootRouterCubit extends Cubit<RootRouterState> {
         tickets: (tickets) => _onlyAuthenticated(tickets.copyWith(transportId: transportId)),
       );
 
+  void toggleTicketHousing({String? housingId}) => state.maybeMap(
+        orElse: () => null,
+        tickets: (tickets) => _onlyAuthenticated(tickets.copyWith(housingId: housingId)),
+      );
+
   void toggleModal(bool value) => state.maybeMap(
         orElse: () => null,
         tickets: (tickets) => emit(tickets.copyWith(modalVisible: value)),
@@ -71,52 +76,53 @@ class RootRouterCubit extends Cubit<RootRouterState> {
   ///
   /// Return `true` if the app navigated back or `false` if it's the root of the app.
   /// The value of the [result] argument is the value returned by the [Route].
-  bool popRoute(dynamic result) {
-    return state.maybeMap(
-      register: (_) => goToRoot(),
-      unknown: (_) => goToRoot(),
-      home: (home) {
-        if (home.viewProfile) {
-          return goToRoot();
-        }
-        return false;
-      },
-      tickets: (tickets) {
-        if (tickets.modalVisible) {
-          if (tickets.transportId?.isNotEmpty ?? false) {
-            toggleTicketTransport();
+  bool popRoute(dynamic result) => state.maybeMap(
+        register: (_) => goToRoot(),
+        unknown: (_) => goToRoot(),
+        home: (home) {
+          if (home.viewProfile) {
+            return goToRoot();
           }
-          return true;
-        }
-        if (tickets.id != null || tickets.add) {
-          goToTickets(type: tickets.type);
-          return true;
-        }
-        return goToRoot();
-      },
-      transport: (transport) {
-        if (transport.modalVisible) {
-          return true;
-        }
-        if (transport.add || (transport.id?.isNotEmpty ?? false)) {
-          goToTransport();
-          return true;
-        }
-        return goToRoot();
-      },
-      housing: (housing) {
-        if (housing.modalVisible) {
-          return true;
-        }
-        if (housing.add || (housing.id?.isNotEmpty ?? false)) {
-          goToHousing();
-          return true;
-        }
-        return goToRoot();
-      },
-      orElse: () => false,
-    );
-  }
+          return false;
+        },
+        tickets: (tickets) {
+          if (tickets.modalVisible) {
+            if (tickets.transportId?.isNotEmpty ?? false) {
+              toggleTicketTransport();
+            }
+            if (tickets.housingId?.isNotEmpty ?? false) {
+              toggleTicketHousing();
+            }
+            return true;
+          }
+          if (tickets.id != null || tickets.add) {
+            goToTickets(type: tickets.type);
+            return true;
+          }
+          return goToRoot();
+        },
+        transport: (transport) {
+          if (transport.modalVisible) {
+            return true;
+          }
+          if (transport.add || (transport.id?.isNotEmpty ?? false)) {
+            goToTransport();
+            return true;
+          }
+          return goToRoot();
+        },
+        housing: (housing) {
+          if (housing.modalVisible) {
+            return true;
+          }
+          if (housing.add || (housing.id?.isNotEmpty ?? false)) {
+            goToHousing();
+            return true;
+          }
+          return goToRoot();
+        },
+        orElse: () => false,
+      );
 
   /// Method called by the overriden [RootRouterDelegate.setNewRoutePath] method.
   ///

@@ -124,7 +124,7 @@
     },
     "adults_number": "Număr adulţi",
     "children_number": "Număr copii",
-    "transport_is_required": "Transprtul este obligatoriu!",
+    "transport_is_required": "Transportul este obligatoriu!",
     "destination": "Destinaţie",
     "finished": "Finalizat",
     "canceled": "Anulat",
@@ -158,5 +158,8 @@
     "offers_transport": "Oferă transport",
     "update_housing_title": "Actualizezi cazarea?",
     "update_housing_confirm": "Eşti sigur că doreşti să actualizezi opţiunea de cazare?",
-    "beds_available": "Număr de paturi disponibile"
+    "beds_available": "Număr de paturi disponibile",
+    "choose_housing": "Alege cazare",
+    "housing_is_required": "Cazarea este obligatorie!",
+    "housing_info": "Info cazare"
 }

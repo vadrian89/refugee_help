@@ -16,17 +16,18 @@ class TicketListTile extends StatelessWidget {
   Widget build(BuildContext context) => ListTile(
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         leading: TicketStatusAvatar(ticket: ticket),
-        title: Head6Text(text: "${"destination".tr()}: ${ticket.destination!}"),
+        title: Head6Text(text: "${"destination".tr()}: ${ticket.destinationAddress}"),
         subtitle: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2.5),
-              child: Sub2Text(
-                text: "Transport: ${ticket.transport!.registrationNumber}",
+            if (ticket.transport != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2.5),
+                child: Sub2Text(
+                  text: "Transport: ${ticket.transport!.registrationNumber}",
+                ),
               ),
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 2.5),
               child: Sub2Text(

@@ -27,6 +27,9 @@ class TicketCategorySelector extends StatelessWidget {
               TicketCategoryListTile(
                 icon: MdiIcons.homeGroup,
                 label: "housing_tickets".tr(),
+                onPressed: () => context.read<RootRouterCubit>().goToTickets(
+                      type: TicketTypeModel.housing(),
+                    ),
               ),
             ],
           ),

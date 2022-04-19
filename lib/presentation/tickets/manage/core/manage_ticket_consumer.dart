@@ -5,21 +5,15 @@ import 'package:refugee_help/application/tickets/manage/manage_ticket_cubit.dart
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/utils/snackbars.dart';
+import 'package:refugee_help/presentation/core/widgets/loader_widget.dart';
 
-class ManageTicketListener extends StatelessWidget {
-  final Widget child;
-  final void Function(TicketModel ticket) onView;
-  final void Function(TicketModel ticket) onEdit;
+class ManageTicketConsumer extends StatelessWidget {
+  final Widget Function(BuildContext context, TicketModel? ticket, bool editable) builder;
 
-  const ManageTicketListener({
-    Key? key,
-    required this.child,
-    required this.onView,
-    required this.onEdit,
-  }) : super(key: key);
+  const ManageTicketConsumer({Key? key, required this.builder}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BlocListener<ManageTicketCubit, ManageTicketState>(
+  Widget build(BuildContext context) => BlocConsumer<ManageTicketCubit, ManageTicketState>(
         listener: (context, state) => state.maybeWhen(
           orElse: () => null,
           loading: (message) => showLoadingSnackBar(context, message: message),
@@ -30,10 +24,25 @@ class ManageTicketListener extends StatelessWidget {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             return AdaptiveDialog.showError(context, message: message);
           },
-          view: (ticket) => onView(ticket),
-          edit: onEdit,
           unkown: context.read<RootRouterCubit>().goToRoot,
         ),
-        child: child,
+        listenWhen: (_, current) => current.maybeMap(
+          orElse: () => false,
+          loading: (_) => true,
+          success: (_) => true,
+          failure: (_) => true,
+          unkown: (_) => true,
+        ),
+        builder: (context, state) => state.maybeWhen(
+          orElse: () => const SizedBox.shrink(),
+          initial: () => const LoaderWidget(),
+          view: (ticket) => builder(context, ticket, false),
+          edit: (_) => builder(context, null, true),
+        ),
+        buildWhen: (_, current) => current.maybeMap(
+          orElse: () => false,
+          view: (_) => true,
+          edit: (_) => true,
+        ),
       );
 }

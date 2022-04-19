@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/domain/user/user_info_model.dart';
 
@@ -14,6 +15,9 @@ part 'housing_info_model.freezed.dart';
 /// and without forcing unnecessary extra-reads for every ticket document.
 @freezed
 class HousingInfoModel with _$HousingInfoModel {
+  /// The period as translated string
+  String get periodStr => (period == 2) ? "long_period".tr() : "short_period".tr();
+
   const HousingInfoModel._();
 
   @JsonSerializable(explicitToJson: true)
@@ -50,5 +54,5 @@ class HousingInfoModel with _$HousingInfoModel {
         remarks: model.remarks,
       );
 
-  HousingModel get toTransport => HousingModel.fromJson(toJson()).copyWith(id: id);
+  HousingModel get toHousing => HousingModel.fromJson(toJson()).copyWith(id: id);
 }

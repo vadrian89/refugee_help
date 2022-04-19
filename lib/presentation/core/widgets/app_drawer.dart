@@ -63,8 +63,9 @@ class AppDrawer extends ResponsiveWidget {
                   orElse: () => false,
                   tickets: (tickets) => tickets.type == TicketTypeModel.transport(),
                 ),
-                onPressed: () =>
-                    context.read<RootRouterCubit>().goToTickets(type: TicketTypeModel.transport()),
+                onPressed: () => context.read<RootRouterCubit>().goToTickets(
+                      type: TicketTypeModel.transport(),
+                    ),
               ),
               DrawerListTile(
                 icon: MdiIcons.ticket,
@@ -73,6 +74,9 @@ class AppDrawer extends ResponsiveWidget {
                   orElse: () => false,
                   tickets: (tickets) => tickets.type == TicketTypeModel.housing(),
                 ),
+                onPressed: () => context.read<RootRouterCubit>().goToTickets(
+                      type: TicketTypeModel.housing(),
+                    ),
               ),
               DrawerListTile(
                 icon: MdiIcons.car,

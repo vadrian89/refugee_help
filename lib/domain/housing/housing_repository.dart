@@ -155,11 +155,13 @@ class HousingRepository extends BaseRepository implements CrudRepositoryInterfac
     }
     if (request.bedsAvailable != null) {
       query = query.where("bedsAvailable", isEqualTo: request.bedsAvailable);
+    } else {
+      query = query.orderBy("bedsAvailable", descending: true);
     }
     if (request.isAvailable != null) {
       query = query.where("isAvailable", isEqualTo: request.isAvailable);
     }
-    query = query.orderBy("bedsAvailable", descending: true).orderBy("updatedAt", descending: true);
+    query = query.orderBy("updatedAt", descending: true);
     if (request.limit != null) {
       query = query.limit(request.limit!);
     }

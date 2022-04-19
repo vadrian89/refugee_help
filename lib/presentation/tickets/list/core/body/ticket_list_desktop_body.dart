@@ -78,7 +78,7 @@ class _TicketListDesktopBodyState extends State<TicketListDesktopBody> {
             color: ticket.status.color,
           ),
           _cell(
-            value: ticket.destination,
+            value: ticket.destinationAddress,
             color: ticket.status.color,
           ),
           _cell(
@@ -86,11 +86,11 @@ class _TicketListDesktopBodyState extends State<TicketListDesktopBody> {
             color: ticket.status.color,
           ),
           _cell(
-            value: ticket.transport?.user?.fullName,
+            value: ticket.ownerName,
             color: ticket.status.color,
           ),
           _cell(
-            value: ticket.transport?.user?.phone,
+            value: ticket.ownerPhone,
             color: ticket.status.color,
           ),
           _cell(

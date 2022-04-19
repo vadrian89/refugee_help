@@ -2,6 +2,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/domain/housing/housing_info_model.dart';
+import 'package:refugee_help/domain/housing/housing_model.dart';
 
 import 'package:refugee_help/domain/transport/transport_info_model.dart';
 import 'package:refugee_help/domain/transport/transport_model.dart';
@@ -18,6 +19,9 @@ part 'ticket_model.freezed.dart';
 @freezed
 class TicketModel with _$TicketModel {
   TicketFeedbackModel? get feedback => cancelFeedback ?? finishedFeedback;
+  String get destinationAddress => destination ?? housing?.address ?? "n/a";
+  String get ownerName => transport?.user?.fullName ?? housing?.user?.fullName ?? "n/a";
+  String get ownerPhone => transport?.user?.phone ?? housing?.user?.phone ?? "n/a";
 
   const TicketModel._();
 
@@ -86,7 +90,12 @@ class TicketModel with _$TicketModel {
     return TicketStatusModel.created();
   }
 
-  TransportModel get unavailableTransport => transport!.toTransport.copyWith(
+  TransportModel? get unavailableTransport => transport?.toTransport.copyWith(
+        isAvailable: false,
+        updatedAt: DateTime.now(),
+      );
+
+  HousingModel? get unavailableHousing => housing?.toHousing.copyWith(
         isAvailable: false,
         updatedAt: DateTime.now(),
       );

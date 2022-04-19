@@ -13,7 +13,7 @@ import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_form
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
 import 'package:refugee_help/presentation/housing/manage/core/housing_period_dropdown.dart';
 
-import 'manage_housing_listener.dart';
+import 'manage_housing_consumer.dart';
 import 'housing_button_bar.dart';
 import 'manage_housing_user_info.dart';
 

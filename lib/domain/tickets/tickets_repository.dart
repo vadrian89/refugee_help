@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:refugee_help/domain/core/base_repository.dart';
 import 'package:refugee_help/domain/core/crud_repository_interface.dart';
 import 'package:refugee_help/domain/core/operation_result.dart';
+import 'package:refugee_help/domain/housing/housing_repository.dart';
 import 'package:refugee_help/domain/tickets/list_tickets_request_model.dart';
 import 'package:refugee_help/domain/transport/transport_repository.dart';
 
@@ -13,11 +14,19 @@ import 'ticket_status_model.dart';
 
 /// Repository class used for the authentication process
 class TicketsRepository extends BaseRepository implements CrudRepositoryInterface<TicketModel> {
+  /// Transport repository and related subscriptions, all lazy initialised for optimised resource usage.
   TransportRepository? __transportRepo;
   TransportRepository get _transportRepo => __transportRepo ??= TransportRepository();
   StreamSubscription<OperationResult>? __transportResultSub;
   StreamSubscription<OperationResult> get _transportResultSub =>
       __transportResultSub ??= _transportRepo.resultStream.listen(addResultToStream);
+
+  /// Housing repository and related subscriptions, all lazy initialised for optimised resource usage.
+  HousingRepository? __housingRepo;
+  HousingRepository get _housingRepo => __housingRepo ??= HousingRepository();
+  StreamSubscription<OperationResult>? __housingResultSub;
+  StreamSubscription<OperationResult> get _housingResultSub =>
+      __housingResultSub ??= _housingRepo.resultStream.listen(addResultToStream);
 
   /// Location in the database.
   String get _colName => BaseRepository.ticketsCollection;
@@ -65,7 +74,13 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
   Future<void> updateStatus(TicketModel model) async {
     await update(model);
     if (model.status == TicketStatusModel.started()) {
-      await _transportRepo.updateAvailability(model.unavailableTransport);
+      if (model.transport != null) {
+        await _transportRepo.updateAvailability(model.unavailableTransport!);
+      }
+
+      if (model.housing != null) {
+        await _housingRepo.updateAvailability(model.unavailableHousing!);
+      }
     }
   }
 
@@ -122,6 +137,12 @@ class TicketsRepository extends BaseRepository implements CrudRepositoryInterfac
     }
     if (__transportRepo != null) {
       await _transportRepo.close();
+    }
+    if (__housingResultSub != null) {
+      await _housingResultSub.cancel();
+    }
+    if (__housingRepo != null) {
+      await _housingRepo.close();
     }
     return super.close();
   }

@@ -37,7 +37,7 @@ class ManageTicketCubit extends Cubit<ManageTicketState> {
     if (id != null) {
       _ticketSub = _repository.docStream(id).listen(_parseModelSub);
     } else {
-      emit(ManageTicketState.edit(TicketModel.newTicket()));
+      emit(ManageTicketState.edit(TicketModel.newTicket(_type)));
     }
   }
 

@@ -128,6 +128,14 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
             ),
           );
         }
+        if (tickets.housingId?.isNotEmpty ?? false) {
+          tmpList.add(
+            _materialPage(
+              valueKey: RootRouterState.housingPath,
+              child: ManageHousingScreen(id: tickets.housingId),
+            ),
+          );
+        }
       },
       transport: (transport) {
         if ((transport.id?.isNotEmpty ?? false) || transport.add) {

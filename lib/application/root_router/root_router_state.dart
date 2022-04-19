@@ -93,6 +93,7 @@ class RootRouterState with _$RootRouterState {
     @Default(false) bool add,
     @Default(false) bool modalVisible,
     String? transportId,
+    String? housingId,
   }) = _Tickets;
 
   /// [RootRouterState.register] shows [RegisterScreen].
@@ -164,16 +165,14 @@ class RootRouterState with _$RootRouterState {
     final pathSegment3 = uri.pathSegments[2];
     final queryParameters = uri.queryParametersAll;
     if (pathSegment1 == ticketsPath && TicketTypeModel.isValidType(pathSegment2)) {
-      if ("/$pathSegment3" == addPath) {
-        return RootRouterState.tickets(
-          add: true,
-          modalVisible: queryParameters["transportId"] != null,
-          transportId: queryParameters["transportId"]?.first,
-          type: TicketTypeModel.values.firstWhereOrNull((element) => element.name == pathSegment2),
-        );
-      }
+      final isAddPath = "/$pathSegment3" == addPath;
       return RootRouterState.tickets(
-        id: pathSegment3,
+        add: isAddPath,
+        id: isAddPath ? null : pathSegment3,
+        modalVisible:
+            queryParameters["transportId"] != null || queryParameters["housingId"] != null,
+        transportId: queryParameters["transportId"]?.first,
+        housingId: queryParameters["housingId"]?.first,
         type: TicketTypeModel.values.firstWhereOrNull((element) => element.name == pathSegment2),
       );
     }
@@ -200,7 +199,9 @@ class RootRouterState with _$RootRouterState {
             _getPath(tickets.add, addPath) +
             _getPath(tickets.id?.trim().isNotEmpty ?? false, "/${tickets.id}") +
             _getPath(tickets.transportId?.trim().isNotEmpty ?? false, "?") +
-            _getParameter("transportId", tickets.transportId ?? ""),
+            _getPath(tickets.housingId?.trim().isNotEmpty ?? false, "?") +
+            _getParameter("transportId", tickets.transportId ?? "") +
+            _getParameter("housingId", tickets.housingId ?? ""),
         orElse: () => unknownPath,
       );
 

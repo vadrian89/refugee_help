@@ -19,7 +19,7 @@ class TicketsListScreen extends StatelessWidget {
             leading: BackButton(onPressed: context.read<RootRouterCubit>().goToRoot),
             title: Text(type.translatedName),
           ),
-          body: TicketListBody(type: type),
+          body: TicketListBody(type: type, key: ObjectKey(type)),
           addButton: PrivilegedBuilder(
             builder: (context, isPrivileged) => Visibility(
               visible: isPrivileged,
