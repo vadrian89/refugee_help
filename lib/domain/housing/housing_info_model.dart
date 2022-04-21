@@ -33,7 +33,16 @@ class HousingInfoModel with _$HousingInfoModel {
     /// 1 - short term period, 2 - long term period
     @Default(2) int? period,
 
-    /// The full address of the housing's location.
+    /// The country of the housing's location.
+    String? country,
+
+    /// The county of the housing's location.
+    String? county,
+
+    /// The city of the housing's location.
+    String? city,
+
+    /// The address of the housing's location.
     String? address,
 
     /// The user owning the housing.
@@ -49,6 +58,9 @@ class HousingInfoModel with _$HousingInfoModel {
         id: model.id!,
         bedsAvailable: model.bedsAvailable,
         period: model.period,
+        country: model.country,
+        county: model.county,
+        city: model.city,
         address: model.address,
         user: model.user,
         remarks: model.remarks,

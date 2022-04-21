@@ -20,7 +20,7 @@ class HousingRepository extends BaseRepository implements CrudRepositoryInterfac
 
   CollectionReference<HousingModel> get _reference => _collection.withConverter<HousingModel>(
         fromFirestore: (snapshot, _) => HousingModel.fromJson(snapshot.data()!),
-        toFirestore: (model, _) => model.toJson(),
+        toFirestore: (model, _) => model.updatedIndexes.toJson(),
       );
 
   Future<void> updateAvailability(HousingModel model) async {
@@ -114,7 +114,7 @@ class HousingRepository extends BaseRepository implements CrudRepositoryInterfac
       }
 
       final updatedModel = model.copyWith(imageList: cloudImages, updatedAt: DateTime.now());
-      await _reference.doc(model.id).update(updatedModel.toJson());
+      await _reference.doc(model.id).update(updatedModel.updatedIndexes.toJson());
     } on FirebaseException catch (error) {
       logException("Exception in update", error: error, stackTrace: error.stackTrace);
       result = OperationResult.failure("error_saving_housing".tr());
@@ -152,6 +152,19 @@ class HousingRepository extends BaseRepository implements CrudRepositoryInterfac
     Query<HousingModel> query = _reference;
     if (request.userId != null) {
       query = query.where("user.id", isEqualTo: request.userId);
+    }
+    if (request.county != null) {
+      query = query
+          .where("county", isGreaterThanOrEqualTo: request.county!.toLowerCase())
+          .where("county", isLessThanOrEqualTo: "${request.county!.toLowerCase()}z");
+    }
+    if (request.city != null) {
+      query = query
+          .where("city", isGreaterThanOrEqualTo: request.city!.toLowerCase())
+          .where("city", isLessThanOrEqualTo: "${request.city!.toLowerCase()}z");
+    }
+    if (request.type != null) {
+      query = query.where("type.id", isEqualTo: request.type!.id);
     }
     if (request.bedsAvailable != null) {
       query = query.where("bedsAvailable", isEqualTo: request.bedsAvailable);

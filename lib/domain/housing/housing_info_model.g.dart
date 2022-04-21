@@ -11,6 +11,9 @@ _$_HousingInfoModel _$$_HousingInfoModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
       bedsAvailable: json['bedsAvailable'] as int? ?? 0,
       period: json['period'] as int? ?? 2,
+      country: json['country'] as String?,
+      county: json['county'] as String?,
+      city: json['city'] as String?,
       address: json['address'] as String?,
       user: json['user'] == null
           ? null
@@ -23,6 +26,9 @@ Map<String, dynamic> _$$_HousingInfoModelToJson(_$_HousingInfoModel instance) =>
       'id': instance.id,
       'bedsAvailable': instance.bedsAvailable,
       'period': instance.period,
+      'country': instance.country,
+      'county': instance.county,
+      'city': instance.city,
       'address': instance.address,
       'user': instance.user?.toJson(),
       'remarks': instance.remarks,

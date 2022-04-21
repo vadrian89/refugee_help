@@ -26,6 +26,9 @@ class _$HousingInfoModelTearOff {
       {String? id,
       int? bedsAvailable = 0,
       int? period = 2,
+      String? country,
+      String? county,
+      String? city,
       String? address,
       UserInfoModel? user,
       String? remarks}) {
@@ -33,6 +36,9 @@ class _$HousingInfoModelTearOff {
       id: id,
       bedsAvailable: bedsAvailable,
       period: period,
+      country: country,
+      county: county,
+      city: city,
       address: address,
       user: user,
       remarks: remarks,
@@ -60,7 +66,16 @@ mixin _$HousingInfoModel {
   /// 1 - short term period, 2 - long term period
   int? get period => throw _privateConstructorUsedError;
 
-  /// The full address of the housing's location.
+  /// The country of the housing's location.
+  String? get country => throw _privateConstructorUsedError;
+
+  /// The county of the housing's location.
+  String? get county => throw _privateConstructorUsedError;
+
+  /// The city of the housing's location.
+  String? get city => throw _privateConstructorUsedError;
+
+  /// The address of the housing's location.
   String? get address => throw _privateConstructorUsedError;
 
   /// The user owning the housing.
@@ -84,6 +99,9 @@ abstract class $HousingInfoModelCopyWith<$Res> {
       {String? id,
       int? bedsAvailable,
       int? period,
+      String? country,
+      String? county,
+      String? city,
       String? address,
       UserInfoModel? user,
       String? remarks});
@@ -105,6 +123,9 @@ class _$HousingInfoModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? bedsAvailable = freezed,
     Object? period = freezed,
+    Object? country = freezed,
+    Object? county = freezed,
+    Object? city = freezed,
     Object? address = freezed,
     Object? user = freezed,
     Object? remarks = freezed,
@@ -122,6 +143,18 @@ class _$HousingInfoModelCopyWithImpl<$Res>
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as int?,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      county: county == freezed
+          ? _value.county
+          : county // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -160,6 +193,9 @@ abstract class _$HousingInfoModelCopyWith<$Res>
       {String? id,
       int? bedsAvailable,
       int? period,
+      String? country,
+      String? county,
+      String? city,
       String? address,
       UserInfoModel? user,
       String? remarks});
@@ -184,6 +220,9 @@ class __$HousingInfoModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? bedsAvailable = freezed,
     Object? period = freezed,
+    Object? country = freezed,
+    Object? county = freezed,
+    Object? city = freezed,
     Object? address = freezed,
     Object? user = freezed,
     Object? remarks = freezed,
@@ -201,6 +240,18 @@ class __$HousingInfoModelCopyWithImpl<$Res>
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as int?,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      county: county == freezed
+          ? _value.county
+          : county // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -225,6 +276,9 @@ class _$_HousingInfoModel extends _HousingInfoModel {
       {this.id,
       this.bedsAvailable = 0,
       this.period = 2,
+      this.country,
+      this.county,
+      this.city,
       this.address,
       this.user,
       this.remarks})
@@ -251,7 +305,19 @@ class _$_HousingInfoModel extends _HousingInfoModel {
   final int? period;
   @override
 
-  /// The full address of the housing's location.
+  /// The country of the housing's location.
+  final String? country;
+  @override
+
+  /// The county of the housing's location.
+  final String? county;
+  @override
+
+  /// The city of the housing's location.
+  final String? city;
+  @override
+
+  /// The address of the housing's location.
   final String? address;
   @override
 
@@ -264,7 +330,7 @@ class _$_HousingInfoModel extends _HousingInfoModel {
 
   @override
   String toString() {
-    return 'HousingInfoModel(id: $id, bedsAvailable: $bedsAvailable, period: $period, address: $address, user: $user, remarks: $remarks)';
+    return 'HousingInfoModel(id: $id, bedsAvailable: $bedsAvailable, period: $period, country: $country, county: $county, city: $city, address: $address, user: $user, remarks: $remarks)';
   }
 
   @override
@@ -276,6 +342,9 @@ class _$_HousingInfoModel extends _HousingInfoModel {
             const DeepCollectionEquality()
                 .equals(other.bedsAvailable, bedsAvailable) &&
             const DeepCollectionEquality().equals(other.period, period) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
+            const DeepCollectionEquality().equals(other.county, county) &&
+            const DeepCollectionEquality().equals(other.city, city) &&
             const DeepCollectionEquality().equals(other.address, address) &&
             const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality().equals(other.remarks, remarks));
@@ -287,6 +356,9 @@ class _$_HousingInfoModel extends _HousingInfoModel {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(bedsAvailable),
       const DeepCollectionEquality().hash(period),
+      const DeepCollectionEquality().hash(country),
+      const DeepCollectionEquality().hash(county),
+      const DeepCollectionEquality().hash(city),
       const DeepCollectionEquality().hash(address),
       const DeepCollectionEquality().hash(user),
       const DeepCollectionEquality().hash(remarks));
@@ -307,6 +379,9 @@ abstract class _HousingInfoModel extends HousingInfoModel {
       {String? id,
       int? bedsAvailable,
       int? period,
+      String? country,
+      String? county,
+      String? city,
       String? address,
       UserInfoModel? user,
       String? remarks}) = _$_HousingInfoModel;
@@ -331,7 +406,19 @@ abstract class _HousingInfoModel extends HousingInfoModel {
   int? get period;
   @override
 
-  /// The full address of the housing's location.
+  /// The country of the housing's location.
+  String? get country;
+  @override
+
+  /// The county of the housing's location.
+  String? get county;
+  @override
+
+  /// The city of the housing's location.
+  String? get city;
+  @override
+
+  /// The address of the housing's location.
   String? get address;
   @override
 

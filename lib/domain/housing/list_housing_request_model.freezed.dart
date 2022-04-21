@@ -19,12 +19,21 @@ class _$ListHousingRequestModelTearOff {
   const _$ListHousingRequestModelTearOff();
 
   _ListHousingRequestModel call(
-      {int? bedsAvailable, int? limit, bool? isAvailable, String? userId}) {
+      {int? bedsAvailable,
+      int? limit,
+      bool? isAvailable,
+      String? userId,
+      String? county,
+      String? city,
+      HousingTypeModel? type}) {
     return _ListHousingRequestModel(
       bedsAvailable: bedsAvailable,
       limit: limit,
       isAvailable: isAvailable,
       userId: userId,
+      county: county,
+      city: city,
+      type: type,
     );
   }
 }
@@ -38,6 +47,9 @@ mixin _$ListHousingRequestModel {
   int? get limit => throw _privateConstructorUsedError;
   bool? get isAvailable => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
+  String? get county => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  HousingTypeModel? get type => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListHousingRequestModelCopyWith<ListHousingRequestModel> get copyWith =>
@@ -50,7 +62,13 @@ abstract class $ListHousingRequestModelCopyWith<$Res> {
           $Res Function(ListHousingRequestModel) then) =
       _$ListHousingRequestModelCopyWithImpl<$Res>;
   $Res call(
-      {int? bedsAvailable, int? limit, bool? isAvailable, String? userId});
+      {int? bedsAvailable,
+      int? limit,
+      bool? isAvailable,
+      String? userId,
+      String? county,
+      String? city,
+      HousingTypeModel? type});
 }
 
 /// @nodoc
@@ -68,6 +86,9 @@ class _$ListHousingRequestModelCopyWithImpl<$Res>
     Object? limit = freezed,
     Object? isAvailable = freezed,
     Object? userId = freezed,
+    Object? county = freezed,
+    Object? city = freezed,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       bedsAvailable: bedsAvailable == freezed
@@ -86,6 +107,18 @@ class _$ListHousingRequestModelCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
+      county: county == freezed
+          ? _value.county
+          : county // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as HousingTypeModel?,
     ));
   }
 }
@@ -98,7 +131,13 @@ abstract class _$ListHousingRequestModelCopyWith<$Res>
       __$ListHousingRequestModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int? bedsAvailable, int? limit, bool? isAvailable, String? userId});
+      {int? bedsAvailable,
+      int? limit,
+      bool? isAvailable,
+      String? userId,
+      String? county,
+      String? city,
+      HousingTypeModel? type});
 }
 
 /// @nodoc
@@ -119,6 +158,9 @@ class __$ListHousingRequestModelCopyWithImpl<$Res>
     Object? limit = freezed,
     Object? isAvailable = freezed,
     Object? userId = freezed,
+    Object? county = freezed,
+    Object? city = freezed,
+    Object? type = freezed,
   }) {
     return _then(_ListHousingRequestModel(
       bedsAvailable: bedsAvailable == freezed
@@ -137,6 +179,18 @@ class __$ListHousingRequestModelCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
+      county: county == freezed
+          ? _value.county
+          : county // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as HousingTypeModel?,
     ));
   }
 }
@@ -145,7 +199,13 @@ class __$ListHousingRequestModelCopyWithImpl<$Res>
 
 class _$_ListHousingRequestModel implements _ListHousingRequestModel {
   const _$_ListHousingRequestModel(
-      {this.bedsAvailable, this.limit, this.isAvailable, this.userId});
+      {this.bedsAvailable,
+      this.limit,
+      this.isAvailable,
+      this.userId,
+      this.county,
+      this.city,
+      this.type});
 
   @override
   final int? bedsAvailable;
@@ -155,10 +215,16 @@ class _$_ListHousingRequestModel implements _ListHousingRequestModel {
   final bool? isAvailable;
   @override
   final String? userId;
+  @override
+  final String? county;
+  @override
+  final String? city;
+  @override
+  final HousingTypeModel? type;
 
   @override
   String toString() {
-    return 'ListHousingRequestModel(bedsAvailable: $bedsAvailable, limit: $limit, isAvailable: $isAvailable, userId: $userId)';
+    return 'ListHousingRequestModel(bedsAvailable: $bedsAvailable, limit: $limit, isAvailable: $isAvailable, userId: $userId, county: $county, city: $city, type: $type)';
   }
 
   @override
@@ -171,7 +237,10 @@ class _$_ListHousingRequestModel implements _ListHousingRequestModel {
             const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality()
                 .equals(other.isAvailable, isAvailable) &&
-            const DeepCollectionEquality().equals(other.userId, userId));
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality().equals(other.county, county) &&
+            const DeepCollectionEquality().equals(other.city, city) &&
+            const DeepCollectionEquality().equals(other.type, type));
   }
 
   @override
@@ -180,7 +249,10 @@ class _$_ListHousingRequestModel implements _ListHousingRequestModel {
       const DeepCollectionEquality().hash(bedsAvailable),
       const DeepCollectionEquality().hash(limit),
       const DeepCollectionEquality().hash(isAvailable),
-      const DeepCollectionEquality().hash(userId));
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(county),
+      const DeepCollectionEquality().hash(city),
+      const DeepCollectionEquality().hash(type));
 
   @JsonKey(ignore: true)
   @override
@@ -194,7 +266,10 @@ abstract class _ListHousingRequestModel implements ListHousingRequestModel {
       {int? bedsAvailable,
       int? limit,
       bool? isAvailable,
-      String? userId}) = _$_ListHousingRequestModel;
+      String? userId,
+      String? county,
+      String? city,
+      HousingTypeModel? type}) = _$_ListHousingRequestModel;
 
   @override
   int? get bedsAvailable;
@@ -204,6 +279,12 @@ abstract class _ListHousingRequestModel implements ListHousingRequestModel {
   bool? get isAvailable;
   @override
   String? get userId;
+  @override
+  String? get county;
+  @override
+  String? get city;
+  @override
+  HousingTypeModel? get type;
   @override
   @JsonKey(ignore: true)
   _$ListHousingRequestModelCopyWith<_ListHousingRequestModel> get copyWith =>

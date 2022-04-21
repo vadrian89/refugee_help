@@ -3,6 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/domain/core/image_model.dart';
+import 'package:refugee_help/domain/housing/housing_type_model.dart';
 import 'package:refugee_help/domain/user/user_info_model.dart';
 import 'package:refugee_help/domain/util/json_util.dart';
 
@@ -63,11 +64,35 @@ class HousingModel with _$HousingModel {
     /// If the owner ofers transport to the housing.
     @Default(true) bool? hasTransport,
 
-    /// The full address of the housing's location.
+    /// The country of the housing's location.
+    @Default("Romania") String? country,
+
+    /// The search index for the [country].
+    String? countryIndex,
+
+    /// The county of the housing's location.
+    String? county,
+
+    /// The search index for the [county].
+    String? countyIndex,
+
+    /// The city of the housing's location.
+    String? city,
+
+    /// The search index for the [city].
+    String? cityIndex,
+
+    /// The address of the housing's location.
     String? address,
+
+    /// The index of the [address].
+    String? addressIndex,
 
     /// The user owning the housing.
     UserInfoModel? user,
+
+    /// Housing type
+    HousingTypeModel? type,
 
     /// Creation date.
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? createdAt,
@@ -83,6 +108,13 @@ class HousingModel with _$HousingModel {
   }) = _HousingModel;
 
   factory HousingModel.fromJson(Map<String, dynamic> json) => _$HousingModelFromJson(json);
+
+  HousingModel get updatedIndexes => copyWith(
+        countryIndex: country?.toLowerCase(),
+        countyIndex: county?.toLowerCase(),
+        cityIndex: city?.toLowerCase(),
+        addressIndex: address?.toLowerCase(),
+      ).updated;
 
   HousingModel get updated => copyWith(
         createdAt: createdAt ?? DateTime.now(),

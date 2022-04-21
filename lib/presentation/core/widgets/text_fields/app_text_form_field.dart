@@ -52,6 +52,13 @@ class AppTextFormField extends StatelessWidget {
         readOnly: readOnly,
         minLines: minLines,
         maxLines: maxLines,
-        onSaved: onSaved,
+        onSaved: _onSaved,
       );
+
+  void _onSaved([String? val]) {
+    if (onSaved == null) {
+      return;
+    }
+    onSaved!(val?.trim());
+  }
 }

@@ -31,8 +31,16 @@ class _$HousingModelTearOff {
           List<ImageModel>? imagesToDelete,
       bool? isAvailable = true,
       bool? hasTransport = true,
+      String? country = "Romania",
+      String? countryIndex,
+      String? county,
+      String? countyIndex,
+      String? city,
+      String? cityIndex,
       String? address,
+      String? addressIndex,
       UserInfoModel? user,
+      HousingTypeModel? type,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -47,8 +55,16 @@ class _$HousingModelTearOff {
       imagesToDelete: imagesToDelete,
       isAvailable: isAvailable,
       hasTransport: hasTransport,
+      country: country,
+      countryIndex: countryIndex,
+      county: county,
+      countyIndex: countyIndex,
+      city: city,
+      cityIndex: cityIndex,
       address: address,
+      addressIndex: addressIndex,
       user: user,
+      type: type,
       createdAt: createdAt,
       updatedAt: updatedAt,
       remarks: remarks,
@@ -90,11 +106,35 @@ mixin _$HousingModel {
   /// If the owner ofers transport to the housing.
   bool? get hasTransport => throw _privateConstructorUsedError;
 
-  /// The full address of the housing's location.
+  /// The country of the housing's location.
+  String? get country => throw _privateConstructorUsedError;
+
+  /// The search index for the [country].
+  String? get countryIndex => throw _privateConstructorUsedError;
+
+  /// The county of the housing's location.
+  String? get county => throw _privateConstructorUsedError;
+
+  /// The search index for the [county].
+  String? get countyIndex => throw _privateConstructorUsedError;
+
+  /// The city of the housing's location.
+  String? get city => throw _privateConstructorUsedError;
+
+  /// The search index for the [city].
+  String? get cityIndex => throw _privateConstructorUsedError;
+
+  /// The address of the housing's location.
   String? get address => throw _privateConstructorUsedError;
+
+  /// The index of the [address].
+  String? get addressIndex => throw _privateConstructorUsedError;
 
   /// The user owning the housing.
   UserInfoModel? get user => throw _privateConstructorUsedError;
+
+  /// Housing type
+  HousingTypeModel? get type => throw _privateConstructorUsedError;
 
   /// Creation date.
   @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -130,8 +170,16 @@ abstract class $HousingModelCopyWith<$Res> {
           List<ImageModel>? imagesToDelete,
       bool? isAvailable,
       bool? hasTransport,
+      String? country,
+      String? countryIndex,
+      String? county,
+      String? countyIndex,
+      String? city,
+      String? cityIndex,
       String? address,
+      String? addressIndex,
       UserInfoModel? user,
+      HousingTypeModel? type,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -159,8 +207,16 @@ class _$HousingModelCopyWithImpl<$Res> implements $HousingModelCopyWith<$Res> {
     Object? imagesToDelete = freezed,
     Object? isAvailable = freezed,
     Object? hasTransport = freezed,
+    Object? country = freezed,
+    Object? countryIndex = freezed,
+    Object? county = freezed,
+    Object? countyIndex = freezed,
+    Object? city = freezed,
+    Object? cityIndex = freezed,
     Object? address = freezed,
+    Object? addressIndex = freezed,
     Object? user = freezed,
+    Object? type = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? remarks = freezed,
@@ -195,14 +251,46 @@ class _$HousingModelCopyWithImpl<$Res> implements $HousingModelCopyWith<$Res> {
           ? _value.hasTransport
           : hasTransport // ignore: cast_nullable_to_non_nullable
               as bool?,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countryIndex: countryIndex == freezed
+          ? _value.countryIndex
+          : countryIndex // ignore: cast_nullable_to_non_nullable
+              as String?,
+      county: county == freezed
+          ? _value.county
+          : county // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countyIndex: countyIndex == freezed
+          ? _value.countyIndex
+          : countyIndex // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cityIndex: cityIndex == freezed
+          ? _value.cityIndex
+          : cityIndex // ignore: cast_nullable_to_non_nullable
+              as String?,
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addressIndex: addressIndex == freezed
+          ? _value.addressIndex
+          : addressIndex // ignore: cast_nullable_to_non_nullable
               as String?,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserInfoModel?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as HousingTypeModel?,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -250,8 +338,16 @@ abstract class _$HousingModelCopyWith<$Res>
           List<ImageModel>? imagesToDelete,
       bool? isAvailable,
       bool? hasTransport,
+      String? country,
+      String? countryIndex,
+      String? county,
+      String? countyIndex,
+      String? city,
+      String? cityIndex,
       String? address,
+      String? addressIndex,
       UserInfoModel? user,
+      HousingTypeModel? type,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -282,8 +378,16 @@ class __$HousingModelCopyWithImpl<$Res> extends _$HousingModelCopyWithImpl<$Res>
     Object? imagesToDelete = freezed,
     Object? isAvailable = freezed,
     Object? hasTransport = freezed,
+    Object? country = freezed,
+    Object? countryIndex = freezed,
+    Object? county = freezed,
+    Object? countyIndex = freezed,
+    Object? city = freezed,
+    Object? cityIndex = freezed,
     Object? address = freezed,
+    Object? addressIndex = freezed,
     Object? user = freezed,
+    Object? type = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? remarks = freezed,
@@ -318,14 +422,46 @@ class __$HousingModelCopyWithImpl<$Res> extends _$HousingModelCopyWithImpl<$Res>
           ? _value.hasTransport
           : hasTransport // ignore: cast_nullable_to_non_nullable
               as bool?,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countryIndex: countryIndex == freezed
+          ? _value.countryIndex
+          : countryIndex // ignore: cast_nullable_to_non_nullable
+              as String?,
+      county: county == freezed
+          ? _value.county
+          : county // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countyIndex: countyIndex == freezed
+          ? _value.countyIndex
+          : countyIndex // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: city == freezed
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cityIndex: cityIndex == freezed
+          ? _value.cityIndex
+          : cityIndex // ignore: cast_nullable_to_non_nullable
+              as String?,
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addressIndex: addressIndex == freezed
+          ? _value.addressIndex
+          : addressIndex // ignore: cast_nullable_to_non_nullable
               as String?,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserInfoModel?,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as HousingTypeModel?,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -359,8 +495,16 @@ class _$_HousingModel extends _HousingModel {
           this.imagesToDelete,
       this.isAvailable = true,
       this.hasTransport = true,
+      this.country = "Romania",
+      this.countryIndex,
+      this.county,
+      this.countyIndex,
+      this.city,
+      this.cityIndex,
       this.address,
+      this.addressIndex,
       this.user,
+      this.type,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           this.createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -407,14 +551,47 @@ class _$_HousingModel extends _HousingModel {
 
   /// If the owner ofers transport to the housing.
   final bool? hasTransport;
+  @JsonKey()
   @override
 
-  /// The full address of the housing's location.
+  /// The country of the housing's location.
+  final String? country;
+  @override
+
+  /// The search index for the [country].
+  final String? countryIndex;
+  @override
+
+  /// The county of the housing's location.
+  final String? county;
+  @override
+
+  /// The search index for the [county].
+  final String? countyIndex;
+  @override
+
+  /// The city of the housing's location.
+  final String? city;
+  @override
+
+  /// The search index for the [city].
+  final String? cityIndex;
+  @override
+
+  /// The address of the housing's location.
   final String? address;
+  @override
+
+  /// The index of the [address].
+  final String? addressIndex;
   @override
 
   /// The user owning the housing.
   final UserInfoModel? user;
+  @override
+
+  /// Housing type
+  final HousingTypeModel? type;
   @override
 
   /// Creation date.
@@ -437,7 +614,7 @@ class _$_HousingModel extends _HousingModel {
 
   @override
   String toString() {
-    return 'HousingModel(id: $id, bedsAvailable: $bedsAvailable, period: $period, imageList: $imageList, imagesToDelete: $imagesToDelete, isAvailable: $isAvailable, hasTransport: $hasTransport, address: $address, user: $user, createdAt: $createdAt, updatedAt: $updatedAt, remarks: $remarks, isMock: $isMock)';
+    return 'HousingModel(id: $id, bedsAvailable: $bedsAvailable, period: $period, imageList: $imageList, imagesToDelete: $imagesToDelete, isAvailable: $isAvailable, hasTransport: $hasTransport, country: $country, countryIndex: $countryIndex, county: $county, countyIndex: $countyIndex, city: $city, cityIndex: $cityIndex, address: $address, addressIndex: $addressIndex, user: $user, type: $type, createdAt: $createdAt, updatedAt: $updatedAt, remarks: $remarks, isMock: $isMock)';
   }
 
   @override
@@ -456,8 +633,19 @@ class _$_HousingModel extends _HousingModel {
                 .equals(other.isAvailable, isAvailable) &&
             const DeepCollectionEquality()
                 .equals(other.hasTransport, hasTransport) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
+            const DeepCollectionEquality()
+                .equals(other.countryIndex, countryIndex) &&
+            const DeepCollectionEquality().equals(other.county, county) &&
+            const DeepCollectionEquality()
+                .equals(other.countyIndex, countyIndex) &&
+            const DeepCollectionEquality().equals(other.city, city) &&
+            const DeepCollectionEquality().equals(other.cityIndex, cityIndex) &&
             const DeepCollectionEquality().equals(other.address, address) &&
+            const DeepCollectionEquality()
+                .equals(other.addressIndex, addressIndex) &&
             const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             const DeepCollectionEquality().equals(other.remarks, remarks) &&
@@ -465,21 +653,30 @@ class _$_HousingModel extends _HousingModel {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(bedsAvailable),
-      const DeepCollectionEquality().hash(period),
-      const DeepCollectionEquality().hash(imageList),
-      const DeepCollectionEquality().hash(imagesToDelete),
-      const DeepCollectionEquality().hash(isAvailable),
-      const DeepCollectionEquality().hash(hasTransport),
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(updatedAt),
-      const DeepCollectionEquality().hash(remarks),
-      const DeepCollectionEquality().hash(isMock));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(id),
+        const DeepCollectionEquality().hash(bedsAvailable),
+        const DeepCollectionEquality().hash(period),
+        const DeepCollectionEquality().hash(imageList),
+        const DeepCollectionEquality().hash(imagesToDelete),
+        const DeepCollectionEquality().hash(isAvailable),
+        const DeepCollectionEquality().hash(hasTransport),
+        const DeepCollectionEquality().hash(country),
+        const DeepCollectionEquality().hash(countryIndex),
+        const DeepCollectionEquality().hash(county),
+        const DeepCollectionEquality().hash(countyIndex),
+        const DeepCollectionEquality().hash(city),
+        const DeepCollectionEquality().hash(cityIndex),
+        const DeepCollectionEquality().hash(address),
+        const DeepCollectionEquality().hash(addressIndex),
+        const DeepCollectionEquality().hash(user),
+        const DeepCollectionEquality().hash(type),
+        const DeepCollectionEquality().hash(createdAt),
+        const DeepCollectionEquality().hash(updatedAt),
+        const DeepCollectionEquality().hash(remarks),
+        const DeepCollectionEquality().hash(isMock)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -502,8 +699,16 @@ abstract class _HousingModel extends HousingModel {
           List<ImageModel>? imagesToDelete,
       bool? isAvailable,
       bool? hasTransport,
+      String? country,
+      String? countryIndex,
+      String? county,
+      String? countyIndex,
+      String? city,
+      String? cityIndex,
       String? address,
+      String? addressIndex,
       UserInfoModel? user,
+      HousingTypeModel? type,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -548,12 +753,44 @@ abstract class _HousingModel extends HousingModel {
   bool? get hasTransport;
   @override
 
-  /// The full address of the housing's location.
+  /// The country of the housing's location.
+  String? get country;
+  @override
+
+  /// The search index for the [country].
+  String? get countryIndex;
+  @override
+
+  /// The county of the housing's location.
+  String? get county;
+  @override
+
+  /// The search index for the [county].
+  String? get countyIndex;
+  @override
+
+  /// The city of the housing's location.
+  String? get city;
+  @override
+
+  /// The search index for the [city].
+  String? get cityIndex;
+  @override
+
+  /// The address of the housing's location.
   String? get address;
+  @override
+
+  /// The index of the [address].
+  String? get addressIndex;
   @override
 
   /// The user owning the housing.
   UserInfoModel? get user;
+  @override
+
+  /// Housing type
+  HousingTypeModel? get type;
   @override
 
   /// Creation date.

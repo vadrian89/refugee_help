@@ -161,5 +161,11 @@
     "beds_available": "Number of beds available",
     "choose_housing": "Choose housing",
     "housing_is_required": "Housing option is required!",
-    "housing_info": "Housing info"
+    "housing_info": "Housing info",
+    "host": "Host",
+    "pension": "Pension",
+    "hotel": "Hotel",
+    "institution": "Institution",
+    "ngo": "NGO",
+    "housing_type": "Housing type"
 }

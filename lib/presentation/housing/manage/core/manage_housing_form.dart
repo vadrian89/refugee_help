@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/housing/manage/manage_housing_cubit.dart';
 import 'package:refugee_help/domain/core/image_model.dart';
 import 'package:refugee_help/domain/housing/housing_model.dart';
+import 'package:refugee_help/domain/housing/housing_type_model.dart';
 import 'package:refugee_help/infrastructure/validators.dart';
 import 'package:refugee_help/presentation/core/bottom_sheets/image_picker_bottom_sheet.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
@@ -13,6 +14,7 @@ import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_form
 import 'package:refugee_help/presentation/core/widgets/vertical_spacing.dart';
 import 'package:refugee_help/presentation/housing/manage/core/housing_period_dropdown.dart';
 
+import 'housing_type_dropdown.dart';
 import 'manage_housing_consumer.dart';
 import 'housing_button_bar.dart';
 import 'manage_housing_user_info.dart';
@@ -40,6 +42,7 @@ class _ManageHousingFormState extends State<ManageHousingForm> {
           edit: (housing) => housing,
           view: (housing, _, __) => housing,
         );
+    _housing = _housing.copyWith(type: _housing.type ?? HousingTypeModel.host());
   }
 
   @override
@@ -71,6 +74,7 @@ class _ManageHousingFormState extends State<ManageHousingForm> {
               ),
               const VerticalSpacing(),
               ..._fields(state),
+              const VerticalSpacing(),
               HousingButtonBar(
                 onCancel: () => (_housing.id != null)
                     ? context.read<ManageHousingCubit>().toggleEdit()
@@ -84,11 +88,32 @@ class _ManageHousingFormState extends State<ManageHousingForm> {
 
   List<Widget> _fields(ManageHousingState state) => [
         AppTextFormField(
+          initialValue: _housing.county,
+          hintText: "${"county".tr()}*",
+          validator: (val) => (val?.isNotEmpty ?? false) ? null : "field_empty_error".tr(),
+          readOnly: !_editable,
+          onSaved: (val) => _housing = _housing.copyWith(county: val),
+        ),
+        AppTextFormField(
+          initialValue: _housing.city,
+          hintText: "${"city".tr()}*",
+          validator: (val) => (val?.isNotEmpty ?? false) ? null : "field_empty_error".tr(),
+          readOnly: !_editable,
+          onSaved: (val) => _housing = _housing.copyWith(city: val),
+        ),
+        AppTextFormField(
           initialValue: _housing.address,
           hintText: "${"address".tr()}*",
           validator: (val) => (val?.isNotEmpty ?? false) ? null : "field_empty_error".tr(),
           readOnly: !_editable,
           onSaved: (val) => _housing = _housing.copyWith(address: val),
+        ),
+        HousingTypeDropdown(
+          value: _housing.type,
+          onChanged: state.maybeWhen(
+            orElse: () => null,
+            edit: (_) => (val) => setState(() => _housing = _housing.copyWith(type: val)),
+          ),
         ),
         AppTextFormField(
           initialValue: _housing.bedsAvailable?.toString(),
@@ -189,7 +214,7 @@ class _ManageHousingFormState extends State<ManageHousingForm> {
       cancelText: "cancel".tr(),
     ).then((save) {
       _formKey.currentState!.save();
-      save ? context.read<ManageHousingCubit>().save(_housing.updated) : null;
+      save ? context.read<ManageHousingCubit>().save(_housing) : null;
     });
   }
 }

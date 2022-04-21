@@ -28,6 +28,12 @@ class HousingListTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 2.5),
               child: Sub2Text(
+                text: "${"housing_type".tr()}: ${model.type?.name ?? "-"}",
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2.5),
+              child: Sub2Text(
                 text: "${"beds_available".tr()}: ${model.bedsAvailable}",
               ),
             ),
