@@ -167,5 +167,7 @@
     "hotel": "Hotel",
     "institution": "Instituţie",
     "ngo": "ONG",
-    "housing_type": "Tip cazare"
+    "housing_type": "Tip cazare",
+    "actions": "Acţiuni",
+    "type": "Tip"
 }

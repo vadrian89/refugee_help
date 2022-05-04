@@ -16,6 +16,13 @@ class TransportTypeModel extends Equatable {
     required this.icon,
   });
 
+  factory TransportTypeModel.all() => TransportTypeModel(
+        id: 0,
+        name: "type".tr(),
+        seats: "",
+        icon: MdiIcons.homeCircleOutline,
+      );
+
   factory TransportTypeModel.car() => TransportTypeModel(
         id: 1,
         name: "car".tr(),

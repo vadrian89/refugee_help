@@ -7,11 +7,15 @@ import 'package:refugee_help/presentation/housing/list/core/body/housing_list_bo
 import 'housing_list_listener.dart';
 
 class HousingListBody extends StatelessWidget {
-  const HousingListBody({Key? key}) : super(key: key);
+  final bool enableFilters;
+
+  const HousingListBody({Key? key, this.enableFilters = false}) : super(key: key);
 
   @override
   Widget build(_) => BlocProvider(
         create: (context) => ListHousingCubit(authCubit: context.read<AuthenticationCubit>()),
-        child: const HousingListListener(child: HousingListBodyView()),
+        child: HousingListListener(
+          child: HousingListBodyView(enableFilters: enableFilters),
+        ),
       );
 }

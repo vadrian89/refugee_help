@@ -7,11 +7,15 @@ import 'package:refugee_help/presentation/transport/list/core/body/transport_lis
 import 'transport_list_listener.dart';
 
 class TransportListBody extends StatelessWidget {
-  const TransportListBody({Key? key}) : super(key: key);
+  final bool enableFilters;
+
+  const TransportListBody({Key? key, this.enableFilters = false}) : super(key: key);
 
   @override
   Widget build(_) => BlocProvider(
         create: (context) => ListTransportCubit(authCubit: context.read<AuthenticationCubit>()),
-        child: const TransportListListener(child: TransportListBodyView()),
+        child: TransportListListener(
+          child: TransportListBodyView(enableFilters: enableFilters),
+        ),
       );
 }

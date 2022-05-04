@@ -14,14 +14,15 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<RootRouterCubit, RootRouterState>(
-        builder: (context, state) => state.maybeMap(
-          initial: (_) => const LoadingScreen(),
+        builder: (context, state) => state.maybeWhen(
+          initial: () => const LoadingScreen(),
           orElse: () => const UnkownScreen(),
-          unauthenticated: (_) => const AuthenticationScreen(),
-          register: (_) => const AuthenticationScreen(),
-          home: (_) => const HomeScreen(),
-          tickets: (tickets) =>
-              (tickets.type == null) ? const HomeScreen() : TicketsListScreen(type: tickets.type!),
+          unauthenticated: () => const AuthenticationScreen(),
+          register: () => const AuthenticationScreen(),
+          home: (_, __) => const HomeScreen(),
+          tickets: (stateConfig) => (stateConfig.type == null)
+              ? const HomeScreen()
+              : TicketsListScreen(type: stateConfig.type!),
           transport: (_) => const TransportListScreen(),
           housing: (_) => const HousingListScreen(),
         ),

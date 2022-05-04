@@ -6,11 +6,14 @@ import 'package:refugee_help/domain/transport/transport_model.dart';
 import 'package:refugee_help/presentation/core/adaptive_widgets/bottom_sheets/adaptive_bottom_sheet.dart';
 import 'package:refugee_help/presentation/core/widgets/tiles/field_placeholder_tile.dart';
 import 'package:refugee_help/presentation/core/widgets/text/form_error_text.dart';
+import 'package:refugee_help/presentation/root_router/pop_result_listener.dart';
 
 import 'transport/ticket_transport_info_tile.dart';
 import 'transport/ticket_transport_sheet_body.dart';
 
 class TicketTransportFormField extends FormField<TransportInfoModel> {
+  final VoidCallback onSearch;
+
   TicketTransportFormField({
     Key? key,
     TransportInfoModel? initialValue,
@@ -18,7 +21,8 @@ class TicketTransportFormField extends FormField<TransportInfoModel> {
     FormFieldValidator<TransportInfoModel?>? validator,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction,
     bool editable = true,
-    void Function(TransportInfoModel value)? onChanged,
+    ValueChanged<TransportInfoModel>? onChanged,
+    required this.onSearch,
   }) : super(
           key: ObjectKey(initialValue),
           onSaved: onSaved,
@@ -38,6 +42,7 @@ class TicketTransportFormField extends FormField<TransportInfoModel> {
                     onChanged(value);
                   }
                 },
+                onSearch: onSearch,
               ),
               if (state.hasError) FormErrorText(text: state.errorText ?? ""),
             ],
@@ -49,35 +54,35 @@ class _TicketTransportFormFieldWidget extends StatelessWidget {
   final TransportInfoModel? value;
   final void Function(TransportInfoModel value) onChanged;
   final bool editable;
+  final VoidCallback onSearch;
 
   const _TicketTransportFormFieldWidget({
     Key? key,
     this.value,
     required this.onChanged,
     this.editable = true,
+    required this.onSearch,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => (value == null)
-      ? _placeholderTile(context)
-      : TicketTransportInfoTile(
-          info: value!,
-          editable: editable,
-          onPressed: () => _showTransportSheet(context),
-        );
+  Widget build(BuildContext context) => PopResultListener(
+        onResultChanged: (result) {
+          if (result is TransportModel) {
+            onChanged(TransportInfoModel.fromTransport(result));
+          }
+        },
+        child: (value == null)
+            ? _placeholderTile(context)
+            : TicketTransportInfoTile(
+                info: value!,
+                editable: editable,
+                onPressed: onSearch,
+              ),
+      );
 
   Widget _placeholderTile(BuildContext context) => FieldPlaceholderTile(
         leadingIcon: MdiIcons.car,
         label: "choose_transport".tr(),
-        onPressed: () => _showTransportSheet(context),
+        onPressed: onSearch,
       );
-
-  void _showTransportSheet(BuildContext context) => AdaptiveBottomSheet(
-        bodyChildren: const [TicketTransportSheetBody()],
-        isScrollControlled: true,
-        materialChildrenPadding: const EdgeInsets.symmetric(horizontal: 16),
-        title: "choose_transport".tr(),
-      ).show<TransportModel>(context).then((value) {
-        (value != null) ? onChanged(TransportInfoModel.fromTransport(value)) : null;
-      });
 }

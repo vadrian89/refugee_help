@@ -1,16 +1,26 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
+import 'package:refugee_help/application/root_router/router_transport_state.dart';
 import 'package:refugee_help/application/transport/list/list_transport_cubit.dart';
 import 'package:refugee_help/domain/transport/transport_model.dart';
 import 'package:refugee_help/domain/transport/list_transport_request_model.dart';
+import 'package:refugee_help/domain/transport/transport_type_model.dart';
+import 'package:refugee_help/presentation/core/widgets/no_data_placeholder.dart';
 import 'package:refugee_help/presentation/core/widgets/tables/data_list_table.dart';
+import 'package:refugee_help/presentation/core/widgets/text_fields/app_text_form_field.dart';
+import 'package:refugee_help/presentation/transport/manage/core/transport_type_dropdown.dart';
 
 import 'transport_list_consumer.dart';
 
 class TransportListDesktopBody extends StatefulWidget {
-  const TransportListDesktopBody({Key? key}) : super(key: key);
+  final bool enableFilters;
+
+  const TransportListDesktopBody({Key? key, this.enableFilters = false}) : super(key: key);
 
   @override
   State<TransportListDesktopBody> createState() => _TransportListDesktopBodyState();
@@ -20,8 +30,9 @@ class _TransportListDesktopBodyState extends State<TransportListDesktopBody> {
   List<TransportModel> _list = const [];
   static const int _pageLimit = 20;
   int _currentPage = 1;
+  Timer? _timer;
 
-  ListTransportRequestModel get _request => const ListTransportRequestModel();
+  ListTransportRequestModel _request = const ListTransportRequestModel();
   int get _startIndex => _pageLimit * (_currentPage - 1);
   int get _endIndex {
     final endIndex = _startIndex + _pageLimit;
@@ -42,6 +53,8 @@ class _TransportListDesktopBodyState extends State<TransportListDesktopBody> {
           _list = list;
 
           return DataListTable(
+            headerActions: widget.enableFilters ? _tableActions(context) : null,
+            emptyPlaceholder: const NoDataPlaceholder(),
             columns: _tableColumns,
             page: _currentPage,
             pageLimit: _pageLimit,
@@ -56,6 +69,37 @@ class _TransportListDesktopBodyState extends State<TransportListDesktopBody> {
         },
       );
 
+  List<Widget> _tableActions(BuildContext context) => [
+        _textField(
+          hintText: "seats_available".tr(),
+          onChanged: (val) {
+            _request = _request.copyWith(seatsAvailable: int.tryParse(val));
+            _delayedSearch(context);
+          },
+        ),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 200, maxHeight: 68),
+          child: TransportTypeDropdown(
+            enableAll: true,
+            value: _request.transportType ?? TransportTypeModel.all(),
+            onChanged: (val) => setState(() {
+              _request = _request.copyWith(
+                transportType: (val == TransportTypeModel.all()) ? null : val,
+              );
+              _fetch(context);
+            }),
+          ),
+        ),
+      ];
+
+  Widget _textField({String? hintText, ValueChanged<String>? onChanged}) => ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 200),
+        child: AppTextFormField(
+          hintText: hintText,
+          onChanged: onChanged,
+        ),
+      );
+
   DataRow _row(BuildContext context, TransportModel transport) => DataRow(
         cells: [
           _cell(value: transport.seatsAvailable.toString()),
@@ -66,8 +110,24 @@ class _TransportListDesktopBodyState extends State<TransportListDesktopBody> {
           _cell(value: transport.destinations),
           _cell(value: transport.user?.fullName),
           _cell(value: transport.user?.phone),
+          if (widget.enableFilters)
+            DataCell(
+              IconButton(
+                icon: const Icon(MdiIcons.magnify),
+                color: Theme.of(context).primaryColor,
+                onPressed: () => context.read<RootRouterCubit>().goToTransport(
+                      RouterTransportState(id: transport.id),
+                    ),
+              ),
+            ),
         ],
-        onSelectChanged: (_) => context.read<RootRouterCubit>().goToTransport(id: transport.id),
+        onSelectChanged: (_) {
+          if (widget.enableFilters) {
+            Navigator.maybePop(context, transport);
+          } else {
+            context.read<RootRouterCubit>().goToTransport(RouterTransportState(id: transport.id));
+          }
+        },
       );
 
   List<DataColumn> get _tableColumns => [
@@ -79,7 +139,15 @@ class _TransportListDesktopBodyState extends State<TransportListDesktopBody> {
         DataColumn(label: Text("destinations_list".tr())),
         DataColumn(label: Text("owner".tr())),
         DataColumn(label: Text("phone".tr())),
+        if (widget.enableFilters) DataColumn(label: Text("actions".tr())),
       ];
 
   DataCell _cell({String? value}) => DataCell(Text(value ?? "n/a"));
+
+  void _fetch(BuildContext context) => context.read<ListTransportCubit>().fetchList(_request);
+
+  void _delayedSearch(BuildContext context) {
+    _timer?.cancel();
+    _timer = Timer(const Duration(milliseconds: 500), () => _fetch(context));
+  }
 }

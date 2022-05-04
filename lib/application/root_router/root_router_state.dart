@@ -36,6 +36,10 @@ class RootRouterState with _$RootRouterState {
 
   static const addPath = "/add";
 
+  static const searchHousingPath = "/search-housing";
+
+  static const searchTransportPath = "/search-transport";
+
   /// Getter to quickly check if the router is in unkown state.
   bool get isUknown => maybeWhen(orElse: () => false, unknown: () => true);
 
@@ -49,10 +53,10 @@ class RootRouterState with _$RootRouterState {
       );
 
   bool get isRegister => maybeWhen(orElse: () => false, register: () => true);
-  bool get isModalOpened => maybeMap(
+  bool get isModalOpened => maybeWhen(
         orElse: () => false,
-        tickets: (tickets) => tickets.modalVisible,
-        transport: (transport) => transport.modalVisible,
+        tickets: (stateConfig) => stateConfig.modalVisible,
+        transport: (stateConfig) => stateConfig.modalVisible,
       );
 
   /// Define the private constructor to enable support for class methods and properties.
@@ -75,26 +79,17 @@ class RootRouterState with _$RootRouterState {
     @Default(false) bool viewProfile,
   }) = _Home;
 
-  const factory RootRouterState.transport({
-    String? id,
-    @Default(false) bool add,
-    @Default(false) bool modalVisible,
-  }) = _Transport;
+  const factory RootRouterState.transport([
+    @Default(RouterTransportState()) RouterTransportState stateConfig,
+  ]) = _Transport;
 
-  const factory RootRouterState.housing({
-    String? id,
-    @Default(false) bool add,
-    @Default(false) bool modalVisible,
-  }) = _Housing;
+  const factory RootRouterState.housing([
+    @Default(RouterHousingState()) RouterHousingState stateConfig,
+  ]) = _Housing;
 
-  const factory RootRouterState.tickets({
-    String? id,
-    TicketTypeModel? type,
-    @Default(false) bool add,
-    @Default(false) bool modalVisible,
-    String? transportId,
-    String? housingId,
-  }) = _Tickets;
+  const factory RootRouterState.tickets([
+    @Default(RouterTicketsState()) RouterTicketsState stateConfig,
+  ]) = _Tickets;
 
   /// [RootRouterState.register] shows [RegisterScreen].
   const factory RootRouterState.register() = _Register;
@@ -108,109 +103,47 @@ class RootRouterState with _$RootRouterState {
   /// Factory constructor used to get the correct state from an [Uri].
   ///
   /// This constructor is used inside [RootRouterParser.parseRouteInformation].
-  factory RootRouterState.fromUriLevel1(Uri uri) {
+  factory RootRouterState.fromUri(Uri uri) {
     final pathSegment = "/${uri.pathSegments[0]}";
     if (pathSegment == homePath) {
-      return const RootRouterState.home();
-    } else if (pathSegment == authPath) {
+      final pathSegment2 = uri.pathSegments.length == 2 ? "/${uri.pathSegments[1]}" : null;
+      return RootRouterState.home(viewProfile: pathSegment2 == profilePath);
+    }
+    if (pathSegment == authPath) {
       return const RootRouterState.unauthenticated();
-    } else if (pathSegment == registerPath) {
+    }
+    if (pathSegment == registerPath) {
       return const RootRouterState.register();
-    } else if (pathSegment == transportPath) {
-      return const RootRouterState.transport();
-    } else if (pathSegment == housingPath) {
-      return const RootRouterState.housing();
-    } else {
-      return const RootRouterState.unknown();
     }
-  }
-
-  /// Factory constructor used to get the correct state from an [Uri] when [Uri.length] is 2.
-  ///
-  /// This constructor is used inside [RootRouterParser.parseRouteInformation].
-  factory RootRouterState.fromUriLevel2(Uri uri) {
-    final pathSegment1 = "/${uri.pathSegments[0]}";
-    final pathSegment2 = uri.pathSegments[1];
-    if (pathSegment1 == homePath) {
-      if ("/$pathSegment2" == profilePath) {
-        return const RootRouterState.home(viewProfile: true);
-      }
+    if (pathSegment == transportPath) {
+      return RouterTransportState.fromUri(uri).state;
     }
-    if (pathSegment1 == transportPath) {
-      if ("/$pathSegment2" == addPath) {
-        return const RootRouterState.transport(add: true);
-      }
-      return RootRouterState.transport(id: pathSegment2);
+    if (pathSegment == housingPath) {
+      return RouterHousingState.fromUri(uri).state;
     }
-    if (pathSegment1 == housingPath) {
-      if ("/$pathSegment2" == addPath) {
-        return const RootRouterState.housing(add: true);
-      }
-      return RootRouterState.housing(id: pathSegment2);
-    }
-    if (pathSegment1 == ticketsPath && TicketTypeModel.isValidType(pathSegment2)) {
-      return RootRouterState.tickets(
-        type: TicketTypeModel.values.firstWhereOrNull((element) => element.name == pathSegment2),
-      );
-    }
-    return const RootRouterState.unknown();
-  }
-
-  /// Factory constructor used to get the correct state from an [Uri] when [Uri.length] is 3.
-  ///
-  /// This constructor is used inside [RootRouterParser.parseRouteInformation].
-  factory RootRouterState.fromUriLevel3(Uri uri) {
-    final pathSegment1 = "/${uri.pathSegments[0]}";
-    final pathSegment2 = uri.pathSegments[1];
-    final pathSegment3 = uri.pathSegments[2];
-    final queryParameters = uri.queryParametersAll;
-    if (pathSegment1 == ticketsPath && TicketTypeModel.isValidType(pathSegment2)) {
-      final isAddPath = "/$pathSegment3" == addPath;
-      return RootRouterState.tickets(
-        add: isAddPath,
-        id: isAddPath ? null : pathSegment3,
-        modalVisible:
-            queryParameters["transportId"] != null || queryParameters["housingId"] != null,
-        transportId: queryParameters["transportId"]?.first,
-        housingId: queryParameters["housingId"]?.first,
-        type: TicketTypeModel.values.firstWhereOrNull((element) => element.name == pathSegment2),
-      );
+    if (pathSegment == ticketsPath) {
+      return RouterTicketsState.fromUri(uri).state;
     }
     return const RootRouterState.unknown();
   }
 
   /// Get the corresponding url for each state
-  String get urlPath => maybeMap(
-        initial: (_) => rootPath,
-        unauthenticated: (_) => authPath,
-        register: (_) => registerPath,
-        home: (home) => "$homePath${_getPath(home.viewProfile, profilePath)}",
-        transport: (transport) =>
-            transportPath +
-            _getPath(transport.add, addPath) +
-            _getPath(transport.id?.trim().isNotEmpty ?? false, "/${transport.id}"),
-        housing: (housing) =>
-            housingPath +
-            _getPath(housing.add, addPath) +
-            _getPath(housing.id?.trim().isNotEmpty ?? false, "/${housing.id}"),
-        tickets: (tickets) =>
-            ticketsPath +
-            _getPath(tickets.type?.name.trim().isNotEmpty ?? false, "/${tickets.type!.name}") +
-            _getPath(tickets.add, addPath) +
-            _getPath(tickets.id?.trim().isNotEmpty ?? false, "/${tickets.id}") +
-            _getPath(tickets.transportId?.trim().isNotEmpty ?? false, "?") +
-            _getPath(tickets.housingId?.trim().isNotEmpty ?? false, "?") +
-            _getParameter("transportId", tickets.transportId ?? "") +
-            _getParameter("housingId", tickets.housingId ?? ""),
+  String get uriPath => maybeWhen(
+        initial: () => rootPath,
+        unauthenticated: () => authPath,
+        register: () => registerPath,
+        home: (_, viewProfile) => "$homePath${_getPath(viewProfile, profilePath)}",
+        transport: (stateConfig) => stateConfig.uriPpath,
+        housing: (stateConfig) => stateConfig.uriPpath,
+        tickets: (stateConfig) => stateConfig.uriPpath,
         orElse: () => unknownPath,
       );
 
+  dynamic get popResult => maybeWhen(
+        orElse: () => null,
+        tickets: (stateConfig) => stateConfig.popResult,
+      );
+
   /// Return the path if the expression is `true`, otherwise return an empty string.
-  String _getPath(bool expression, path) => expression ? path : "";
-
-  String _getParameter(String name, String value) {
-    if (value.trim().isEmpty) return "";
-
-    return "$name=$value";
-  }
+  String _getPath(bool expression, String path) => expression ? path : "";
 }
