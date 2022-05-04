@@ -34,36 +34,23 @@ class _$RootRouterStateTearOff {
   }
 
   _Transport transport(
-      {String? id, bool add = false, bool modalVisible = false}) {
+      [RouterTransportState stateConfig = const RouterTransportState()]) {
     return _Transport(
-      id: id,
-      add: add,
-      modalVisible: modalVisible,
+      stateConfig,
     );
   }
 
-  _Housing housing({String? id, bool add = false, bool modalVisible = false}) {
+  _Housing housing(
+      [RouterHousingState stateConfig = const RouterHousingState()]) {
     return _Housing(
-      id: id,
-      add: add,
-      modalVisible: modalVisible,
+      stateConfig,
     );
   }
 
   _Tickets tickets(
-      {String? id,
-      TicketTypeModel? type,
-      bool add = false,
-      bool modalVisible = false,
-      String? transportId,
-      String? housingId}) {
+      [RouterTicketsState stateConfig = const RouterTicketsState()]) {
     return _Tickets(
-      id: id,
-      type: type,
-      add: add,
-      modalVisible: modalVisible,
-      transportId: transportId,
-      housingId: housingId,
+      stateConfig,
     );
   }
 
@@ -86,12 +73,9 @@ mixin _$RootRouterState {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user, bool viewProfile) home,
-    required TResult Function(String? id, bool add, bool modalVisible)
-        transport,
-    required TResult Function(String? id, bool add, bool modalVisible) housing,
-    required TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)
-        tickets,
+    required TResult Function(RouterTransportState stateConfig) transport,
+    required TResult Function(RouterHousingState stateConfig) housing,
+    required TResult Function(RouterTicketsState stateConfig) tickets,
     required TResult Function() register,
     required TResult Function() unknown,
   }) =>
@@ -101,11 +85,9 @@ mixin _$RootRouterState {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
   }) =>
@@ -115,11 +97,9 @@ mixin _$RootRouterState {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -222,12 +202,9 @@ class _$_Initial extends _Initial {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user, bool viewProfile) home,
-    required TResult Function(String? id, bool add, bool modalVisible)
-        transport,
-    required TResult Function(String? id, bool add, bool modalVisible) housing,
-    required TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)
-        tickets,
+    required TResult Function(RouterTransportState stateConfig) transport,
+    required TResult Function(RouterHousingState stateConfig) housing,
+    required TResult Function(RouterTicketsState stateConfig) tickets,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
@@ -240,11 +217,9 @@ class _$_Initial extends _Initial {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
@@ -257,11 +232,9 @@ class _$_Initial extends _Initial {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -371,12 +344,9 @@ class _$_Unauthenticated extends _Unauthenticated {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user, bool viewProfile) home,
-    required TResult Function(String? id, bool add, bool modalVisible)
-        transport,
-    required TResult Function(String? id, bool add, bool modalVisible) housing,
-    required TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)
-        tickets,
+    required TResult Function(RouterTransportState stateConfig) transport,
+    required TResult Function(RouterHousingState stateConfig) housing,
+    required TResult Function(RouterTicketsState stateConfig) tickets,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
@@ -389,11 +359,9 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
@@ -406,11 +374,9 @@ class _$_Unauthenticated extends _Unauthenticated {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -566,12 +532,9 @@ class _$_Home extends _Home {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user, bool viewProfile) home,
-    required TResult Function(String? id, bool add, bool modalVisible)
-        transport,
-    required TResult Function(String? id, bool add, bool modalVisible) housing,
-    required TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)
-        tickets,
+    required TResult Function(RouterTransportState stateConfig) transport,
+    required TResult Function(RouterHousingState stateConfig) housing,
+    required TResult Function(RouterTicketsState stateConfig) tickets,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
@@ -584,11 +547,9 @@ class _$_Home extends _Home {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
@@ -601,11 +562,9 @@ class _$_Home extends _Home {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -681,7 +640,9 @@ abstract class _$TransportCopyWith<$Res> {
   factory _$TransportCopyWith(
           _Transport value, $Res Function(_Transport) then) =
       __$TransportCopyWithImpl<$Res>;
-  $Res call({String? id, bool add, bool modalVisible});
+  $Res call({RouterTransportState stateConfig});
+
+  $RouterTransportStateCopyWith<$Res> get stateConfig;
 }
 
 /// @nodoc
@@ -695,45 +656,37 @@ class __$TransportCopyWithImpl<$Res> extends _$RootRouterStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? add = freezed,
-    Object? modalVisible = freezed,
+    Object? stateConfig = freezed,
   }) {
     return _then(_Transport(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      add: add == freezed
-          ? _value.add
-          : add // ignore: cast_nullable_to_non_nullable
-              as bool,
-      modalVisible: modalVisible == freezed
-          ? _value.modalVisible
-          : modalVisible // ignore: cast_nullable_to_non_nullable
-              as bool,
+      stateConfig == freezed
+          ? _value.stateConfig
+          : stateConfig // ignore: cast_nullable_to_non_nullable
+              as RouterTransportState,
     ));
+  }
+
+  @override
+  $RouterTransportStateCopyWith<$Res> get stateConfig {
+    return $RouterTransportStateCopyWith<$Res>(_value.stateConfig, (value) {
+      return _then(_value.copyWith(stateConfig: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Transport extends _Transport {
-  const _$_Transport({this.id, this.add = false, this.modalVisible = false})
+  const _$_Transport([this.stateConfig = const RouterTransportState()])
       : super._();
 
-  @override
-  final String? id;
   @JsonKey()
   @override
-  final bool add;
-  @JsonKey()
-  @override
-  final bool modalVisible;
+  final RouterTransportState stateConfig;
 
   @override
   String toString() {
-    return 'RootRouterState.transport(id: $id, add: $add, modalVisible: $modalVisible)';
+    return 'RootRouterState.transport(stateConfig: $stateConfig)';
   }
 
   @override
@@ -741,18 +694,13 @@ class _$_Transport extends _Transport {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Transport &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.add, add) &&
             const DeepCollectionEquality()
-                .equals(other.modalVisible, modalVisible));
+                .equals(other.stateConfig, stateConfig));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(add),
-      const DeepCollectionEquality().hash(modalVisible));
+      runtimeType, const DeepCollectionEquality().hash(stateConfig));
 
   @JsonKey(ignore: true)
   @override
@@ -765,16 +713,13 @@ class _$_Transport extends _Transport {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user, bool viewProfile) home,
-    required TResult Function(String? id, bool add, bool modalVisible)
-        transport,
-    required TResult Function(String? id, bool add, bool modalVisible) housing,
-    required TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)
-        tickets,
+    required TResult Function(RouterTransportState stateConfig) transport,
+    required TResult Function(RouterHousingState stateConfig) housing,
+    required TResult Function(RouterTicketsState stateConfig) tickets,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
-    return transport(id, add, modalVisible);
+    return transport(stateConfig);
   }
 
   @override
@@ -783,15 +728,13 @@ class _$_Transport extends _Transport {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
-    return transport?.call(id, add, modalVisible);
+    return transport?.call(stateConfig);
   }
 
   @override
@@ -800,17 +743,15 @@ class _$_Transport extends _Transport {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (transport != null) {
-      return transport(id, add, modalVisible);
+      return transport(stateConfig);
     }
     return orElse();
   }
@@ -866,13 +807,10 @@ class _$_Transport extends _Transport {
 }
 
 abstract class _Transport extends RootRouterState {
-  const factory _Transport({String? id, bool add, bool modalVisible}) =
-      _$_Transport;
+  const factory _Transport([RouterTransportState stateConfig]) = _$_Transport;
   const _Transport._() : super._();
 
-  String? get id;
-  bool get add;
-  bool get modalVisible;
+  RouterTransportState get stateConfig;
   @JsonKey(ignore: true)
   _$TransportCopyWith<_Transport> get copyWith =>
       throw _privateConstructorUsedError;
@@ -882,7 +820,9 @@ abstract class _Transport extends RootRouterState {
 abstract class _$HousingCopyWith<$Res> {
   factory _$HousingCopyWith(_Housing value, $Res Function(_Housing) then) =
       __$HousingCopyWithImpl<$Res>;
-  $Res call({String? id, bool add, bool modalVisible});
+  $Res call({RouterHousingState stateConfig});
+
+  $RouterHousingStateCopyWith<$Res> get stateConfig;
 }
 
 /// @nodoc
@@ -896,45 +836,36 @@ class __$HousingCopyWithImpl<$Res> extends _$RootRouterStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? add = freezed,
-    Object? modalVisible = freezed,
+    Object? stateConfig = freezed,
   }) {
     return _then(_Housing(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      add: add == freezed
-          ? _value.add
-          : add // ignore: cast_nullable_to_non_nullable
-              as bool,
-      modalVisible: modalVisible == freezed
-          ? _value.modalVisible
-          : modalVisible // ignore: cast_nullable_to_non_nullable
-              as bool,
+      stateConfig == freezed
+          ? _value.stateConfig
+          : stateConfig // ignore: cast_nullable_to_non_nullable
+              as RouterHousingState,
     ));
+  }
+
+  @override
+  $RouterHousingStateCopyWith<$Res> get stateConfig {
+    return $RouterHousingStateCopyWith<$Res>(_value.stateConfig, (value) {
+      return _then(_value.copyWith(stateConfig: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Housing extends _Housing {
-  const _$_Housing({this.id, this.add = false, this.modalVisible = false})
-      : super._();
+  const _$_Housing([this.stateConfig = const RouterHousingState()]) : super._();
 
-  @override
-  final String? id;
   @JsonKey()
   @override
-  final bool add;
-  @JsonKey()
-  @override
-  final bool modalVisible;
+  final RouterHousingState stateConfig;
 
   @override
   String toString() {
-    return 'RootRouterState.housing(id: $id, add: $add, modalVisible: $modalVisible)';
+    return 'RootRouterState.housing(stateConfig: $stateConfig)';
   }
 
   @override
@@ -942,18 +873,13 @@ class _$_Housing extends _Housing {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Housing &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.add, add) &&
             const DeepCollectionEquality()
-                .equals(other.modalVisible, modalVisible));
+                .equals(other.stateConfig, stateConfig));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(add),
-      const DeepCollectionEquality().hash(modalVisible));
+      runtimeType, const DeepCollectionEquality().hash(stateConfig));
 
   @JsonKey(ignore: true)
   @override
@@ -966,16 +892,13 @@ class _$_Housing extends _Housing {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user, bool viewProfile) home,
-    required TResult Function(String? id, bool add, bool modalVisible)
-        transport,
-    required TResult Function(String? id, bool add, bool modalVisible) housing,
-    required TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)
-        tickets,
+    required TResult Function(RouterTransportState stateConfig) transport,
+    required TResult Function(RouterHousingState stateConfig) housing,
+    required TResult Function(RouterTicketsState stateConfig) tickets,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
-    return housing(id, add, modalVisible);
+    return housing(stateConfig);
   }
 
   @override
@@ -984,15 +907,13 @@ class _$_Housing extends _Housing {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
-    return housing?.call(id, add, modalVisible);
+    return housing?.call(stateConfig);
   }
 
   @override
@@ -1001,17 +922,15 @@ class _$_Housing extends _Housing {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (housing != null) {
-      return housing(id, add, modalVisible);
+      return housing(stateConfig);
     }
     return orElse();
   }
@@ -1067,13 +986,10 @@ class _$_Housing extends _Housing {
 }
 
 abstract class _Housing extends RootRouterState {
-  const factory _Housing({String? id, bool add, bool modalVisible}) =
-      _$_Housing;
+  const factory _Housing([RouterHousingState stateConfig]) = _$_Housing;
   const _Housing._() : super._();
 
-  String? get id;
-  bool get add;
-  bool get modalVisible;
+  RouterHousingState get stateConfig;
   @JsonKey(ignore: true)
   _$HousingCopyWith<_Housing> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1083,13 +999,9 @@ abstract class _Housing extends RootRouterState {
 abstract class _$TicketsCopyWith<$Res> {
   factory _$TicketsCopyWith(_Tickets value, $Res Function(_Tickets) then) =
       __$TicketsCopyWithImpl<$Res>;
-  $Res call(
-      {String? id,
-      TicketTypeModel? type,
-      bool add,
-      bool modalVisible,
-      String? transportId,
-      String? housingId});
+  $Res call({RouterTicketsState stateConfig});
+
+  $RouterTicketsStateCopyWith<$Res> get stateConfig;
 }
 
 /// @nodoc
@@ -1103,72 +1015,36 @@ class __$TicketsCopyWithImpl<$Res> extends _$RootRouterStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? type = freezed,
-    Object? add = freezed,
-    Object? modalVisible = freezed,
-    Object? transportId = freezed,
-    Object? housingId = freezed,
+    Object? stateConfig = freezed,
   }) {
     return _then(_Tickets(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      type: type == freezed
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as TicketTypeModel?,
-      add: add == freezed
-          ? _value.add
-          : add // ignore: cast_nullable_to_non_nullable
-              as bool,
-      modalVisible: modalVisible == freezed
-          ? _value.modalVisible
-          : modalVisible // ignore: cast_nullable_to_non_nullable
-              as bool,
-      transportId: transportId == freezed
-          ? _value.transportId
-          : transportId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      housingId: housingId == freezed
-          ? _value.housingId
-          : housingId // ignore: cast_nullable_to_non_nullable
-              as String?,
+      stateConfig == freezed
+          ? _value.stateConfig
+          : stateConfig // ignore: cast_nullable_to_non_nullable
+              as RouterTicketsState,
     ));
+  }
+
+  @override
+  $RouterTicketsStateCopyWith<$Res> get stateConfig {
+    return $RouterTicketsStateCopyWith<$Res>(_value.stateConfig, (value) {
+      return _then(_value.copyWith(stateConfig: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Tickets extends _Tickets {
-  const _$_Tickets(
-      {this.id,
-      this.type,
-      this.add = false,
-      this.modalVisible = false,
-      this.transportId,
-      this.housingId})
-      : super._();
+  const _$_Tickets([this.stateConfig = const RouterTicketsState()]) : super._();
 
-  @override
-  final String? id;
-  @override
-  final TicketTypeModel? type;
   @JsonKey()
   @override
-  final bool add;
-  @JsonKey()
-  @override
-  final bool modalVisible;
-  @override
-  final String? transportId;
-  @override
-  final String? housingId;
+  final RouterTicketsState stateConfig;
 
   @override
   String toString() {
-    return 'RootRouterState.tickets(id: $id, type: $type, add: $add, modalVisible: $modalVisible, transportId: $transportId, housingId: $housingId)';
+    return 'RootRouterState.tickets(stateConfig: $stateConfig)';
   }
 
   @override
@@ -1176,25 +1052,13 @@ class _$_Tickets extends _Tickets {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Tickets &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.add, add) &&
             const DeepCollectionEquality()
-                .equals(other.modalVisible, modalVisible) &&
-            const DeepCollectionEquality()
-                .equals(other.transportId, transportId) &&
-            const DeepCollectionEquality().equals(other.housingId, housingId));
+                .equals(other.stateConfig, stateConfig));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(add),
-      const DeepCollectionEquality().hash(modalVisible),
-      const DeepCollectionEquality().hash(transportId),
-      const DeepCollectionEquality().hash(housingId));
+      runtimeType, const DeepCollectionEquality().hash(stateConfig));
 
   @JsonKey(ignore: true)
   @override
@@ -1207,16 +1071,13 @@ class _$_Tickets extends _Tickets {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user, bool viewProfile) home,
-    required TResult Function(String? id, bool add, bool modalVisible)
-        transport,
-    required TResult Function(String? id, bool add, bool modalVisible) housing,
-    required TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)
-        tickets,
+    required TResult Function(RouterTransportState stateConfig) transport,
+    required TResult Function(RouterHousingState stateConfig) housing,
+    required TResult Function(RouterTicketsState stateConfig) tickets,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
-    return tickets(id, type, add, modalVisible, transportId, housingId);
+    return tickets(stateConfig);
   }
 
   @override
@@ -1225,15 +1086,13 @@ class _$_Tickets extends _Tickets {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
-    return tickets?.call(id, type, add, modalVisible, transportId, housingId);
+    return tickets?.call(stateConfig);
   }
 
   @override
@@ -1242,17 +1101,15 @@ class _$_Tickets extends _Tickets {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
   }) {
     if (tickets != null) {
-      return tickets(id, type, add, modalVisible, transportId, housingId);
+      return tickets(stateConfig);
     }
     return orElse();
   }
@@ -1308,21 +1165,10 @@ class _$_Tickets extends _Tickets {
 }
 
 abstract class _Tickets extends RootRouterState {
-  const factory _Tickets(
-      {String? id,
-      TicketTypeModel? type,
-      bool add,
-      bool modalVisible,
-      String? transportId,
-      String? housingId}) = _$_Tickets;
+  const factory _Tickets([RouterTicketsState stateConfig]) = _$_Tickets;
   const _Tickets._() : super._();
 
-  String? get id;
-  TicketTypeModel? get type;
-  bool get add;
-  bool get modalVisible;
-  String? get transportId;
-  String? get housingId;
+  RouterTicketsState get stateConfig;
   @JsonKey(ignore: true)
   _$TicketsCopyWith<_Tickets> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1369,12 +1215,9 @@ class _$_Register extends _Register {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user, bool viewProfile) home,
-    required TResult Function(String? id, bool add, bool modalVisible)
-        transport,
-    required TResult Function(String? id, bool add, bool modalVisible) housing,
-    required TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)
-        tickets,
+    required TResult Function(RouterTransportState stateConfig) transport,
+    required TResult Function(RouterHousingState stateConfig) housing,
+    required TResult Function(RouterTicketsState stateConfig) tickets,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
@@ -1387,11 +1230,9 @@ class _$_Register extends _Register {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
@@ -1404,11 +1245,9 @@ class _$_Register extends _Register {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),
@@ -1515,12 +1354,9 @@ class _$_Unknown extends _Unknown {
     required TResult Function() initial,
     required TResult Function() unauthenticated,
     required TResult Function(UserModel? user, bool viewProfile) home,
-    required TResult Function(String? id, bool add, bool modalVisible)
-        transport,
-    required TResult Function(String? id, bool add, bool modalVisible) housing,
-    required TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)
-        tickets,
+    required TResult Function(RouterTransportState stateConfig) transport,
+    required TResult Function(RouterHousingState stateConfig) housing,
+    required TResult Function(RouterTicketsState stateConfig) tickets,
     required TResult Function() register,
     required TResult Function() unknown,
   }) {
@@ -1533,11 +1369,9 @@ class _$_Unknown extends _Unknown {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
   }) {
@@ -1550,11 +1384,9 @@ class _$_Unknown extends _Unknown {
     TResult Function()? initial,
     TResult Function()? unauthenticated,
     TResult Function(UserModel? user, bool viewProfile)? home,
-    TResult Function(String? id, bool add, bool modalVisible)? transport,
-    TResult Function(String? id, bool add, bool modalVisible)? housing,
-    TResult Function(String? id, TicketTypeModel? type, bool add,
-            bool modalVisible, String? transportId, String? housingId)?
-        tickets,
+    TResult Function(RouterTransportState stateConfig)? transport,
+    TResult Function(RouterHousingState stateConfig)? housing,
+    TResult Function(RouterTicketsState stateConfig)? tickets,
     TResult Function()? register,
     TResult Function()? unknown,
     required TResult orElse(),

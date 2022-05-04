@@ -6,6 +6,8 @@ import 'package:refugee_help/presentation/authentication/register/register_scree
 import 'package:refugee_help/presentation/core/adaptive_widgets/dialogs/adaptive_dialog.dart';
 import 'package:refugee_help/presentation/core/screens/main_screen.dart';
 import 'package:refugee_help/presentation/housing/manage/manage_housing_screen.dart';
+import 'package:refugee_help/presentation/tickets/manage/core/housing/search_housing_screen.dart';
+import 'package:refugee_help/presentation/tickets/manage/core/housing/search_transport_screen.dart';
 import 'package:refugee_help/presentation/tickets/manage/manage_ticket_screen.dart';
 import 'package:refugee_help/presentation/transport/manage/manage_transport_screen.dart';
 import 'package:refugee_help/presentation/user_profile/user_profile_screen.dart';
@@ -101,58 +103,74 @@ class RootRouterDelegate extends RouterDelegate<RootRouterState> with ChangeNoti
   /// Alternatively to have a cleaner delegate, the list of pages can be built in a separate class.
   List<Page> get _extraPages {
     final tmpList = <Page>[];
-    _routerCubit.state.maybeMap(
+    _routerCubit.state.maybeWhen(
       orElse: () => null,
-      register: (_) => null,
-      home: (home) {
-        if (home.viewProfile) {
+      register: () => null,
+      home: (_, viewProfile) {
+        if (viewProfile) {
           tmpList.add(
             _materialPage(valueKey: RootRouterState.profilePath, child: const UserProfileScreen()),
           );
         }
       },
-      tickets: (tickets) {
-        if ((tickets.id?.isNotEmpty ?? false) || tickets.add) {
+      tickets: (stateConfig) {
+        if ((stateConfig.id?.isNotEmpty ?? false) || stateConfig.add) {
           tmpList.add(
             _materialPage(
               valueKey: RootRouterState.ticketsPath,
-              child: ManageTicketScreen(id: tickets.id, type: tickets.type!),
+              child: ManageTicketScreen(id: stateConfig.id, type: stateConfig.type!),
             ),
           );
         }
-        if (tickets.transportId?.isNotEmpty ?? false) {
+        if (stateConfig.searchHousing) {
+          tmpList.add(
+            _materialPage(
+              valueKey: RootRouterState.searchHousingPath,
+              child: const SearchHousingScreen(),
+            ),
+          );
+        }
+        if (stateConfig.searchTransport) {
+          tmpList.add(
+            _materialPage(
+              valueKey: RootRouterState.searchTransportPath,
+              child: const SearchTransportScreen(),
+            ),
+          );
+        }
+        if (stateConfig.transportId?.isNotEmpty ?? false) {
           tmpList.add(
             _materialPage(
               valueKey: RootRouterState.transportPath,
-              child: ManageTransportScreen(id: tickets.transportId),
+              child: ManageTransportScreen(id: stateConfig.transportId),
             ),
           );
         }
-        if (tickets.housingId?.isNotEmpty ?? false) {
+        if (stateConfig.housingId?.isNotEmpty ?? false) {
           tmpList.add(
             _materialPage(
               valueKey: RootRouterState.housingPath,
-              child: ManageHousingScreen(id: tickets.housingId),
+              child: ManageHousingScreen(id: stateConfig.housingId),
             ),
           );
         }
       },
-      transport: (transport) {
-        if ((transport.id?.isNotEmpty ?? false) || transport.add) {
+      transport: (stateConfig) {
+        if ((stateConfig.id?.isNotEmpty ?? false) || stateConfig.add) {
           tmpList.add(
             _materialPage(
               valueKey: RootRouterState.transportPath,
-              child: ManageTransportScreen(id: transport.id),
+              child: ManageTransportScreen(id: stateConfig.id),
             ),
           );
         }
       },
-      housing: (housing) {
-        if ((housing.id?.isNotEmpty ?? false) || housing.add) {
+      housing: (stateConfig) {
+        if ((stateConfig.id?.isNotEmpty ?? false) || stateConfig.add) {
           tmpList.add(
             _materialPage(
               valueKey: RootRouterState.transportPath,
-              child: ManageHousingScreen(id: housing.id),
+              child: ManageHousingScreen(id: stateConfig.id),
             ),
           );
         }

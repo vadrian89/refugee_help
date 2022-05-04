@@ -14,6 +14,12 @@ class HousingTypeModel extends Equatable {
     required this.icon,
   });
 
+  factory HousingTypeModel.all() => HousingTypeModel(
+        id: 0,
+        name: "housing_type".tr(),
+        icon: MdiIcons.homeCircleOutline,
+      );
+
   factory HousingTypeModel.host() => HousingTypeModel(
         id: 1,
         name: "host".tr(),

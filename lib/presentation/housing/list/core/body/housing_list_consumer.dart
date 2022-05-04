@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:refugee_help/application/housing/list/list_housing_cubit.dart';
 import 'package:refugee_help/domain/housing/housing_model.dart';
 import 'package:refugee_help/presentation/core/widgets/loader_widget.dart';
-import 'package:refugee_help/presentation/core/widgets/no_data_placeholder.dart';
 
 class HousingListConsumer extends StatelessWidget {
   final VoidCallback? onFinished;
@@ -27,7 +26,7 @@ class HousingListConsumer extends StatelessWidget {
         listenWhen: (_, current) => current.maybeWhen(orElse: () => false, view: (_) => true),
         builder: (context, state) => state.maybeWhen(
           orElse: () => const LoaderWidget(),
-          view: (list) => list.isEmpty ? const NoDataPlaceholder() : builder(context, list),
+          view: (list) => builder(context, list),
         ),
         buildWhen: (_, current) => current.maybeWhen(orElse: () => false, view: (_) => true),
       );

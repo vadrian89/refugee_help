@@ -5,13 +5,18 @@ import 'package:refugee_help/domain/housing/housing_type_model.dart';
 class HousingTypeDropdown extends StatelessWidget {
   final HousingTypeModel? value;
   final ValueChanged<HousingTypeModel?>? onChanged;
+  final bool enableAll;
 
-  List<HousingTypeModel> get _list => HousingTypeModel.list;
+  List<HousingTypeModel> get _list => List.from([
+        if (enableAll) HousingTypeModel.all(),
+        ...HousingTypeModel.list,
+      ]);
 
   const HousingTypeDropdown({
     Key? key,
     this.value,
     required this.onChanged,
+    this.enableAll = false,
   }) : super(key: key);
 
   @override

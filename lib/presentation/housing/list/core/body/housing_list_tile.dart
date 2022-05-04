@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:refugee_help/application/root_router/root_router_cubit.dart';
+import 'package:refugee_help/application/root_router/router_housing_state.dart';
 import 'package:refugee_help/domain/housing/housing_model.dart';
 import 'package:refugee_help/presentation/core/widgets/circle_image_avatar.dart';
 import 'package:refugee_help/presentation/core/widgets/text/head6_text.dart';
@@ -9,8 +11,13 @@ import 'package:refugee_help/presentation/core/widgets/text/sub2_text.dart';
 
 class HousingListTile extends StatelessWidget {
   final HousingModel model;
+  final bool useViewButton;
 
-  const HousingListTile({Key? key, required this.model}) : super(key: key);
+  const HousingListTile({
+    Key? key,
+    required this.model,
+    this.useViewButton = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => ListTile(
@@ -39,6 +46,22 @@ class HousingListTile extends StatelessWidget {
             ),
           ],
         ),
-        onTap: () => context.read<RootRouterCubit>().goToHousing(id: model.id),
+        trailing: useViewButton
+            ? IconButton(
+                icon: const Icon(MdiIcons.magnify),
+                color: Theme.of(context).primaryColor,
+                onPressed: () => _view(context),
+              )
+            : null,
+        onTap: () {
+          if (useViewButton) {
+            Navigator.maybePop(context, model);
+          } else {
+            _view(context);
+          }
+        },
       );
+
+  void _view(BuildContext context) =>
+      context.read<RootRouterCubit>().goToHousing(RouterHousingState(id: model.id));
 }

@@ -4,9 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:refugee_help/application/authentication/authentication_cubit.dart';
+import 'package:refugee_help/application/root_router/router_transport_state.dart';
 import 'package:refugee_help/domain/tickets/ticket_type_model.dart';
 import 'package:refugee_help/domain/user/user_model.dart';
 import 'package:refugee_help/infrastructure/utils.dart';
+
+import 'router_housing_state.dart';
+import 'router_tickets_state.dart';
 
 part 'root_router_state.dart';
 part 'root_router_cubit.freezed.dart';
@@ -42,86 +46,108 @@ class RootRouterCubit extends Cubit<RootRouterState> {
 
   void goToUserProfile() => _onlyAuthenticated(const RootRouterState.home(viewProfile: true));
 
-  void goToTransport({String? id, bool add = false}) =>
-      _onlyAuthenticated(RootRouterState.transport(id: id, add: add));
+  void goToTransport([RouterTransportState transport = const RouterTransportState()]) =>
+      _onlyAuthenticated(state.maybeWhen(
+        orElse: () => transport.state,
+        tickets: (stateConfig) => (stateConfig.add || (stateConfig.id?.isNotEmpty ?? false))
+            ? stateConfig.copyWith(transportId: transport.id).state
+            : transport.state,
+      ));
 
-  void goToHousing({String? id, bool add = false}) =>
-      _onlyAuthenticated(RootRouterState.housing(id: id, add: add));
+  void goToHousing([RouterHousingState housing = const RouterHousingState()]) =>
+      _onlyAuthenticated(state.maybeWhen(
+        orElse: () => housing.state,
+        tickets: (stateConfig) => (stateConfig.add || (stateConfig.id?.isNotEmpty ?? false))
+            ? stateConfig.copyWith(housingId: housing.id).state
+            : housing.state,
+      ));
 
   void goToTickets({
     String? id,
     TicketTypeModel? type,
     bool add = false,
+    bool searchHousing = false,
+    bool searchTransport = false,
   }) =>
-      _onlyAuthenticated(RootRouterState.tickets(id: id, type: type, add: add));
+      _onlyAuthenticated(RouterTicketsState(
+        id: id,
+        type: type,
+        add: add,
+        searchHousing: searchHousing,
+        searchTransport: searchTransport,
+      ).state);
 
-  void toggleTicketTransport({String? transportId}) => state.maybeMap(
+  void toggleTicketTransport({String? transportId}) => state.maybeWhen(
         orElse: () => null,
-        tickets: (tickets) => _onlyAuthenticated(tickets.copyWith(transportId: transportId)),
+        tickets: (stateConfig) => _onlyAuthenticated(
+          stateConfig.copyWith(transportId: transportId).state,
+        ),
       );
 
-  void toggleTicketHousing({String? housingId}) => state.maybeMap(
+  void toggleTicketHousing({String? housingId}) => state.maybeWhen(
         orElse: () => null,
-        tickets: (tickets) => _onlyAuthenticated(tickets.copyWith(housingId: housingId)),
+        tickets: (stateConfig) => _onlyAuthenticated(
+          stateConfig.copyWith(housingId: housingId).state,
+        ),
       );
 
-  void toggleModal(bool value) => state.maybeMap(
+  void toggleModal(bool value) => state.maybeWhen(
         orElse: () => null,
-        tickets: (tickets) => emit(tickets.copyWith(modalVisible: value)),
-        transport: (transport) => emit(transport.copyWith(modalVisible: value)),
-        housing: (housing) => emit(housing.copyWith(modalVisible: value)),
+        tickets: (stateConfig) => emit(stateConfig.copyWith(modalVisible: value).state),
+        transport: (stateConfig) => emit(stateConfig.copyWith(modalVisible: value).state),
+        housing: (stateConfig) => emit(stateConfig.copyWith(modalVisible: value).state),
       );
 
   /// Implement the logic for what happens when the back button was called.
   ///
   /// Return `true` if the app navigated back or `false` if it's the root of the app.
   /// The value of the [result] argument is the value returned by the [Route].
-  bool popRoute(dynamic result) => state.maybeMap(
-        register: (_) => goToRoot(),
-        unknown: (_) => goToRoot(),
-        home: (home) {
-          if (home.viewProfile) {
+  bool popRoute(dynamic result) => state.maybeWhen(
+        register: () => goToRoot(),
+        unknown: () => goToRoot(),
+        home: (_, viewProfile) {
+          if (viewProfile) {
             return goToRoot();
           }
           return false;
         },
-        tickets: (tickets) {
-          if (tickets.modalVisible) {
-            if (tickets.transportId?.isNotEmpty ?? false) {
-              toggleTicketTransport();
-            }
-            if (tickets.housingId?.isNotEmpty ?? false) {
-              toggleTicketHousing();
-            }
+        tickets: (stateConfig) {
+          if (stateConfig.modalVisible) {
             return true;
           }
-          if (tickets.id != null || tickets.add) {
-            goToTickets(type: tickets.type);
+          if (stateConfig.popedState(result) != null) {
+            emit(stateConfig.popedState(result)!);
             return true;
           }
           return goToRoot();
         },
-        transport: (transport) {
-          if (transport.modalVisible) {
+        transport: (stateConfig) {
+          if (stateConfig.modalVisible) {
             return true;
           }
-          if (transport.add || (transport.id?.isNotEmpty ?? false)) {
+          if (stateConfig.add || (stateConfig.id?.isNotEmpty ?? false)) {
             goToTransport();
             return true;
           }
           return goToRoot();
         },
-        housing: (housing) {
-          if (housing.modalVisible) {
+        housing: (stateConfig) {
+          if (stateConfig.modalVisible) {
             return true;
           }
-          if (housing.add || (housing.id?.isNotEmpty ?? false)) {
+          if (stateConfig.add || (stateConfig.id?.isNotEmpty ?? false)) {
             goToHousing();
             return true;
           }
           return goToRoot();
         },
         orElse: () => false,
+      );
+
+  /// Clear any non-null popResult after usage.
+  void clearResult() => state.maybeWhen(
+        orElse: () => null,
+        tickets: (stateConfig) => emit(stateConfig.copyWith(popResult: null).state),
       );
 
   /// Method called by the overriden [RootRouterDelegate.setNewRoutePath] method.
@@ -140,7 +166,7 @@ class RootRouterCubit extends Cubit<RootRouterState> {
           transport: _onlyAuthenticated,
           housing: _onlyAuthenticated,
           tickets: (tickets) {
-            if (tickets.type == null) {
+            if (tickets.stateConfig.type == null) {
               goToRoot();
               return;
             }

@@ -59,9 +59,9 @@ class AppDrawer extends ResponsiveWidget {
               DrawerListTile(
                 icon: MdiIcons.ticket,
                 label: "transport_tickets".tr(),
-                isSelected: state.maybeMap(
+                isSelected: state.maybeWhen(
                   orElse: () => false,
-                  tickets: (tickets) => tickets.type == TicketTypeModel.transport(),
+                  tickets: (stateConfig) => stateConfig.type == TicketTypeModel.transport(),
                 ),
                 onPressed: () => context.read<RootRouterCubit>().goToTickets(
                       type: TicketTypeModel.transport(),
@@ -70,9 +70,9 @@ class AppDrawer extends ResponsiveWidget {
               DrawerListTile(
                 icon: MdiIcons.ticket,
                 label: "housing_tickets".tr(),
-                isSelected: state.maybeMap(
+                isSelected: state.maybeWhen(
                   orElse: () => false,
-                  tickets: (tickets) => tickets.type == TicketTypeModel.housing(),
+                  tickets: (stateConfig) => stateConfig.type == TicketTypeModel.housing(),
                 ),
                 onPressed: () => context.read<RootRouterCubit>().goToTickets(
                       type: TicketTypeModel.housing(),

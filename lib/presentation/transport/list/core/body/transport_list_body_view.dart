@@ -4,11 +4,13 @@ import 'package:refugee_help/presentation/transport/list/core/body/transport_lis
 import 'package:refugee_help/presentation/transport/list/core/body/transport_list_mobile_body.dart';
 
 class TransportListBodyView extends ResponsiveWidget {
-  const TransportListBodyView({Key? key}) : super(key: key);
+  final bool enableFilters;
+
+  const TransportListBodyView({Key? key, this.enableFilters = false}) : super(key: key);
 
   @override
-  Widget phone(BuildContext context) => const TransportListMobileBody();
+  Widget phone(BuildContext context) => TransportListMobileBody(enableFilters: enableFilters);
 
   @override
-  Widget desktop(BuildContext context) => const TransportListDesktopBody();
+  Widget desktop(BuildContext context) => TransportListDesktopBody(enableFilters: enableFilters);
 }

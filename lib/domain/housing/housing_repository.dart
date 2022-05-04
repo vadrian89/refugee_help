@@ -153,18 +153,8 @@ class HousingRepository extends BaseRepository implements CrudRepositoryInterfac
     if (request.userId != null) {
       query = query.where("user.id", isEqualTo: request.userId);
     }
-    if (request.county != null) {
-      query = query
-          .where("county", isGreaterThanOrEqualTo: request.county!.toLowerCase())
-          .where("county", isLessThanOrEqualTo: "${request.county!.toLowerCase()}z");
-    }
-    if (request.city != null) {
-      query = query
-          .where("city", isGreaterThanOrEqualTo: request.city!.toLowerCase())
-          .where("city", isLessThanOrEqualTo: "${request.city!.toLowerCase()}z");
-    }
     if (request.type != null) {
-      query = query.where("type.id", isEqualTo: request.type!.id);
+      query = query.where("type", isEqualTo: request.type!.id);
     }
     if (request.bedsAvailable != null) {
       query = query.where("bedsAvailable", isEqualTo: request.bedsAvailable);
@@ -178,6 +168,7 @@ class HousingRepository extends BaseRepository implements CrudRepositoryInterfac
     if (request.limit != null) {
       query = query.limit(request.limit!);
     }
+
     logDebug("Firebase query ${query.parameters}", local: true);
     yield* query.snapshots(includeMetadataChanges: true).asyncMap(_listFromSnapshot);
   }

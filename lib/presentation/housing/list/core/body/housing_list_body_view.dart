@@ -4,11 +4,13 @@ import 'package:refugee_help/presentation/housing/list/core/body/housing_list_de
 import 'package:refugee_help/presentation/housing/list/core/body/housing_list_mobile_body.dart';
 
 class HousingListBodyView extends ResponsiveWidget {
-  const HousingListBodyView({Key? key}) : super(key: key);
+  final bool enableFilters;
+
+  const HousingListBodyView({Key? key, this.enableFilters = false}) : super(key: key);
 
   @override
-  Widget phone(BuildContext context) => const HousingListMobileBody();
+  Widget phone(BuildContext context) => HousingListMobileBody(enableFilters: enableFilters);
 
   @override
-  Widget desktop(BuildContext context) => const HousingListDesktopBody();
+  Widget desktop(BuildContext context) => HousingListDesktopBody(enableFilters: enableFilters);
 }

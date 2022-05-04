@@ -14,15 +14,7 @@ class RootRouterParser extends RouteInformationParser<RootRouterState> {
     final uri = Uri.parse(routeInformation.location ?? "");
     RootRouterState state = const RootRouterState.initial();
     if (uri.pathSegments.isNotEmpty) {
-      if (uri.pathSegments.length == 1) {
-        state = RootRouterState.fromUriLevel1(uri);
-      } else if (uri.pathSegments.length == 2) {
-        state = RootRouterState.fromUriLevel2(uri);
-      } else if (uri.pathSegments.length == 3) {
-        state = RootRouterState.fromUriLevel3(uri);
-      } else {
-        state = const RootRouterState.unknown();
-      }
+      state = RootRouterState.fromUri(uri);
     }
     return SynchronousFuture(state);
   }
@@ -32,5 +24,5 @@ class RootRouterParser extends RouteInformationParser<RootRouterState> {
   /// It's required to properly update the browser's history.
   @override
   RouteInformation restoreRouteInformation(RootRouterState configuration) =>
-      RouteInformation(location: configuration.urlPath);
+      RouteInformation(location: configuration.uriPath);
 }

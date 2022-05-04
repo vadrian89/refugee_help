@@ -5,13 +5,18 @@ import 'package:refugee_help/domain/transport/transport_type_model.dart';
 class TransportTypeDropdown extends StatelessWidget {
   final void Function(TransportTypeModel? type)? onChanged;
   final TransportTypeModel? value;
+  final bool enableAll;
 
-  List<TransportTypeModel> get _list => TransportTypeModel.list;
+  List<TransportTypeModel> get _list => List.from([
+        if (enableAll) TransportTypeModel.all(),
+        ...TransportTypeModel.list,
+      ]);
 
   const TransportTypeDropdown({
     Key? key,
     this.value,
     required this.onChanged,
+    this.enableAll = false,
   }) : super(key: key);
 
   @override

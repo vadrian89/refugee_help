@@ -167,5 +167,7 @@
     "hotel": "Hotel",
     "institution": "Institution",
     "ngo": "NGO",
-    "housing_type": "Housing type"
+    "housing_type": "Housing type",
+    "actions": "Actions",
+    "type": "Type"
 }

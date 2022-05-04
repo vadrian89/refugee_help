@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:refugee_help/application/root_router/root_router_cubit.dart';
 import 'package:refugee_help/application/tickets/manage/manage_ticket_cubit.dart';
 import 'package:refugee_help/domain/tickets/ticket_model.dart';
 import 'package:refugee_help/domain/tickets/ticket_status_model.dart';
@@ -128,6 +129,12 @@ class _ManageTicketFormState extends State<ManageTicketForm> {
         initialValue: _ticket.transport,
         validator: (val) => (val == null) ? "transport_is_required".tr() : null,
         onSaved: (val) => _ticket = _ticket.copyWith(transport: val),
+        onSearch: () => context.read<RootRouterCubit>().goToTickets(
+              add: _ticket.id == null,
+              id: _ticket.id,
+              searchTransport: true,
+              type: _ticket.type,
+            ),
       ),
       AppTextFormField(
         initialValue: _ticket.destination,
@@ -149,6 +156,12 @@ class _ManageTicketFormState extends State<ManageTicketForm> {
         initialValue: _ticket.housing,
         validator: (val) => (val == null) ? "housing_is_required".tr() : null,
         onSaved: (val) => _ticket = _ticket.copyWith(housing: val),
+        onSearchHousing: () => context.read<RootRouterCubit>().goToTickets(
+              add: _ticket.id == null,
+              id: _ticket.id,
+              searchHousing: true,
+              type: _ticket.type,
+            ),
       ),
     ];
   }
