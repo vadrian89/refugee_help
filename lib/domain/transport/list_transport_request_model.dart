@@ -11,5 +11,6 @@ class ListTransportRequestModel with _$ListTransportRequestModel {
     int? limit,
     bool? isAvailable,
     String? userId,
+    String? destinations,
   }) = _ListTransportRequestModel;
 }

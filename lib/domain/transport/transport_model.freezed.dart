@@ -32,6 +32,7 @@ class _$TransportModelTearOff {
       int? timeAvailable = 0,
       bool? isAvailable = false,
       String? destinations,
+      List<String>? destinationsIndex,
       UserInfoModel? user,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
@@ -49,6 +50,7 @@ class _$TransportModelTearOff {
       timeAvailable: timeAvailable,
       isAvailable: isAvailable,
       destinations: destinations,
+      destinationsIndex: destinationsIndex,
       user: user,
       createdAt: createdAt,
       updatedAt: updatedAt,
@@ -80,6 +82,7 @@ mixin _$TransportModel {
   int? get timeAvailable => throw _privateConstructorUsedError;
   bool? get isAvailable => throw _privateConstructorUsedError;
   String? get destinations => throw _privateConstructorUsedError;
+  List<String>? get destinationsIndex => throw _privateConstructorUsedError;
   UserInfoModel? get user => throw _privateConstructorUsedError;
   @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -111,6 +114,7 @@ abstract class $TransportModelCopyWith<$Res> {
       int? timeAvailable,
       bool? isAvailable,
       String? destinations,
+      List<String>? destinationsIndex,
       UserInfoModel? user,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
@@ -143,6 +147,7 @@ class _$TransportModelCopyWithImpl<$Res>
     Object? timeAvailable = freezed,
     Object? isAvailable = freezed,
     Object? destinations = freezed,
+    Object? destinationsIndex = freezed,
     Object? user = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -186,6 +191,10 @@ class _$TransportModelCopyWithImpl<$Res>
           ? _value.destinations
           : destinations // ignore: cast_nullable_to_non_nullable
               as String?,
+      destinationsIndex: destinationsIndex == freezed
+          ? _value.destinationsIndex
+          : destinationsIndex // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -249,6 +258,7 @@ abstract class _$TransportModelCopyWith<$Res>
       int? timeAvailable,
       bool? isAvailable,
       String? destinations,
+      List<String>? destinationsIndex,
       UserInfoModel? user,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
@@ -285,6 +295,7 @@ class __$TransportModelCopyWithImpl<$Res>
     Object? timeAvailable = freezed,
     Object? isAvailable = freezed,
     Object? destinations = freezed,
+    Object? destinationsIndex = freezed,
     Object? user = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -328,6 +339,10 @@ class __$TransportModelCopyWithImpl<$Res>
           ? _value.destinations
           : destinations // ignore: cast_nullable_to_non_nullable
               as String?,
+      destinationsIndex: destinationsIndex == freezed
+          ? _value.destinationsIndex
+          : destinationsIndex // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -366,6 +381,7 @@ class _$_TransportModel extends _TransportModel {
       this.timeAvailable = 0,
       this.isAvailable = false,
       this.destinations,
+      this.destinationsIndex,
       this.user,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           this.createdAt,
@@ -405,6 +421,8 @@ class _$_TransportModel extends _TransportModel {
   @override
   final String? destinations;
   @override
+  final List<String>? destinationsIndex;
+  @override
   final UserInfoModel? user;
   @override
   @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
@@ -422,7 +440,7 @@ class _$_TransportModel extends _TransportModel {
 
   @override
   String toString() {
-    return 'TransportModel(id: $id, registrationNumber: $registrationNumber, seatsAvailable: $seatsAvailable, type: $type, image: $image, atLocation: $atLocation, timeAvailable: $timeAvailable, isAvailable: $isAvailable, destinations: $destinations, user: $user, createdAt: $createdAt, updatedAt: $updatedAt, remarks: $remarks, isMock: $isMock)';
+    return 'TransportModel(id: $id, registrationNumber: $registrationNumber, seatsAvailable: $seatsAvailable, type: $type, image: $image, atLocation: $atLocation, timeAvailable: $timeAvailable, isAvailable: $isAvailable, destinations: $destinations, destinationsIndex: $destinationsIndex, user: $user, createdAt: $createdAt, updatedAt: $updatedAt, remarks: $remarks, isMock: $isMock)';
   }
 
   @override
@@ -445,6 +463,8 @@ class _$_TransportModel extends _TransportModel {
                 .equals(other.isAvailable, isAvailable) &&
             const DeepCollectionEquality()
                 .equals(other.destinations, destinations) &&
+            const DeepCollectionEquality()
+                .equals(other.destinationsIndex, destinationsIndex) &&
             const DeepCollectionEquality().equals(other.user, user) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
@@ -464,6 +484,7 @@ class _$_TransportModel extends _TransportModel {
       const DeepCollectionEquality().hash(timeAvailable),
       const DeepCollectionEquality().hash(isAvailable),
       const DeepCollectionEquality().hash(destinations),
+      const DeepCollectionEquality().hash(destinationsIndex),
       const DeepCollectionEquality().hash(user),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt),
@@ -492,6 +513,7 @@ abstract class _TransportModel extends TransportModel {
       int? timeAvailable,
       bool? isAvailable,
       String? destinations,
+      List<String>? destinationsIndex,
       UserInfoModel? user,
       @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
           DateTime? createdAt,
@@ -526,6 +548,8 @@ abstract class _TransportModel extends TransportModel {
   bool? get isAvailable;
   @override
   String? get destinations;
+  @override
+  List<String>? get destinationsIndex;
   @override
   UserInfoModel? get user;
   @override

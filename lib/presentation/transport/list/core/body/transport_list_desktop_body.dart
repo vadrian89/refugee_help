@@ -77,6 +77,13 @@ class _TransportListDesktopBodyState extends State<TransportListDesktopBody> {
             _delayedSearch(context);
           },
         ),
+        _textField(
+          hintText: "destination".tr(),
+          onChanged: (val) {
+            _request = _request.copyWith(destinations: val);
+            _delayedSearch(context);
+          },
+        ),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 200, maxHeight: 68),
           child: TransportTypeDropdown(

@@ -23,13 +23,15 @@ class _$ListTransportRequestModelTearOff {
       TransportTypeModel? transportType,
       int? limit,
       bool? isAvailable,
-      String? userId}) {
+      String? userId,
+      String? destinations}) {
     return _ListTransportRequestModel(
       seatsAvailable: seatsAvailable,
       transportType: transportType,
       limit: limit,
       isAvailable: isAvailable,
       userId: userId,
+      destinations: destinations,
     );
   }
 }
@@ -44,6 +46,7 @@ mixin _$ListTransportRequestModel {
   int? get limit => throw _privateConstructorUsedError;
   bool? get isAvailable => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
+  String? get destinations => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ListTransportRequestModelCopyWith<ListTransportRequestModel> get copyWith =>
@@ -60,7 +63,8 @@ abstract class $ListTransportRequestModelCopyWith<$Res> {
       TransportTypeModel? transportType,
       int? limit,
       bool? isAvailable,
-      String? userId});
+      String? userId,
+      String? destinations});
 }
 
 /// @nodoc
@@ -79,6 +83,7 @@ class _$ListTransportRequestModelCopyWithImpl<$Res>
     Object? limit = freezed,
     Object? isAvailable = freezed,
     Object? userId = freezed,
+    Object? destinations = freezed,
   }) {
     return _then(_value.copyWith(
       seatsAvailable: seatsAvailable == freezed
@@ -101,6 +106,10 @@ class _$ListTransportRequestModelCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
+      destinations: destinations == freezed
+          ? _value.destinations
+          : destinations // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -117,7 +126,8 @@ abstract class _$ListTransportRequestModelCopyWith<$Res>
       TransportTypeModel? transportType,
       int? limit,
       bool? isAvailable,
-      String? userId});
+      String? userId,
+      String? destinations});
 }
 
 /// @nodoc
@@ -139,6 +149,7 @@ class __$ListTransportRequestModelCopyWithImpl<$Res>
     Object? limit = freezed,
     Object? isAvailable = freezed,
     Object? userId = freezed,
+    Object? destinations = freezed,
   }) {
     return _then(_ListTransportRequestModel(
       seatsAvailable: seatsAvailable == freezed
@@ -161,6 +172,10 @@ class __$ListTransportRequestModelCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
+      destinations: destinations == freezed
+          ? _value.destinations
+          : destinations // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -173,7 +188,8 @@ class _$_ListTransportRequestModel implements _ListTransportRequestModel {
       this.transportType,
       this.limit,
       this.isAvailable,
-      this.userId});
+      this.userId,
+      this.destinations});
 
   @override
   final int? seatsAvailable;
@@ -185,10 +201,12 @@ class _$_ListTransportRequestModel implements _ListTransportRequestModel {
   final bool? isAvailable;
   @override
   final String? userId;
+  @override
+  final String? destinations;
 
   @override
   String toString() {
-    return 'ListTransportRequestModel(seatsAvailable: $seatsAvailable, transportType: $transportType, limit: $limit, isAvailable: $isAvailable, userId: $userId)';
+    return 'ListTransportRequestModel(seatsAvailable: $seatsAvailable, transportType: $transportType, limit: $limit, isAvailable: $isAvailable, userId: $userId, destinations: $destinations)';
   }
 
   @override
@@ -203,7 +221,9 @@ class _$_ListTransportRequestModel implements _ListTransportRequestModel {
             const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality()
                 .equals(other.isAvailable, isAvailable) &&
-            const DeepCollectionEquality().equals(other.userId, userId));
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality()
+                .equals(other.destinations, destinations));
   }
 
   @override
@@ -213,7 +233,8 @@ class _$_ListTransportRequestModel implements _ListTransportRequestModel {
       const DeepCollectionEquality().hash(transportType),
       const DeepCollectionEquality().hash(limit),
       const DeepCollectionEquality().hash(isAvailable),
-      const DeepCollectionEquality().hash(userId));
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(destinations));
 
   @JsonKey(ignore: true)
   @override
@@ -229,7 +250,8 @@ abstract class _ListTransportRequestModel implements ListTransportRequestModel {
       TransportTypeModel? transportType,
       int? limit,
       bool? isAvailable,
-      String? userId}) = _$_ListTransportRequestModel;
+      String? userId,
+      String? destinations}) = _$_ListTransportRequestModel;
 
   @override
   int? get seatsAvailable;
@@ -241,6 +263,8 @@ abstract class _ListTransportRequestModel implements ListTransportRequestModel {
   bool? get isAvailable;
   @override
   String? get userId;
+  @override
+  String? get destinations;
   @override
   @JsonKey(ignore: true)
   _$ListTransportRequestModelCopyWith<_ListTransportRequestModel>

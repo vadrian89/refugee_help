@@ -78,6 +78,13 @@ class _TransportListMobileBodyState extends State<TransportListMobileBody> {
             _delayedSearch(context);
           },
         ),
+        _textField(
+          hintText: "destination".tr(),
+          onChanged: (val) {
+            _request = _request.copyWith(destinations: val);
+            _delayedSearch(context);
+          },
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: TransportTypeDropdown(

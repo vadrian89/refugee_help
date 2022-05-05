@@ -45,7 +45,7 @@ class TransportRepository extends BaseRepository
   Future<void> add(TransportModel model) async {
     OperationResult<bool> result = const OperationResult.success(true);
     ImageModel image = model.image!;
-    TransportModel updatedModel = model;
+    TransportModel updatedModel = model.buildIndexes;
     try {
       final doc = await _reference.add(model.copyWith(image: image));
       updatedModel = updatedModel.copyWith(id: doc.id);
@@ -100,7 +100,7 @@ class TransportRepository extends BaseRepository
         }
       }
 
-      final updatedModel = model.copyWith(image: image, updatedAt: DateTime.now());
+      final updatedModel = model.copyWith(image: image).buildIndexes;
       await _reference.doc(model.id).update(updatedModel.toJson());
     } on FirebaseException catch (error) {
       logException("Exception in update", error: error, stackTrace: error.stackTrace);
@@ -137,6 +137,11 @@ class TransportRepository extends BaseRepository
 
   Stream<List<TransportModel>> listStream(ListTransportRequestModel request) async* {
     Query<TransportModel> query = _reference;
+    if (request.destinations?.isNotEmpty ?? false) {
+      query = query
+          .where("destinationsIndex", arrayContains: request.destinations!.toLowerCase())
+          .orderBy("destinationsIndex");
+    }
     if (request.userId != null) {
       query = query.where("user.id", isEqualTo: request.userId);
     }

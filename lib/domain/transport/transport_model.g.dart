@@ -21,6 +21,9 @@ _$_TransportModel _$$_TransportModelFromJson(Map<String, dynamic> json) =>
       timeAvailable: json['timeAvailable'] as int? ?? 0,
       isAvailable: json['isAvailable'] as bool? ?? false,
       destinations: json['destinations'] as String?,
+      destinationsIndex: (json['destinationsIndex'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       user: json['user'] == null
           ? null
           : UserInfoModel.fromJson(json['user'] as Map<String, dynamic>),
@@ -41,6 +44,7 @@ Map<String, dynamic> _$$_TransportModelToJson(_$_TransportModel instance) =>
       'timeAvailable': instance.timeAvailable,
       'isAvailable': instance.isAvailable,
       'destinations': instance.destinations,
+      'destinationsIndex': instance.destinationsIndex,
       'user': instance.user?.toJson(),
       'createdAt': dateTimeToJson(instance.createdAt),
       'updatedAt': dateTimeToJson(instance.updatedAt),

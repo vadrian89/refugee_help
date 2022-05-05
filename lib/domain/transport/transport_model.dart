@@ -38,6 +38,7 @@ class TransportModel with _$TransportModel {
     @Default(0) int? timeAvailable,
     @Default(false) bool? isAvailable,
     String? destinations,
+    List<String>? destinationsIndex,
     UserInfoModel? user,
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? createdAt,
     @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson) DateTime? updatedAt,
@@ -49,8 +50,34 @@ class TransportModel with _$TransportModel {
 
   factory TransportModel.fromJson(Map<String, dynamic> json) => _$TransportModelFromJson(json);
 
+  /// Build indexes for search query.
+  ///
+  /// This getter splits the destinations string based on `,` (comma) and ` ` (space) then
+  /// builds keywords array ([destinationsIndex]) for each destination found.
+  /// For example, if [destinations] contains `Tulcea, Constanta`, the array will contain:
+  /// ```
+  /// [t, tu, tul, tulc, tulce, tulcea, c, co, con, cons, const, consta, constan, constant, constanta]
+  /// ```
+  TransportModel get buildIndexes {
+    final destinationsList = destinations!.split(RegExp(r",| "));
+    List<String> indexes = [];
+    for (final dest in destinationsList) {
+      final destKeywords = List.generate(
+        dest.length,
+        (index) => dest.toLowerCase().substring(0, index + 1),
+      );
+      indexes.addAll(destKeywords.where((element) => element.isNotEmpty));
+    }
+    return copyWith(destinationsIndex: indexes).updated;
+  }
+
   Map<String, dynamic> get availabilityJson => {
         "isAvailable": isAvailable,
         "updatedAt": dateTimeToJson(updatedAt),
       };
+
+  TransportModel get updated => copyWith(
+        createdAt: createdAt ?? DateTime.now(),
+        updatedAt: DateTime.now(),
+      );
 }
