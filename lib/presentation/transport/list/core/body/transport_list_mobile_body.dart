@@ -36,7 +36,7 @@ class _TransportListMobileBodyState extends State<TransportListMobileBody> {
     super.initState();
     _request = ListTransportRequestModel(limit: _pageLimit);
     _controller = ScrollController()..addListener(_scrollEventListener);
-    _bloc = context.read<ListTransportCubit>()..fetchList(_request);
+    _bloc = context.read<ListTransportCubit>()..fetchList(_request, all: widget.enableFilters);
   }
 
   @override
@@ -87,7 +87,7 @@ class _TransportListMobileBodyState extends State<TransportListMobileBody> {
               _request = _request.copyWith(
                 transportType: (val == TransportTypeModel.all()) ? null : val,
               );
-              _bloc.fetchList(_request);
+              _bloc.fetchList(_request, all: widget.enableFilters);
             }),
           ),
         ),
@@ -109,7 +109,7 @@ class _TransportListMobileBodyState extends State<TransportListMobileBody> {
         _controller.position.pixels == _controller.position.maxScrollExtent &&
         _pageLimit <= _totalRows) {
       _currentPage++;
-      _bloc.fetchList(_request);
+      _bloc.fetchList(_request, all: widget.enableFilters);
     }
   }
 
@@ -117,7 +117,7 @@ class _TransportListMobileBodyState extends State<TransportListMobileBody> {
     _timer?.cancel();
     _timer = Timer(
       const Duration(milliseconds: 500),
-      () => _bloc.fetchList(_request),
+      () => _bloc.fetchList(_request, all: widget.enableFilters),
     );
   }
 }

@@ -44,7 +44,7 @@ class _TransportListDesktopBodyState extends State<TransportListDesktopBody> {
   @override
   void initState() {
     super.initState();
-    context.read<ListTransportCubit>().fetchList(_request);
+    context.read<ListTransportCubit>().fetchList(_request, all: widget.enableFilters);
   }
 
   @override
@@ -144,7 +144,8 @@ class _TransportListDesktopBodyState extends State<TransportListDesktopBody> {
 
   DataCell _cell({String? value}) => DataCell(Text(value ?? "n/a"));
 
-  void _fetch(BuildContext context) => context.read<ListTransportCubit>().fetchList(_request);
+  void _fetch(BuildContext context) =>
+      context.read<ListTransportCubit>().fetchList(_request, all: widget.enableFilters);
 
   void _delayedSearch(BuildContext context) {
     _timer?.cancel();

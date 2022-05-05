@@ -27,6 +27,7 @@ class HousingListDesktopBody extends StatefulWidget {
 }
 
 class _HousingListDesktopBodyState extends State<HousingListDesktopBody> {
+  late ListHousingCubit _bloc;
   List<HousingModel> _list = const [];
   static const int _pageLimit = 20;
   int _currentPage = 1;
@@ -58,7 +59,7 @@ class _HousingListDesktopBodyState extends State<HousingListDesktopBody> {
   @override
   void initState() {
     super.initState();
-    context.read<ListHousingCubit>().fetchList(_request);
+    _bloc = context.read<ListHousingCubit>()..fetchList(_request, all: widget.enableFilters);
   }
 
   @override
@@ -106,7 +107,7 @@ class _HousingListDesktopBodyState extends State<HousingListDesktopBody> {
             value: _request.type ?? HousingTypeModel.all(),
             onChanged: (val) => setState(() {
               _request = _request.copyWith(type: (val == HousingTypeModel.all()) ? null : val);
-              context.read<ListHousingCubit>().fetchList(_request);
+              _bloc.fetchList(_request, all: widget.enableFilters);
             }),
           ),
         ),
@@ -167,7 +168,7 @@ class _HousingListDesktopBodyState extends State<HousingListDesktopBody> {
     _timer?.cancel();
     _timer = Timer(
       const Duration(milliseconds: 500),
-      () => context.read<ListHousingCubit>().fetchList(_request),
+      () => _bloc.fetchList(_request, all: widget.enableFilters),
     );
   }
 }

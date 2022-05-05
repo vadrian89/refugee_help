@@ -50,7 +50,7 @@ class _HousingListMobileBodyState extends State<HousingListMobileBody> {
     super.initState();
     _request = _request.copyWith(limit: _pageLimit);
     _controller = ScrollController()..addListener(_scrollEventListener);
-    _bloc = context.read<ListHousingCubit>()..fetchList(_request);
+    _bloc = context.read<ListHousingCubit>()..fetchList(_request, all: widget.enableFilters);
   }
 
   @override
@@ -127,7 +127,7 @@ class _HousingListMobileBodyState extends State<HousingListMobileBody> {
         _controller.position.pixels == _controller.position.maxScrollExtent &&
         _pageLimit <= _totalRows) {
       _currentPage++;
-      _bloc.fetchList(_request);
+      _bloc.fetchList(_request, all: widget.enableFilters);
     }
   }
 
@@ -142,6 +142,6 @@ class _HousingListMobileBodyState extends State<HousingListMobileBody> {
     } else {
       _request = _request.copyWith(limit: _pageLimit);
     }
-    _bloc.fetchList(_request);
+    _bloc.fetchList(_request, all: widget.enableFilters);
   }
 }
